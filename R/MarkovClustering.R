@@ -2,7 +2,8 @@ MarkovClustering=function(Data=NULL,Adjacency=NULL,PlotIt=FALSE,...){
   
   #author: MT, 04/2018
   if(!is.null(Data)){
-    Adjacency=GraphAlgorithms::RkugelGraph(Data) #getRadius4Dichte missing 
+    requireNamespace('GraphAlgorithms')
+    Adjacency=GraphAlgorithms::RkugelGraph(Data)
   }  
   requireNamespace('MCL')
   
