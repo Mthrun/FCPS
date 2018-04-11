@@ -1,4 +1,4 @@
-MarkovClustering=function(Data=NULL,Adjacency=NULL,PlotIt=FALSE,...){
+MarkovClustering=function(Data=NULL,Adjacency=NULL,addLoops = TRUE,PlotIt=FALSE,...){
   
   #author: MT, 04/2018
   if(!is.null(Data)){
@@ -7,7 +7,7 @@ MarkovClustering=function(Data=NULL,Adjacency=NULL,PlotIt=FALSE,...){
   }  
   requireNamespace('MCL')
   
-  mm=MCL::mcl(x = Adjacency,...)
+  mm=MCL::mcl(x = Adjacency,addLoops =addLoops,...)
 
   #Graph wahl noetig, daher automatisiert nicht nutzbar
   # Distance=DistanceMatrix(FCPS$Hepta$Data)
