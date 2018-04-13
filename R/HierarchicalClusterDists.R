@@ -1,4 +1,4 @@
-HierarchicalClusterDists <-function(pDist,FestgesetzteClustAnz=0,ClusterAlg="ward.D2",ColorTreshold=0){
+HierarchicalClusterDists <-function(pDist,ClusterNo=0,ClusterAlg="ward.D2",ColorTreshold=0){
 # HierarchicalClusterDists(pDist)
 # HierarchicalClusterDists(pDist,0,"ward.D2",100)
 # Cls=HierarchicalClusterDists(pDist,6,"ward.D2")
@@ -7,13 +7,13 @@ HierarchicalClusterDists <-function(pDist,FestgesetzteClustAnz=0,ClusterAlg="war
 # INPUT
 # pDist                 Distanzen eines Datensatzesueber DistanceMatrix()
 # OPTIONAL
-# FestgesetzteClustAnz  in soviele Cluster werden die daten eingeteilt, wenn dieser Wert 
+# ClusterNo  in soviele Cluster werden die daten eingeteilt, wenn dieser Wert 
 #                       fehlt oder =0 gesetzt ist, wird ein Dendrogramm gezeichnet
 # ClusterAlg			      Methode der Clusterung: "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".
 # ColorTreshold			    zeichnet Schnittlinie bei entsprechende, Dendogram y-Achsenwerte (Hoehe), Hoehe der Linie wird als Skalar angegeben
 #
 # OUTPUT
-# HierarchicalCluster      Hierarchische Clusterung der Daten, falls FestgesetzteClustAnz angegeben
+# HierarchicalCluster      Hierarchische Clusterung der Daten, falls ClusterNo angegeben
 
 # Author: MT
 #Update 11.09.2014, "ward" zu "ward.D" ge?ndert f?r R 3.1.x, Tippfehler in Kommentaren korrigiert (Raphael P?bst)
@@ -25,8 +25,8 @@ HierarchicalClusterDists <-function(pDist,FestgesetzteClustAnz=0,ClusterAlg="war
 	m=paste(ClusterAlg,"LinkCluster/ "," N=",nrow(as.matrix(pDist)))
 	
 # Classification or Dendrogram
-	if (FestgesetzteClustAnz>0){
-		return (cutree(hc,FestgesetzteClustAnz));
+	if (ClusterNo>0){
+		return (cutree(hc,ClusterNo));
 	} 
 	else{
 		x=as.dendrogram(hc);plot(x, main=m,xlab="Number of Data Points N", ylab="Distance",sub=" ",leaflab ="none")

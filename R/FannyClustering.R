@@ -1,8 +1,8 @@
-FannyClustering=function(Data,k,PlotIt=FALSE,...){
+FannyClustering=function(Data,ClusterNo,PlotIt=FALSE,...){
   
   #author: MT, 04/2018
   requireNamespace('cluster')
-  fan=cluster::fanny(Data,k=k,...)
+  fan=cluster::fanny(Data,k=ClusterNo,...)
   Cls=fan$clustering
   if(!is.null(rownames(Data)))
     names(Cls)=rownames(Data)

@@ -12,13 +12,13 @@ SOMbatchClustering(Data,LC=c(3,3),PlotIt=FALSE,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-\item{Data(1:n,1:m)}{Data to be clustered. n Datapoints with m Attributes}
+\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
 \item{LC}{Lines and Columns of a small SOM, usually every unit is a cluster, 3x3 means 9 units}
-\item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of a data set with colored point definded by Cls}
-\item{\dots}{Further arguments to be set for the clustering algorithm, if not set, defaul arguments are used.}
+\item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 }
 \details{
-very small maps, not emergent.
+very small maps, not emergent. In approximation every unit can be seen as an cluster.
 }
 \value{
 List of

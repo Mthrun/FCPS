@@ -10,5 +10,5 @@ ADPclustering=function(Data,PlotIt=FALSE,...){
     requireNamespace('DataVisualizations')
     DataVisualizations::plot3D(Data,Cls)
   }
-  return(list(Cls=Cls,ObjectADP=adp))
+  return(list(Cls=Cls,ADPobject=adp))
 }

@@ -1,7 +1,7 @@
 SOMbatchClustering=function(Data,LC=c(3,3),PlotIt=FALSE,...){
   
   #author: MT, 04/2018
-  requireRpackage('kohonen')
+  requireNamespace('kohonen')
   koh=kohonen::supersom(Data,grid = kohonen::somgrid(LC[1],LC[2]),keep.data=TRUE,...)
   Cls=koh$unit.classif
   
