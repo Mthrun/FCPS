@@ -24,5 +24,5 @@ MarkovClustering=function(Data=NULL,Adjacency=NULL,addLoops = TRUE,PlotIt=FALSE,
     requireNamespace('DataVisualizations')
     DataVisualizations::plot3D(Data,Cls)
   }
-  return(list(Cls=Cls,ObjectMCL=mm))
+  return(list(Cls=Cls,MCLobject=mm))
 }
