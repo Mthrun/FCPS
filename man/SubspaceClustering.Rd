@@ -15,9 +15,9 @@ PlotIt=FALSE,Algorithm='orclus',OrclusInitialClustersNo=2*ClusterNo,...)
 \item{DimSubspace}{numerical number defining the dimensionality in which clusters should be search in}
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{Algorithm}{
-'orclus', Subspace Clustering Based on Arbitrarily Oriented Projected Cluster Generation
+'orclus', Subspace Clustering Based on Arbitrarily Oriented Projected Cluster Generation [Aggarwal and Yu, 2000]
 
-'ProClus' Subspace Clustering Based on Arbitrarily Oriented Projected Cluster Generatio
+'ProClus' ProClus Algorithm for Projected Clustering [Aggarwal and Procopiuc, 1999] 
 
 }
 
@@ -31,6 +31,12 @@ List of
 }
 \note{
 JAVA_HOME has to be set for rJava to the ProClus algorithm.
+}
+\references{
+[Aggarwal and Yu, 2000] Aggarwal, C. and Yu, P.: Finding generalized projected clusters in high dimensional spaces, Proceedings of ACM SIGMOD International Conference on Management of Data, pp. 70-81, 2000
+
+[Aggarwal and Procopiuc, 1999]  C. C. Aggarwal and C. Procopiuc Fast Algorithms for Projected Clustering. In Proc. ACM SIGMOD 1999.
+
 }
  \examples{
 data('Hepta')

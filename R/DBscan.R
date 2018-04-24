@@ -1,4 +1,4 @@
-DBscan <-function(Data,Radius,minPts=5,PlotIt=FALSE,...){
+DBscan <-function(Data,Radius,minPts,ClusterNo=NULL,PlotIt=FALSE,...){
 #  res=kmeans(FCPS$Hepta$Data,7)
 #  Cls=DBscan(FCPS$Hepta$Data,sqrt(min(res$withinss)))
 # DBscan nach [Ester et al., 1996]
@@ -21,8 +21,16 @@ DBscan <-function(Data,Radius,minPts=5,PlotIt=FALSE,...){
     return(cls <- rep(1,length(Data)))
   }
   
-if(missing(Radius))  
-  stop('The eps parameter is missing but it is required in DBscan!')
+if(missing(Radius)){  
+  warning('The eps parameter is missing but it is required in DBscan. Trying to estimate..')
+  if(is.null(ClusterNo)) stop('ClusterNo has to be set to estimate Radius.')
+  Radius=sqrt(min(kmeansClustering(Data,ClusterNo=ClusterNo,method = 'LBG')$SumDistsToCentroids))
+
+} 
+  if(missing(minPts)){
+    minPts=round(0.025*nrow(Data),0)
+    warning('The minPts parameter is missing but it is required in DBscan. Trying to estimate..')
+  }   
   
   requireNamespace('dbscan')
   liste=dbscan::dbscan(x = Data,eps = Radius,minPts = minPts,...)
@@ -36,7 +44,9 @@ if(missing(Radius))
 	
 	if(PlotIt){
 	  requireNamespace('DataVisualizations')
-	  DataVisualizations::plot3D(Data,Cls)
+	  Cls2=Cls
+	  Cls2[!is.finite(Cls2)]=999
+	  DataVisualizations::plot3D(Data,Cls2)
 	}
 	
   return(list(Cls=Cls,DBscanObject=liste))
