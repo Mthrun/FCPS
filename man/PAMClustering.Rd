@@ -1,5 +1,5 @@
-\name{FannyClustering}
-\alias{FannyClustering}
+\name{PAMClustering}
+\alias{PAMClustering}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Partitioning Around Medoids [Rousseeuw/Kaufman, 1990, p. 164-198] 
@@ -24,7 +24,7 @@ PAMClustering(Data,ClusterNo,PlotIt=FALSE,...)
 \value{
 List of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
-\item{FannyObject}{Object defined by clustering algorithm as the other output of this algorithm}
+\item{PAMObject}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
  [Rousseeuw/Kaufman, 1990]	Rousseeuw, P. J., & Kaufman, L.: Finding groups in data, Belgium, John Wiley & Sons Inc., ISBN: 0471735787, 1990.

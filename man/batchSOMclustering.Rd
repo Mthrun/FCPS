@@ -1,5 +1,5 @@
-\name{SOMbatchClustering}
-\alias{SOMbatchClustering}
+\name{batchSOMclustering}
+\alias{batchSOMclustering}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 k-batch self-organizing maps based clustering
@@ -8,7 +8,7 @@ k-batch self-organizing maps based clustering
 ...
 }
 \usage{
-SOMbatchClustering(Data,LC=c(3,3),PlotIt=FALSE,...)
+batchSOMclustering(Data,LC=c(3,3),PlotIt=FALSE,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,7 +23,7 @@ very small maps, not emergent. In approximation every unit can be seen as an clu
 \value{
 List of
 \item{Cls}{[1:n]  numerical vector defining the classification as the main output of the clustering algorithm}
-\item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
+\item{KohonenObject}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
 R. Wehrens and L.M.C. Buydens, J. Stat. Softw. 21 (5), 2007; R. Wehrens and J. Kruisselbrink, submitted, 2017.
@@ -34,7 +34,7 @@ Michael Thrun
 
 \examples{
 data('Hepta')
-out=SOMbatchClustering(Hepta$Data,PlotIt=TRUE)
+out=batchSOMclustering(Hepta$Data,PlotIt=TRUE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -19,7 +19,7 @@ Hard Competitive learning clustering published by [Ripley, 2007] and implemented
 \value{
 List of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
-\item{NeuralGasObject}{Object defined by clustering algorithm as the other output of this algorithm}
+\item{HCLObject}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 
  \examples{

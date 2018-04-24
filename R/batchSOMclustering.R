@@ -1,4 +1,4 @@
-SOMbatchClustering=function(Data,LC=c(3,3),PlotIt=FALSE,...){
+batchSOMclustering=function(Data,LC=c(3,3),PlotIt=FALSE,...){
   
   #author: MT, 04/2018
   requireNamespace('kohonen')
@@ -14,5 +14,5 @@ SOMbatchClustering=function(Data,LC=c(3,3),PlotIt=FALSE,...){
     requireNamespace('DataVisualizations')
     DataVisualizations::plot3D(Data,Cls)
   }
-  return(list(Cls=Cls,ObjectKohonen=koh))
+  return(list(Cls=Cls,KohonenObject=koh))
 }

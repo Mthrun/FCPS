@@ -26,7 +26,7 @@ logical; if TRUE, self-loops with weight 1 are added to each vertex of x (see \c
 \value{
 List of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
-\item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
+\item{MarkovObject}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
 van Dongen, S.M. Graph Clustering by Flow Simulation. Ph.D. thesis, Universtiy of Utrecht. Utrecht University Repository: http://dspace.library.uu.nl/handle/1874/848, 2000

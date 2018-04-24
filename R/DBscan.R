@@ -9,6 +9,7 @@ DBscan <-function(Data,Radius,minPts,ClusterNo=NULL,PlotIt=FALSE,...){
 # minPts                 In principle minimum number of points in the unit disk, if the unit disk is within the cluster (core) [Ester et al., 1996, p. 228].
 #                        number of minimum points in the eps region (for core points). 
   #                      Default is 5 points.
+#Cluster No
 # OUTPUT List V with
 # Cls[1:n]               Clusterung der Daten, Points which cannot be assigned to a cluster will be reported as members of the noise cluster with NaN.
 # 
