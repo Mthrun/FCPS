@@ -2,7 +2,7 @@
 \alias{FannyClustering}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-fuzzy clustering
+Fuzzy Analysis Clustering [Rousseeuw/Kaufman, 1990, p. 164-198] 
 }
 \description{
 ...
@@ -27,7 +27,8 @@ List of
 \item{FannyObject}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
-P. Rousseeuw, A. Struyf, M. Hubert, and M. Maechler. cluster:  Cluster  Analysis Extended Rousseeuw et al. , 2006. URL http://www.R-project.org .  R package version 1.11.
+ [Rousseeuw/Kaufman, 1990]	Rousseeuw, P. J., & Kaufman, L.: Finding groups in data, Belgium, John Wiley & Sons Inc., ISBN: 0471735787, 1990.
+
 }
 \author{
 Michael Thrun

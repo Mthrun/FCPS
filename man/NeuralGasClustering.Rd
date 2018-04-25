@@ -6,6 +6,10 @@
 NeuralGasClustering(Data, ClusterNo,PlotIt=FALSE,...)
 }
 
+\description{
+Neural gas clustering published by [Martinetz et al., 1993]] and implemented by [Bodenhofer et al., 2011].
+
+}
 \arguments{
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
 
@@ -24,3 +28,11 @@ data('Hepta')
 out=NeuralGasClustering(Hepta$Data,ClusterNo=7,PlotIt=TRUE)
 }
 \author{Michael Thrun}
+
+
+
+\references{
+[Dimitriadou, 2002]  Dimitriadou, E.: cclust–convex clustering methods and clustering indexes. R package, 2002,
+
+[Martinetz et al., 1993]  Martinetz, T. M., Berkovich, S. G., & Schulten, K. J.: 'Neural-gas' network for vector quantization and its application to time-series prediction, IEEE Transactions on Neural Networks, Vol. 4(4), pp. 558-569. 1993.
+}

@@ -2,10 +2,10 @@
 \alias{ADPclustering}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-clustering by fast search and find of density peaks
+Clustering by fast search and find of density peaks [Rodriguez/Laio, 2014]
 }
 \description{
-...
+The algorithm was introduced in [Rodriguez/Laio, 2014] und reimplemented by [Wang/Xu, 2017].
 }
 \usage{
 ADPclustering(Data,PlotIt=FALSE,...)
@@ -25,10 +25,8 @@ List of
 \item{ADPobject}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
-Rodriguez, A., & Laio, A.:Clustering by fast search and find of density peaks. Science, 344(6191), 1492-1496, 2014.
-
-Xiao-Feng Wang, and Yifan Xu: "Fast Clustering Using Adaptive Density Peak Detection." Statistical Methods in Medical Research, doi:10.1177/0962280215609948, 2015.
-}
+[Rodriguez/Laio, 2014]  Rodriguez, A., & Laio, A.: Clustering by fast search and find of density peaks, Science, Vol. 344(6191), pp. 1492-1496. 2014.
+[Wang/Xu, 2017]  Wang, X.-F., & Xu, Y.: Fast clustering using adaptive density peak detection, Statistical methods in medical research, Vol. 26(6), pp. 2800-2811. 2017.}
 \author{
 Michael Thrun
 }

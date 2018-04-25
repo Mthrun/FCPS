@@ -5,7 +5,7 @@
 Affinity Propagation clustering
 }
 \description{
-Affinity Propagation clustering introduced by Frey and Dueck (2007) <doi:10.1126/science.1136800>.
+Affinity Propagation clustering published by [Frey/Dueck, 2007] and implemented by [Bodenhofer et al., 2011].
 
 }
 \usage{
@@ -45,15 +45,19 @@ List of
 \item{APobject}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
-http://www.bioinf.jku.at/software/apcluster
+[Frey/Dueck, 2007]	Frey, B. J., & Dueck, D.: Clustering by passing messages between data points, Science, Vol. 315(5814), pp. 972-976, <doi:10.1126/science.1136800>, 2007.
 
-Frey, B. J. and Dueck, D. (2007) Clustering by passing messages between data points. Science 315, 972-976. DOI: 10.1126/science.1136800.
+[Bodenhofer et al., 2011]	Bodenhofer, U., Kothmeier, A., & Hochreiter, S.: APCluster: an R package for affinity propagation clustering, Bioinformatics, Vol. 27(17), pp, 2463-2464, 2011.
 
-Bodenhofer, U., Kothmeier, A., and Hochreiter, S. (2011) APCluster: an R package for affinity propagation clustering. Bioinformatics 27, 2463-2464. DOI: 10.1093/bioinformatics/btr406.
+further Details in
+\url{
+http://www.bioinf.jku.at/software/apcluster 
+}
 }
 \author{
 Michael Thrun
 }
+
 
 \examples{
 data('Hepta')

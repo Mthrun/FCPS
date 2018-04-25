@@ -24,9 +24,9 @@ DBscan <-function(Data,Radius,minPts,ClusterNo=NULL,PlotIt=FALSE,...){
   
 if(missing(Radius)){  
   warning('The eps parameter is missing but it is required in DBscan. Trying to estimate..')
-  if(is.null(ClusterNo)) stop('ClusterNo has to be set to estimate Radius.')
-  Radius=sqrt(min(kmeansClustering(Data,ClusterNo=ClusterNo,method = 'LBG')$SumDistsToCentroids))
-
+  #if(is.null(ClusterNo)) stop('ClusterNo has to be set to estimate Radius.')
+  #Radius=sqrt(min(kmeansClustering(Data,ClusterNo=ClusterNo,method = 'LBG')$SumDistsToCentroids))
+  Radius=AdaptGauss::ParetoRadius(Data)*0.5
 } 
   if(missing(minPts)){
     minPts=round(0.025*nrow(Data),0)
