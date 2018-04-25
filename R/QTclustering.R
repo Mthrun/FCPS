@@ -16,12 +16,16 @@ QTClustering <-function(Data,Radius,ClusterNo,PlotIt=FALSE,...){
   # Author: MT 04/2018
 
   #
+
+  
+  
   requireNamespace('flexclust')
   if(missing(Radius)){  
-    warning('The Radius parameter is missing but it is required in DBscan. Trying to estimate..')
-    if(is.null(ClusterNo)) stop('ClusterNo has to be set to estimate Radius.')
-    Radius=sqrt(min(kmeansClustering(Data,ClusterNo=ClusterNo,method = 'LBG')$SumDistsToCentroids))
-    
+    warning('The Radius parameter is missing but it is required in QTclustering Trying to estimate..')
+   # if(is.null(ClusterNo)) stop('ClusterNo has to be set to estimate Radius.')
+    #Radius=sqrt(min(kmeansClustering(Data,ClusterNo=ClusterNo,method = 'LBG')$SumDistsToCentroids))
+    #Radius=getRadius4Dichte(as.matrix(dist(Data)))
+    Radius=AdaptGauss::ParetoRadius(Data)
   } 
   obj=flexclust::qtclust(Data,Radius,...)
   Cls=obj@cluster

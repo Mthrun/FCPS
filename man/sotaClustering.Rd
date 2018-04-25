@@ -1,9 +1,11 @@
-\name{NeuralGasClustering}
-\alias{NeuralGasClustering}
-\title{Neural gas algorithm for clustering}
-
+\name{sotaClustering}
+\alias{sotaClustering}
+\title{SOTA Clustering}
+\description{
+Self-organizing Tree Algorithm (SOTA)
+}
 \usage{
-NeuralGasClustering(Data, ClusterNo,PlotIt=FALSE,...)
+sotaClustering(Data, ClusterNo,PlotIt=FALSE,...)
 }
 
 \arguments{
@@ -16,11 +18,15 @@ NeuralGasClustering(Data, ClusterNo,PlotIt=FALSE,...)
 \value{
 List of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
-\item{NeuralGasObject}{Object defined by clustering algorithm as the other output of this algorithm}
+\item{sotaObject}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 
  \examples{
 data('Hepta')
-out=NeuralGasClustering(Hepta$Data,ClusterNo=7,PlotIt=TRUE)
+out=sotaClustering(Hepta$Data,ClusterNo=7,PlotIt=TRUE)
 }
 \author{Michael Thrun}
+
+\references{
+Herrero, J., Valencia, A, and Dopazo, J. (2005). A hierarchical unsupervised growing neural network for clustering gene expression patterns. Bioinformatics, 17, 126-136.
+}

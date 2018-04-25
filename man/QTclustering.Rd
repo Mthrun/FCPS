@@ -2,10 +2,10 @@
 \alias{QTclustering}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-stochastic QT clustering
+Stochastic QT Clustering
 }
 \description{
-stochastic QT clustering
+stochastic quality clustering of [Heyer et al., 1999] with an improved implementation by [Scharl/Leisch, 2006].
 }
 \usage{
 QTclustering(Data,ClusterNo,PlotIt=FALSE,...)
@@ -26,8 +26,10 @@ List of
 \item{QTObject}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
-  [Heyer et al., 1999]	Heyer, L. J., Kruglyak, S., Yooseph, S.: Exploring expression data: Identification and analysis of coexpressed genes. Genome Research 9, 1106–1115, 1999.
-  [Scharl and Leisch, 2006]	 Theresa Scharl and Friedrich Leisch: The stochastic QT-clust algorithm: evaluation of stability and variance on time-course microarray data.  In Alfredo Rizzi and Maurizio Vichi, editors, Compstat - Proceedings in Computational Statistics,  pages 1015-1022.   Physica Verlag,  Heidelberg, Germany, 2006}
+[Heyer et al., 1999]  Heyer, L. J., Kruglyak, S., & Yooseph, S.: Exploring expression data: identification and analysis of coexpressed genes, Genome research, Vol. 9(11), pp. 1106-1115. 1999.
+
+[Scharl/Leisch, 2006]  Scharl, T., & Leisch, F.: The stochastic QT-clust algorithm: evaluation of stability and variance on time-course microarray data, in Rizzi , A. & Vichi, M. (eds.), Proc. Proceedings in Computational Statistics (Compstat), pp. 1015–1022, Physica Verlag, Heidelberg, Germany, 2006.
+}
 \author{
 Michael Thrun
 }

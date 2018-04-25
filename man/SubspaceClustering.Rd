@@ -30,12 +30,12 @@ List of
 \item{NeuralGasObject}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \note{
-JAVA_HOME has to be set for rJava to the ProClus algorithm.
+JAVA_HOME has to be set for rJava to the ProClus algorithm (in windows set PATH env. variable to .../bin path of Java. The architecture of R and Java have to match. Java automatically downloads the Java version of the browser which may not be installed in the architecture in R. In such a case choose a Java version manually.
 }
 \references{
-[Aggarwal and Yu, 2000] Aggarwal, C. and Yu, P.: Finding generalized projected clusters in high dimensional spaces, Proceedings of ACM SIGMOD International Conference on Management of Data, pp. 70-81, 2000
+[Aggarwal et al., 1999]  Aggarwal, C. C., Wolf, J. L., Yu, P. S., Procopiuc, C., & Park, J. S.: Fast algorithms for projected clustering, Proc. ACM SIGMoD Record, Vol. 28, pp. 61-72, ACM, 1999.
 
-[Aggarwal and Procopiuc, 1999]  C. C. Aggarwal and C. Procopiuc Fast Algorithms for Projected Clustering. In Proc. ACM SIGMOD 1999.
+[Aggarwal/Yu, 2000]  Aggarwal, C. C., & Yu, P. S.: Finding generalized projected clusters in high dimensional spaces, (Vol. 29), ACM, ISBN: 1581132174, 2000.
 
 }
  \examples{

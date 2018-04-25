@@ -3,7 +3,7 @@ MarkovClustering=function(Data=NULL,Adjacency=NULL,addLoops = TRUE,PlotIt=FALSE,
   #author: MT, 04/2018
   if(!is.null(Data)){
     requireNamespace('GraphAlgorithms')
-    Adjacency=GraphAlgorithms::RkugelGraph(Data)
+    Adjacency=GraphAlgorithms::RkugelGraph(Data,R = AdaptGauss::ParetoRadius(Data))
   }  
   requireNamespace('MCL')
   

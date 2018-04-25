@@ -1,5 +1,5 @@
 NeuralGasClustering <-function(Data,ClusterNo,PlotIt=FALSE,...){
-# Cls=NeuralGas(Data,ClusterNo=2)
+# Cls=NeuralGas(Data,ClusterNo)
 #  
 # liefert eine Klassenzuweisung
 # INPUT
@@ -9,10 +9,11 @@ NeuralGasClustering <-function(Data,ClusterNo,PlotIt=FALSE,...){
   
 # OUTPUT
 # Cls[1:n]                Clusterung der Daten
-#
+# NeuralGasObject         Object of NeuralGas Alorithm
 # Author: MT 06/2015
 #1.Editor: MT 04/18
-#requireRpackage('cclust')
+
+  
 requireNamespace('cclust')
 res=cclust::cclust(x=Data,centers=ClusterNo,method='neuralgas',...)
 if(PlotIt){
