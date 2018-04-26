@@ -10,19 +10,18 @@ sotaClustering <-function(Data,ClusterNo,PlotIt=FALSE,...){
   # OUTPUT
   # Cls[1:n]                Clusterung der Daten
   # sotaObject         Object of sota Alorithm
-  # Author: MT 06/2015
-  #1.Editor: MT 04/18
+  # Author: MT 04/2018
   
   
   requireNamespace('clValid')
   res=clValid::sota(Data,maxCycles = ClusterNo-1,...)
-  Cls=res$clus
+  Cls=res$clust
   if(!is.null(rownames(Data)))
     names(Cls)=rownames(Data)
     
   if(PlotIt){
     requireNamespace('DataVisualizations')
-    DataVisualizations::plot3D(Data,res$clust)
+    DataVisualizations::plot3D(Data,Cls)
   }
-  return(list(Cls=res$clust,sotaObject=res))
+  return(list(Cls=Cls,sotaObject=res))
 }
