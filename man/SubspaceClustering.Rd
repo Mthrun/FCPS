@@ -1,9 +1,11 @@
 \name{SubspaceClustering}
 \alias{SubspaceClustering}
 \title{Algorithms for Subspace clustering}
-
+\description{
+Algorithms published by [Aggarwal et al., 1999] and [Aggarwal/Yu, 2000].
+}
 \usage{
-SubspaceClustering(Data, ClusterNo=2,DimSubspace,
+SubspaceClustering(Data, ClusterNo,DimSubspace,
 
 PlotIt=FALSE,Algorithm='orclus',OrclusInitialClustersNo=2*ClusterNo,...)
 }

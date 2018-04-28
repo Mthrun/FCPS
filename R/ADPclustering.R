@@ -1,8 +1,11 @@
-ADPclustering=function(Data,PlotIt=FALSE,...){
+ADPclustering=function(Data,ClusterNo=NULL,PlotIt=FALSE,...){
   
   #author: MT, 04/2018
   requireNamespace('ADPclust')
-  adp=ADPclust::adpclust(Data,...)
+  if(is.null(ClusterNo))
+	adp=ADPclust::adpclust(Data,...)
+  else
+  adp=ADPclust::adpclust(Data,nclust=ClusterNo,...)
   
   Cls=as.numeric(adp$clusters)
   

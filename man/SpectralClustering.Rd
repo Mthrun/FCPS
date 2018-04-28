@@ -3,7 +3,7 @@
 \title{ Spectral Clustering }
 
 \usage{
-SpectralClustering(Data, ClusterNo=2,PlotIt=FALSE,...)
+SpectralClustering(Data, ClusterNo,PlotIt=FALSE,...)
 }
 \arguments{
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}

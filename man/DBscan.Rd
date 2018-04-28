@@ -8,22 +8,21 @@ DBscan
 DBscan clustering
 }
 \usage{
-DBscan(Data,eps,minPts=5,,ClusterNo=NULL,PlotIt,...)
+DBscan(Data,Radius,minPts,PlotIt,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
 
-  \item{eps}{
- Radius [Ester et al., 1996, p. 227] neighborhood in the R-ball graph/unit disk graph), size of the epsilon neighborhood.
+  \item{Radius}{
+ eps [Ester et al., 1996, p. 227] neighborhood in the R-ball graph/unit disk graph), size of the epsilon neighborhood.
+ If missing, automatic estimation is done using insights of [Ultsch, 2005].
 }
   \item{minPts}{
  number of minimum points in the eps region (for core points). 
  In principle minimum number of points in the unit disk, if the unit disk is within the cluster (core) [Ester et al., 1996, p. 228].
  Default is 2.5 percent of points.
 }
-\item{ClusterNo}{A number k which defines k different Clusters by which the \code{Radius} can be estimated.}
-
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 
@@ -37,6 +36,7 @@ List of
 \references{
 [Ester et al., 1996]  Ester, M., Kriegel, H.-P., Sander, J., & Xu, X.: A density-based algorithm for discovering clusters in large spatial databases with noise, Proc. Kdd, Vol. 96, pp. 226-231, 1996.
 
+[Ultsch, 2005]  Ultsch, A.: Pareto density estimation: A density estimation for knowledge discovery, In Baier, D. & Werrnecke, K. D. (Eds.), Innovations in classification, data science, and information systems, (Vol. 27, pp. 91-100), Berlin, Germany, Springer, 2005.
 }
 \author{
 Michael Thrun

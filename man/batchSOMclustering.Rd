@@ -8,12 +8,14 @@ k-batch self-organizing maps based clustering
 ...
 }
 \usage{
-batchSOMclustering(Data,LC=c(3,3),PlotIt=FALSE,...)
+batchSOMclustering(Data,LC,ClusterNo=NULL,PlotIt=FALSE,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
 \item{LC}{Lines and Columns of a small SOM, usually every unit is a cluster, 3x3 means 9 units}
+\item{ClusterNo}{Optional, A number k which defines k different Clusters to be build by the algorithm. LC will then be set accordingly.}
+
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 }
@@ -34,7 +36,7 @@ Michael Thrun
 
 \examples{
 data('Hepta')
-out=batchSOMclustering(Hepta$Data,PlotIt=TRUE)
+out=batchSOMclustering(Hepta$Data,ClusterNo=7,PlotIt=TRUE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -1,12 +1,12 @@
 \name{HierarchicalClusterDists}
-\Rdversion{1.1}
+
 \alias{HierarchicalClusterDists}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 HierarchicalClusterDists(pDist) HierarchicalClusterDists(pDist,0,"ward.D",100) Cls=HierarchicalClusterDists(pDist,6,"ward.D")    Zeichnet entweder ein Dendrogram oder liefert eine Klassenzuweisung
 }
 \usage{
-HierarchicalCluster(pDist,ClusterNo=0,ClusterAlg="ward.D2",ColorTreshold=0)
+HierarchicalClusterDists(pDist,ClusterNo=0,ClusterAlg="ward.D2",ColorTreshold=0)
 }
 
 \description{

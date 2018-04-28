@@ -6,9 +6,11 @@
 Zu einem gegebenen Datensatz und Clusterungen fuer diesen Datensatz werden in Details genannten Kennzahlen berechnet und darauf basierend fuer jede Kennzahl eine Empfehlung bezueglich der Klassenanzahl gegeben.
 }
 \usage{
-clusternumbers(data, cls, max.nc)
-clusternumbers(data, max.nc, method)
-clusternumbers(data, cls = NULL, max.nc, method = NULL, index = "all", min.nc = 2, print.status = FALSE)
+clusternumbers(data, cls = NULL, max.nc, 
+
+index = "all", min.nc = 2,
+
+print.status = FALSE, method = NULL)
 }
 \arguments{
   \item{data}{

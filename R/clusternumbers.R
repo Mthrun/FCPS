@@ -505,11 +505,12 @@ clusternumbers <- function (data,
       }
     }
     else if (methodn == 10) {
-      projPoints <- pswarmCpp(data)
+	requireNamespace('DatabionicSwarm')
+      projPoints <- DatabionicSwarm::Pswarm(data)
       
       for (i in 0:(range + 1)) {
         if (i != 0 || !min.nc == 2) {
-          temp <- DBSclustering(min.nc-1+i,data,projPoints$ProjectedPoints,projPoints$LC[c(2,1)])
+          temp <- DatabionicSwarm::DBSclustering(min.nc-1+i,data,projPoints$ProjectedPoints,projPoints$LC[c(2,1)])
           clusters2[,i+1] <- temp
         }
       }

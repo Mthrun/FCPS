@@ -1,9 +1,30 @@
-MarkovClustering=function(Data=NULL,Adjacency=NULL,addLoops = TRUE,PlotIt=FALSE,...){
+MarkovClustering=function(Data=NULL,Adjacency=NULL,Radius=TRUE,addLoops = TRUE,PlotIt=FALSE,...){
   
   #author: MT, 04/2018
   if(!is.null(Data)){
-    requireNamespace('GraphAlgorithms')
-    Adjacency=GraphAlgorithms::RkugelGraph(Data,R = AdaptGauss::ParetoRadius(Data))
+      if(Radius==TRUE){
+        Radius=AdaptGauss::ParetoRadius(Data)
+      }
+    if(Radius==FALSE){
+      requireNamespace('ABCanalysis')
+      x=DistanceMatrix(Data,outputisvector=T)
+      x=x[lower.tri(x, diag = FALSE)]
+      par=quantile(x,c(0.2013)) #geschaetzter paretorRadius
+      xx=ABCanalysis::ABCRemoveSmallYields(x,0.5)
+      x=xx$SubstantialData
+      res=suppressWarnings(ABCanalysis::ABCanalysis(x))
+      Radius=min(x[res$Aind])/max(x[res$Cind])
+      
+      
+    }
+    DistanceMatrix = as.matrix(dist(Data))
+    AnzPunkte = nrow(DistanceMatrix)
+    N = ncol(DistanceMatrix)
+    Adjacency = matrix(0, ncol = N, nrow = N)
+    for (i in 1:AnzPunkte) {
+      RInd = which(DistanceMatrix[i, ] <= Radius, arr.ind = T)
+      Adjacency[i, RInd] = 1
+    }
   }  
   requireNamespace('MCL')
   

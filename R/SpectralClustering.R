@@ -1,4 +1,4 @@
-SpectralClustering <- function(Data, ClusterNo=2,PlotIt=FALSE,...){
+SpectralClustering <- function(Data, ClusterNo,PlotIt=FALSE,...){
   #Cls=SpectralClustering(Data,ClusterNo)
   #Cls=SpectralClustering(Data,ClusterNo,...)
   # Clusters the Data into "ClusterNo" different clusters using the Spectal Clustering Method

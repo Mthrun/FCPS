@@ -8,11 +8,13 @@ Clustering by fast search and find of density peaks [Rodriguez/Laio, 2014]
 The algorithm was introduced in [Rodriguez/Laio, 2014] und reimplemented by [Wang/Xu, 2017].
 }
 \usage{
-ADPclustering(Data,PlotIt=FALSE,...)
+ADPclustering(Data,ClusterNo=NULL,PlotIt=FALSE,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
+\item{ClusterNo}{Optional, Either: A number k which defines k different Clusters to be build by the algorithm, or a range of ClusterNo to let the algorithm choose from.}
+
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 }

@@ -13,7 +13,7 @@ kmeansdist(centers, distances, maxIt = 2000, verbose = F)
   \item{distances}{ Distanzmatrix. Bei n Datenpunkten der Dimension n x n  }
   \item{centers}{Entweder: Vektor aus Indizes <= n die initiale Zentroide fuer Kmeans sind. Oder: Integer, gibt an wieviele Zentroide es geben soll. Diese werden dann zuf?llig gezogen.}
   \item{maxIt}{ Optional: Maximale Anzahl an Iterationen bevor der Algorithmus abbricht.}
-  \item{Verbose}{Optional: Algorithmus gibt immer aktuelle Iteration aus.}
+  \item{verbose}{Optional: Algorithmus gibt immer aktuelle Iteration aus.}
 }
 
 \value{

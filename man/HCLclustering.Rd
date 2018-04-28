@@ -3,7 +3,7 @@
 \title{On-line Update (Hard Competitive learning) method}
 
 \usage{
-HCLclustering(Data, ClusterNo=2,PlotIt=FALSE,...)
+HCLclustering(Data, ClusterNo,PlotIt=FALSE,...)
 }
 \description{
 Hard Competitive learning clustering published by [Ripley, 2007] and implemented by [Dimitriadou, 2002].
@@ -29,7 +29,7 @@ out=HCLclustering(Hepta$Data,ClusterNo=7,PlotIt=TRUE)
 \author{Michael Thrun}
 
 \references{
-[Dimitriadou, 2002]  Dimitriadou, E.: cclust–convex clustering methods and clustering indexes. R package, 2002,
+[Dimitriadou, 2002]  Dimitriadou, E.: cclust-convex clustering methods and clustering indexes. R package, 2002,
 
 [Ripley, 2007]  Ripley, B. D.: Pattern recognition and neural networks, Cambridge university press, ISBN: 0521717701, 2007.
 

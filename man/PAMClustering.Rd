@@ -5,7 +5,7 @@
 Partitioning Around Medoids [Rousseeuw/Kaufman, 1990, p. 164-198] 
 }
 \description{
-Partitioning (clustering) of the data into k clusters “around medoids”, a more robust version of K-means.
+Partitioning (clustering) of the data into k clusters "around medoids", a more robust version of K-means.
 }
 \usage{
 PAMClustering(Data,ClusterNo,PlotIt=FALSE,...)

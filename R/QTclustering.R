@@ -1,4 +1,4 @@
-QTClustering <-function(Data,Radius,ClusterNo,PlotIt=FALSE,...){
+QTClustering <-function(Data,Radius=TRUE,PlotIt=FALSE,...){
   # Cls=QTClustering(Data,Radius=2)
   #  
   # liefert eine Klassenzuweisung
@@ -20,13 +20,19 @@ QTClustering <-function(Data,Radius,ClusterNo,PlotIt=FALSE,...){
   
   
   requireNamespace('flexclust')
-  if(missing(Radius)){  
-    warning('The Radius parameter is missing but it is required in QTclustering Trying to estimate..')
-   # if(is.null(ClusterNo)) stop('ClusterNo has to be set to estimate Radius.')
-    #Radius=sqrt(min(kmeansClustering(Data,ClusterNo=ClusterNo,method = 'LBG')$SumDistsToCentroids))
-    #Radius=getRadius4Dichte(as.matrix(dist(Data)))
-    Radius=AdaptGauss::ParetoRadius(Data)
-  } 
+    if(Radius==TRUE){
+      Radius=AdaptGauss::ParetoRadius(Data)
+    }
+    if(Radius==FALSE){
+      requireNamespace('ABCanalysis')
+      x=as.matrix(dist(Data))
+      x=x[lower.tri(x, diag = FALSE)]
+      par=quantile(x,c(0.2013)) #geschaetzter paretorRadius
+      xx=ABCanalysis::ABCRemoveSmallYields(x,0.5)
+      x=xx$SubstantialData
+      res=suppressWarnings(ABCanalysis::ABCanalysis(x))
+      Radius=min(x[res$Aind])/max(x[res$Cind])
+    } 
   obj=flexclust::qtclust(Data,Radius,...)
   Cls=obj@cluster
   

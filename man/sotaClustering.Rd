@@ -2,7 +2,7 @@
 \alias{sotaClustering}
 \title{SOTA Clustering}
 \description{
-Self-organizing Tree Algorithm (SOTA)
+Self-organizing Tree Algorithm (SOTA) introduced by [Herrero et al., 2001].
 }
 \usage{
 sotaClustering(Data, ClusterNo,PlotIt=FALSE,...)
@@ -28,5 +28,6 @@ out=sotaClustering(Hepta$Data,ClusterNo=7,PlotIt=TRUE)
 \author{Michael Thrun}
 
 \references{
-Herrero, J., Valencia, A, and Dopazo, J. (2005). A hierarchical unsupervised growing neural network for clustering gene expression patterns. Bioinformatics, 17, 126-136.
+[Herrero et al., 2001]  Herrero, J., Valencia, A., & Dopazo, J.: A hierarchical unsupervised growing neural network for clustering gene expression patterns, Bioinformatics, Vol. 17(2), pp. 126-136. 2001.
+
 }

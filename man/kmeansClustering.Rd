@@ -8,7 +8,7 @@ K-Means Clustering
 Perform k-means clustering on a data matrix with 100 max iterations.Used stats package function 'kmeans'.
 }
 \usage{
-kmeansClustering(Data, ClusterNo,Centers=ClusterNo,
+kmeansClustering(Data, ClusterNo,Centers=NULL,
 
  method = 'LBG',PlotIt=FALSE, Verbose = 0 )
 }
