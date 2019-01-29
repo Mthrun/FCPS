@@ -37,13 +37,13 @@ if(missing(Radius)){
   # if(length(ind)>0)
   #   Cls[ind]=999
 	#Cls=NormalizeCls(Cls)$normalizedCls
-	if(length(ind)>0)
-	  Cls[ind]=NaN
-	
+	#if(length(ind)>0)
+	#  Cls[ind]=NaN
+  Cls[!is.finite(Cls)]=0
 	if(PlotIt){
 	  requireNamespace('DataVisualizations')
 	  Cls2=Cls
-	  Cls2[!is.finite(Cls2)]=999
+	  Cls2[Cls2==0]=999
 	  DataVisualizations::plot3D(Data,Cls2)
 	}
 	

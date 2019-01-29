@@ -17,15 +17,22 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,PlotIt=FALSE,Algorithm=
 # Author: MT 04/2018
   
   #orclus
-
+  d=dim(Data)[2]
+  n=d=dim(Data)[1]
+  
   switch(Algorithm,
          orclus={
-           d=dim(Data)[2]
+           
            if(missing(DimSubspace)){
-             if(d>3)
-               DimSubspace=dim(Data)[2]-1    
-             else
+             if(d>3){
+               DimSubspace=dim(Data)[2]-1 
+               if(DimSubspace>n/ClusterNo){
+                 DimSubspace=n/ClusterNo-1
+               }
+               DimSubspace=min(c(DimSubspace,25)) #higher subsopace is not computable
+             }else{
                DimSubspace=dim(Data)[2]*0.99
+             }
            }
            requireNamespace('orclus')
            obj=orclus::orclus(x=Data, k=ClusterNo,l=DimSubspace,k0=OrclusInitialClustersNo, ...)

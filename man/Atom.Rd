@@ -6,7 +6,7 @@
 Atom from FCPS
 }
 \description{
-different variances and linear not separable
+Two nested spheres with different variances that are not linear not separable.
 }
 \usage{data("Atom")}
 

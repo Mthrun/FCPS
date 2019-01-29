@@ -27,7 +27,8 @@ logical; if TRUE, self-loops with weight 1 are added to each vertex of x (see \c
 }
 \value{
 List of
-\item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
+\item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.
+. Points which cannot be assigned to a cluster will be reported with 0.}
 \item{MCLobject}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{

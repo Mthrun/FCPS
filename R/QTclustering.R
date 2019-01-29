@@ -35,13 +35,15 @@ QTClustering <-function(Data,Radius=TRUE,PlotIt=FALSE,...){
     } 
   obj=flexclust::qtclust(Data,Radius,...)
   Cls=obj@cluster
-  
+  Cls[!is.finite(Cls)]=0
   if(!is.null(rownames(Data)))
     names(Cls)=rownames(Data)
   
   if(PlotIt){
+    Cls2=Cls
+    Cls2[Cls2==0]=999
     requireNamespace('DataVisualizations')
-    DataVisualizations::plot3D(Data,Cls)
+    DataVisualizations::plot3D(Data,Cls2)
   }
   return(list(Cls=Cls,QTObject=obj))
 }

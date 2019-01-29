@@ -30,7 +30,7 @@ DBscan(Data,Radius,minPts,PlotIt,...)
 
 \value{
 List of
-\item{Cls}{[1:n]  numerical vector defining the clustering; this classification is the main output of the algorithm. Points which cannot be assigned to a cluster will be reported as members of the noise cluster with NaN.}
+\item{Cls}{[1:n]  numerical vector defining the clustering; this classification is the main output of the algorithm. Points which cannot be assigned to a cluster will be reported as members of the noise cluster with 0.}
 \item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
