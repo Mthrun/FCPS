@@ -8,7 +8,7 @@ MoGclustering <-function(Data,ClusterNo=2,method="EM",PlotIt=FALSE,...){
 # OUTPUT List V with
 # Cls[1:n]                k-means Clusterung der Daten
 # MT 2017
-# Übersicht/Kurz-Zfssg in  [Thrun, 2017, p. 23]
+# IMPORTANT UPDATE: MoGclustering renamed to ModelBasedClustering MoG Clustering is now defined es Mixture of Gaussians based on EM This is a change contrary to my PhD thesis [Thrun, 2018]! Additionally density based clustering methods added.
 #
 
   if (ClusterNo<2){
