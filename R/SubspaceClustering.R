@@ -58,7 +58,7 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,PlotIt=FALSE,Algorithm=
 if(PlotIt){
   requireNamespace('DataVisualizations')
 
-  DataVisualizations::plot3D(Data,Cls)
+  DataVisualizations::Plot3D(Data,Cls)
 }
 return(list(Cls=Cls,SubspaceObject=obj))
 }

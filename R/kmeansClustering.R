@@ -38,7 +38,7 @@ if(!is.null(Centers))
   	if(Verbose==1){print(c);}
   	if(PlotIt){
   	  requireNamespace('DataVisualizations')
-  	  DataVisualizations::plot3D(Data,as.vector(c$cluster))
+  	  DataVisualizations::Plot3D(Data,as.vector(c$cluster))
   	}
   	return(list(Cls=as.vector(c$cluster),SumDistsToCentroids=c$withinss,Centroids=c$centers))
   }
@@ -51,7 +51,7 @@ if(!is.null(Centers))
     # Weingessel, Andreas and Dimitriadou, Evgenia and Dolnicar, Sara (1999)
     if(PlotIt){
       requireNamespace('DataVisualizations')
-      DataVisualizations::plot3D(Data,res$cluster)
+      DataVisualizations::Plot3D(Data,res$cluster)
     }
     return(list(Cls=res$cluster,SumDistsToCentroids=SSE,Centroids=res$centers))
   }

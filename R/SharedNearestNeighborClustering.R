@@ -1,5 +1,4 @@
-SharedNearestNeighborClustering <-function(Data,Knn=7,Radius,minPts,PlotIt=FALSE,...){
-  #  res=kmeans(FCPS$Hepta$Data,7)
+SharedNearestNeighborClustering <-function(Data,Knn=7,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
   #  Cls=SharedNearestNeighborClustering(FCPS$Hepta$Data,sqrt(min(res$withinss)))
   # DBscan nach [Ester et al., 1996]
   # INPUT
@@ -12,10 +11,7 @@ SharedNearestNeighborClustering <-function(Data,Knn=7,Radius,minPts,PlotIt=FALSE
   # OUTPUT List V with
   # Cls[1:n]               Clusterung der Daten, Points which cannot be assigned to a cluster will be reported as members of the noise cluster with NaN.
   # 
-  # author: MT 2017, 1.Editor MT 04/2018
-  #
-  # [Ester et al., 1996]  Ester, M., Kriegel, H.-P., Sander, J., & Xu, X.: A density-based algorithm for discovering clusters in large spatial databases with noise, Proc. Kdd, Vol. 96, pp. 226-231, 1996.
-  
+  # author: MT 2019
   
   if(is.null(nrow(Data))){# dann haben wir einen Vektor
     return(cls <- rep(1,length(Data)))
@@ -26,20 +22,25 @@ SharedNearestNeighborClustering <-function(Data,Knn=7,Radius,minPts,PlotIt=FALSE
     Radius=0.5*AdaptGauss::ParetoRadius(Data)
   } 
   if(missing(minPts)){
-    minPts=round(0.025*nrow(Data),0)
+    minPts=max(round(0.025*nrow(Data),0),20)## A point needs a least 16 (minPts) links in the sNN graph to be a core point.
     warning('The minPts parameter is missing but it is required in DBscan. Trying to estimate..')
   }   
+  if(missing(UpperLimitRadius))
+    UpperLimitRadius=4*Radius
   
   requireNamespace('dbscan')
   liste=dbscan::sNNclust(x = Data,k=Knn,eps=Radius,minPts=minPts,...)
   Cls=liste$cluster
+
   ind=which(Cls==0)
-  # if(length(ind)>0)
-  #   Cls[ind]=999
-  #Cls=NormalizeCls(Cls)$normalizedCls
-  #if(length(ind)>0)
-  #  Cls[ind]=NaN
+
   Cls[!is.finite(Cls)]=0
+  # Noise points have cluster id 0
+  if(Radius<UpperLimitRadius&sum(Cls==0)>round(0.025*nrow(Data))){
+    out=suppressWarnings(SharedNearestNeighborClustering(Data,Knn=Knn,Radius=Radius*1.01,minPts=minPts,PlotIt=PlotIt,UpperLimitRadius=UpperLimitRadius,...))
+    Cls=out$Cls
+    liste=out$SNNobject
+  }
   
   if(!is.null(rownames(Data))){
     names(Cls)=rownames(Data)
@@ -49,7 +50,7 @@ SharedNearestNeighborClustering <-function(Data,Knn=7,Radius,minPts,PlotIt=FALSE
     requireNamespace('DataVisualizations')
     Cls2=Cls
     Cls2[Cls2==0]=999
-    DataVisualizations::plot3D(Data,Cls2)
+    DataVisualizations::Plot3D(Data,Cls2)
   }
   
   return(list(Cls=Cls,SNNobject=liste))

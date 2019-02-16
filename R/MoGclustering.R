@@ -40,7 +40,7 @@ if(!is.null(rownames(Data)))
 
 if(PlotIt){
   requireNamespace('DataVisualizations')
-  DataVisualizations::plot3D(Data,Cls)
+  DataVisualizations::Plot3D(Data,Cls)
 }
 return(list(Cls=Cls,MClustObject=out))
 }

@@ -25,7 +25,7 @@ OPTICSclustering=function(Data, MaxRadius,RadiusThreshold, minPts = 5, PlotIt=TR
   
   if(PlotIt){
     requireNamespace('DataVisualizations')
-    DataVisualizations::plot3D(Data,Cls)
+    DataVisualizations::Plot3D(Data,Cls)
   }
   return(list(Cls=Cls,OPTICScobject=OPTICScobject))
 }

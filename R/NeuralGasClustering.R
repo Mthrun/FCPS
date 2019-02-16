@@ -18,7 +18,7 @@ requireNamespace('cclust')
 res=cclust::cclust(x=Data,centers=ClusterNo,method='neuralgas',...)
 if(PlotIt){
   requireNamespace('DataVisualizations')
-  DataVisualizations::plot3D(Data,res$cluster)
+  DataVisualizations::Plot3D(Data,res$cluster)
 }
 return(list(Cls=res$cluster,NeuralGasObject=res))
 }

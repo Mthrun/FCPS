@@ -45,7 +45,7 @@ APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,
   }
   if(PlotIt){
     requireNamespace('DataVisualizations')
-    DataVisualizations::plot3D(DataOrDistances,Cls)
+    DataVisualizations::Plot3D(DataOrDistances,Cls)
   }
   return(list(Cls=Cls,APobject=apres))
 }

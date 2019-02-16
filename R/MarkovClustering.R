@@ -43,7 +43,7 @@ MarkovClustering=function(Data=NULL,Adjacency=NULL,Radius=TRUE,addLoops = TRUE,P
   
   if(PlotIt&!is.null(Data)){
     requireNamespace('DataVisualizations')
-    DataVisualizations::plot3D(Data,Cls)
+    DataVisualizations::Plot3D(Data,Cls)
   }
   return(list(Cls=Cls,MCLobject=mm))
 }

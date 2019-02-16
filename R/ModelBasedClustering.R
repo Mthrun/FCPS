@@ -30,7 +30,7 @@ MoGclustering <-function(Data,ClusterNo=2,PlotIt=FALSE,...){
 res=mclust::Mclust(Data,G=ClusterNo,modelNames=mclust::mclust.options("emModelNames"),...)
 if(PlotIt){
   requireNamespace('DataVisualizations')
-  DataVisualizations::plot3D(Data,res$classification)
+  DataVisualizations::Plot3D(Data,res$classification)
 }
 return(list(Cls=res$classification,MClustObject=res))
 }

@@ -43,7 +43,7 @@ QTClustering <-function(Data,Radius=TRUE,PlotIt=FALSE,...){
     Cls2=Cls
     Cls2[Cls2==0]=999
     requireNamespace('DataVisualizations')
-    DataVisualizations::plot3D(Data,Cls2)
+    DataVisualizations::Plot3D(Data,Cls2)
   }
   return(list(Cls=Cls,QTObject=obj))
 }

@@ -42,7 +42,7 @@ batchSOMclustering=function(Data,LC,ClusterNo=NULL,PlotIt=FALSE,...){
   
   if(PlotIt){
     requireNamespace('DataVisualizations')
-    DataVisualizations::plot3D(Data,Cls)
+    DataVisualizations::Plot3D(Data,Cls)
   }
   return(list(Cls=Cls,KohonenObject=koh))
 }

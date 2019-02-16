@@ -11,7 +11,7 @@ ADPclustering=function(Data,ClusterNo=NULL,PlotIt=FALSE,...){
   
   if(PlotIt){
     requireNamespace('DataVisualizations')
-    DataVisualizations::plot3D(Data,Cls)
+    DataVisualizations::Plot3D(Data,Cls)
   }
   return(list(Cls=Cls,ADPobject=adp))
 }
@@ -41,11 +41,11 @@ ADPclustering=function(Data,ClusterNo=NULL,PlotIt=FALSE,...){
 #   if(PlotIt){
 #     requireNamespace('DataVisualizations')
 #     if (!isSymmetric(DataOrDistances)) {
-#       DataVisualizations::plot3D(DataOrDistances,Cls,k=Knn)
+#       DataVisualizations::Plot3D(DataOrDistances,Cls,k=Knn)
 #     }else{
 #       requireNamespace('ProjectionBasedClustering')
 #       
-#       DataVisualizations::plot3D(DataOrDistances,ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = 3)$ProjectedPoints)
+#       DataVisualizations::Plot3D(DataOrDistances,ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = 3)$ProjectedPoints)
 #     }
 #   }
 #   return(list(Cls=NULL,DPobject=out))

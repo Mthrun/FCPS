@@ -22,7 +22,7 @@ DivisiveAnalysisClustering <-function(Data,ClusterNo,PlotIt=FALSE,...){
     
     if(PlotIt){
       requireNamespace('DataVisualizations')
-      DataVisualizations::plot3D(Data,Cls)
+      DataVisualizations::Plot3D(Data,Cls)
       #plot(res)
     }
   }

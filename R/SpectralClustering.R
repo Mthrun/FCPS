@@ -57,7 +57,7 @@ SpectralClustering <- function(Data, ClusterNo,PlotIt=FALSE,...){
 	Cls=sc@.Data
 	if(PlotIt){
 	  requireNamespace('DataVisualizations')
-	  DataVisualizations::plot3D(Data,Cls)
+	  DataVisualizations::Plot3D(Data,Cls)
 	}  
 	return(list(Cls=Cls,SCobject=sc))
 }
