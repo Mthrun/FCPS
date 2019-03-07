@@ -1,4 +1,4 @@
-MoGclustering <-function(Data,ClusterNo=2,PlotIt=FALSE,...){
+ModelBasedClustering <-function(Data,ClusterNo=2,PlotIt=FALSE,...){
 # Cls <- MoGclustering(Data,ClusterNo);
 # call R's Model based clustering or MixtureOfGaussians (MoG) clustering
 # INPUT

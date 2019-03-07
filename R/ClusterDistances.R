@@ -1,4 +1,7 @@
 ClusterDistances=function(FullDistanceMatrix,Cls,PlotIt=FALSE){
+  if(missing(Cls)){
+    Cls=rep(1,nrow(FullDistanceMatrix))
+  }
   u=unique(Cls)
   classdist=list(FullDistanceMatrix[upper.tri(FullDistanceMatrix,diag = F)])
   if(length(u)==1) return(unlist(classdist))
