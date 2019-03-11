@@ -24,7 +24,9 @@ DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclid
   if(missing(Rho)|missing(Delta)){
     requireNamespace('plotly')
     print('Please set Paramaters Rho and Delta')
+   
     p <- plotly::plot_ly( x = ~DensityPeaks$rho, y = ~DensityPeaks$delta,type = "scatter",mode="markers")
+    p=plotly::layout(p,title = "Decision Graph",xaxis=list(exponentformat = "E",  title = "Local Density Rho"),yaxis=list(exponentformat = "E",  title = "Minimum Distance Delta"),showlegend = FALSE)
 	return(p)
   }else{
     DensityPeaks=densityClust::findClusters(DensityPeaks,rho=Rho,delta=Delta)
