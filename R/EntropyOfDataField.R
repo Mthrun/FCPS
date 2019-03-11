@@ -69,9 +69,30 @@ EntropyOfDataField=function(Data,sigmarange=c(0.01,0.1,0.5,1,2,5,8,10,100),PlotI
 
   if(PlotIt){
     # defined in Wang et al 2011
-    plot(sigmarange,H,ylab='Potential Entropy H',
-         xlab = 'Points of  Selected Impact Factor Sigma in black, Red: Upper Boundary of H',main='Entropy of Data Field')
-    abline(h = log(nrow(Data)),col='red')
+    # plot(sigmarange,H,ylab='Potential Entropy H',
+    #      xlab = 'Points of  Selected Impact Factor Sigma in black, Red: Upper Boundary of H',main='Entropy of Data Field')
+    # abline(h = log(nrow(Data)),col='red')
+    # 
+    requireNamespace('plotly')
+    
+    p <- plotly::plot_ly( x = ~sigmarange, y = ~H,type = "scatter",mode="markers")
+    
+    line <- list(
+      type = "line",
+      line = list(color = "red"),
+      xref = "x",
+      yref = "y"
+    )
+    line[["x0"]] <- min(sigmarange)
+    line[["x1"]] <- max(sigmarange)
+    line[c("y0", "y1")] <- log(nrow(Data))
+    
+    p=plotly::layout(p,title = "Entropy of Data Field",
+                     xaxis=list(exponentformat = "E",  title = "Points of  Selected Impact Factor Sigma in black, Red: Upper Boundary of H"),
+                     yaxis=list(exponentformat = "E",  title = "Potential Entropy H"),
+                     showlegend = FALSE,shapes=line)
+    print(p)
+    
   }
   names(H)=sigmarange
   return(H)

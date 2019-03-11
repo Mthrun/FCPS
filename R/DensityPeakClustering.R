@@ -40,7 +40,8 @@ DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclid
   if(PlotIt){
     requireNamespace('DataVisualizations')
     if (!isSymmetric(DataOrDistances)) {
-      DataVisualizations::Plot3D(DataOrDistances,Cls)
+      print(DataVisualizations::Plot3D(DataOrDistances,Cls))
+    
     }else{
       requireNamespace('ProjectionBasedClustering')
       
