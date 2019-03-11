@@ -1,0 +1,19 @@
+citHeader("To cite the 'FCPS' R package in publications, please use:")
+
+citEntry(entry = "proceedings",
+  title = "Benchmarking Cluster Analysis Methods using PDE-Optimized Violin Plots",
+  author = personList(person(given="Michael Christoph", family="Thrun"),person(given="Felix", family="Pape"),person(given="Alfred", family="Ultsch")),
+  publisher = " European Conference on Data Analysis (ECDA)",
+  year = "2018",
+  url = "http://groups.uni-paderborn.de/eim-i-fg-huellermeier/ecda2018/downloads/ECDA2018-BoA.pdf",
+  location = "Paderborn, Germany",
+  pages="26",
+  textVersion =
+  paste(
+"Thrun, M. C.,Pape, F., & Ultsch, A. :",
+"Benchmarking Cluster Analysis Methods using PDE-Optimized Violin Plots",
+"Proc. European Conference on Data Analysis (ECDA)",
+"pp. 26,",
+"Paderborn, Germany",
+"2018."
+))

@@ -22,13 +22,13 @@ SharedNearestNeighborClustering <-function(Data,Knn=7,Radius,minPts,PlotIt=FALSE
     Radius=0.5*AdaptGauss::ParetoRadius(Data)
   } 
   if(missing(minPts)){
-    minPts=max(round(0.025*nrow(Data),0),20)## A point needs a least 16 (minPts) links in the sNN graph to be a core point.
+    minPts=min(round(0.0005*nrow(Data),2),20)## A point needs a least 16 (minPts) links in the sNN graph to be a core point.
     warning('The minPts parameter is missing but it is required in DBscan. Trying to estimate..')
   }   
   if(missing(UpperLimitRadius))
-    UpperLimitRadius=4*Radius
+    UpperLimitRadius=2*Radius
   
-  requireNamespace('dbscan')
+  requireNamespace('dbscan',quietly = TRUE)
   liste=dbscan::sNNclust(x = Data,k=Knn,eps=Radius,minPts=minPts,...)
   Cls=liste$cluster
 

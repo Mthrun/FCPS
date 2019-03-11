@@ -1,4 +1,4 @@
-DensityPeakClustering=function(DataOrDistances,Knn=10,Rho,Delta,method="euclidean",PlotIt=FALSE,...){
+DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclidean",PlotIt=FALSE,...){
   #Rodriguez, A., & Laio, A.: Clustering by fast search and find of density peaks. Science, 344(6191), 1492-1496. doi:10.1126/science.1242072, 2014.
   requireNamespace('densityClust')
   if(!is.matrix(DataOrDistances)){
@@ -16,16 +16,20 @@ DensityPeakClustering=function(DataOrDistances,Knn=10,Rho,Delta,method="euclidea
     
     Distances=as.matrix(parallelDist::parDist(DataOrDistances,method=method))
   }
-
-  out=densityClust::densityClust(Distances,k=Knn,...)
-
+  if(missing(Dc))
+    DensityPeaks=densityClust::densityClust(Distances,k=Knn,...)
+  else
+    DensityPeaks=densityClust::densityClust(Distances,dc=Dc,k=Knn,...)
+  
   if(missing(Rho)|missing(Delta)){
-    plot(out)
-	return('Please set Paramaters Rho and Delta')
+    requireNamespace('plotly')
+    print('Please set Paramaters Rho and Delta')
+    p <- plotly::plot_ly( x = ~DensityPeaks$rho, y = ~DensityPeaks$delta,type = "scatter",mode="markers")
+	return(p)
   }else{
-    out=densityClust::findClusters(out,rho=Rho,delta=Delta)
+    DensityPeaks=densityClust::findClusters(DensityPeaks,rho=Rho,delta=Delta)
   }
-  Cls=out$clusters
+  Cls=DensityPeaks$clusters
 
   if(sum(is.na(Cls))==length(Cls)){
   	Cls=rep(1,nrow(Distances))
@@ -41,5 +45,5 @@ DensityPeakClustering=function(DataOrDistances,Knn=10,Rho,Delta,method="euclidea
       DataVisualizations::Plot3D(DataOrDistances,ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = 3)$ProjectedPoints)
     }
   }
-  return(list(Cls=Cls,DPobject=out))
+  return(list(Cls=Cls,DPobject=DensityPeaks))
 } 
