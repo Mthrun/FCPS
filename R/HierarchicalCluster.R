@@ -1,4 +1,4 @@
-HierarchicalCluster <-function(Data,ClusterNo=0,ClusterAlg="ward.D2",Distance="euclidean",ColorTreshold=0,...){
+HierarchicalCluster <-function(Data,ClusterNo=0,ClusterAlg="ward.D2",DistanceMethod="euclidean",ColorTreshold=0,...){
 # HierarchicalCluster(Data)
 # HierarchicalClusterDists(Data,0,"ward.D2",NULL,"cosine",100)
 # Cls=HierarchicalCluster(Data,6,"ward.D2")
@@ -42,30 +42,31 @@ HierarchicalCluster <-function(Data,ClusterNo=0,ClusterAlg="ward.D2",Distance="e
 #	}
 #}
 #else{
-  Y=as.dist(DistanceMatrix(Data,method=Distance))#} #Case Corr und otherwiese
+requireNamespace('parallelDist')
+  Y=parallelDist::parDist(Data,method=DistanceMethod)#} #Case Corr und otherwiese
 if(any(is.nan(Y),na.rm=TRUE)) {
-stop('Distance with NaN in calculated. Please choose another distance.')}
+stop('DistanceMethod with NaN in calculated. Please choose another DistanceMethod.')}
 if(any(is.infinite(Y),na.rm=TRUE)) {
-stop('Distance with infinites in calculated. Please choose another distance.')}
+stop('DistanceMethod with infinites in calculated. Please choose another DistanceMethod.')}
 #Clustering
 
 hc <- hclust(Y,method=ClusterAlg); #hclust liefer in Matlab andere Werte (Aufruf: Z = linkage(Y,ClusterAlg))
-if(Distance=='euclidean')
-  Distance='Euclidean'
+if(DistanceMethod=='euclidean')
+  DistanceMethod='Euclidean'
   
-m=paste(ClusterAlg,"LinkCluster/ ",Distance," N=",nrow(as.matrix(Data)))
+m=paste(ClusterAlg,"LinkCluster/ ",DistanceMethod," N=",nrow(as.matrix(Data)))
 # Classification or Dendrogram
 if (ClusterNo>0){
 	return (cutree(hc,ClusterNo));	
 	} 
 else{
 		x=as.dendrogram(hc)
-    #plot(x, main=m,xlab="Anzahl N", ylab=Distance, sub=" ",leaflab ="none")
-    plot(x, main=m,xlab="Number of Data Points N", ylab=Distance, sub=" ",...)
+    #plot(x, main=m,xlab="Anzahl N", ylab=DistanceMethod, sub=" ",leaflab ="none")
+    plot(x, main=m,xlab="Number of Data Points N", ylab=DistanceMethod, sub=" ",...)
    # if(is.null(rownames(x))){
-   #   plot(x, main=m,xlab="Anzahl N", ylab=Distance, sub=" ",leaflab ="none")
+   #   plot(x, main=m,xlab="Anzahl N", ylab=DistanceMethod, sub=" ",leaflab ="none")
    # }else{
-   #   plot(x, main=m,xlab="Anzahl N", ylab=Distance, sub=" ",leaflab =rownames(x))
+   #   plot(x, main=m,xlab="Anzahl N", ylab=DistanceMethod, sub=" ",leaflab =rownames(x))
    # }
 		axis(1,col="black",las=1)
     if (ColorTreshold!=0){

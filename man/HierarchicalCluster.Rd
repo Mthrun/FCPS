@@ -6,7 +6,7 @@
 Hierarchical Clusterering
 }
 \usage{
-HierarchicalCluster(Data,ClusterNo=0,ClusterAlg="ward.D2",Distance="euclidean",ColorTreshold=0,...)
+HierarchicalCluster(Data,ClusterNo=0,ClusterAlg="ward.D2",DistanceMethod="euclidean",ColorTreshold=0,...)
 }
 
 \description{
@@ -16,7 +16,7 @@ Hierarchical cluster analysis on a set of dissimilarities and methods for analyz
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
 \item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.}
 \item{ClusterAlg}{Methode der Clusterung: "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".}
-\item{Distance}{see  DistanceMatrix(), for example 'euclidean','sqEuclidean','mahalanobis','cityblock=manhatten','cosine','chebychev','jaccard','minkowski','manhattan','binary', 'canberra', 'maximum'. Any unambiguous substring can be given.}
+\item{DistanceMethod}{see  \code{\link[parallelDist]{parDist}}, for example 'euclidean','mahalanobis','manhatten' (cityblock),'fJaccard','binary', 'canberra', 'maximum'. Any unambiguous substring can be given.}
 \item{ColorTreshold}{zeichnet Schnittlinie bei entsprechenden Dendrogram y-Achsenwerte (Hoehe), Hoehe der Linie wird als Skalar angegeben}
 \item{...}{If ClusterNo=0, plot arugments for as.dendrogramm, e.g.
 

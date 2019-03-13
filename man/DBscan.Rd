@@ -46,4 +46,32 @@ Michael Thrun
 data('Hepta')
 
 out=DBscan(Hepta$Data,PlotIt=TRUE)
+
+\donttest{
+#search for right parameter setting by grid search
+data("WingNut")
+Data=WingNut$Data
+DBSGrid <- expand.grid(Radius=seq(from=0.01,to=0.3,by=0.02),minPTs=seq(from=1,to=50,by=2))
+BestAcc=c()
+for (i in seq_len(nrow(DBSGrid))) {
+  print(i)
+  parameters <- DBSGrid[i, ]
+  Cls9=DBscan(Data,minPts = parameters$minPTs,
+  
+  Radius = parameters$Radius,PlotIt = F,
+  
+  UpperLimitRadius = parameters$Radius)$Cls
+  if(length(unique(Cls9))<5)
+    BestAcc[i]=ClusteringAccuracy(WingNut$Cls,
+	
+	Cls9)*100
+  else
+  BestAcc[i]=50
+}
+max(BestAcc)
+which.max(BestAcc)
+parameters <- DBSGrid[13, ]
+
+Cls9=DBscan(Data,minPts = parameters$minPTs,Radius = parameters$Radius,PlotIt = F,UpperLimitRadius = parameters$Radius,PlotIt=TRUE)$Cls
+}
 }
