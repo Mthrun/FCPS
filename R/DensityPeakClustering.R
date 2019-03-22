@@ -15,6 +15,8 @@ DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclid
     requireNamespace('parallelDist')
     
     Distances=as.matrix(parallelDist::parDist(DataOrDistances,method=method))
+  }else{
+    Distances=DataOrDistances
   }
   if(missing(Dc))
     DensityPeaks=densityClust::densityClust(Distances,k=Knn,...)
