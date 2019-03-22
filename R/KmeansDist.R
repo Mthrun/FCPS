@@ -15,6 +15,7 @@ kstepdist <- function(centers, dists){
 }
 
 kmeansdist <- function(centers, distances, maxIt = 2000, verbose = F){
+  stop('kmeansdist function does not work yet.')
   # KMeans version using ONLY datapoints as centers
   # INPUT
   # centers:  Vektor der die ids der initialen centers enthält. Alle centers müssen daher Datenpunkte sein
