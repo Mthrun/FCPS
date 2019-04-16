@@ -9,6 +9,6 @@ Description: Conventional Clustering Algorithms are available in this package. T
 Imports: mclust
 Suggests: DataVisualizations, DatabionicSwarm, gplots, kernlab, cclust, vegan, dbscan, kohonen, MCL, ADPclust, cluster, orclus, subspace, flexclust, clValid, AdaptGauss, ABCanalysis, apcluster, pracma,EMCluster, pdfCluster, parallelDist, plotly, ProjectionBasedClustering, GeneralizedUmatrix, mstknnclust
 Depends: R (>= 2.10)
-License: GPL-3
+License: CC BY-NC 4.0
 LazyData: TRUE
 LazyLoad: yes
