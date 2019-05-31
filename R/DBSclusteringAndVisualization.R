@@ -4,7 +4,7 @@ DBSclusteringAndVisualization=function(DataOrDistances,ClusterNo=0,StructureType
     if (isSymmetric(DataOrDistances)) {
       DataDists = DataOrDistances
       requireNamespace('ProjectionBasedClustering')
-      DataPoints=ProjectionBasedClustering::MDS(DataDists,OutputDimension = nrow(DataDists))$ProjectedPoints
+      DataPoints=ProjectionBasedClustering::MDS(DataDists,OutputDimension = nrow(DataDists)-1)$ProjectedPoints
       AnzVar = ncol(DataOrDistances)
       AnzData = nrow(DataOrDistances)
     }else{
@@ -19,16 +19,16 @@ DBSclusteringAndVisualization=function(DataOrDistances,ClusterNo=0,StructureType
   }
   generalizedUmatrix=DatabionicSwarm::GeneratePswarmVisualization(Data = DataPoints,ProjectedPoints = proj$ProjectedPoints,LC = proj$LC)
   if(ClusterNo==0){
-    none=DBSclustering(1,DataOrDistance = DataOrDistances,BestMatches =generalizedUmatrix$Bestmatche,LC = generalizedUmatrix$LC,
+    none=DatabionicSwarm::DBSclustering(1,DataOrDistance = DataOrDistances,BestMatches =generalizedUmatrix$Bestmatche,LC = generalizedUmatrix$LC,
                   StructureType = StructureType,PlotIt = PlotTree)
    GeneralizedUmatrix::plotTopographicMap(generalizedUmatrix$Umatrix,generalizedUmatrix$Bestmatches)
    Cls=NULL
   }else{
     if(is.null(DistancesMethod)){
-      Cls=DBSclustering(ClusterNo,DataOrDistance = DataOrDistances,BestMatches =generalizedUmatrix$Bestmatche,LC = generalizedUmatrix$LC,
+      Cls=DatabionicSwarm::DBSclustering(ClusterNo,DataOrDistance = DataOrDistances,BestMatches =generalizedUmatrix$Bestmatche,LC = generalizedUmatrix$LC,
                         StructureType = StructureType,PlotIt = PlotTree)
     }else{
-      Cls=DBSclustering(ClusterNo,DataOrDistance = DataDists,BestMatches =generalizedUmatrix$Bestmatche,LC = generalizedUmatrix$LC,
+      Cls=DatabionicSwarm::DBSclustering(ClusterNo,DataOrDistance = DataDists,BestMatches =generalizedUmatrix$Bestmatche,LC = generalizedUmatrix$LC,
                         StructureType = StructureType,PlotIt = PlotTree)
     }
   }

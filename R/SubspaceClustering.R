@@ -36,7 +36,7 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,PlotIt=FALSE,Algorithm=
            }
            requireNamespace('orclus')
            obj=orclus::orclus(x=Data, k=ClusterNo,l=DimSubspace,k0=OrclusInitialClustersNo, ...)
-           Cls=obj$cluster
+           Cls=obj$c
          },
          ProClus ={
            requireNamespace('subspace')
@@ -49,6 +49,26 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,PlotIt=FALSE,Algorithm=
           for(i in 1:length(obj)){
             Cls[obj[[i]]$objects]=i
           }
+           Cls[!is.finite(Cls)]=9999
+         },
+         SubClu={
+           requireNamespace('subspace')
+          obj=subspace::SubClu(data=Data, ...)
+           
+           Cls=rep(NaN,nrow(Data))
+           for(i in 1:length(obj)){
+             Cls[obj[[i]]$objects]=i
+           }
+           Cls[!is.finite(Cls)]=9999
+         },
+         Clique={
+           requireNamespace('subspace')
+           obj=subspace::CLIQUE(data=Data, ...)
+           
+           Cls=rep(NaN,nrow(Data))
+           for(i in 1:length(obj)){
+             Cls[obj[[i]]$objects]=i
+           }
            Cls[!is.finite(Cls)]=9999
          },
          stop("Wrong Algorithm string entered")

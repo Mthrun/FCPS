@@ -5,7 +5,7 @@ ClusterDistances=function(FullDistanceMatrix,Cls,PlotIt=FALSE){
   u=unique(Cls)
   classdist=list(FullDistanceMatrix[upper.tri(FullDistanceMatrix,diag = F)])
   if(length(u)==1) return(unlist(classdist))
-  
+  #funktioniert nicht bei clustersize==1!
   for(i in u){
     classdistcur=FullDistanceMatrix[Cls==i,Cls==i]
     distvec=classdistcur[upper.tri(classdistcur,diag = F)]
