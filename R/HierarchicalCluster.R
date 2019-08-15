@@ -1,4 +1,4 @@
-HierarchicalCluster <-function(Data,ClusterNo=0,ClusterAlg="ward.D2",DistanceMethod="euclidean",ColorTreshold=0,...){
+HierarchicalCluster <-function(Data,ClusterNo=0,ClusterAlg="ward.D2",DistanceMethod="euclidean",ColorTreshold=0,Cls=NULL,...){
 # HierarchicalCluster(Data)
 # HierarchicalClusterDists(Data,0,"ward.D2",NULL,"cosine",100)
 # Cls=HierarchicalCluster(Data,6,"ward.D2")
@@ -17,6 +17,7 @@ HierarchicalCluster <-function(Data,ClusterNo=0,ClusterAlg="ward.D2",DistanceMet
 #                        "textlike" writes text horizontally (in a rectangle), and 
 #                        "none" suppresses leaf labels 
 #                        s. ?as.dendrogramm
+# Cls                   Classification for coloring the datapoints
 #  
 #
 # OUTPUT
@@ -42,6 +43,37 @@ HierarchicalCluster <-function(Data,ClusterNo=0,ClusterAlg="ward.D2",DistanceMet
 #	}
 #}
 #else{
+  
+dcls = Cls
+col = DefaultColorSequence()
+setNodeAttributes <- function(node){
+  classification = -1
+  
+  # abbruchbedingung
+  if(is.leaf(node)){
+    val <- node[1]
+    classification = dcls[val]
+    attr(node, "edgePar") <- list(col = col[classification])
+    return(list(node=node, class=classification))
+  }
+  
+  left <- setNodeAttributes(node[[1]])
+  right <- setNodeAttributes(node[[2]])
+  height = attr(node, "height")
+  
+  
+  # bestimme neue klasse
+  if((left$class == right$class)&(left$class != -1)) classification = left$class
+  
+  # merge die beiden kinder
+  node <- merge(left$node,right$node, height=height)
+  if(classification != -1) 
+    attr(node, "edgePar") <- list(col = col[classification])
+  
+  
+  return(list(node=node,class=classification))
+}
+  
 requireNamespace('parallelDist')
   Y=parallelDist::parDist(Data,method=DistanceMethod)#} #Case Corr und otherwiese
 if(any(is.nan(Y),na.rm=TRUE)) {
@@ -61,8 +93,15 @@ if (ClusterNo>0){
 	} 
 else{
 		x=as.dendrogram(hc)
+		if(!is.null(Cls)){
+  		x = setNodeAttributes(x)$node
+  		print("Class Colors:")
+  		for(i in unique(Cls)){
+  		  print(paste0("Class ", i, ": ", col[i]))
+  		}
+		}
     #plot(x, main=m,xlab="Anzahl N", ylab=DistanceMethod, sub=" ",leaflab ="none")
-    plot(x, main=m,xlab="Number of Data Points N", ylab=DistanceMethod, sub=" ",...)
+    plot(x, main=m,xlab="Number of Data Points N", ylab=DistanceMethod, sub=" ", leaflab="none",...)
    # if(is.null(rownames(x))){
    #   plot(x, main=m,xlab="Anzahl N", ylab=DistanceMethod, sub=" ",leaflab ="none")
    # }else{

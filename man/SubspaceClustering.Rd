@@ -26,7 +26,7 @@ PlotIt=FALSE,Algorithm='orclus',OrclusInitialClustersNo=2*ClusterNo,\dots)
 
 'Clique' ProClus Algorithm for Projected Clustering [Agrawal/Gehrke et al., 1999] 
 
-'SubClu' ProClus Algorithm for Projected Clustering [Kailing et al.,2014]  
+'SubClu' ProClus Algorithm for Projected Clustering [Kailing et al.,2004]  
 
 }
 \item{OrclusInitialClustersNo}{Only for Orclus algorithm: Initial number of clusters (that are computed in the entire data space). Must be greater than k. The number of clusters is iteratively decreased by factor a until the final number of k clusters is reached.}
@@ -53,7 +53,7 @@ JAVA_HOME has to be set for rJava to the ProClus algorithm (in windows set PATH 
 
 [Aggarwal/Gehrke et al., 1999]: Rakesh Agrawal, Johannes Gehrke, Dimitrios Gunopulos, and Prabhakar Raghavan: Automatic Subspace Clustering of High Dimensional Data for Data Mining Applications, In Proc. ACM SIGMOD, 1999.
 
-[Kailing et al.,2014]  Kailing, Karin, Hans-Peter Kriegel, and Peer Kroeger: Density-connected subspace clustering for high-dimensional data, Proceedings of the 2004 SIAM international conference on data mining. Society for Industrial and Applied Mathematics, 2004
+[Kailing et al.,2004]  Kailing, Karin, Hans-Peter Kriegel, and Peer Kroeger: Density-connected subspace clustering for high-dimensional data, Proceedings of the 2004 SIAM international conference on data mining. Society for Industrial and Applied Mathematics, 2004
 
 Further "advertising" can be found in 
 
