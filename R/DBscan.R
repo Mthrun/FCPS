@@ -22,8 +22,9 @@ DBscan <-function(Data,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
   }
   
 if(missing(Radius)){  
+	requireNamespace('DataVisualizations')
   warning('The Radius (eps) parameter is missing but it is required in DBscan. Trying to estimate..')
-  Radius=0.5*AdaptGauss::ParetoRadius(Data)
+  Radius=0.5*DataVisualizations::ParetoRadiusV2(Data)
 } 
   if(missing(minPts)){
     minPts=round(0.04*nrow(Data),0)

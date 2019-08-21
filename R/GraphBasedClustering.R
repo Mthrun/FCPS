@@ -1,5 +1,5 @@
 GraphBasedClustering=function(DataOrDistances,method="euclidean",PlotIt=FALSE,...){
-  requireRpackage('mstknnclust')
+  requireNamespace('mstknnclust')
   if(!is.matrix(DataOrDistances)){
     warning('DataOrDistances is not a matrix. Calling as.matrix()')
     DataOrDistances=as.matrix(DataOrDistances)

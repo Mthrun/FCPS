@@ -45,7 +45,7 @@ HierarchicalCluster <-function(Data,ClusterNo=0,ClusterAlg="ward.D2",DistanceMet
 #else{
   
 dcls = Cls
-col = DefaultColorSequence()
+col = DataVisualizations::DefaultColorSequence
 setNodeAttributes <- function(node){
   classification = -1
   

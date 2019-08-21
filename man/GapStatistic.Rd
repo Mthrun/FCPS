@@ -1,6 +1,5 @@
 \name{GapStatistic}
 \alias{GapStatistic}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Gap Statistic
 }
@@ -8,32 +7,27 @@ Gap Statistic
 Gap Statistic
 }
 \usage{
-GapStatistic(Data, ClusterNoMax, ClusterFun, ...)
+GapStatistic(Data, ClusterNoMax, ClusterFun, \dots)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Data}{
-%%     ~~Describe \code{Data} here~~
+[1:n,1:d] data matrix
 }
   \item{ClusterNoMax}{
-%%     ~~Describe \code{ClusterNoMax} here~~
+max no of clusters to beinvestigated
 }
   \item{ClusterFun}{
-%%     ~~Describe \code{ClusterFun} here~~
+which clustering algorithm to investigate
 }
   \item{\dots}{
-%%     ~~Describe \code{\dots} here~~
+further arguments passed on
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+does not work on hepta, see example
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+tobedocumented
 }
 \references{
 Tibshirani, R., Walther, G. and Hastie, T: Estimating the number of data clusters via the Gap statistic, Journal of the Royal Statistical Society B,63, 411–423, 2003.
@@ -44,17 +38,9 @@ Michael Thrun
 \note{
 Wrapper only
 }
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
 \examples{
 data(Hepta)
 GapStatistic(Hepta$Data,10,ClusterFun = kmeans)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{Gap}
+\keyword{GapStatistic}

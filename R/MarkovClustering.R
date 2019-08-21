@@ -3,7 +3,8 @@ MarkovClustering=function(Data=NULL,Adjacency=NULL,Radius=TRUE,addLoops = TRUE,P
   #author: MT, 04/2018
   if(!is.null(Data)){
       if(Radius==TRUE){
-        Radius=AdaptGauss::ParetoRadius(Data)
+	  requireNamespace('DataVisualizations')
+        Radius=DataVisualizations::ParetoRadiusV2(Data)
       }
     if(Radius==FALSE){
       requireNamespace('ABCanalysis')

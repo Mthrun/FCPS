@@ -4,7 +4,8 @@ OPTICSclustering=function(Data, MaxRadius,RadiusThreshold, minPts = 5, PlotIt=TR
   
   if(missing(MaxRadius)){  
     warning('The MaxRadius (eps) parameter is missing but it is required in OPTICS Trying to estimate..')
-    MaxRadius=0.5*AdaptGauss::ParetoRadius(Data)
+	requireNamespace('DataVisualizations')
+    MaxRadius=0.5*DataVisualizations::ParetoRadiusV2(Data)
   } 
   if(missing(RadiusThreshold)){  
     warning('The RadiusThreshold (eps_cl) parameter is missing but it is required in OPTICS Trying to estimate..')

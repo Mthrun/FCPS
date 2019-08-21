@@ -1,13 +1,13 @@
 Package: FCPS
 Type: Package
 Title: Fundamental Clustering Problems Suite
-Version: 1.0.5
-Date: 2019-05-31
+Version: 1.0.6
+Date: 2019-08-15
 Authors@R: c(person("Michael", "Thrun", email= "m.thrun@gmx.net",role=c("aut","cre","cph")),person("Peter", "Nahrgang",role=c("ctr","ctb")),person("Alfred", "Ultsch",role=c("dtc","ctb")))
 Maintainer: Michael Thrun <mthrun@mathematik.uni-marburg.de>
 Description: Conventional Clustering Algorithms are available in this package. The Fundamental Clustering Problems Suite (FCPS) offer a variety of clustering problems any algorithm shall be able to handle when facing real world data. FCPS data sets serve as an elementary benchmark for clustering algorithms.
 Imports: mclust
-Suggests: DataVisualizations, DatabionicSwarm, gplots, kernlab, cclust, vegan, dbscan, kohonen, MCL, ADPclust, cluster, orclus, subspace, flexclust,clValid, AdaptGauss, ABCanalysis, apcluster, pracma,EMCluster, pdfCluster, parallelDist, plotly, ProjectionBasedClustering, GeneralizedUmatrix, mstknnclust, densityClust
+Suggests: DataVisualizations, DatabionicSwarm, gplots, kernlab, cclust, vegan, dbscan, kohonen, MCL, ADPclust, cluster, orclus, subspace, flexclust,clValid, ABCanalysis, apcluster, pracma,EMCluster, pdfCluster, parallelDist, plotly, ProjectionBasedClustering, GeneralizedUmatrix, mstknnclust, densityClust, rowr
 Depends: R (>= 2.10)
 License: CC BY-NC 4.0
 LazyData: TRUE

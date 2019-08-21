@@ -43,7 +43,7 @@ if(!is.null(Centers))
   	return(list(Cls=as.vector(c$cluster),SumDistsToCentroids=c$withinss,Centroids=c$centers))
   }
   if(method=='LBG'){
-#    requireRpackage('cclust')
+#    requireNamespace('cclust')
     res=cclust::cclust(x=Data,centers=ClusterNo,method='kmeans')
     SSE=res$withinss
     # s. http://epub.wu.ac.at/1542/1/document.pdf p.5

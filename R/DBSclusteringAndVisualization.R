@@ -35,5 +35,5 @@ DBSclusteringAndVisualization=function(DataOrDistances,ClusterNo=0,StructureType
   if(PlotMap){
     GeneralizedUmatrix::plotTopographicMap(generalizedUmatrix$Umatrix,generalizedUmatrix$Bestmatches,Cls = Cls)
   }
-  return(list(Projection=proj,GeneralizedUmatrixOfSwarm=generalizedUmatrix,Cls=Cls,DataPoints=DataPoints))
+  return(list(Cls=Cls,DBSobject=list(Projection=proj,GeneralizedUmatrixOfSwarm=generalizedUmatrix,DataPoints=DataPoints)))
 }

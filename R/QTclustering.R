@@ -21,7 +21,8 @@ QTClustering <-function(Data,Radius=TRUE,PlotIt=FALSE,...){
   
   requireNamespace('flexclust')
     if(Radius==TRUE){
-      Radius=AdaptGauss::ParetoRadius(Data)
+	requireNamespace('DataVisualizations')
+      Radius=DataVisualizations::ParetoRadiusV2(Data)
     }
     if(Radius==FALSE){
       requireNamespace('ABCanalysis')

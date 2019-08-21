@@ -17,7 +17,7 @@ function(DataOrDistance,isDistance=FALSE){
 #
 # Author: MT
   
-#requireRpackage('vegan')
+#requireNamespace('vegan')
 #if(require(vegan)){library(vegan)}else{install.packages("vegan")
 #library(vegan)}
 requireNamespace('vegan')

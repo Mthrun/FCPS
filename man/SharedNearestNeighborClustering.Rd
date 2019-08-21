@@ -49,7 +49,7 @@ Michael Thrun
 }
 \examples{
 data('Hepta')
-SharedNearestNeighborClustering(Hepta$Data,PlotIt = FALSE)
+out=SharedNearestNeighborClustering(Hepta$Data,PlotIt = FALSE)
 
 DatabionicSwarm::ClusteringAccuracy(out$Cls,Hepta$Cls)
 }
