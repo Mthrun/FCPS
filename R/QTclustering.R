@@ -1,4 +1,4 @@
-QTClustering <-function(Data,Radius=TRUE,PlotIt=FALSE,...){
+QTClustering <-function(Data,Radius,PlotIt=FALSE,...){
   # Cls=QTClustering(Data,Radius=2)
   #  
   # liefert eine Klassenzuweisung
@@ -20,11 +20,8 @@ QTClustering <-function(Data,Radius=TRUE,PlotIt=FALSE,...){
   
   
   requireNamespace('flexclust')
-    if(Radius==TRUE){
-	requireNamespace('DataVisualizations')
-      Radius=DataVisualizations::ParetoRadiusV2(Data)
-    }
-    if(Radius==FALSE){
+
+    if(missing(Radius)){ #estimate Maximum diameter of cluster, i.e. group of large distances
       requireNamespace('ABCanalysis')
       x=as.matrix(dist(Data))
       x=x[lower.tri(x, diag = FALSE)]

@@ -1,4 +1,4 @@
-SubspaceClustering <-function(Data,ClusterNo,DimSubspace,PlotIt=FALSE,Algorithm='orclus',OrclusInitialClustersNo=2*ClusterNo,...){
+SubspaceClustering <-function(Data,ClusterNo,DimSubspace,PlotIt=FALSE,Algorithm='orclus',OrclusInitialClustersNo=ClusterNo+2,...){
 # Cls=SubspaceClustering(Data,ClusterNo=2)
 #  
 # liefert eine Klassenzuweisung
@@ -29,14 +29,15 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,PlotIt=FALSE,Algorithm=
                if(DimSubspace>n/ClusterNo){
                  DimSubspace=n/ClusterNo-1
                }
-               DimSubspace=min(c(DimSubspace,25)) #higher subsopace is not computable
+               DimSubspace=min(c(DimSubspace,20)) #higher subsopace is not computable
              }else{
                DimSubspace=dim(Data)[2]*0.99
              }
            }
+
            requireNamespace('orclus')
            obj=orclus::orclus(x=Data, k=ClusterNo,l=DimSubspace,k0=OrclusInitialClustersNo, ...)
-           Cls=obj$c
+           Cls=obj$cluster
          },
          ProClus ={
            requireNamespace('subspace')
