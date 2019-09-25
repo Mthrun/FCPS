@@ -1,9 +1,9 @@
-DivisiveAnalysisClustering <-function(Data,ClusterNo,PlotIt=FALSE,...){
+DivisiveAnalysisClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE,...){
   # Cls=DivisiveAnalysisClustering(Data,ClusterNo=2)
   # DivisiveAnalysisClustering (diana)
   # liefert eine Klassenzuweisung
   # INPUT
-  # Data[1:n,1:d]             Der Datensatz
+  # DataOrDistances[1:n,1:d]             Der Datensatz oder die Distanzmatrix [1:n,1:n]
   # ClusterNo  in soviele Cluster werden die daten eingeteilt
   
   # OUTPUT
@@ -13,7 +13,20 @@ DivisiveAnalysisClustering <-function(Data,ClusterNo,PlotIt=FALSE,...){
   
   
   requireNamespace('cluster')
-  res=cluster::diana(x=Data,...)
+  if (isSymmetric(DataOrDistances)) {
+      Input = as.dist(DataOrDistances)
+      requireNamespace('ProjectionBasedClustering')
+      DataPoints=ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = 3)$ProjectedPoints
+      AnzVar = ncol(DataOrDistances)
+      AnzData = nrow(DataOrDistances)
+	  diss =TRUE
+    }else{
+      DataPoints=DataOrDistances
+	  Input=DataOrDistances
+	  diss =FALSE
+    }
+	
+  res=cluster::diana(x=Input,diss =diss,...)
   if(length(ClusterNo)!=1){
     stop('ClusterNo has to be an numerical number not a vector of length higher than 1 or another object.')
   }
@@ -22,7 +35,7 @@ DivisiveAnalysisClustering <-function(Data,ClusterNo,PlotIt=FALSE,...){
     
     if(PlotIt){
       requireNamespace('DataVisualizations')
-      DataVisualizations::Plot3D(Data,Cls)
+      DataVisualizations::Plot3D(DataPoints,Cls)
       #plot(res)
     }
   }

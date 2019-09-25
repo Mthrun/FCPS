@@ -1,5 +1,8 @@
 DBSclusteringAndVisualization=function(DataOrDistances,ClusterNo=0,StructureType=TRUE,DistancesMethod=NULL,PlotTree=FALSE,PlotMap=TRUE){
   requireNamespace('DatabionicSwarm')
+  if(StructureType==1) StructureType=TRUE
+  if(StructureType==0) StructureType=FALSE
+ 
   if(is.null(DistancesMethod)){
     if (isSymmetric(DataOrDistances)) {
       DataDists = DataOrDistances

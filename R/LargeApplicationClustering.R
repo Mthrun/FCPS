@@ -1,4 +1,4 @@
-LargeApplicationClustering <-function(Data,ClusterNo,PlotIt=FALSE,...){
+LargeApplicationClustering <-function(Data,ClusterNo,PlotIt=FALSE,Samples=50,Random=TRUE,...){
   # Cls=LargeApplicationClustering(Data,ClusterNo=2)
   # Clustering Large Applications  (clara)
   # liefert eine Klassenzuweisung
@@ -14,7 +14,7 @@ LargeApplicationClustering <-function(Data,ClusterNo,PlotIt=FALSE,...){
   
   
   requireNamespace('cluster')
-  res=cluster::clara(x=Data,k = ClusterNo,...)
+  res=cluster::clara(x=Data,k = ClusterNo,samples=Samples,rngR=Random,...)
   Cls=res$clustering
 
   if(PlotIt){

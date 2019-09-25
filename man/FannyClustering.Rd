@@ -8,11 +8,11 @@ Fuzzy Analysis Clustering [Rousseeuw/Kaufman, 1990, p. 164-198]
 ...
 }
 \usage{
-FannyClustering(Data,ClusterNo,PlotIt=FALSE,...)
+FannyClustering(DataOrDistances,ClusterNo,PlotIt=FALSE,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
+\item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
 
 \item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.}
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}

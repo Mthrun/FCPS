@@ -40,7 +40,7 @@ Michael Thrun
 
 \examples{
 data('Hepta')
-out=QTClustering(Hepta$Data,Radius=FALSE,PlotIt=TRUE)
+out=QTClustering(Hepta$Data,PlotIt=TRUE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

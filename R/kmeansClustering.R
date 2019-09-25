@@ -1,4 +1,4 @@
-kmeansClustering <-function(Data,ClusterNo=2,Centers=NULL,method='LBG',PlotIt=FALSE,Verbose=0){
+kmeansClustering <-function(Data,ClusterNo=2,Centers=NULL,method='LBG',PlotIt=FALSE,Verbose=FALSE,...){
 # Cls <- kmeansClustering(Data,ClusterNo,Verbose);
 # call R's k-means method, best of 10 repetitions, each max. 100 optimizing steps
 # INPUT
@@ -34,8 +34,8 @@ if(!is.null(Centers))
   requireNamespace('cclust')
 
   if(method=='Hartigan'){
-  	c=kmeans(Data,ClusterNo,iter.max = 100);
-  	if(Verbose==1){print(c);}
+  	c=kmeans(Data,centers=ClusterNo,...);
+  	if(Verbose==TRUE){print(c);}
   	if(PlotIt){
   	  requireNamespace('DataVisualizations')
   	  DataVisualizations::Plot3D(Data,as.vector(c$cluster))
@@ -44,7 +44,7 @@ if(!is.null(Centers))
   }
   if(method=='LBG'){
 #    requireNamespace('cclust')
-    res=cclust::cclust(x=Data,centers=ClusterNo,method='kmeans')
+    res=cclust::cclust(x=Data,centers=ClusterNo,method='kmeans',verbose=Verbose,...)
     SSE=res$withinss
     # s. http://epub.wu.ac.at/1542/1/document.pdf p.5
     # An examination of indexes for determining the number of clusters in binary data sets

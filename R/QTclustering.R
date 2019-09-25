@@ -25,7 +25,6 @@ QTClustering <-function(Data,Radius,PlotIt=FALSE,...){
       requireNamespace('ABCanalysis')
       x=as.matrix(dist(Data))
       x=x[lower.tri(x, diag = FALSE)]
-      par=quantile(x,c(0.2013)) #geschaetzter paretorRadius
       xx=ABCanalysis::ABCRemoveSmallYields(x,0.5)
       x=xx$SubstantialData
       res=suppressWarnings(ABCanalysis::ABCanalysis(x))

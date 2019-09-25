@@ -5,11 +5,11 @@
 Divisive Analysis Clustering (diana) of  [Rousseeuw/Kaufman, 1990]
 }
 \usage{
-DivisiveAnalysisClustering(Data, ClusterNo,PlotIt=FALSE,...)
+DivisiveAnalysisClustering(DataOrDistances, ClusterNo,PlotIt=FALSE,...)
 }
 
 \arguments{
-\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
+\item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
 
 \item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.
 if \code{ClusterNo=0}, the dendrogram is generated instead of a clustering to estimate the numbers of clusters.
