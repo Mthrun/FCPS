@@ -5,14 +5,23 @@ parApplyClusterAnalysis=function(DataOrDistance,FUN,NumberOfTrials=1:100,Cluster
     NoWorkers <- parallel::detectCores() - 1
 
   cl=parallel::makeCluster(NoWorkers,type = Type)
-  
+
   help_fun=function(i,fun,DataOrDistance,ClusterNo,...){
     prior=Sys.time()
     if(is.null(ClusterNo)){
-      object=R.utils::doCall(fun, alwaysArgs=DataOrDistances,...,.ignoreUnusedArgs=TRUE)
+      if (isSymmetric(DataOrDistance)) {
+        object=R.utils::doCall(fun, args=list(DataOrDistances=DataOrDistance,...),.ignoreUnusedArgs=TRUE)
+      }else{
+        object=R.utils::doCall(fun, args=list(Data=DataOrDistance,...),.ignoreUnusedArgs=TRUE)
+      }
       #object=fun(DataOrDistance,...)
     }else{
-      object=R.utils::doCall(fun,  alwaysArgs=DataOrDistances,ClusterNo=ClusterNo,...,.ignoreUnusedArgs=TRUE)
+      if(isSymmetric(DataOrDistance)) {
+        object=R.utils::doCall(fun,  args=list(DataOrDistances=DataOrDistance,ClusterNo=ClusterNo,...),.ignoreUnusedArgs=TRUE)
+      }else{
+        object=R.utils::doCall(fun,  args=list(Data=DataOrDistance,ClusterNo=ClusterNo,...),.ignoreUnusedArgs=TRUE)
+ 
+      }
       #object=fun(DataOrDistance,ClusterNo,...)
     }
     past=Sys.time()
@@ -27,6 +36,17 @@ parApplyClusterAnalysis=function(DataOrDistance,FUN,NumberOfTrials=1:100,Cluster
     }
     return(Liste)
   }#end help_fun
+  
+  if (isSymmetric(DataOrDistances)) {
+    if(!inherits(DataOrDistances,'dist'))
+      Input=as.dist(DataOrDistances)
+    else
+      Input=DataOrDistances
+    
+    return(HierarchicalClusterDists(pDist = Input,ClusterNo = ClusterNo,...))
+  }else{
+    return(HierarchicalCluster(Data = DataOrDistances,ClusterNo = ClusterNo,...))
+  }
   
   tryCatch({
     out=parallel::parLapply(cl = cl,X = NumberOfTrials,fun = help_fun,FUN,DataOrDistance,ClusterNo,...)

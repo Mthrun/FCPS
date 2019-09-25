@@ -1,4 +1,4 @@
-APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,Seed=7568,PlotIt=FALSE,...){
+APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,Seed=7568,PlotIt=FALSE,method=NULL,...){
 #Cls=APcluster(Data,Seed=7568)$Cls
 #Affinity Propagation clustering introduced by Frey and Dueck (2007) <doi:10.1126/science.1136800>.
 #INPUT
@@ -16,16 +16,18 @@ APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,
 
 #note: # NoNoise   see \code{apcluster}
   requireNamespace('apcluster')
+
   if(!is.matrix(DataOrDistances)){
     warning('DataOrDistances is not a matrix. Calling as.matrix()')
     DataOrDistances=as.matrix(DataOrDistances)
   }
+
   if(!mode(DataOrDistances)=='numeric'){
     warning('Data is not a numeric matrix. Calling mode(DataOrDistances)="numeric"')
     mode(DataOrDistances)='numeric'
   }
   AnzData = nrow(DataOrDistances)
-  
+
   if (isSymmetric(DataOrDistances)) {
     s=(1-DataOrDistances)/max(DataOrDistances)
     apres <- apcluster::apcluster(s=s,p=InputPreference, details=TRUE,q=ExemplarPreferences,seed=Seed,...)
