@@ -60,11 +60,12 @@ Michael Thrun
 \code{\link[parallel]{clusterApply}}
 }
 \examples{
+\donttest{
 Result=parApplyClusterAnalysis(FCPS$Hepta$Data,
 
 kmeansClustering,1:3,7,method="LBG")
 #clustering accuracy
-\donttest{
+
 apply(Result$Cls_Matrix,2,ClusteringAccuracy,FCPS$Hepta$Cls)
 }
 }
