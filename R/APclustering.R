@@ -1,4 +1,4 @@
-APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,Seed,PlotIt=FALSE,...){
+APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,Seed=7568,PlotIt=FALSE,...){
 #Cls=APcluster(Data,Seed=7568)$Cls
 #Affinity Propagation clustering introduced by Frey and Dueck (2007) <doi:10.1126/science.1136800>.
 #INPUT
@@ -13,8 +13,8 @@ APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,
 # APresults class of apcluster
 #
 # author MT: 04/2018
-#note: # NoNoise   see \code{apcluster}
 
+#note: # NoNoise   see \code{apcluster}
   requireNamespace('apcluster')
   if(!is.matrix(DataOrDistances)){
     warning('DataOrDistances is not a matrix. Calling as.matrix()')
@@ -36,7 +36,7 @@ APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,
   }
   else{
     s=DataOrDistances
-    apres <- apcluster::apcluster(apcluster::negDistMat(r=2), x=DataOrDistances,p=InputPreference,q=ExemplarPreferences, details=TRUE,seed=7568,...)
+    apres <- apcluster::apcluster(apcluster::negDistMat(r=2), x=DataOrDistances,p=InputPreference,q=ExemplarPreferences, details=TRUE,seed=Seed,...)
   }
   ClsIndList=apres@clusters
   Cls=rep(NaN,AnzData)

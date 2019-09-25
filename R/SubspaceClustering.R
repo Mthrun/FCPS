@@ -8,7 +8,9 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,PlotIt=FALSE,Algorithm=
 # ClusterNo  in soviele Cluster werden die daten eingeteilt
 # PlotIt
 # Algorithm     'orclus', Subspace Clustering Based on Arbitrarily Oriented Projected Cluster Generation
-#               'ProClus' 
+#               'ProClus'
+#               'SubClu'
+#               'Clique'
 # OrclusInitialClustersNo
 # note: JAVA_HOME has to be set for rJava to use this algorithm
 # OUTPUT
