@@ -9,9 +9,11 @@ parApplyClusterAnalysis=function(DataOrDistance,FUN,NumberOfTrials=1:100,Cluster
   help_fun=function(i,fun,DataOrDistance,ClusterNo,...){
     prior=Sys.time()
     if(is.null(ClusterNo)){
-      object=fun(DataOrDistance,...)
+      object=R.utils::doCall(fun, alwaysArgs=DataOrDistances,...,.ignoreUnusedArgs=TRUE)
+      #object=fun(DataOrDistance,...)
     }else{
-      object=fun(DataOrDistance,ClusterNo,...)
+      object=R.utils::doCall(fun,  alwaysArgs=DataOrDistances,ClusterNo=ClusterNo,...,.ignoreUnusedArgs=TRUE)
+      #object=fun(DataOrDistance,ClusterNo,...)
     }
     past=Sys.time()
     delta=difftime(past,prior,units = 'secs')

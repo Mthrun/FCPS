@@ -1,5 +1,5 @@
-HierarchicalCluster <-function(Data,ClusterNo=0,ClusterAlg="ward.D2",DistanceMethod="euclidean",ColorTreshold=0,Cls=NULL,...){
-# HierarchicalCluster(Data)
+HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,method="ward.D2",DistanceMethod="euclidean",ColorTreshold=0,Cls=NULL,...){
+# HierarchicalClusterData(Data)
 # HierarchicalClusterDists(Data,0,"ward.D2",NULL,"cosine",100)
 # Cls=HierarchicalCluster(Data,6,"ward.D2")
 #  
@@ -9,7 +9,7 @@ HierarchicalCluster <-function(Data,ClusterNo=0,ClusterAlg="ward.D2",DistanceMet
 # OPTIONAL
 # ClusterNo  in soviele Cluster werden die daten eingeteilt, wenn dieser Wert 
 #                       fehlt oder =0 gesetzt ist, wird ein Dendrogramm gezeichnet
-# ClusterAlg  		      Methode der Clusterung: "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".
+# method  		      Methode der Clusterung: "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".
 # Distance               see  DistanceMatrix(), for example 'euclidean','sqEuclidean','mahalanobis','cityblock=manhatten','cosine','chebychev','jaccard','minkowski','manhattan','binary', 'canberra', 'maximum'. Any unambiguous substring can be given.
 # ColorTreshold			     zeichnet Schnittlinie bei entsprechenden Dendrogram y-Achsenwerte (Hoehe), Hoehe der Linie wird als Skalar angegeben
 # ...                   Nur Falls ClusterNo=0, plot argumente fuer as.dendrogramm, z.b.
@@ -82,15 +82,16 @@ if(any(is.infinite(Y),na.rm=TRUE)) {
 stop('DistanceMethod with infinites in calculated. Please choose another DistanceMethod.')}
 #Clustering
 
-hc <- hclust(Y,method=ClusterAlg); #hclust liefer in Matlab andere Werte (Aufruf: Z = linkage(Y,ClusterAlg))
+hc <- hclust(Y,method=method); #hclust liefer in Matlab andere Werte (Aufruf: Z = linkage(Y,method))
 if(DistanceMethod=='euclidean')
   DistanceMethod='Euclidean'
   
-m=paste(ClusterAlg,"LinkCluster/ ",DistanceMethod," N=",nrow(as.matrix(Data)))
+m=paste(method,"LinkCluster/ ",DistanceMethod," N=",nrow(as.matrix(Data)))
 # Classification or Dendrogram
 if (ClusterNo>0){
-	return (cutree(hc,ClusterNo));	
-	} 
+  Cls=cutree(hc,ClusterNo)
+  return(list(Cls=Cls,Dedrogram=as.dendrogram(hc)))
+} 
 else{
 		x=as.dendrogram(hc)
 		if(!is.null(Cls)){
@@ -113,5 +114,6 @@ else{
 		else{
 		#rect.hclust(hc, h=4*mean(hc$height),border="red")
 		}
+		return(list(Cls=NULL,Dedrogram=x))
 	}
 }
