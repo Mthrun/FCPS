@@ -1,4 +1,4 @@
-OPTICSclustering=function(Data, MaxRadius,RadiusThreshold, minPts = 5, PlotIt=TRUE,...){
+OPTICSclustering=function(Data, MaxRadius,RadiusThreshold, minPts = 5, PlotIt=FALSE,...){
   
   requireNamespace('dbscan')
   

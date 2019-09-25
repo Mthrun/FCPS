@@ -1,4 +1,4 @@
-DBSclusteringAndVisualization=function(DataOrDistances,ClusterNo=0,StructureType=TRUE,DistancesMethod=NULL,PlotTree=FALSE,PlotMap=TRUE){
+DBSclusteringAndVisualization=function(DataOrDistances,ClusterNo=0,StructureType=TRUE,DistancesMethod=NULL,PlotTree=FALSE,PlotMap=FALSE){
   requireNamespace('DatabionicSwarm')
   if(StructureType==1) StructureType=TRUE
   if(StructureType==0) StructureType=FALSE

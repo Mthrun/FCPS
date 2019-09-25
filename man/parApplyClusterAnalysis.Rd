@@ -12,7 +12,7 @@ parApplyClusterAnalysis(DataOrDistance, FUN,
 
 NumberOfTrials = 1:100, ClusterNo = NULL, 
 
-NoWorkers, Type = "PSOCK", ...)
+NoWorkers, Type = "PSOCK",SetSeed=TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -35,6 +35,10 @@ Number of Workers (number of cores used).
 }
   \item{Type}{
 see \code{\link[parallel]{makeCluster}} for details, if default does not work.
+}  
+\item{SetSeed}{
+TRUE: \code{\link{set.seed}} is set to 1000+ (Number Of Trial), \code{ComputationTime} is named with seed
+FALSE: \code{\link{set.seed}} is set to NULL), \code{ComputationTime} is named with Number Of Trial
 }
   \item{\dots}{
 further arguments required in \code{FUN}. 

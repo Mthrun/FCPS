@@ -1,4 +1,4 @@
-parApplyClusterAnalysis=function(DataOrDistance,FUN,NumberOfTrials=1:100,ClusterNo=NULL,NoWorkers,Type="PSOCK",...){
+parApplyClusterAnalysis=function(DataOrDistance,FUN,NumberOfTrials=1:100,ClusterNo=NULL,NoWorkers,Type="PSOCK",SetSeed=TRUE,...){
   
   #example
   # data(Hepta)
@@ -15,9 +15,9 @@ parApplyClusterAnalysis=function(DataOrDistance,FUN,NumberOfTrials=1:100,Cluster
   tryCatch({
     if (isSymmetric(DataOrDistance)) {
       DataOrDistances=DataOrDistance
-      out=parallel::parLapply(cl = cl,X = NumberOfTrials,fun = cluster_analysis_fun,FUN,DataOrDistances,ClusterNo,...)
+      out=parallel::parLapply(cl = cl,X = NumberOfTrials,fun = cluster_analysis_fun,FUN,DataOrDistances,ClusterNo,SetSeed,...)
     }else{
-      out=parallel::parLapply(cl = cl,X = NumberOfTrials,fun = cluster_analysis_fun,FUN,Data,ClusterNo,...)
+      out=parallel::parLapply(cl = cl,X = NumberOfTrials,fun = cluster_analysis_fun,FUN,Data,ClusterNo,SetSeed,...)
     }
 
   },error=function(e){

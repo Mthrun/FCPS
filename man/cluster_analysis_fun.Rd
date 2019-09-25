@@ -8,7 +8,7 @@ Internal function
 Do not use alone, please use \code{\link{parApplyClusterAnalysis}}.
 }
 \usage{
-cluster_analysis_fun(i, fun, DataOrDistance, ClusterNo, ...)
+cluster_analysis_fun(i, fun, DataOrDistance, ClusterNo,SetSeed=TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -22,6 +22,9 @@ cluster_analysis_fun(i, fun, DataOrDistance, ClusterNo, ...)
 ...
 }
   \item{ClusterNo}{
+...
+}
+  \item{SetSeed}{
 ...
 }
   \item{\dots}{
