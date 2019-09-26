@@ -1,4 +1,4 @@
-SubspaceClustering <-function(Data,ClusterNo,DimSubspace,method='orclus',PlotIt=FALSE,OrclusInitialClustersNo=ClusterNo+2,...){
+SubspaceClustering <-function(Data,ClusterNo,DimSubspace,method='Orclus',PlotIt=FALSE,OrclusInitialClustersNo=ClusterNo+2,...){
 # Cls=SubspaceClustering(Data,ClusterNo=2)
 #  
 # liefert eine Klassenzuweisung
@@ -7,7 +7,7 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,method='orclus',PlotIt=
 
 # ClusterNo  in soviele Cluster werden die daten eingeteilt
 # PlotIt
-# method     'orclus', Subspace Clustering Based on Arbitrarily Oriented Projected Cluster Generation
+# method     'Orclus', Subspace Clustering Based on Arbitrarily Oriented Projected Cluster Generation
 #               'ProClus'
 #               'SubClu'
 #               'Clique'
@@ -18,12 +18,12 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,method='orclus',PlotIt=
 #
 # Author: MT 04/2018
   
-  #orclus
+  #Orclus
   d=dim(Data)[2]
   n=d=dim(Data)[1]
   
   switch(method,
-         orclus={
+         Orclus={
            
            if(missing(DimSubspace)){
              if(d>3){
@@ -37,7 +37,7 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,method='orclus',PlotIt=
              }
            }
 
-           requireNamespace('orclus')
+           requireNamespace('Orclus')
            obj=orclus::orclus(x=Data, k=ClusterNo,l=DimSubspace,k0=OrclusInitialClustersNo, ...)
            Cls=obj$cluster
          },
@@ -83,5 +83,5 @@ if(PlotIt){
 
   DataVisualizations::Plot3D(Data,Cls)
 }
-return(list(Cls=Cls,SubspaceObject=obj))
+return(list(Cls=Cls,SubspaceObject=obj,Method=method))
 }

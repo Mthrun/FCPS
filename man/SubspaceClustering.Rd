@@ -7,7 +7,7 @@ Subspace clustering is a technique which finds clusters within different subspac
 \usage{
 SubspaceClustering(Data,ClusterNo,DimSubspace,
 
-method='orclus',PlotIt=FALSE,OrclusInitialClustersNo=ClusterNo+2,...)
+method='Orclus',PlotIt=FALSE,OrclusInitialClustersNo=ClusterNo+2,...)
 }
 \details{
 "The underlying assumption is that we can find valid clusters which are defined by only a subset of dimensions (it is not needed to have the agreement of all N features).The resulting clusters may be overlapping both in the space of features and observations" [Source: URL]. 
@@ -19,7 +19,7 @@ method='orclus',PlotIt=FALSE,OrclusInitialClustersNo=ClusterNo+2,...)
 \item{ClusterNo}{A number k which defines k different Clusters to be build by the proclus or orclust algorithm.}
 \item{DimSubspace}{numerical number defining the dimensionality in which clusters should be search in in the orclust algorithm, for proclus it is an optional parameter}
 \item{method}{
-'orclus', Subspace Clustering Based on Arbitrarily Oriented Projected Cluster Generation [Aggarwal and Yu, 2000]
+'Orclus', Subspace Clustering Based on Arbitrarily Oriented Projected Cluster Generation [Aggarwal and Yu, 2000]
 
 'ProClus' ProClus Algorithm for Projected Clustering [Aggarwal/Wolf, 1999] 
 
