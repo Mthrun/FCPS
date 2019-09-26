@@ -1,6 +1,6 @@
 kmeansClustering <-function(Data,ClusterNo=2,Centers=NULL,method='LBG',PlotIt=FALSE,Verbose=FALSE,...){
 # Cls <- kmeansClustering(Data,ClusterNo,Verbose);
-# call R's k-means method, best of 10 repetitions, each max. 100 optimizing steps
+# calls one of two common approaches for kmeans
 # INPUT
 # Data[1:n]                  der Datensatz in Zeilenvektoren 
 # ClusterNo  in soviele Cluster werden die daten eingeteilt

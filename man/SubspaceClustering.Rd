@@ -5,9 +5,9 @@
 Subspace clustering is a technique which finds clusters within different subspaces (a selection of one or more dimensions)
 }
 \usage{
-SubspaceClustering(Data, ClusterNo,DimSubspace,
+SubspaceClustering(Data,ClusterNo,DimSubspace,
 
-PlotIt=FALSE,Algorithm='orclus',OrclusInitialClustersNo=2*ClusterNo,\dots)
+method='orclus',PlotIt=FALSE,OrclusInitialClustersNo=ClusterNo+2,...)
 }
 \details{
 "The underlying assumption is that we can find valid clusters which are defined by only a subset of dimensions (it is not needed to have the agreement of all N features).The resulting clusters may be overlapping both in the space of features and observations" [Source: URL]. 
@@ -18,8 +18,7 @@ PlotIt=FALSE,Algorithm='orclus',OrclusInitialClustersNo=2*ClusterNo,\dots)
 
 \item{ClusterNo}{A number k which defines k different Clusters to be build by the proclus or orclust algorithm.}
 \item{DimSubspace}{numerical number defining the dimensionality in which clusters should be search in in the orclust algorithm, for proclus it is an optional parameter}
-\item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
-\item{Algorithm}{
+\item{method}{
 'orclus', Subspace Clustering Based on Arbitrarily Oriented Projected Cluster Generation [Aggarwal and Yu, 2000]
 
 'ProClus' ProClus Algorithm for Projected Clustering [Aggarwal/Wolf, 1999] 
@@ -29,6 +28,8 @@ PlotIt=FALSE,Algorithm='orclus',OrclusInitialClustersNo=2*ClusterNo,\dots)
 'SubClu' ProClus Algorithm for Projected Clustering [Kailing et al.,2004]  
 
 }
+\item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+
 \item{OrclusInitialClustersNo}{Only for Orclus algorithm: Initial number of clusters (that are computed in the entire data space). Must be greater than k. The number of clusters is iteratively decreased by factor a until the final number of k clusters is reached.}
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.
 

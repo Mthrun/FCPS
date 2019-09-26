@@ -23,16 +23,16 @@ Seed,DistanceMethod="euclidean",PlotIt=FALSE,Data,...)
   In the later case the Euclidean distances will be calculated.
 }
   \item{InputPreference}{
-  default parameter set, see \code{apcluster}
+  default parameter set, see \pkg{apcluster}
 }
   \item{ExemplarPreferences}{
-  default parameter set, see \code{apcluster}
+  default parameter set, see \pkg{apcluster}
 }
   \item{DistanceMethod}{
-  DistanceMethod as in \code{\link{dist}} for  \code{\link[apcluster]{negDistMat}}.
+  DistanceMethod as in \code{\link{dist}} for  \code{\link[apcluster]{similarities}}.
 }
   \item{Seed}{
-    set as integervalue to have reproducible results, see \code{\link[apcluster]{apcluster}}
+    set as integervalue to have reproducible results, see \pkg{apcluster}
 }
 \item{PlotIt}{default: FALSE, If TRUE and dataset of [1:n,1:d] dimensions then a plot of the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls} will be generated.}
 \item{Data}{[1:n,1:d] data matrix in the case that \code{DataOrDistances} is missing and partial matching does not work.}
@@ -43,7 +43,7 @@ Seed,DistanceMethod="euclidean",PlotIt=FALSE,Data,...)
 \details{
 Distancematrix D is converted to similaritiy matrix S with S=-(D^2).
 
-If Data matrix is used, then euclidean similarities are calculated by \code{\link[apcluster]{negDistMat}} and a specifed distance method.
+If Data matrix is used, then euclidean similarities are calculated by \code{\link[apcluster]{similarities}} and a specifed distance method.
 
 The AP algorithm decides the k number of clusters.
 }
@@ -75,9 +75,9 @@ res=APclustering(Hepta$Data)
 }
 }
 \seealso{
-\code{\link[apcluster]{apcluster}}
+\pkg{apcluster}
 }
-}
+
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{apcluster}% use one of  RShowDoc("KEYWORDS")

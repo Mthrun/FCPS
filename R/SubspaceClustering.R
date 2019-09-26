@@ -1,4 +1,4 @@
-SubspaceClustering <-function(Data,ClusterNo,DimSubspace,PlotIt=FALSE,Algorithm='orclus',OrclusInitialClustersNo=ClusterNo+2,...){
+SubspaceClustering <-function(Data,ClusterNo,DimSubspace,method='orclus',PlotIt=FALSE,OrclusInitialClustersNo=ClusterNo+2,...){
 # Cls=SubspaceClustering(Data,ClusterNo=2)
 #  
 # liefert eine Klassenzuweisung
@@ -7,12 +7,12 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,PlotIt=FALSE,Algorithm=
 
 # ClusterNo  in soviele Cluster werden die daten eingeteilt
 # PlotIt
-# Algorithm     'orclus', Subspace Clustering Based on Arbitrarily Oriented Projected Cluster Generation
+# method     'orclus', Subspace Clustering Based on Arbitrarily Oriented Projected Cluster Generation
 #               'ProClus'
 #               'SubClu'
 #               'Clique'
 # OrclusInitialClustersNo
-# note: JAVA_HOME has to be set for rJava to use this algorithm
+# note: JAVA_HOME has to be set for rJava to use this method
 # OUTPUT
 # Cls[1:n]                Clusterung der Daten
 #
@@ -22,7 +22,7 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,PlotIt=FALSE,Algorithm=
   d=dim(Data)[2]
   n=d=dim(Data)[1]
   
-  switch(Algorithm,
+  switch(method,
          orclus={
            
            if(missing(DimSubspace)){
@@ -74,7 +74,7 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,PlotIt=FALSE,Algorithm=
            }
            Cls[!is.finite(Cls)]=9999
          },
-         stop("Wrong Algorithm string entered")
+         stop("Wrong method string entered")
          
   )
 
