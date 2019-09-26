@@ -1,4 +1,4 @@
-APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,Seed=7568,PlotIt=FALSE,method=NULL,Data,...){
+APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,DistanceMethod="euclidean",Seed=7568,PlotIt=FALSE,method=NULL,Data,...){
 #Cls=APcluster(Data,Seed=7568)$Cls
 #Affinity Propagation clustering introduced by Frey and Dueck (2007) <doi:10.1126/science.1136800>.
 #INPUT
@@ -32,16 +32,15 @@ APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,
   AnzData = nrow(DataOrDistances)
 
   if (isSymmetric(DataOrDistances)) {
-    s=(1-DataOrDistances)/max(DataOrDistances)
+    DataPoints=ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = 3)$ProjectedPoints
+    s=-(DataOrDistances)^2
     apres <- apcluster::apcluster(s=s,p=InputPreference, details=TRUE,q=ExemplarPreferences,seed=Seed,...)
-    if(PlotIt){
-      PlotIt=FALSE
-      warning('Only a Input of a dataset can be visualized.')
-    } 
+
   }
   else{
+    DataPoints=DataOrDistances
     s=DataOrDistances
-    apres <- apcluster::apcluster(apcluster::negDistMat(r=2), x=DataOrDistances,p=InputPreference,q=ExemplarPreferences, details=TRUE,seed=Seed,...)
+    apres <- apcluster::apcluster(apcluster::negDistMat(method = DistanceMethod,r=2), x=DataOrDistances,p=InputPreference,q=ExemplarPreferences, details=TRUE,seed=Seed,...)
   }
   ClsIndList=apres@clusters
   Cls=rep(NaN,AnzData)
@@ -50,7 +49,7 @@ APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,
   }
   if(PlotIt){
     requireNamespace('DataVisualizations')
-    DataVisualizations::Plot3D(DataOrDistances,Cls)
+    DataVisualizations::Plot3D(DataPoints,Cls)
   }
   return(list(Cls=Cls,APobject=apres))
 }

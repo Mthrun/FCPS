@@ -13,7 +13,7 @@ APclustering(DataOrDistances,
 
 InputPreference=NA,ExemplarPreferences=NA,
 
-Seed,PlotIt=FALSE,Data,...)
+Seed,DistanceMethod="euclidean",PlotIt=FALSE,Data,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,8 +28,11 @@ Seed,PlotIt=FALSE,Data,...)
   \item{ExemplarPreferences}{
   default parameter set, see \code{apcluster}
 }
+  \item{DistanceMethod}{
+  DistanceMethod as in \code{\link{dist}} for  \code{\link[apcluster]{negDistMat}}.
+}
   \item{Seed}{
-    set as integervalue to have reproducible results, see \code{apcluster}
+    set as integervalue to have reproducible results, see \code{\link[apcluster]{apcluster}}
 }
 \item{PlotIt}{default: FALSE, If TRUE and dataset of [1:n,1:d] dimensions then a plot of the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls} will be generated.}
 \item{Data}{[1:n,1:d] data matrix in the case that \code{DataOrDistances} is missing and partial matching does not work.}
@@ -38,8 +41,9 @@ Seed,PlotIt=FALSE,Data,...)
 
 }
 \details{
-Distancematrix is converted to similaritiy matrix.
-If Data matrix is used, then euclidean similarities are calculated by \code{negDistMat}.
+Distancematrix D is converted to similaritiy matrix S with S=-(D^2).
+
+If Data matrix is used, then euclidean similarities are calculated by \code{\link[apcluster]{negDistMat}} and a specifed distance method.
 
 The AP algorithm decides the k number of clusters.
 }
@@ -70,7 +74,11 @@ res=APclustering(Hepta$Data)
 #DataVisualizations::plot3D(Hepta$Data,res$Cls)
 }
 }
+\seealso{
+\code{\link[apcluster]{apcluster}}
+}
+}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{apcluster}% use one of  RShowDoc("KEYWORDS")
+\keyword{Affinity Propagation}% __ONLY ONE__ keyword per line
