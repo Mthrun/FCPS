@@ -20,9 +20,10 @@ HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,method="
 # Cls                   Classification for coloring the datapoints
 #  
 #
-# OUTPUT
+# OUTPUT Liste Mit
 # HierarchicalCluster      Hierarchische Clusterung der Daten
-#
+# Dendrogram
+
 # Author: MT
 #1.Editor: MT 07/2015, pdist fuer Distanzberechnung verwendet
 # Example

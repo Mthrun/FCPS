@@ -12,6 +12,7 @@ HierarchicalClusterDists(pDist,ClusterNo=0,method="ward.D2",ColorTreshold=0)
 \description{
 Hierarchical cluster analysis on a set of dissimilarities and methods for analyzing it.Used stats package function 'hclust'.
 }
+
 \arguments{
 \item{pDist}{distances as either matrix [1:n,1:n] or dist object}
 \item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.}
@@ -19,9 +20,11 @@ Hierarchical cluster analysis on a set of dissimilarities and methods for analyz
 \item{ColorTreshold}{draws cutline w.r.t. dendogram y-axis (height), height of line as scalar should be given}
 \item{...}{If ClusterNo=0, plot arugments for as.dendrogramm, e.g.
 
-leaflab : a string specifying how leaves are labeled. The default "perpendicular" write text vertically (by default). "textlike" writes text horizontally (in a rectangle), and "none" suppresses leaf labels s. ?as.dendrogramm
-
+leaflab
 }
+}
+\details{
+leaflab : a string specifying how leaves are labeled. The default "perpendicular" write text vertically (by default). "textlike" writes text horizontally (in a rectangle), and "none" suppresses leaf labels s. ?as.dendrogramm
 }
 \value{
 List of
@@ -33,3 +36,6 @@ List of
 data('Hepta')
 out=HierarchicalClusterData(Hepta$Data,ClusterNo=7)
 }
+\keyword{Hierarchical}% use one of  RShowDoc("KEYWORDS")
+\keyword{Clustering}% __ONLY ONE__ keyword per line
+\keyword{Agglomerative}% __ONLY ONE__ keyword per line

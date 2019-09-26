@@ -18,11 +18,12 @@ Hierarchical cluster analysis on a set of dissimilarities and methods for analyz
 \item{method}{Methode der Clusterung: "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".}
 \item{DistanceMethod}{see  \code{\link[parallelDist]{parDist}}, for example 'euclidean','mahalanobis','manhatten' (cityblock),'fJaccard','binary', 'canberra', 'maximum'. Any unambiguous substring can be given.}
 \item{ColorTreshold}{draws cutline w.r.t. dendogram y-axis (height), height of line as scalar should be given}
-\item{...}{If ClusterNo=0, plot arugments for as.dendrogramm, e.g.
-
-leaflab : a string specifying how leaves are labeled. The default "perpendicular" write text vertically (by default). "textlike" writes text horizontally (in a rectangle), and "none" suppresses leaf labels s. ?as.dendrogramm
+\item{...}{If ClusterNo=0, plot arugments for as.dendrogramm, e.g.leaflab
 
 }
+}
+\details{
+leaflab : a string specifying how leaves are labeled. The default "perpendicular" write text vertically (by default). "textlike" writes text horizontally (in a rectangle), and "none" suppresses leaf labels s. ?as.dendrogramm
 }
 \value{
 List of
@@ -37,3 +38,6 @@ Michael Thrun
 data('Hepta')
 out=HierarchicalClusterData(Hepta$Data,ClusterNo=7)
 }
+\keyword{Hierarchical}% use one of  RShowDoc("KEYWORDS")
+\keyword{Clustering}% __ONLY ONE__ keyword per line
+\keyword{Agglomerative}% __ONLY ONE__ keyword per line
