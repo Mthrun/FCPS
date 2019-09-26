@@ -26,8 +26,8 @@ MinimalEnergyClustering <-function(DataOrDistances,ClusterNo=0,DistanceMethod="e
     pDist=parallelDist::parDist(DataOrDistances,method=DistanceMethod)
   }
 
-  if(!inherits(pDist,'dist'))
-    pDist=as.dist(pDist)
+  if(!inherits(DataOrDistances,'dist'))
+    pDist=as.dist(DataOrDistances)
   
   requireNamespace('energy')
 	hc <- energy::energy.hclust(pDist)

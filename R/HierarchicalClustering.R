@@ -9,27 +9,22 @@ HierarchicalClustering=function(DataOrDistances,ClusterNo,method='SingleL',Data,
   if(method=='CompleteL') method="complete"
   if(method=='AverageL') method="average"
   if(method=='WPGMA') method="mcquitty"
-  if(method=='Median') method="medianL"
+  if(method=='MedianL') method="median"
   if(method=='CentroidL') method="centroid"
   
+  
   #backwards compatibility to matlab, otherwise could be programmed better :-(
-  if (isSymmetric(DataOrDistances)) {
-    if(!inherits(DataOrDistances,'dist'))
+  if(method=='MinEnergy'){
+    return(MinimalEnergyClustering(DataOrDistances = DataOrDistances,ClusterNo = ClusterNo,...))
+  }else if (isSymmetric(DataOrDistances)) {
+    if(!inherits(DataOrDistances,'dist')){
       Input=as.dist(DataOrDistances)
-    else
+    }else{
       Input=DataOrDistances
-    
-    if(method=='MinEnergy'){
-      return(MinimalEnergyClustering(DataOrDistances = Input,ClusterNo = ClusterNo,...))
-    }else{
-      return(HierarchicalClusterDists(pDist = Input,ClusterNo = ClusterNo,method = method,...))
-    }#end MinEnergy
+  }
+    return(HierarchicalClusterDists(pDist = Input,ClusterNo = ClusterNo,method = method,...))
   }else{#data given
-    if(method=='MinEnergy'){
-      
-    }else{
-      return(MinimalEnergyClustering(DataOrDistances = Input,ClusterNo = ClusterNo,...))
-    }#end MinEnergy
+    return(MinimalEnergyClustering(DataOrDistances = Input,ClusterNo = ClusterNo,...))
   }#endisSymmetric(DataOrDistances)
   
 }
