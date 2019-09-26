@@ -1,4 +1,4 @@
-QTClustering <-function(Data,Radius,PlotIt=FALSE,...){
+QTclustering=QTClustering <-function(Data,Radius,PlotIt=FALSE,...){
   # Cls=QTClustering(Data,Radius=2)
   #  
   # liefert eine Klassenzuweisung

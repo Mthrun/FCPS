@@ -8,7 +8,7 @@ Fuzzy Analysis Clustering [Rousseeuw/Kaufman, 1990, p. 164-198]
 ...
 }
 \usage{
-FannyClustering(DataOrDistances,ClusterNo,PlotIt=FALSE,...)
+FannyClustering(DataOrDistances,ClusterNo,PlotIt=FALSE,Data,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -16,6 +16,8 @@ FannyClustering(DataOrDistances,ClusterNo,PlotIt=FALSE,...)
 
 \item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.}
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{Data}{[1:n,1:d] data matrix in the case that \code{DataOrDistances} is missing and partial matching does not work.}
+
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 }
 \details{

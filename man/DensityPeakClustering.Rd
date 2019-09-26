@@ -8,7 +8,9 @@ Density Peak Clustering algorithm using the Decision Graph
 Density Peaks Clustering of [Rodriguez/Laio, 2014] is here implemented by [Pedersen et al., 2017] with estimation of [Wang et al, 2015] meaning its non adaptive in the sense of \code{\link{ADPclustering}}.
 }
 \usage{
-DensityPeakClustering(DataOrDistances, Rho,Delta,Dc,Knn=7, method = "euclidean", PlotIt = FALSE, ...)
+DensityPeakClustering(DataOrDistances, Rho,Delta,Dc,Knn=7, 
+
+method = "euclidean", PlotIt = FALSE, Data, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -35,6 +37,8 @@ Optional distance method of data, default is euclid, see \code{\link[parallelDis
   \item{PlotIt}{
 Optional TRUE: Plots 2d or 3d result with clustering
 }
+\item{Data}{[1:n,1:d] data matrix in the case that \code{DataOrDistances} is missing and partial matching does not work.}
+
   \item{\dots}{
 Optional, further arguments for  \code{\link[densityClust]{densityClust}}
 }

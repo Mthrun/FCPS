@@ -1,4 +1,5 @@
-\name{QTClustering}
+\name{QTclustering}
+\alias{QTclustering}
 \alias{QTClustering}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
@@ -8,7 +9,7 @@ Stochastic QT Clustering
 stochastic quality clustering of [Heyer et al., 1999] with an improved implementation by [Scharl/Leisch, 2006].
 }
 \usage{
-QTClustering(Data,Radius,PlotIt=FALSE,...)
+QTclustering(Data,Radius,PlotIt=FALSE,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -40,7 +41,7 @@ Michael Thrun
 
 \examples{
 data('Hepta')
-out=QTClustering(Hepta$Data,PlotIt=TRUE)
+out=QTclustering(Hepta$Data,PlotIt=TRUE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

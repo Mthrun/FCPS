@@ -1,6 +1,10 @@
-DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclidean",PlotIt=FALSE,...){
+DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclidean",PlotIt=FALSE,Data,...){
   #Rodriguez, A., & Laio, A.: Clustering by fast search and find of density peaks. Science, 344(6191), 1492-1496. doi:10.1126/science.1242072, 2014.
   requireNamespace('densityClust')
+  if(missing(DataOrDistances)){
+    DataOrDistances=Data
+  }
+  
   if(!is.matrix(DataOrDistances)){
     warning('DataOrDistances is not a matrix. Calling as.matrix()')
     DataOrDistances=as.matrix(DataOrDistances)

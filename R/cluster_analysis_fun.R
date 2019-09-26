@@ -1,5 +1,4 @@
 cluster_analysis_fun=function(i,fun,DataOrDistance,ClusterNo,SetSeed=TRUE,...){
-
   #example
   # data(Hepta)
   # Distance=as.matrix(parallelDist::parallelDist(Hepta$Data))

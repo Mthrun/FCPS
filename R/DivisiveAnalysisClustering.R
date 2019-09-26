@@ -1,4 +1,4 @@
-DivisiveAnalysisClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE,...){
+DivisiveAnalysisClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE,Data,...){
   # Cls=DivisiveAnalysisClustering(Data,ClusterNo=2)
   # DivisiveAnalysisClustering (diana)
   # liefert eine Klassenzuweisung
@@ -10,6 +10,9 @@ DivisiveAnalysisClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE,...
   # Cls[1:n]                Clusterung der Daten
   # dianaObject         Object of sota Alorithm
   # Author: MT 04/2018
+  if(missing(DataOrDistances)){
+    DataOrDistances=Data
+  }
   
   
   requireNamespace('cluster')

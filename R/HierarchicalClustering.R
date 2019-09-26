@@ -1,4 +1,8 @@
-HierarchicalClustering=function(DataOrDistances,ClusterNo,...){
+HierarchicalClustering=function(DataOrDistances,ClusterNo,Data,...){
+  if(missing(DataOrDistances)){
+    DataOrDistances=Data
+  }
+  
   if (isSymmetric(DataOrDistances)) {
     if(!inherits(DataOrDistances,'dist'))
       Input=as.dist(DataOrDistances)

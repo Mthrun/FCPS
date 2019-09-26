@@ -11,7 +11,9 @@ Affinity Propagation clustering published by [Frey/Dueck, 2007] and implemented 
 \usage{
 APclustering(DataOrDistances,
 
-InputPreference=NA,ExemplarPreferences=NA,Seed,PlotIt=FALSE,...)
+InputPreference=NA,ExemplarPreferences=NA,
+
+Seed,PlotIt=FALSE,Data,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -30,6 +32,8 @@ InputPreference=NA,ExemplarPreferences=NA,Seed,PlotIt=FALSE,...)
     set as integervalue to have reproducible results, see \code{apcluster}
 }
 \item{PlotIt}{default: FALSE, If TRUE and dataset of [1:n,1:d] dimensions then a plot of the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls} will be generated.}
+\item{Data}{[1:n,1:d] data matrix in the case that \code{DataOrDistances} is missing and partial matching does not work.}
+
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 
 }

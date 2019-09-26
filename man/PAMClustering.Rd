@@ -1,4 +1,5 @@
-\name{PAMClustering}
+\name{PAMclustering}
+\alias{PAMclustering}
 \alias{PAMClustering}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
@@ -8,7 +9,7 @@ Partitioning Around Medoids [Rousseeuw/Kaufman, 1990, p. 164-198]
 Partitioning (clustering) of the data into k clusters "around medoids", a more robust version of K-means.
 }
 \usage{
-PAMClustering(DataOrDistances,ClusterNo,PlotIt=FALSE,...)
+PAMclustering(DataOrDistances,ClusterNo,PlotIt=FALSE,Data,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -16,6 +17,8 @@ PAMClustering(DataOrDistances,ClusterNo,PlotIt=FALSE,...)
 
 \item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.}
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{Data}{[1:n,1:d] data matrix in the case that \code{DataOrDistances} is missing and partial matching does not work.}
+
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 }
 \details{
@@ -37,9 +40,10 @@ Michael Thrun
 
 \examples{
 data('Hepta')
-out=PAMClustering(Hepta$Data,ClusterNo=7,PlotIt=TRUE)
+out=PAMclustering(Hepta$Data,ClusterNo=7,PlotIt=TRUE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{fanny}% use one of  RShowDoc("KEYWORDS")
-\keyword{fuzzy clustering}% __ONLY ONE__ keyword per line
+\keyword{PAM}% use one of  RShowDoc("KEYWORDS")
+\keyword{Partitioning Around Medoids}% __ONLY ONE__ keyword per line
+\keyword{clustering}

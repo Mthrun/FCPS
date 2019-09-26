@@ -1,5 +1,9 @@
-FannyClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,...){
+FannyClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Data,...){
   
+  if(missing(DataOrDistances)){
+    DataOrDistances=Data
+  }
+
   #author: MT, 04/2018
   requireNamespace('cluster')
     if (isSymmetric(DataOrDistances)) {

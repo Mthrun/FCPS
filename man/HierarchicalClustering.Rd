@@ -8,13 +8,14 @@ Hierarchical Clustering
 Wrapper for \code{\link{HierarchicalClusterData}} and \code{\link{HierarchicalClusterDists}}.
 }
 \usage{
-HierarchicalClustering(DataOrDistances, ClusterNo, ...)
+HierarchicalClustering(DataOrDistances, ClusterNo,Data, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
 \item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
 
 \item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.}
+\item{Data}{[1:n,1:d] data matrix in the case that \code{DataOrDistances} is missing and partial matching does not work.}
 
   \item{\dots}{
 Further arguments passed on to either \code{\link{HierarchicalClusterData}} or \code{\link{HierarchicalClusterDists}}.

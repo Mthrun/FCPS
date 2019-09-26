@@ -12,7 +12,7 @@ DBSclusteringAndVisualization(DataOrDistances, ClusterNo = 0,
 
 StructureType = TRUE, DistancesMethod = NULL,
 
-PlotTree = FALSE, PlotMap = TRUE)
+PlotTree = FALSE, PlotMap = TRUE,Data)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -36,6 +36,8 @@ Optional, if TRUE: dendrogram is plotted
   \item{PlotMap}{
 Optional,if TRUE: topographic map is plotted.
 }
+\item{Data}{[1:n,1:d] data matrix in the case that \code{DataOrDistances} is missing and partial matching does not work.}
+
 }
 \details{
 This function does not enable the user first to project the data and then to test the Boolean parameter defining the type of structure contrary to the \pkg{DatabionicSwarm} which is an inappropriate approach in case of exploratory data analysis. 
