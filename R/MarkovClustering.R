@@ -7,16 +7,8 @@ MarkovClustering=function(Data=NULL,Adjacency=NULL,Radius=TRUE,addLoops = TRUE,P
         Radius=DataVisualizations::ParetoRadiusV2(Data)
       }
     if(Radius==FALSE){
-      requireNamespace('ABCanalysis')
-      x=DistanceMatrix(Data,outputisvector=T)
-      x=x[lower.tri(x, diag = FALSE)]
-      par=quantile(x,c(0.2013)) #geschaetzter paretorRadius
-      xx=ABCanalysis::ABCRemoveSmallYields(x,0.5)
-      x=xx$SubstantialData
-      res=suppressWarnings(ABCanalysis::ABCanalysis(x))
-      Radius=min(x[res$Aind])/max(x[res$Cind])
-      
-      
+      requireNamespace('parallelDist')
+      Radius=EstimateRadiusByDistance(as.matrix(parallelDist::parallelDist(Data)))
     }
     DistanceMatrix = as.matrix(dist(Data))
     AnzPunkte = nrow(DistanceMatrix)

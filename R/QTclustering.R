@@ -22,13 +22,8 @@ QTclustering=QTClustering <-function(Data,Radius,PlotIt=FALSE,...){
   requireNamespace('flexclust')
 
     if(missing(Radius)){ #estimate Maximum diameter of cluster, i.e. group of large distances
-      requireNamespace('ABCanalysis')
-      x=as.matrix(dist(Data))
-      x=x[lower.tri(x, diag = FALSE)]
-      xx=ABCanalysis::ABCRemoveSmallYields(x,0.5)
-      x=xx$SubstantialData
-      res=suppressWarnings(ABCanalysis::ABCanalysis(x))
-      Radius=min(x[res$Aind])/max(x[res$Cind])
+      requireNamespace('parallelDist')
+      Radius=EstimateRadiusByDistance(as.matrix(parallelDist::parallelDist(Data)))
     } 
   obj=flexclust::qtclust(Data,Radius,...)
   Cls=obj@cluster
