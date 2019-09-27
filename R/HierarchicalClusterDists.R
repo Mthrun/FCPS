@@ -27,7 +27,7 @@ HierarchicalClusterDists <-function(pDist,ClusterNo=0,method="ward.D2",ColorTres
 	
 # Classification or Dendrogram
 	if (ClusterNo>0){
-		return (cutree(hc,ClusterNo));
+		return (list(Cls=cutree(hc,ClusterNo),Dedrogram=hc))
 	} 
 	else{
 		x=as.dendrogram(hc);plot(x, main=m,xlab="Number of Data Points N", ylab="Distance",sub=" ",leaflab ="none",...)
@@ -37,7 +37,7 @@ HierarchicalClusterDists <-function(pDist,ClusterNo=0,method="ward.D2",ColorTres
 		else{
 		  #rect.hclust(hc, h=4*mean(hc$height),border="red")
 		}
-		return(list(Cls=hc,Dedrogram=x))
+		return(list(Cls=NULL,Dedrogram=x))
 	}
 }
 

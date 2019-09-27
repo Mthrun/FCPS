@@ -12,7 +12,6 @@ HierarchicalClustering=function(DataOrDistances,ClusterNo,method='SingleL',Data,
   if(method=='MedianL') method="median"
   if(method=='CentroidL') method="centroid"
   
-  
   #backwards compatibility to matlab, otherwise could be programmed better :-(
   if(method=='MinEnergy'){
     return(MinimalEnergyClustering(DataOrDistances = DataOrDistances,ClusterNo = ClusterNo,...))
@@ -21,10 +20,10 @@ HierarchicalClustering=function(DataOrDistances,ClusterNo,method='SingleL',Data,
       Input=as.dist(DataOrDistances)
     }else{
       Input=DataOrDistances
-  }
+    }
     return(HierarchicalClusterDists(pDist = Input,ClusterNo = ClusterNo,method = method,...))
   }else{#data given
-    return(MinimalEnergyClustering(DataOrDistances = Input,ClusterNo = ClusterNo,...))
+    return(HierarchicalClusterData(Data = DataOrDistances,ClusterNo = ClusterNo,method = method,...))
   }#endisSymmetric(DataOrDistances)
   
 }
