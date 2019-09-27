@@ -37,7 +37,7 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,method='Orclus',PlotIt=
              }
            }
 
-           requireNamespace('Orclus')
+           requireNamespace('orclus')
            obj=orclus::orclus(x=Data, k=ClusterNo,l=DimSubspace,k0=OrclusInitialClustersNo, ...)
            Cls=obj$cluster
          },
