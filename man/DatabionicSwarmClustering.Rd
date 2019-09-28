@@ -13,7 +13,7 @@ DatabionicSwarmClustering(DataOrDistances, ClusterNo = 0,
 
 StructureType = TRUE, DistancesMethod = NULL,
 
-PlotTree = FALSE, PlotMap = TRUE,Data)
+PlotTree = FALSE, PlotMap = FALSE,Data)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -78,15 +78,16 @@ DataVisualizations::Plot3D(Data)
 #No structres are visible
 #topographic map looks like "egg carton"
 # with every point in its own valley
-Cls=DatabionicSwarmClustering(Data,7,PlotMap = T)
+Cls=DatabionicSwarmClustering(Data,0,PlotMap = T)
 }
 
 #distance based cluster structures
+#7 valleys are visible, thus ClusterNo=7
 \donttest{
 data(Hepta)
 DataVisualizations::Plot3D(Hepta$Data)  
 
-Cls=DatabionicSwarmClustering(Hepta$Data,7,PlotMap = T)
+Cls=DatabionicSwarmClustering(Hepta$Data,0,PlotMap = T)
 }
 
 #entagled, complex, and non-linear seperable structures 
@@ -94,8 +95,19 @@ Cls=DatabionicSwarmClustering(Hepta$Data,7,PlotMap = T)
 data(Chainlink)
 DataVisualizations::Plot3D(Chainlink$Data)  
 
+#2 valleys are visible, thus ClusterNo=2
+Cls=DatabionicSwarmClustering(Chainlink$Data,0,PlotMap = T)
+
+#Trying of only parameter StructureType
+#reveals that clustering is appropriate
+# if StructureType=FALSE
 Cls=DatabionicSwarmClustering(Chainlink$Data,2,
 StructureType=FALSE,PlotMap = T)
+
+#Here clusters (colored points)
+#are not seperated by valleys
+Cls=DatabionicSwarmClustering(Chainlink$Data,2,
+StructureType=TRUE,PlotMap = T)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
