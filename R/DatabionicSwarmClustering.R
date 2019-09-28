@@ -46,7 +46,7 @@ DatabionicSwarmClustering=DBSclusteringAndVisualization=function(DataOrDistances
     message("Operator: Clustering the dataset.")
     TwoD_Points=proj$ProjectedPoints
     #Make sure that grid dimensions are correct, even if generalized umatrix is not computed which is not necessary for clustering.
-    
+    LC=c()
     LC[1]=ceiling(max(TwoD_Points[, 1])+1)
     LC[2]=ceiling(max(TwoD_Points[, 2])+1)
  
