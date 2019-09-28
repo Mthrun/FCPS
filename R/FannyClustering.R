@@ -1,9 +1,10 @@
-FannyClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Data,...){
+FannyClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Standardization=TRUE,Data,...){
   
   if(missing(DataOrDistances)){
     DataOrDistances=Data
   }
-
+  if(Standardization==1) Standardization=TRUE
+  if(Standardization==0) Standardization=FALSE
   #author: MT, 04/2018
   requireNamespace('cluster')
     if (isSymmetric(DataOrDistances)) {
@@ -19,7 +20,7 @@ FannyClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Data,...){
 	  diss =FALSE
     }
   
-  fan=cluster::fanny(Input,k=ClusterNo,diss=diss,...)
+  fan=cluster::fanny(Input,k=ClusterNo,diss=diss,stand=Standardization,...)
   Cls=fan$clustering
   if(!is.null(rownames(DataOrDistances)))
     names(Cls)=rownames(DataOrDistances)

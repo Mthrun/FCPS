@@ -1,4 +1,4 @@
-LargeApplicationClustering <-function(Data,ClusterNo,PlotIt=FALSE,Samples=50,Random=TRUE,...){
+LargeApplicationClustering <-function(Data,ClusterNo,PlotIt=FALSE,Standardization=TRUE,Samples=50,Random=TRUE,...){
   # Cls=LargeApplicationClustering(Data,ClusterNo=2)
   # Clustering Large Applications  (clara)
   # liefert eine Klassenzuweisung
@@ -11,10 +11,11 @@ LargeApplicationClustering <-function(Data,ClusterNo,PlotIt=FALSE,Samples=50,Ran
   # Cls[1:n]                Clusterung der Daten
   # claraObject         Object of sota Alorithm
   # Author: MT 04/2018
-  
+  if(Standardization==1) Standardization=TRUE
+  if(Standardization==0) Standardization=FALSE
   
   requireNamespace('cluster')
-  res=cluster::clara(x=Data,k = ClusterNo,samples=Samples,rngR=Random,...)
+  res=cluster::clara(x=Data,k = ClusterNo,samples=Samples,rngR=Random,stand=Standardization,...)
   Cls=res$clustering
 
   if(PlotIt){

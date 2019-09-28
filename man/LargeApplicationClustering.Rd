@@ -5,17 +5,23 @@
 Clustering Large Applications  (clara) of  [Rousseeuw/Kaufman, 1990]
 }
 \usage{
-LargeApplicationClustering(Data, ClusterNo,Samples=50,PlotIt=FALSE,Samples=50,Random=TRUE,...)
+LargeApplicationClustering(Data, ClusterNo,
+
+PlotIt=FALSE,Standardization=TRUE,Samples=50,Random=TRUE,...)
 }
 
 \arguments{
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
 
 \item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.}
+\item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{Standardization}{
+\code{Data} is standardized before calculating the dissimilarities. Measurements are standardized for each variable (column), by subtracting the variable's mean value and dividing by the variable's mean absolute deviation.
+}
 \item{Samples}{integer, say N, the number of samples to be drawn from the dataset. Default value set as recommended by documentation of \code{\link[cluster]{clara}}}
 \item{Random}{logical indicating if R's random number generator should be used instead of the primitive clara()-builtin one.}
 
-\item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 }
 

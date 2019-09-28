@@ -1,4 +1,4 @@
-DivisiveAnalysisClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE,Data,...){
+DivisiveAnalysisClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE,Standardization=TRUE,Data,...){
   # Cls=DivisiveAnalysisClustering(Data,ClusterNo=2)
   # DivisiveAnalysisClustering (diana)
   # liefert eine Klassenzuweisung
@@ -13,7 +13,10 @@ DivisiveAnalysisClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE,Dat
   if(missing(DataOrDistances)){
     DataOrDistances=Data
   }
-  
+  if(Standardization==1) Standardization=TRUE
+  if(Standardization==0) Standardization=FALSE
+
+
   
   requireNamespace('cluster')
   if (isSymmetric(DataOrDistances)) {
@@ -29,7 +32,7 @@ DivisiveAnalysisClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE,Dat
 	  diss =FALSE
     }
 	
-  res=cluster::diana(x=Input,diss =diss,...)
+  res=cluster::diana(x=Input,diss =diss,stand=Standardization,...)
   if(length(ClusterNo)!=1){
     stop('ClusterNo has to be an numerical number not a vector of length higher than 1 or another object.')
   }

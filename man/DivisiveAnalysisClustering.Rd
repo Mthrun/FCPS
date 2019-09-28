@@ -5,7 +5,9 @@
 Divisive Analysis Clustering (diana) of  [Rousseeuw/Kaufman, 1990]
 }
 \usage{
-DivisiveAnalysisClustering(DataOrDistances, ClusterNo,PlotIt=FALSE,Data,...)
+DivisiveAnalysisClustering(DataOrDistances, ClusterNo,
+
+PlotIt=FALSE,Standardization=TRUE,Data,...)
 }
 
 \arguments{
@@ -15,6 +17,9 @@ DivisiveAnalysisClustering(DataOrDistances, ClusterNo,PlotIt=FALSE,Data,...)
 if \code{ClusterNo=0}, the dendrogram is generated instead of a clustering to estimate the numbers of clusters.
 }
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{Standardization}{
+\code{DataOrDistances} is standardized before calculating the dissimilarities. Measurements are standardized for each variable (column), by subtracting the variable's mean value and dividing by the variable's mean absolute deviation.If \code{DataOrDistances} is already a distance matrix, then this argument will be ignored.
+}
 \item{Data}{[1:n,1:d] data matrix in the case that \code{DataOrDistances} is missing and partial matching does not work.}
 
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}

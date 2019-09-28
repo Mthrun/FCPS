@@ -1,8 +1,9 @@
-PAMclustering=PAMClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Data,...){
+PAMclustering=PAMClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Standardization=TRUE,Data,...){
   if(missing(DataOrDistances)){
     DataOrDistances=Data
   }
-  
+  if(Standardization==1) Standardization=TRUE
+  if(Standardization==0) Standardization=FALSE
   #author: MT, 04/2018
   requireNamespace('cluster')
       if (isSymmetric(DataOrDistances)) {
@@ -18,7 +19,7 @@ PAMclustering=PAMClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Data
 	  diss =FALSE
     }
 	
-  pam=cluster::pam(x=Input,k=ClusterNo,diss=diss,...)
+  pam=cluster::pam(x=Input,k=ClusterNo,diss=diss,stand=Standardization,...)
   Cls=pam$clustering
   if(!is.null(rownames(DataOrDistances)))
     names(Cls)=rownames(DataOrDistances)
