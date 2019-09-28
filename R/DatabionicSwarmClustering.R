@@ -44,13 +44,12 @@ DatabionicSwarmClustering=DBSclusteringAndVisualization=function(DataOrDistances
    
   }else{
     message("Operator: Clustering the dataset.")
-    LC=proj$LC
     TwoD_Points=proj$ProjectedPoints
     #Make sure that grid dimensions are correct, even if generalized umatrix is not computed which is not necessary for clustering.
-    if (max(TwoD_Points[, 1]) > LC[1]) LC[1]=max(TwoD_Points[, 1])+1
-      
-    if (max(TwoD_Points[, 2]) > LC[2]) LC[2]=max(TwoD_Points[, 2])+1
-     
+    
+    LC[1]=ceiling(max(TwoD_Points[, 1])+1)
+    LC[2]=ceiling(max(TwoD_Points[, 2])+1)
+ 
     if(is.null(DistancesMethod)){
       Cls=DatabionicSwarm::DBSclustering(ClusterNo,DataOrDistance = DataOrDistances,BestMatches =TwoD_Points,LC = LC,
                         StructureType = StructureType,PlotIt = PlotTree)
