@@ -5,7 +5,7 @@
 Self-organizing Tree Algorithm (SOTA) introduced by [Herrero et al., 2001].
 }
 \usage{
-sotaClustering(Data, ClusterNo,PlotIt=FALSE,...)
+sotaClustering(Data, ClusterNo,PlotIt=FALSE,UnrestGrowth,...)
 }
 
 \arguments{
@@ -13,6 +13,10 @@ sotaClustering(Data, ClusterNo,PlotIt=FALSE,...)
 
 \item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.}
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{UnrestGrowth}{
+TRUE: forces the \code{ClusterNo} option to uphold.
+FALSE: enables the algorithm to find its own number of clusters, in this cases ClusterNo should contain a high number because it is internally set as the number of iterations which is either reached or the max diversity criteria is satisfied priorly.
+}
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 }
 \value{
@@ -22,8 +26,16 @@ List of
 }
 
  \examples{
+#Does Work
 data('Hepta')
-out=sotaClustering(Hepta$Data,ClusterNo=7,PlotIt=TRUE)
+out=sotaClustering(Hepta$Data,ClusterNo=7)
+table(Hepta$Cls,out$Cls)
+
+\donttest{
+#Does not work well
+data('Lsun3D')
+out=sotaClustering(Lsun3D$Data,ClusterNo=100,PlotIt=TRUE,UnrestGrowth=FALSE)
+}
 }
 \author{Michael Thrun}
 

@@ -1,4 +1,4 @@
-sotaClustering <-function(Data,ClusterNo,PlotIt=FALSE,...){
+sotaClustering <-function(Data,ClusterNo,PlotIt=FALSE,UnrestGrowth,...){
   # Cls=sotaClustering(Data,ClusterNo=2)
   # Self-organizing Tree Algorithm (SOTA)
   # liefert eine Klassenzuweisung
@@ -12,9 +12,15 @@ sotaClustering <-function(Data,ClusterNo,PlotIt=FALSE,...){
   # sotaObject         Object of sota Alorithm
   # Author: MT 04/2018
   
-  
+  if(missing(UnrestGrowth)){
+  UnrestGrowth=TRUE
+  }
   requireNamespace('clValid')
-  res=clValid::sota(Data,maxCycles = ClusterNo-1,...)
+  if(isFALSE(UnrestGrowth))#maxCycles is number of iterations
+	res=clValid::sota(Data,maxCycles = ClusterNo,unrest.growth=UnrestGrowth,...)
+  else #maxCycles is number of of clusters+1
+	res=clValid::sota(Data,maxCycles = ClusterNo-1,	unrest.growth=UnrestGrowth,...)
+	
   Cls=res$clust
   if(!is.null(rownames(Data)))
     names(Cls)=rownames(Data)
