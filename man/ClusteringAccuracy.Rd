@@ -23,25 +23,39 @@ Maximal number of classes for computation.
 }
 }
 \details{
-Here, accuracy is defined as the normalized sum over all true positive labeled data points of a clustering algorithm. The best of all permutation of labels with the highest accuracy is selected in every trial because algorithms arbitrarily define the labels.
+Here, accuracy is defined as the normalized sum over all true positive labeled data points of a clustering algorithm. The best of all permutation of labels with the highest accuracy is selected in every trial because algorithms arbitrarily define the labels [Thrun et al., 2018].
 
-In contrast to the F-measure, "Accuracy  tends  to  be  “naturally”  unbiased,   because  itcan  be  expressed  in  terms  of  a  binomial  distribution:A  “success”  in  the  underlying  Bernoulli  trial  would  bedefined as sampling an example for which a classifier underconsideration  makes  the  right  prediction.    By  definition,the  success  probability  is  identical  to  the  accuracy  of  theclassifier.  The i.i.d. assumption implies that each exampleof  the  test  set  is  sampled  independently,  so  the  expectedfraction  of  correctly  classified  samples  is  identical  to  theprobability  of  seeing  a  success  above.Averaging  overmultiple  folds  is  identical  to  increasing  the  number  ofrepetitions of the Binomial trial.  This does not affect theposterior distribution of accuracy 
+In contrast to the F-measure, "Accuracy  tends  to  be  “naturally”  unbiased,   because  itcan  be  expressed  in  terms  of  a  binomial  distribution:A  “success”  in  the  underlying  Bernoulli  trial  would  bedefined as sampling an example for which a classifier underconsideration  makes  the  right  prediction. By definition,the  success  probability  is  identical  to  the  accuracy  of  theclassifier.  The i.i.d. assumption implies that each exampleof  the  test  set  is  sampled  independently,  so  the  expectedfraction  of  correctly  classified  samples  is  identical  to  theprobability  of  seeing  a  success  above.Averaging  overmultiple  folds  is  identical  to  increasing  the  number  ofrepetitions of the Binomial trial.  This does not affect theposterior distribution of accuracy 
 if the test sets are of equalsize, or if we weight each estimate by the size of each testset." [Forman/Scholz, 2010]
 }
 \value{
 Accuracy Between zero and one
 }
 \references{
-Michael C. Thrun, Felix Pape, Alfred Ultsch: Benchmarking Cluster Analysis Methods in the Case of Distance and Density-based Structures Defined by a Prior Classification Using PDE-Optimized Violin Plots, ECDA, Potsdam, 2018
+[Thrun et al., 2018]	Michael C. Thrun, Felix Pape, Alfred Ultsch: Benchmarking Cluster Analysis Methods in the Case of Distance and Density-based Structures Defined by a Prior Classification Using PDE-Optimized Violin Plots, ECDA, Potsdam, 2018
+
+[Forman/Scholz, 2010]  Forman, G., & Scholz, M.: Apples-to-apples in cross-validation studies: pitfalls in classifier performance measurement, ACM SIGKDD Explorations Newsletter, Vol. 12(1), pp. 49-57. 2010.
+
 }
 \author{
 Michael Thrun
 }
-\references{
-[Forman/Scholz, 2010]  Forman, G., & Scholz, M.: Apples-to-apples in cross-validation studies: pitfalls in classifier performance measurement, ACM SIGKDD Explorations Newsletter, Vol. 12(1), pp. 49-57. 2010.
-}
+
 \examples{
-##following
+#Influence of random sets/ random starts on k-means
+\donttest{
+data('Hepta')
+Cls=kmeansClustering(Hepta$Data,7,method = "Hartigan",nstart=1)
+table(Cls$Cls,Hepta$Cls)
+ClusteringAccuracy(Hepta$Cls,Cls$Cls)
+}
+
+\donttest{
+data('Hepta')
+Cls=kmeansClustering(Hepta$Data,7,method = "Hartigan",nstart=100)
+table(Cls$Cls,Hepta$Cls)
+ClusteringAccuracy(Hepta$Cls,Cls$Cls)
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
