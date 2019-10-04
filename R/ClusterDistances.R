@@ -1,8 +1,10 @@
-ClusterDistances=function(FullDistanceMatrix,Cls,PlotIt=FALSE){
+ClusterDistances=function(FullDistanceMatrix,Cls,Names,PlotIt=FALSE){
   if(missing(Cls)){
     Cls=rep(1,nrow(FullDistanceMatrix))
   }
-  u=unique(Cls)
+  
+  u=sort(unique(Cls))
+
   classdist=list(FullDistanceMatrix[upper.tri(FullDistanceMatrix,diag = F)])
   if(length(u)==1) return(unlist(classdist))
   #funktioniert nicht bei clustersize==1!
@@ -24,6 +26,17 @@ ClusterDistances=function(FullDistanceMatrix,Cls,PlotIt=FALSE){
   # 
   # }
     xmat=do.call(addcols,classdist)
-    colnames(xmat)=c('Full',paste0('Class',u))
+    
+    if(missing(Names)){
+      colnames(xmat)=c('Full',paste0('Class',Names))
+    }else{
+      if(length(u)!=length(Names)){
+        warning('Lengh of Names has to be equal of length of unique Cls.')
+        colnames(xmat)=c('Full',paste0('Class',Names))
+      }else{
+        colnames(xmat)=c('Full',Names)
+      }
+    }
+
   return(as.matrix(xmat))
 }
