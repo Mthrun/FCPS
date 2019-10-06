@@ -28,7 +28,7 @@ ClusterDistances=function(FullDistanceMatrix,Cls,Names,PlotIt=FALSE){
     xmat=do.call(addcols,classdist)
     
     if(missing(Names)){
-      colnames(xmat)=c('Full',paste0('Class',Names))
+      colnames(xmat)=c('Full',paste0('Class',u))
     }else{
       if(length(u)!=length(Names)){
         warning('Lengh of Names has to be equal of length of unique Cls.')
