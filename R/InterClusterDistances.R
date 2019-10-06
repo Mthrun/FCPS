@@ -5,7 +5,7 @@ InterClusterDistances=function(FullDistanceMatrix,Cls,Names,PlotIt=FALSE){
   #Funktioniert nicht wenn in custer genau 1 punkt
   for(i in u){
     classdistcur=FullDistanceMatrix[Cls==i,Cls!=i]
-    if(i==1) print(classdistcur)
+    #if(i==1) print(classdistcur)
     distvec=classdistcur[upper.tri(classdistcur,diag = F)]
     classdist=c(classdist,list(distvec))
   }
