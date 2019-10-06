@@ -5,14 +5,13 @@
 ClusterDistances
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Computes intra-cluster distances which are the distance in-between each cluster.
 }
 \usage{
 ClusterDistances(FullDistanceMatrix, Cls,
 
 Names, PlotIt = FALSE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{FullDistanceMatrix}{
   [1:n,1:n] symmetric distance matrix
@@ -28,34 +27,29 @@ Names, PlotIt = FALSE)
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+Cluster distances are given back as a matrix, one column per cluster and the vector of the full distance matrix without the diagonal elements and the upper half of the symmetric matrix.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+matrix [1:m,1:(k+1)] of k clusters, each columns consists of the distances in a cluster, filled up with NaN at the end to be of the same lenght as the complete distance matrix.
 }
 \references{
-%% ~put references to the literature/web site here ~
+[Thrun, 2018] Thrun, M.C., Projection Based Clustering through Self-Organization and Swarm Intelligence. 2018, Heidelberg: Springe
 }
 \author{
 Michael Thrun
 }
 \note{
-%%  ~~further notes~~
+
+PlotIt is under development
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link[DataVisualizations]{MDplot}}
 }
 \examples{
 ##ToDo
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{intra-cluster}% use one of  RShowDoc("KEYWORDS")
+\keyword{distances}% __ONLY ONE__ keyword per line
