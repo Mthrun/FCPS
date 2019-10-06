@@ -1,11 +1,12 @@
-\name{sotaClustering}
+\name{SOTAclustering}
+\alias{SOTAclustering}
 \alias{sotaClustering}
 \title{SOTA Clustering}
 \description{
 Self-organizing Tree Algorithm (SOTA) introduced by [Herrero et al., 2001].
 }
 \usage{
-sotaClustering(Data, ClusterNo,PlotIt=FALSE,UnrestGrowth,...)
+SOTAclustering(Data, ClusterNo,PlotIt=FALSE,UnrestGrowth,...)
 }
 
 \arguments{
@@ -28,13 +29,13 @@ List of
  \examples{
 #Does Work
 data('Hepta')
-out=sotaClustering(Hepta$Data,ClusterNo=7)
+out=SOTAclustering(Hepta$Data,ClusterNo=7)
 table(Hepta$Cls,out$Cls)
 
 \donttest{
 #Does not work well
 data('Lsun3D')
-out=sotaClustering(Lsun3D$Data,ClusterNo=100,PlotIt=TRUE,UnrestGrowth=FALSE)
+out=SOTAclustering(Lsun3D$Data,ClusterNo=100,PlotIt=TRUE,UnrestGrowth=FALSE)
 }
 }
 \author{Michael Thrun}

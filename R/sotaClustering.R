@@ -1,4 +1,4 @@
-sotaClustering <-function(Data,ClusterNo,PlotIt=FALSE,UnrestGrowth,...){
+SOTAclustering=sotaClustering =function(Data,ClusterNo,PlotIt=FALSE,UnrestGrowth,...){
   # Cls=sotaClustering(Data,ClusterNo=2)
   # Self-organizing Tree Algorithm (SOTA)
   # liefert eine Klassenzuweisung
