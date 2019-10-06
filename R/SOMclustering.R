@@ -1,14 +1,16 @@
-batchSOMclustering=function(Data,LC,ClusterNo=NULL,PlotIt=FALSE,...){
+SOMclustering=function(Data,LC=c(1,2),ClusterNo=NULL,Mode="online",PlotIt=FALSE,rlen=100,alpha = c(0.05, 0.01),...){
   
   #author: MT, 04/2018
   requireNamespace('kohonen')
-  if(is.null(ClusterNo)){
-    koh=kohonen::supersom(Data,grid = kohonen::somgrid(LC[1],LC[2]),keep.data=TRUE,...)
-    Cls=koh$unit.classif
-  }
+  
   if(missing(LC)){
     if(is.null(ClusterNo)){stop('Either LinesColumns (LC) has to be set or the ClusterNo.')}
-    else{
+  }
+	
+  if(is.null(ClusterNo)){
+    koh=kohonen::supersom(Data,grid = kohonen::somgrid(LC[1],LC[2],...),keep.data=TRUE,mode=Mode,rlen=rlen,alpha=alpha)
+    Cls=koh$unit.classif
+  }else{
       if(ClusterNo==2){
         LC=c(1,2)
       }
@@ -30,10 +32,9 @@ batchSOMclustering=function(Data,LC,ClusterNo=NULL,PlotIt=FALSE,...){
       if(ClusterNo>36){
         LC=c(10,10)
       }
-    }
   }
   
-  koh=kohonen::supersom(Data,grid = kohonen::somgrid(LC[1],LC[2]),keep.data=TRUE,...)
+  koh=kohonen::supersom(Data,grid = kohonen::somgrid(LC[1],LC[2],...),keep.data=TRUE,mode=Mode,rlen=rlen,alpha=alpha)
   Cls=koh$unit.classif
   if(!is.null(rownames(Data)))
     names(Cls)=rownames(Data)
