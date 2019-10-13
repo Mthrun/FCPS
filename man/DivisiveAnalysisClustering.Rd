@@ -32,7 +32,7 @@ List of
 
  \examples{
 data('Hepta')
-out=DivisiveAnalysisClustering(Hepta$Data,ClusterNo=7,PlotIt=TRUE)
+out=DivisiveAnalysisClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 \donttest{
 print(out$dianaObject)
 plot(out$dianaObject)
