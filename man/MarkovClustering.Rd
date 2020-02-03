@@ -29,7 +29,7 @@ logical; if TRUE, self-loops with weight 1 are added to each vertex of x (see \c
 List of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.
 . Points which cannot be assigned to a cluster will be reported with 0.}
-\item{MCLobject}{Object defined by clustering algorithm as the other output of this algorithm}
+\item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
 [van Dongen, 2000]  van Dongen, S.M. Graph Clustering by Flow Simulation. Ph.D. thesis, Universtiy of Utrecht. Utrecht University Repository: http://dspace.library.uu.nl/handle/1874/848, 2000
@@ -42,8 +42,14 @@ List of
 Michael Thrun
 }
 \examples{
+\dontshow{
 data('Hepta')
-#out=MarkovClustering(Data=Hepta$Data,PlotIt=TRUE)
+out=MarkovClustering(Data=Hepta$Data[sample(1:212,10),],PlotIt=FALSE)
+}
+\donttest{
+data('Hepta')
+out=MarkovClustering(Data=Hepta$Data,PlotIt=FALSE)
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -52,5 +52,5 @@ DivisiveAnalysisClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE,Sta
       warning(('ClusterNo cannot be a negativ number'))
     }
   }
-  return(list(Cls=Cls,dianaObject=res))
+  return(list(Cls=Cls,Object=res))
 }

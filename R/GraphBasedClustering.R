@@ -30,5 +30,5 @@ GraphBasedClustering=function(DataOrDistances,method="euclidean",PlotIt=FALSE,..
       DataVisualizations::Plot3D(DataOrDistances,ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = 3)$ProjectedPoints)
     }
   }
-  return(list(Cls=Cls,mstknnclustObject=results))
+  return(list(Cls=Cls,Object=results))
 }

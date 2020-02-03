@@ -83,5 +83,5 @@ if(PlotIt){
 
   DataVisualizations::Plot3D(Data,Cls)
 }
-return(list(Cls=Cls,SubspaceObject=obj,Method=method))
+return(list(Cls=Cls,Object=obj,Method=method))
 }

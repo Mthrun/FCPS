@@ -1,41 +1,37 @@
-\name{SharedNearestNeighborClustering}
-\alias{SharedNearestNeighborClustering}
+\name{Hierarchical_DBSCAN}
+\alias{Hierarchical_DBSCAN}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-SNN clustering 
+Hierarchical DBSCAN
 }
 \description{
-Shared Nearest Neighbor Clustering of [Ertoz et al., 2003].
+Hierarchical DBSCAN clustering [Campello et al., 2015].
 }
 \usage{
-SharedNearestNeighborClustering(Data,Knn=7,
+Hierarchical_DBSCAN(Data,minPts,
 
-Radius,minPts,PlotIt=FALSE,
-
-UpperLimitRadius,\dots)
+PlotTree=FALSE,PlotIt=FALSE,\dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
-  \item{Knn}{
-number of neighbors to consider to calculate the shared nearest neighbors.
-}
- \item{Radius}{
- eps [Ester et al., 1996, p. 227] neighborhood in the R-ball graph/unit disk graph), size of the epsilon neighborhood.
- If missing, automatic estimation is done using insights of [Ultsch, 2005].
-}
+
   \item{minPts}{
  number of minimum points in the eps region (for core points). 
  In principle minimum number of points in the unit disk, if the unit disk is within the cluster (core) [Ester et al., 1996, p. 228].
  Default is 2.5 percent of points.
 }
+
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
-\item{UpperLimitRadius}{Limit for radius search, experimental}
+
+\item{PlotTree}{default: FALSE, If TRUE plots the dendrogram. If minPts is missing, PlotTree is set to TRUE.}
+
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 
 }
 \details{
-..
+"computes the hierarchical cluster tree representing density estimates along with the stability-based flat cluster extraction proposed by Campello et al. (2013). HDBSCAN essentially computes the hierarchy of all DBSCAN* clusterings, and then uses a stability-based extraction method to find optimal cuts in the hierarchy, thus producing a flat solution."[Hahsler et al., 2019]
+
 }
 \value{
 List of
@@ -43,20 +39,17 @@ List of
 \item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
-[Ertoz et al., 2003]   Levent Ertoz, Michael Steinbach, Vipin Kumar: Finding Clusters of Different Sizes, Shapes, and Densities in Noisy, High Dimensional Data, SIAM International Conference on Data Mining, 47-59, 2003.
+[Campello et al., 2015]  Campello RJGB, Moulavi D, Zimek A, Sander J: Hierarchical density estimates for data clustering, visualization, and outlier detection, ACM Transactions on Knowledge Discovery from Data (TKDD), 10(5), pp. 1-51, 2015.
+
+[Hahsler et al., 2019]   Hahsler M, Piekenbrock M, Doran D: dbscan: Fast Density-Based Clustering with R. Journal of Statistical Software, 91(1), pp. 1-30. doi: 10.18637/jss.v091.i01, 2019
 }
 \author{
 Michael Thrun
 }
 
-\seealso{
-\code{\link[dbscan]{sNNclust}}
-}
 \examples{
 data('Hepta')
-out=SharedNearestNeighborClustering(
-Hepta$Data,PlotIt = FALSE)
-}
 
-\keyword{snn}% use one of  RShowDoc("KEYWORDS")
-\keyword{SharedNearestNeighborClustering}% __ONLY ONE__ keyword per line
+out=Hierarchical_DBSCAN(Hepta$Data,PlotIt=FALSE)
+
+}

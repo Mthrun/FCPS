@@ -23,11 +23,12 @@ MinimalEnergyClustering <-function(DataOrDistances,ClusterNo=0,DistanceMethod="e
   
   if (!isSymmetric(DataOrDistances)) {
     requireNamespace('parallelDist')
-    pDist=parallelDist::parDist(DataOrDistances,method=DistanceMethod)
-  }
-
-  if(!inherits(DataOrDistances,'dist'))
+    pDist=as.dist(parallelDist::parDist(DataOrDistances,method=DistanceMethod))
+  }else if(!inherits(DataOrDistances,'dist')){
     pDist=as.dist(DataOrDistances)
+  }else{
+    pDist=DataOrDistances
+  }
   
   requireNamespace('energy')
 	hc <- energy::energy.hclust(pDist)

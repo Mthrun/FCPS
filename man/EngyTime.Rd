@@ -23,4 +23,6 @@ Ultsch, A.: Clustering with SOM: U*C, In Proc. Workshop on Self-Organizing Maps,
 data(EngyTime)
 str(EngyTime)
 }
-\keyword{datasets,EngyTime,FCPS}
+\keyword{EngyTime}
+\keyword{datasets}
+\keyword{FCPS}

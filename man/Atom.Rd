@@ -23,4 +23,6 @@ Ultsch, A.: Clustering with SOM: U*C, In Proc. Workshop on Self-Organizing Maps,
 data(Atom)
 str(Atom)
 }
-\keyword{datasets,Atom,FCPS}
+\keyword{datasets}
+\keyword{FCPS}
+\keyword{Atom}

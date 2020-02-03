@@ -45,5 +45,5 @@ SOMclustering=function(Data,LC=c(1,2),ClusterNo=NULL,Mode="online",PlotIt=FALSE,
     requireNamespace('DataVisualizations')
     DataVisualizations::Plot3D(Data,Cls)
   }
-  return(list(Cls=Cls,KohonenObject=koh))
+  return(list(Cls=Cls,Object=koh))
 }

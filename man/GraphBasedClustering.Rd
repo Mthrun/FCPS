@@ -8,7 +8,7 @@ MST-kNN clustering algorithm
 Performs the MST-kNN clustering algorithm which generate a clustering solution with automatic k determination using two proximity graphs: Minimal Spanning Tree (MST) and k-Nearest Neighbor (kNN) which are recursively intersected.
 }
 \usage{
-GraphBasedClustering(DataOrDistances, method = "euclidean",PlotIt=FALSE, ...)
+GraphBasedClustering(DataOrDistances, method = "euclidean",PlotIt=FALSE, \dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -19,6 +19,7 @@ Either [1:n,1:n] symmetric distance matrix or [1:n,1:d] not symmetric data matri
   \item{method}{
 Optional distance method of data, default is euclid, see \code{\link[parallelDist]{parDist}} for details
 }
+\item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
   \item{\dots}{
 Optional, further arguments for   \code{\link[mstknnclust]{mst.knn}}
 }
@@ -29,7 +30,7 @@ Does not work on Hepta with euclidean distances.
 \value{
 List of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
-\item{mstknnclustObject}{Object defined by clustering algorithm as the other output of this algorithm}
+\item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
 Inostroza-Ponta, M.: An Integrated and Scalable Approach Based on Combinatorial Optimization Techniques for the Analysis of Microarray Data. Ph.D. thesis, School of Electrical Engineering and Computer Science. University of Newcastle, 2008.

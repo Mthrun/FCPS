@@ -20,5 +20,5 @@ RobustTrimmedClustering=function(Data,ClusterNo,PlotIt=FALSE,...){
     requireNamespace('DataVisualizations')
     DataVisualizations::Plot3D(Data,Cls)
   }
-  return(list(Cls=Cls,TClustObject=res))
+  return(list(Cls=Cls,Object=res))
 }

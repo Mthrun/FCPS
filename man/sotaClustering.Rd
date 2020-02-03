@@ -35,7 +35,7 @@ table(Hepta$Cls,out$Cls)
 \donttest{
 #Does not work well
 data('Lsun3D')
-out=SOTAclustering(Lsun3D$Data,ClusterNo=100,PlotIt=TRUE,UnrestGrowth=FALSE)
+out=SOTAclustering(Lsun3D$Data,ClusterNo=100,PlotIt=FALSE,UnrestGrowth=FALSE)
 }
 }
 \author{Michael Thrun}

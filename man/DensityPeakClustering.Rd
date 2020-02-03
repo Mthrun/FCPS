@@ -52,14 +52,13 @@ The plot shows the density peaks (Cluster centers). Set Rho and Delta as boundar
 If Rho and Delta are set:
 
 list of
+ \item{Cls}{Clustering as a numeric vector of k clusters}
 
-Cls : Clustering as a numeric vector of k clusters
-
-DensityPeaks: output of [Pedersen et al., 2017] algorithm
+ \item{Object}{ output of [Pedersen et al., 2017] algorithm}
 
 If Rho and Delta are missing:
 
-\code{\link[plotly]{plot_ly}} object of the decision graph is returned
+ \item{p}{object of \code{\link[plotly]{plot_ly}} for the decision graph is returned}
 }
 \references{
 [Wang et al., 2015] Wang, S., Wang, D., Li, C., & Li, Y.: Comment on" Clustering by fast search and find of density peaks", arXiv preprint arXiv:1501.04267, 2015.
@@ -82,16 +81,18 @@ Michael Thrun
 \code{\link[densityClust]{densityClust}}
 }
 \examples{
+
 data(Hepta)
-H=EntropyOfDataField(Hepta$Data,  seq(from=0,to=1.5,by=0.05),PlotIt=TRUE)
+H=EntropyOfDataField(Hepta$Data,  seq(from=0,to=1.5,by=0.05),PlotIt=FALSE)
 Sigmamin=names(H)[which.min(H)]
 Dc=3/sqrt(2)*as.numeric(names(H)[which.min(H)])
 #look at the plot and estimate rho and delta
+\donttest{
 DensityPeakClustering(Hepta$Data, Knn = 7,Dc=Dc)
 Cls=DensityPeakClustering(Hepta$Data,Dc=Dc,Rho = 0.028,
 
 Delta = 22,Knn = 7,PlotIt = TRUE)$Cls
-
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -46,7 +46,7 @@ Michael Thrun
 
 \examples{
 data(Hepta)
-H=EntropyOfDataField(Hepta$Data,PlotIt=TRUE)
+H=EntropyOfDataField(Hepta$Data,PlotIt=FALSE)
 Sigmamin=names(H)[which.min(H)]
 Dc=3/sqrt(2)*as.numeric(names(H)[which.min(H)])
 }

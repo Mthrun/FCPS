@@ -1,4 +1,4 @@
-APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,DistanceMethod="euclidean",Seed=7568,PlotIt=FALSE,method=NULL,Data,...){
+APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,DistanceMethod="euclidean",Seed=7568,PlotIt=FALSE,Data,...){
 #Cls=APcluster(Data,Seed=7568)$Cls
 #Affinity Propagation clustering introduced by Frey and Dueck (2007) <doi:10.1126/science.1136800>.
 #INPUT
@@ -51,5 +51,5 @@ APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,
     requireNamespace('DataVisualizations')
     DataVisualizations::Plot3D(DataPoints,Cls)
   }
-  return(list(Cls=Cls,APobject=apres))
+  return(list(Cls=Cls,Object=apres))
 }

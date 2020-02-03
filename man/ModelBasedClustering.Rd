@@ -25,7 +25,7 @@ see [Thrun, 2017, p. 23] or [Fraley/Raftery, 2002] and [Fraley/Raftery, 2006].
 \value{
 List of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
-\item{MCclustObject}{Object defined by clustering algorithm as the other output of this algorithm}
+\item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
 [Thrun, 2017]  Thrun, M. C.:A System for Projection Based Clustering through Self-Organization and Swarm Intelligence, (Doctoral dissertation), Philipps-Universitaet Marburg, Marburg, 2017.
@@ -39,7 +39,7 @@ Michael Thrun
 }
  \examples{
 data('Hepta')
-out=ModelBasedClustering(Hepta$Data,PlotIt=TRUE)
+out=ModelBasedClustering(Hepta$Data,PlotIt=FALSE)
 }
 \note{MoGclustering used in [Thrun, 2017] was renamed to \code{\link{ModelBasedClustering}} in this package.}
 \seealso{

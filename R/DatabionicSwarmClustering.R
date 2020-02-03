@@ -65,5 +65,5 @@ DatabionicSwarmClustering=DBSclusteringAndVisualization=function(DataOrDistances
     } 
     GeneralizedUmatrix::plotTopographicMap(generalizedUmatrix$Umatrix,generalizedUmatrix$Bestmatches,Cls = Cls)
   }
-  return(list(Cls=Cls,DBSobject=list(Projection=proj,GeneralizedUmatrixOfSwarm=generalizedUmatrix,Call=match.call(),DataPoints=DataPoints)))
+  return(list(Cls=Cls,Object=list(Projection=proj,GeneralizedUmatrixOfSwarm=generalizedUmatrix,Call=match.call(),DataPoints=DataPoints)))
 }

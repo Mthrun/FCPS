@@ -22,5 +22,5 @@ LargeApplicationClustering <-function(Data,ClusterNo,PlotIt=FALSE,Standardizatio
     requireNamespace('DataVisualizations')
     DataVisualizations::Plot3D(Data,Cls)
   }
-  return(list(Cls=Cls,claraObject=res))
+  return(list(Cls=Cls,Object=res))
 }

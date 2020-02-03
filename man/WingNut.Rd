@@ -23,4 +23,6 @@ Ultsch, A.: Clustering with SOM: U*C, In Proc. Workshop on Self-Organizing Maps,
 data(WingNut)
 str(WingNut)
 }
-\keyword{datasets,WingNut,FCPS}
+\keyword{WingNut}
+\keyword{datasets}
+\keyword{FCPS}

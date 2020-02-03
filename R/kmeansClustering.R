@@ -8,7 +8,7 @@ kmeansClustering <-function(Data,ClusterNo=2,Centers=NULL,method='LBG',PlotIt=FA
 # OPTIONAL
 # Centers                default(NULL), a set of initial (distinct) cluster centres
 # method                 kind of kmeans algorithm, choose one of following strings
-#                       "Hartigan": Hartigan, J. A. and Wong, M. A.. A K-means clustering algorithm. Applied Statistics 28, 100–108, 1979.
+#                       "Hartigan": Hartigan, J. A. and Wong, M. A. A K-means clustering algorithm. Applied Statistics 28, 100-108, 1979.
 #                       "LBG": Linde,Y.,Buzo,A.,Gray,R.M., An algorithm for vector quantizer design. IEEE Transactions on Communications, COM-28, 84-95, 1980
 # Verbose               '0' or '1' for a documentation of repetitions, default: Verbose==0
 #
@@ -40,7 +40,7 @@ if(!is.null(Centers))
   	  requireNamespace('DataVisualizations')
   	  DataVisualizations::Plot3D(Data,as.vector(c$cluster))
   	}
-  	return(list(Cls=as.vector(c$cluster),SumDistsToCentroids=c$withinss,Centroids=c$centers))
+  	return(list(Cls=as.vector(c$cluster),Object=list(SumDistsToCentroids=c$withinss,Centroids=c$centers)))
   }
   if(method=='LBG'){
 #    requireNamespace('cclust')
@@ -53,6 +53,6 @@ if(!is.null(Centers))
       requireNamespace('DataVisualizations')
       DataVisualizations::Plot3D(Data,res$cluster)
     }
-    return(list(Cls=res$cluster,SumDistsToCentroids=SSE,Centroids=res$centers))
+    return(list(Cls=res$cluster,Object=list(SumDistsToCentroids=SSE,Centroids=res$centers)))
   }
 }

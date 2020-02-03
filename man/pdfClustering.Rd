@@ -23,7 +23,7 @@ Cluster analysis is performed by the density-based procedures described in Azzal
 \value{
 List of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
-\item{MCclustObject}{Object defined by clustering algorithm as the other output of this algorithm}
+\item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
 Azzalini, A., Menardi, G. (2014). Clustering via nonparametric density estimation: the R package pdfCluster. Journal of Statistical Software, 57(11), 1-26, URL http://www.jstatsoft.org/v57/i11/.
@@ -38,7 +38,7 @@ Michael Thrun
 
  \examples{
 data('Hepta')
-out=pdfClustering(Hepta$Data,PlotIt=TRUE)
+out=pdfClustering(Hepta$Data,PlotIt=FALSE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

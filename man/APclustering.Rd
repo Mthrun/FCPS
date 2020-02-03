@@ -1,6 +1,5 @@
 \name{APclustering}
 \alias{APclustering}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Affinity Propagation clustering
 }
@@ -13,9 +12,10 @@ APclustering(DataOrDistances,
 
 InputPreference=NA,ExemplarPreferences=NA,
 
-Seed,DistanceMethod="euclidean",PlotIt=FALSE,Data,...)
+DistanceMethod="euclidean",
+
+Seed=7568,PlotIt=FALSE,Data,\dots)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{DataOrDistances}{
   [1:n,1:d] with: if d=n and symmetric then distance matrix assumed, otherwise:
@@ -31,6 +31,7 @@ Seed,DistanceMethod="euclidean",PlotIt=FALSE,Data,...)
   \item{DistanceMethod}{
   DistanceMethod as in \code{\link{dist}} for  \code{\link[apcluster]{similarities}}.
 }
+
   \item{Seed}{
     set as integervalue to have reproducible results, see \pkg{apcluster}
 }
@@ -50,7 +51,7 @@ The AP algorithm decides the k number of clusters.
 \value{
 List of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
-\item{APobject}{Object defined by clustering algorithm as the other output of this algorithm}
+\item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
 [Frey/Dueck, 2007]	Frey, B. J., & Dueck, D.: Clustering by passing messages between data points, Science, Vol. 315(5814), pp. 972-976, <doi:10.1126/science.1136800>, 2007.
@@ -66,19 +67,16 @@ http://www.bioinf.jku.at/software/apcluster
 Michael Thrun
 }
 
-
 \examples{
 data('Hepta')
 res=APclustering(Hepta$Data)
 \donttest{
-#DataVisualizations::plot3D(Hepta$Data,res$Cls)
+library(DataVisualizations)
+DataVisualizations::Plot3D(Hepta$Data,res$Cls)
 }
 }
 \seealso{
 \pkg{apcluster}
 }
-
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
 \keyword{apcluster}% use one of  RShowDoc("KEYWORDS")
 \keyword{Affinity Propagation}% __ONLY ONE__ keyword per line

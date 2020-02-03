@@ -8,9 +8,7 @@ Hierarchical Clustering
 Wrapper various agglomerative hierarchical clustering algorithms.
 }
 \usage{
-HierarchicalClustering(DataOrDistances, ClusterNo,
-
-Data,method="SingleL", ...)
+HierarchicalClustering(DataOrDistances,ClusterNo,method='SingleL',Data,\dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

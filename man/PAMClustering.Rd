@@ -1,29 +1,25 @@
 \name{PAMclustering}
 \alias{PAMclustering}
 \alias{PAMClustering}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Partitioning Around Medoids [Rousseeuw/Kaufman, 1990, p. 164-198] 
+Partitioning Around Medoids (PAM)
 }
 \description{
-Partitioning (clustering) of the data into k clusters "around medoids", a more robust version of K-means.
+Partitioning (clustering) of the data into k clusters around medoids, a more robust version of k-means [Rousseeuw/Kaufman, 1990, p. 164-198] .
 }
 \usage{
 PAMclustering(DataOrDistances,ClusterNo,
 
 PlotIt=FALSE,Standardization=TRUE,Data,...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
 \item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
-
 \item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.}
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{Standardization}{
 \code{DataOrDistances} is standardized before calculating the dissimilarities. Measurements are standardized for each variable (column), by subtracting the variable's mean value and dividing by the variable's mean absolute deviation.If \code{DataOrDistances} is already a distance matrix, then this argument will be ignored.
 }
 \item{Data}{[1:n,1:d] data matrix in the case that \code{DataOrDistances} is missing and partial matching does not work.}
-
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 }
 \details{
@@ -32,23 +28,20 @@ PlotIt=FALSE,Standardization=TRUE,Data,...)
 \value{
 List of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
-\item{PAMObject}{Object defined by clustering algorithm as the other output of this algorithm}
+\item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
  [Rousseeuw/Kaufman, 1990]	Rousseeuw, P. J., & Kaufman, L.: Finding groups in data, Belgium, John Wiley & Sons Inc., ISBN: 0471735787, 1990.
 
- [Reynolds et al., 1992]	Reynolds, A., Richards, G., de la Iglesia, B. and Rayward-Smith, V.: Clustering rules: A comparison of partitioning and hierarchical clustering algorithms, Journal of Mathematical Modelling and Algorithms 5, 475–504, DOI:10.1007/s10852-005-9022-1, 1992.
+ [Reynolds et al., 1992]	Reynolds, A., Richards, G.,de la Iglesia, B. and Rayward-Smith, V.: Clustering rules: A comparison of partitioning and hierarchical clustering algorithms, Journal of Mathematical Modelling and Algorithms 5, 475-504, DOI:10.1007/s10852-005-9022-1, 1992.
 }
 \author{
 Michael Thrun
 }
-
 \examples{
 data('Hepta')
-out=PAMclustering(Hepta$Data,ClusterNo=7,PlotIt=TRUE)
+out=PAMclustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{PAM}% use one of  RShowDoc("KEYWORDS")
-\keyword{Partitioning Around Medoids}% __ONLY ONE__ keyword per line
+\keyword{PAM}
+\keyword{Partitioning Around Medoids}
 \keyword{clustering}

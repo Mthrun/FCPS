@@ -41,7 +41,7 @@ For Clique: "xi" (number of intervalls for each dimension) and "tau" (Density Th
 \value{
 List of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
-\item{NeuralGasObject}{Object defined by clustering algorithm as the other output of this algorithm}
+\item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \note{
 JAVA_HOME has to be set for rJava to the ProClus algorithm (in windows set PATH env. variable to .../bin path of Java. The architecture of R and Java have to match. Java automatically downloads the Java version of the browser which may not be installed in the architecture in R. In such a case choose a Java version manually.
@@ -65,6 +65,6 @@ https://towardsdatascience.com/subspace-clustering-7b884e8fff73
 
  \examples{
 data('Hepta')
-out=SubspaceClustering(Hepta$Data,ClusterNo=7,PlotIt=TRUE)
+out=SubspaceClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 }
 \author{Michael Thrun}

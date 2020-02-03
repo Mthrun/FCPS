@@ -8,7 +8,9 @@ AGNES clustering
 agglomerative hierarchical clustering (AGNES)
 }
 \usage{
-AgglomerativeNestingClustering(DataOrDistances, ClusterNo, PlotIt = FALSE, Standardization = TRUE, Data, ...)
+AgglomerativeNestingClustering(DataOrDistances, ClusterNo,
+
+PlotIt = FALSE, Standardization = TRUE, Data, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,10 +31,10 @@ if \code{ClusterNo=0}, the dendrogram is generated instead of a clustering to es
 \value{
 List of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
-\item{agnesObject}{Object defined by clustering algorithm as the other output of this algorithm}
+\item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
-Kaufman, L. and Rousseeuw, P.J. (1990). (=: “K&R(1990)”) Finding Groups in Data: An Introduction to Cluster Analysis. Wiley, New York.
+Kaufman, L. and Rousseeuw, P.J. (1990). Finding Groups in Data: An Introduction to Cluster Analysis. Wiley, New York.
 
 Anja Struyf, Mia Hubert and Peter J. Rousseeuw (1996) Clustering in an Object-Oriented Environment. Journal of Statistical Software 1. 10.18637/jss.v001.i04
 

@@ -23,4 +23,6 @@ Ultsch, A.: Clustering with SOM: U*C, In Proc. Workshop on Self-Organizing Maps,
 data(Chainlink)
 str(Chainlink)
 }
-\keyword{datasets,Chainlink,FCPS}
+\keyword{Chainlink}
+\keyword{datasets}
+\keyword{FCPS}

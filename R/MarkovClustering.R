@@ -4,7 +4,7 @@ MarkovClustering=function(Data=NULL,Adjacency=NULL,Radius=TRUE,addLoops = TRUE,P
   if(!is.null(Data)){
       if(Radius==TRUE){
 	  requireNamespace('DataVisualizations')
-        Radius=DataVisualizations::ParetoRadiusV2(Data)
+        Radius=DataVisualizations::ParetoRadius(Data)
       }
     if(Radius==FALSE){
       requireNamespace('parallelDist')
@@ -38,5 +38,5 @@ MarkovClustering=function(Data=NULL,Adjacency=NULL,Radius=TRUE,addLoops = TRUE,P
     requireNamespace('DataVisualizations')
     DataVisualizations::Plot3D(Data,Cls)
   }
-  return(list(Cls=Cls,MCLobject=mm))
+  return(list(Cls=Cls,Object=mm))
 }

@@ -7,9 +7,8 @@ OPTICS Clustering
 OPTICS (Ordering points to identify the clustering structure) clustering algorithm [Ankerst et al.,1999].
 }
 \usage{
-OPTICSclustering(Data, MaxRadius, RadiusThreshold, minPts = 5, PlotIt = TRUE, ...)
+OPTICSclustering(Data, MaxRadius,RadiusThreshold, minPts = 5, PlotIt=FALSE,\dots)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
 
@@ -25,10 +24,8 @@ Threshold to identify clusters (RadiusThreshold <= MaxRadius), if not given \cod
  In principle minimum number of points in the unit disk, if the unit disk is within the cluster (core) [Ester et al., 1996, p. 228].
  Default is 2.5 percent of points.
 }
-
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
-
 }
 \details{
 ...
@@ -39,7 +36,7 @@ List of
 \item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
-[Ankerst et al.,1999]   Mihael Ankerst, Markus M. Breunig, Hans-Peter Kriegel, Joerg Sander: OPTICS: Ordering Points To Identify the Clustering Structure, ACM SIGMOD international conference on Management of data, ACM Press, pp. 49–60, 1999.
+[Ankerst et al.,1999]   Mihael Ankerst, Markus M. Breunig, Hans-Peter Kriegel, Joerg Sander: OPTICS: Ordering Points To Identify the Clustering Structure, ACM SIGMOD international conference on Management of data, ACM Press, pp. 49-60, 1999.
 
 [Ester et al., 1996] Ester, M., Kriegel, H.-P., Sander, J., & Xu, X.: A density-based algorithm for discovering clusters in large spatial databases with noise, Proc. Kdd, Vol. 96, pp. 226-231, 1996.
 
@@ -48,17 +45,11 @@ List of
 \author{
 Michael Thrun
 }
-
 \seealso{
  \code{\link[dbscan]{optics}}
 }
 \examples{
 data('Hepta')
-
 out=OPTICSclustering(Hepta$Data,PlotIt = FALSE)
-
-DatabionicSwarm::ClusteringAccuracy(out$Cls,Hepta$Cls)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
 \keyword{optics}% use one of  RShowDoc("KEYWORDS")

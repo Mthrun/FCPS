@@ -33,7 +33,7 @@ List of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.
 . Points which cannot be assigned to a cluster will be reported with 0.
 }
-\item{FannyObject}{Object defined by clustering algorithm as the other output of this algorithm}
+\item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
  [Rousseeuw/Kaufman, 1990]	Rousseeuw, P. J., & Kaufman, L.: Finding groups in data, Belgium, John Wiley & Sons Inc., ISBN: 0471735787, 1990.
@@ -45,7 +45,7 @@ Michael Thrun
 
 \examples{
 data('Hepta')
-out=FannyClustering(Hepta$Data,ClusterNo=7,PlotIt=TRUE)
+out=FannyClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -34,5 +34,5 @@ FannyClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Standardization=
     requireNamespace('DataVisualizations')
     DataVisualizations::Plot3D(DataPoints,Cls2)
   }
-  return(list(Cls=Cls,ObjectFanny=fan))
+  return(list(Cls=Cls,Object=fan))
 }

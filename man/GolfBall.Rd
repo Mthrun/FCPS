@@ -23,4 +23,6 @@ Ultsch, A.: Clustering with SOM: U*C, In Proc. Workshop on Self-Organizing Maps,
 data(GolfBall)
 str(GolfBall)
 }
-\keyword{datasets,GolfBall,FCPS}
+\keyword{GolfBall}
+\keyword{datasets}
+\keyword{FCPS}

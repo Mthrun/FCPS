@@ -52,5 +52,5 @@ AgglomerativeNestingClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE
       warning(('ClusterNo cannot be a negativ number'))
     }
   }
-  return(list(Cls=Cls,agnesObject=res))
+  return(list(Cls=Cls,Object=res))
 }

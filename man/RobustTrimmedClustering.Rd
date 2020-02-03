@@ -25,17 +25,17 @@ Currently the easies dataset does not work with default parametrization, please 
 \value{
 List of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
-\item{TClustObject}{Object defined by clustering algorithm as the other output of this algorithm}
+\item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 
 \examples{
 data('Hepta')
-out=RobustTrimmedClustering(Hepta$Data,ClusterNo=7,PlotIt=TRUE,restr.fact=1e3)
+out=RobustTrimmedClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE,restr.fact=1e3)
 }
 \author{Michael Thrun}
 
 \references{
-García-Escudero, L. A., Gordaliza, A., Matrán, C., & Mayo-Iscar, A. (2008). A general trimming approach to robust cluster analysis. The Annals of Statistics, 36(3), 1324-1345.
+Garcia-Escudero, L. A., Gordaliza, A., Matran, C., & Mayo-Iscar, A. (2008). A general trimming approach to robust cluster analysis. The Annals of Statistics, 36(3), 1324-1345.
 
-Fritz, H., Garcıa-Escudero, L. A., & Mayo-Iscar, A. (2012). tclust: An R package for a trimming approach to cluster analysis. Journal of Statistical Software, 47(12), 1-26.
+Fritz, H., Garcia-Escudero, L. A., & Mayo-Iscar, A. (2012). tclust: An R package for a trimming approach to cluster analysis. Journal of Statistical Software, 47(12), 1-26.
 }

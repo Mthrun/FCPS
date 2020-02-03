@@ -8,7 +8,9 @@ DBscan
 DBscan clustering
 }
 \usage{
-DBscan(Data,Radius,minPts,PlotIt,...)
+DBscan(Data,Radius,minPts,
+
+PlotIt=FALSE,UpperLimitRadius,\dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,7 +25,10 @@ DBscan(Data,Radius,minPts,PlotIt,...)
  In principle minimum number of points in the unit disk, if the unit disk is within the cluster (core) [Ester et al., 1996, p. 228].
  Default is 2.5 percent of points.
 }
+
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{UpperLimitRadius}{Limit for radius search, experimental}
+
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 
 }
@@ -45,33 +50,47 @@ Michael Thrun
 \examples{
 data('Hepta')
 
-out=DBscan(Hepta$Data,PlotIt=TRUE)
+out=DBscan(Hepta$Data,PlotIt=FALSE)
 
 \donttest{
 #search for right parameter setting by grid search
 data("WingNut")
-Data=WingNut$Data
-DBSGrid <- expand.grid(Radius=seq(from=0.01,to=0.3,by=0.02),minPTs=seq(from=1,to=50,by=2))
-BestAcc=c()
+Data = WingNut$Data
+DBSGrid <- expand.grid(
+  Radius = seq(from = 0.01, to = 0.3, by = 0.02),
+  minPTs = seq(from = 1, to = 50, by = 2)
+)
+BestAcc = c()
 for (i in seq_len(nrow(DBSGrid))) {
   print(i)
-  parameters <- DBSGrid[i, ]
-  Cls9=DBscan(Data,minPts = parameters$minPTs,
-  
-  Radius = parameters$Radius,PlotIt = F,
-  
-  UpperLimitRadius = parameters$Radius)$Cls
-  if(length(unique(Cls9))<5)
-    BestAcc[i]=ClusteringAccuracy(WingNut$Cls,
-	
-	Cls9)*100
+  parameters <- DBSGrid[i,]
+  Cls9 = DBscan(
+    Data,
+    minPts = parameters$minPTs,
+    
+    Radius = parameters$Radius,
+    PlotIt = F,
+    
+    UpperLimitRadius = parameters$Radius
+  )$Cls
+  if (length(unique(Cls9)) < 5)
+    BestAcc[i] = ClusteringAccuracy(WingNut$Cls,
+                                    
+                                    Cls9) * 100
   else
-  BestAcc[i]=50
+    BestAcc[i] = 50
 }
 max(BestAcc)
 which.max(BestAcc)
-parameters <- DBSGrid[13, ]
+parameters <- DBSGrid[13,]
 
-Cls9=DBscan(Data,minPts = parameters$minPTs,Radius = parameters$Radius,PlotIt = F,UpperLimitRadius = parameters$Radius,PlotIt=TRUE)$Cls
+Cls9 = DBscan(
+  Data,
+  minPts = parameters$minPTs,
+  Radius = parameters$Radius,
+  PlotIt = F,
+  UpperLimitRadius = parameters$Radius,
+  PlotIt = TRUE
+)$Cls
 }
 }

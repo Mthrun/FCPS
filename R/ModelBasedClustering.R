@@ -8,9 +8,9 @@ ModelBasedClustering <-function(Data,ClusterNo=2,PlotIt=FALSE,...){
 # OUTPUT List V with
 # Cls[1:n]                k-means Clusterung der Daten
 # MT 2017
-# Übersicht/Kurz-Zfssg in  [Thrun, 2017, p. 23]
+# Uebersicht/Kurz-Zfssg in  [Thrun, 2017, p. 23]
 #
-#  [Thrun, 2017]  Thrun, M. C.:A System for Projection Based Clustering through Self-Organization and Swarm Intelligence, (Doctoral dissertation), Philipps-Universität Marburg, Marburg, 2017.
+#  [Thrun, 2017]  Thrun, M. C.:A System for Projection Based Clustering through Self-Organization and Swarm Intelligence, (Doctoral dissertation), Philipps-Universitaet Marburg, Marburg, 2017.
 # Algorithmus aus  
 #  [Fraley/Raftery, 2002]  Fraley, C., & Raftery, A. E.: Model-based clustering, discriminant analysis, and density estimation, Journal of the American Statistical Association, Vol. 97(458), pp. 611-631. 2002.
   
@@ -32,5 +32,5 @@ if(PlotIt){
   requireNamespace('DataVisualizations')
   DataVisualizations::Plot3D(Data,res$classification)
 }
-return(list(Cls=res$classification,MClustObject=res))
+return(list(Cls=res$classification,Object=res))
 }

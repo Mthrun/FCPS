@@ -13,7 +13,7 @@ ADPclustering=function(Data,ClusterNo=NULL,PlotIt=FALSE,...){
     requireNamespace('DataVisualizations')
     DataVisualizations::Plot3D(Data,Cls)
   }
-  return(list(Cls=Cls,ADPobject=adp))
+  return(list(Cls=Cls,Object=adp))
 }
 
 #other package, were params have to be chosen

@@ -3,7 +3,7 @@
 
 \docType{data}
 \title{
-Hepta form FCPS
+Hepta from FCPS
 }
 \description{
 clearly defined clusters, different variances
@@ -14,13 +14,16 @@ clearly defined clusters, different variances
 Size 212, Dimensions 3, stored in \code{Hepta$Data}
 
 Classes 7, stored in \code{Hepta$Cls}
+
 }
 
 \references{
-Ultsch, A.: Clustering with SOM: U*C, In Proc. Workshop on Self-Organizing Maps, Paris, France, (2005) , pp. 75-82
+Ultsch, A.: Clustering with SOM: U*C, In Proc. Workshop on Self-Organizing Maps, Paris, France, (2005), pp. 75-82.
 }
 \examples{
 data(Hepta)
 str(Hepta)
 }
-\keyword{datasets,Hepta,FCPS}
+\keyword{Hepta}
+\keyword{datasets}
+\keyword{FCPS}

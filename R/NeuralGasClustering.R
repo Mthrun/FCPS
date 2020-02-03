@@ -20,5 +20,5 @@ if(PlotIt){
   requireNamespace('DataVisualizations')
   DataVisualizations::Plot3D(Data,res$cluster)
 }
-return(list(Cls=res$cluster,NeuralGasObject=res))
+return(list(Cls=res$cluster,Object=res))
 }

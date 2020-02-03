@@ -54,5 +54,5 @@ DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclid
       DataVisualizations::Plot3D(DataOrDistances,ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = 3)$ProjectedPoints)
     }
   }
-  return(list(Cls=Cls,DPobject=DensityPeaks))
+  return(list(Cls=Cls,Object=DensityPeaks))
 } 

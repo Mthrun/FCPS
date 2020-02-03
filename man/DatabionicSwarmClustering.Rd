@@ -51,7 +51,7 @@ Databionic swarm is like k-means an stochastic algorithm meaning that the cluste
 \value{
 List of
 \item{Cls}{[1:n] numerical vector of k clusters}
-\item{DBSobject}{List of further output of DBS}
+\item{Object}{List of further output of DBS}
 }
 \references{
 Thrun, M. C., & Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Journal of Artificial Intelligence, under minor revison, 2019. 
@@ -69,45 +69,53 @@ Current implementation is not efficient enough to cluster more than N=4000 cases
 \examples{
 \donttest{
 #Generate random but small non-structured data set
-data=cbind(sample(1:100,300,replace = T),sample(1:100,300,replace = T),sample(1:100,300,replace = T))
-#make sure there are no structures 
+data = cbind(
+  sample(1:100, 300, replace = T),
+  sample(1:100, 300, replace = T),
+  sample(1:100, 300, replace = T)
+)
+#make sure there are no structures
 # (sample size is small and still could generate structures randomly)
-Data=RobustNormalization(data,Centered=TRUE)
-DataVisualizations::Plot3D(Data)
+Data = RobustNormalization(data, Centered = TRUE)
+#DataVisualizations::Plot3D(Data)
 
 #No structres are visible
 #topographic map looks like "egg carton"
 # with every point in its own valley
-Cls=DatabionicSwarmClustering(Data,0,PlotMap = T)
+Cls = DatabionicSwarmClustering(Data, 0, PlotMap = T)
 }
 
 #distance based cluster structures
 #7 valleys are visible, thus ClusterNo=7
 \donttest{
 data(Hepta)
-DataVisualizations::Plot3D(Hepta$Data)  
+#DataVisualizations::Plot3D(Hepta$Data)
 
-Cls=DatabionicSwarmClustering(Hepta$Data,0,PlotMap = T)
+Cls = DatabionicSwarmClustering(Hepta$Data, 0, PlotMap = T)
 }
 
 #entagled, complex, and non-linear seperable structures 
 \donttest{
 data(Chainlink)
-DataVisualizations::Plot3D(Chainlink$Data)  
+#DataVisualizations::Plot3D(Chainlink$Data)
 
 #2 valleys are visible, thus ClusterNo=2
-Cls=DatabionicSwarmClustering(Chainlink$Data,0,PlotMap = T)
+Cls = DatabionicSwarmClustering(Chainlink$Data, 0, PlotMap = T)
 
 #Trying of only parameter StructureType
 #reveals that clustering is appropriate
 # if StructureType=FALSE
-Cls=DatabionicSwarmClustering(Chainlink$Data,2,
-StructureType=FALSE,PlotMap = T)
+Cls = DatabionicSwarmClustering(Chainlink$Data,
+                                2,
+                                StructureType = FALSE,
+                                PlotMap = T)
 
 #Here clusters (colored points)
 #are not seperated by valleys
-Cls=DatabionicSwarmClustering(Chainlink$Data,2,
-StructureType=TRUE,PlotMap = T)
+Cls = DatabionicSwarmClustering(Chainlink$Data,
+                                2,
+                                StructureType = TRUE,
+                                PlotMap = T)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

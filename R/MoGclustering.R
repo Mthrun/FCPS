@@ -42,5 +42,5 @@ if(PlotIt){
   requireNamespace('DataVisualizations')
   DataVisualizations::Plot3D(Data,Cls)
 }
-return(list(Cls=Cls,MClustObject=out))
+return(list(Cls=Cls,Object=out))
 }

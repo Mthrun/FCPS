@@ -30,5 +30,5 @@ PAMclustering=PAMClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Stan
     requireNamespace('DataVisualizations')
     DataVisualizations::Plot3D(DataPoints,Cls)
   }
-  return(list(Cls=Cls,ObjectPAM=pam))
+  return(list(Cls=Cls,Object=pam))
 }

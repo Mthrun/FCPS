@@ -23,4 +23,6 @@ Ultsch, A.: Clustering with SOM: U*C, In Proc. Workshop on Self-Organizing Maps,
 data(TwoDiamonds)
 str(TwoDiamonds)
 }
-\keyword{datasets,TwoDiamonds,FCPS}
+\keyword{TwoDiamonds}
+\keyword{datasets}
+\keyword{FCPS}

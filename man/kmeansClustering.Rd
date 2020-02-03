@@ -26,13 +26,20 @@ kmeansClustering(Data, ClusterNo,Centers=NULL,
 }
 
 \value{
+List V of 
 
-\item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
+\item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.
+}
 
-	\item{SumDistsToCentroids}{Vector of within-cluster sum of squares, one component per cluster}
-\item{Centroids}{The final cluster centers.}
+\item{Object}{ List V of
+
+SumDistsToCentroids: Vector of within-cluster sum of squares, one component per cluster
+	
+Centroids: the final cluster centers.
+}
 
 }
+
 \references{
 Hartigan, J. A. and Wong, M. A.. A K-means clustering algorithm. Applied Statistics 28, 100-108, 1979.
 
@@ -40,7 +47,7 @@ Linde,Y.,Buzo,A.,Gray,R.M., An algorithm for vector quantizer design. IEEE Trans
 }
  \examples{
 data('Hepta')
-out=kmeansClustering(Hepta$Data,ClusterNo=7,PlotIt=TRUE)
+out=kmeansClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 }
 
 \author{

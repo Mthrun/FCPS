@@ -5,7 +5,7 @@ OPTICSclustering=function(Data, MaxRadius,RadiusThreshold, minPts = 5, PlotIt=FA
   if(missing(MaxRadius)){  
     warning('The MaxRadius (eps) parameter is missing but it is required in OPTICS Trying to estimate..')
 	requireNamespace('DataVisualizations')
-    MaxRadius=0.5*DataVisualizations::ParetoRadiusV2(Data)
+    MaxRadius=0.5*DataVisualizations::ParetoRadius(Data)
   } 
   if(missing(RadiusThreshold)){  
     warning('The RadiusThreshold (eps_cl) parameter is missing but it is required in OPTICS Trying to estimate..')
@@ -28,5 +28,5 @@ OPTICSclustering=function(Data, MaxRadius,RadiusThreshold, minPts = 5, PlotIt=FA
     requireNamespace('DataVisualizations')
     DataVisualizations::Plot3D(Data,Cls)
   }
-  return(list(Cls=Cls,OPTICScobject=OPTICScobject))
+  return(list(Cls=Cls,Object=OPTICScobject))
 }

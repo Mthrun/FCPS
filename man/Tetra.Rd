@@ -23,4 +23,6 @@ Ultsch, A.: Clustering with SOM: U*C, In Proc. Workshop on Self-Organizing Maps,
 data(Tetra)
 str(Tetra)
 }
-\keyword{datasets,Tetra,FCPS}
+\keyword{Tetra}
+\keyword{datasets}
+\keyword{FCPS}
