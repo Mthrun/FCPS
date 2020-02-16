@@ -7,7 +7,7 @@ Authors@R: c(person("Michael", "Thrun", email= "m.thrun@gmx.net",role=c("aut","c
 Maintainer: Michael Thrun <m.thrun@gmx.net>
 Description: Many conventional Clustering Algorithms are provided in this package with consistent input and output, which enables the user to tryout algorithms swiftly. Moreover, the fundamental clustering problems suite (FCPS) offers a variety of clustering challenges any algorithm should handle when facing real world data. The datasets were introduced in Ultsch, A.: "Clustering with SOM: U*C", In Workshop on Self-Organizing Maps, 2005.
 Imports: mclust
-Suggests: DataVisualizations, kernlab, cclust, vegan, dbscan, kohonen, MCL, ADPclust, cluster, DatabionicSwarm, orclus, subspace, flexclust,clValid, ABCanalysis, apcluster, pracma,EMCluster, pdfCluster, parallelDist, plotly, ProjectionBasedClustering, GeneralizedUmatrix, mstknnclust, densityClust, rowr, parallel, energy, R.utils, tclust
+Suggests: DataVisualizations, kernlab, cclust, vegan, dbscan, kohonen, MCL, ADPclust, cluster, DatabionicSwarm, orclus, subspace, flexclust,clValid, ABCanalysis, apcluster, pracma,EMCluster, pdfCluster, parallelDist, plotly, ProjectionBasedClustering, GeneralizedUmatrix, mstknnclust, densityClust, parallel, energy, R.utils, tclust
 Depends: R (>= 2.10)
 License: GPL-3
 LazyData: TRUE

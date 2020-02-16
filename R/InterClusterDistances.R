@@ -9,11 +9,11 @@ InterClusterDistances=function(FullDistanceMatrix,Cls,Names,PlotIt=FALSE){
     distvec=classdistcur[upper.tri(classdistcur,diag = F)]
     classdist=c(classdist,list(distvec))
   }
-  addcols=function(...){
-    return(rowr::cbind.fill(...,fill = NaN))
-  }
+  #addcols=function(...){
+  # return(rowr::cbind.fill(...,fill = NaN))
+  #}
   
-  xmat=do.call(addcols,classdist)
+  xmat=do.call(DataVisualizations::CombineCols,classdist)
   
   if(missing(Names)){
     colnames(xmat)=c('Full',paste0('Class',u))
