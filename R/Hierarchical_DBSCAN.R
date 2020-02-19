@@ -1,4 +1,4 @@
-Hierarchical_DBSCAN <-function(Data,minPts,PlotTree=FALSE,PlotIt=FALSE,...){
+Hierarchical_DBSCAN <-function(Data,minPts=4,PlotTree=FALSE,PlotIt=FALSE,...){
   # Cls=Hierarchical_DBSCAN(FCPS$Hepta$Data,minPts=3)
   # DBscan nach  [Campello et al., 2015]
   # INPUT
