@@ -6,7 +6,7 @@
 Lsun3D inspired by FCPS
 }
 \description{
-clearly defined clusters, different variances
+clearly defined clusters, different variances.  Detailed description of dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
 }
 \usage{data("Lsun3D")}
 
@@ -19,6 +19,8 @@ Three main Clusters, and four Outliers (in Cluster 4). See for a more detailed d
 
 \references{
 [Thrun, 2018]  Thrun, M. C.: Projection Based Clustering through Self-Organization and Swarm Intelligence, doctoral dissertation 2017, Springer, Heidelberg, ISBN: 978-3-658-20539-3, \url{https://doi.org/10.1007/978-3-658-20540-9}, 2018. 
+
+[Thrun/Ultsch, 2020]  Thrun, M. C., Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief, 2020.
 }
 \examples{
 data(Lsun3D)

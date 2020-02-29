@@ -2,10 +2,10 @@
 \alias{GenerateFundamentalClusteringProblem}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Generates a Fundamental Clustering Problem based on FCPS datasets.
+Generates a Fundamental Clustering Problem based on specific artificial datasets.
 }
 \description{
-The FCPS datasets were introduced in [Ultsch, 2005] for a fixed size. This function generalites them for any sample size.
+Lsun3D and FCPS datasets were introduced in various publications for a specific fixed size. This function generalites them for any sample size.
 }
 \usage{
 GenerateFundamentalClusteringProblem(Name,SampleSize,PlotIt=TRUE)
@@ -34,8 +34,6 @@ A detailed description of the datasets can be found in [Thrun, 2018]. Lsun was e
 
 }
 \references{
-[Ultsch, 2005] Ultsch, A.: Clustering with SOM: U*C, In Proc. Workshop on Self-Organizing Maps, Paris, France, pp. 75-82, 2005.
-
 [Thrun, 2018]  Thrun, M. C.: Projection Based Clustering through Self-Organization and Swarm Intelligence, Springer, Heidelberg, ISBN: 978-3-658-20539-3, \url{https://doi.org/10.1007/978-3-658-20540-9}, 2018. 
 
 }

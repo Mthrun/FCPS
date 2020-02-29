@@ -13,7 +13,7 @@ parApplyClusterAnalysis=function(DataOrDistance,FUN,NumberOfTrials=1:100,Cluster
 
   
   tryCatch({
-    if (isSymmetric(DataOrDistance)) {
+    if (isSymmetric(unname(DataOrDistance))) {
       DataOrDistances=DataOrDistance
       out=parallel::parLapply(cl = cl,X = NumberOfTrials,fun = cluster_analysis_fun,FUN,DataOrDistances,ClusterNo,SetSeed,...)
     }else{

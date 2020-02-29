@@ -31,7 +31,7 @@ APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,
   }
   AnzData = nrow(DataOrDistances)
 
-  if (isSymmetric(DataOrDistances)) {
+  if (isSymmetric(unname(DataOrDistances))) {
     DataPoints=ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = 3)$ProjectedPoints
     s=-(DataOrDistances)^2
     apres <- apcluster::apcluster(s=s,p=InputPreference, details=TRUE,q=ExemplarPreferences,seed=Seed,...)

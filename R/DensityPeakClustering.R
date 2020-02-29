@@ -15,7 +15,7 @@ DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclid
   }
   AnzData = nrow(DataOrDistances)
   
-  if (!isSymmetric(DataOrDistances)) {
+  if (!isSymmetric(unname(DataOrDistances))) {
     requireNamespace('parallelDist')
     
     Distances=as.matrix(parallelDist::parDist(DataOrDistances,method=method))
@@ -45,7 +45,7 @@ DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclid
   }
   if(PlotIt){
     requireNamespace('DataVisualizations')
-    if (!isSymmetric(DataOrDistances)) {
+    if (!isSymmetric(unname(DataOrDistances))) {
       print(DataVisualizations::Plot3D(DataOrDistances,Cls))
     
     }else{

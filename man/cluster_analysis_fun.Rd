@@ -46,10 +46,10 @@ Michael Thrun
 }
 \examples{
 \donttest{
-data(Hepta)
-Distance=as.matrix(parallelDist::parallelDist(Hepta$Data))
-out=cluster_analysis_fun(i = 1,fun = APclusterin
-g,DataOrDistance = Distance,ClusterNo = 7)
+#data(Hepta)
+#Distance=as.matrix(parallelDist::parallelDist(Hepta$Data))
+#out=cluster_analysis_fun(i = 1,fun = APclusterin
+#g,DataOrDistance = Distance,ClusterNo = 7)
 }
 }
 

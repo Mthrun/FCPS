@@ -10,7 +10,7 @@ Computes inter-cluster distances which are the distance between each cluster and
 \usage{
 InterClusterDistances(FullDistanceMatrix, Cls,
 
-Names,PlotIt=TRUE)
+Names,PlotIt=FALSE)
 }
 
 \arguments{

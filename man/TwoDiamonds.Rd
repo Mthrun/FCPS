@@ -3,10 +3,10 @@
 
 \docType{data}
 \title{
-TwoDiamonds form FCPS
+TwoDiamonds of  [Ultsch, 2003a, 2003b]
 }
 \description{
-cluster border defined by density
+cluster border defined by density. Detailed description of dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
 }
 \usage{data("TwoDiamonds")}
 
@@ -17,7 +17,12 @@ Classes 2, stored in \code{TwoDiamonds$Cls}
 }
 
 \references{
-Ultsch, A.: Clustering with SOM: U*C, In Proc. Workshop on Self-Organizing Maps, Paris, France, (2005) , pp. 75-82
+[Ultsch, 2003a]  Ultsch, A.Optimal density estimation in data containing clusters of unknown structure, technical report, Vol. 34,University of Marburg, Department of Mathematics and Computer Science, 2003.
+
+[Ultsch, 2003b]  Ultsch, A.: U*-matrix: a tool to visualize clusters in high dimensional data, Fachbereich Mathematik und Informatik, 2003.
+
+[Thrun/Ultsch, 2020]  Thrun, M. C., Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief, 2020.
+
 }
 \examples{
 data(TwoDiamonds)

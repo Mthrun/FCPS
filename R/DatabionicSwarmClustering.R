@@ -13,7 +13,7 @@ DatabionicSwarmClustering=DBSclusteringAndVisualization=function(DataOrDistances
   DataPoints=NULL  #init in case of no plotting
   message("Operator: Computing nonlinear projection using the swarm.")
   if(is.null(DistancesMethod)){
-    if (isSymmetric(DataOrDistances)) {
+    if (isSymmetric(unname(DataOrDistances))) {
       DataDists = DataOrDistances
       requireNamespace('ProjectionBasedClustering')
       DataPoints=ProjectionBasedClustering::MDS(DataDists,OutputDimension = nrow(DataDists)-1)$ProjectedPoints

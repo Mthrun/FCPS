@@ -3,10 +3,10 @@
 
 \docType{data}
 \title{
-WingNut form FCPS
+WingNut of [Ultsch, 2005]
 }
 \description{
-density vs. distance
+density vs. distance. Detailed description of dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
 }
 \usage{data("WingNut")}
 
@@ -17,7 +17,7 @@ Classes 2, stored in \code{WingNut$Cls}
 }
 
 \references{
-Ultsch, A.: Clustering with SOM: U*C, In Proc. Workshop on Self-Organizing Maps, Paris, France, (2005) , pp. 75-82
+[Ultsch, 2005]  Ultsch, A.: Clustering wih SOM: U* C, Proc. Proceedings of the 5th Workshop on Self-Organizing Maps, Vol. 2, pp. 75-82, 2005.
 }
 \examples{
 data(WingNut)

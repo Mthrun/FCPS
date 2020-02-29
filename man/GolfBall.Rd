@@ -3,10 +3,10 @@
 
 \docType{data}
 \title{
-GolfBall from FCPS
+GolfBall of [Ultsch, 2005]
 }
 \description{
-no clusters at all
+no clusters at all. Detailed description of dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
 }
 \usage{data("GolfBall")}
 
@@ -17,7 +17,9 @@ Classes 1, stored in \code{GolfBall$Cls}
 }
 
 \references{
-Ultsch, A.: Clustering with SOM: U*C, In Proc. Workshop on Self-Organizing Maps, Paris, France, (2005) , pp. 75-82
+[Ultsch, 2005]  Ultsch, A.: Clustering wih SOM: U* C, Proc. Proceedings of the 5th Workshop on Self-Organizing Maps, Vol. 2, pp. 75-82, 2005.
+
+[Thrun/Ultsch, 2020]  Thrun, M. C., Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief, 2020.
 }
 \examples{
 data(GolfBall)

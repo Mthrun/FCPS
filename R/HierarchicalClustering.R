@@ -15,7 +15,7 @@ HierarchicalClustering=function(DataOrDistances,ClusterNo,method='SingleL',Data,
   #backwards compatibility to matlab, otherwise could be programmed better :-(
   if(method=='MinEnergy'){
     return(MinimalEnergyClustering(DataOrDistances = DataOrDistances,ClusterNo = ClusterNo,...))
-  }else if (isSymmetric(DataOrDistances)) {
+  }else if (isSymmetric(unname(DataOrDistances))) {
     if(!inherits(DataOrDistances,'dist')){
       Input=as.dist(DataOrDistances)
     }else{

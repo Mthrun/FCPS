@@ -7,7 +7,7 @@ FannyClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Standardization=
   if(Standardization==0) Standardization=FALSE
   #author: MT, 04/2018
   requireNamespace('cluster')
-    if (isSymmetric(DataOrDistances)) {
+    if (unname(isSymmetric(DataOrDistances))) {
       Input = as.dist(DataOrDistances)
       requireNamespace('ProjectionBasedClustering')
       DataPoints=ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = 3)$ProjectedPoints

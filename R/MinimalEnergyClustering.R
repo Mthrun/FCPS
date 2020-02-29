@@ -21,7 +21,7 @@ MinimalEnergyClustering <-function(DataOrDistances,ClusterNo=0,DistanceMethod="e
     DataOrDistances=Data
   }
   
-  if (!isSymmetric(DataOrDistances)) {
+  if (!isSymmetric(unname(DataOrDistances))) {
     requireNamespace('parallelDist')
     pDist=as.dist(parallelDist::parDist(DataOrDistances,method=DistanceMethod))
   }else if(!inherits(DataOrDistances,'dist')){

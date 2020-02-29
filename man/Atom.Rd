@@ -3,10 +3,11 @@
 
 \docType{data}
 \title{
-Atom from FCPS
+Atom of [Ultsch, 2004].
 }
 \description{
 Two nested spheres with different variances that are not linear not separable.
+Detailed description of dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
 }
 \usage{data("Atom")}
 
@@ -17,7 +18,9 @@ Classes 2, stored in \code{Atom$Cls}
 }
 
 \references{
-Ultsch, A.: Clustering with SOM: U*C, In Proc. Workshop on Self-Organizing Maps, Paris, France, (2005) , pp. 75-82
+[Ultsch, 2004]  Ultsch, A.: Strategies for an artificial life system to cluster high dimensional data, Abstracting and Synthesizing the Principles of Living Systems, GWAL-6, U. Brggemann, H. Schaub, and F. Detje, Eds, pp. 128-137. 2004.
+
+[Thrun/Ultsch, 2020]  Thrun, M. C., Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief, 2020.
 }
 \examples{
 data(Atom)

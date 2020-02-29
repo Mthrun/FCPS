@@ -3,10 +3,10 @@
 
 \docType{data}
 \title{
-Target from FCPS
+Target of [Ultsch, 2005].
 }
 \description{
-outliers
+Detailed description of dataset and its clustering challenge of outliers is provided in [Thrun/Ultsch, 2020]
 }
 \usage{data("Target")}
 
@@ -17,7 +17,9 @@ Classes 6, stored in \code{Target$Cls}
 }
 
 \references{
-Ultsch, A.: Clustering with SOM: U*C, In Proc. Workshop on Self-Organizing Maps, Paris, France, (2005) , pp. 75-82
+[Ultsch, 2005]  Ultsch, A.: U* C: Self-organized Clustering with Emergent Feature Maps, Proc. Lernen, Wissensentdeckung und Adaptivitaet (LWA/FGML), pp. 240-244, Saarbruecken, Germany, 2005.
+
+[Thrun/Ultsch, 2020]  Thrun, M. C., Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief, 2020.
 }
 \examples{
 data(Target)

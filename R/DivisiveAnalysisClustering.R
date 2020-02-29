@@ -19,7 +19,7 @@ DivisiveAnalysisClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE,Sta
 
   
   requireNamespace('cluster')
-  if (isSymmetric(DataOrDistances)) {
+  if (isSymmetric(unname(DataOrDistances))) {
       Input = as.dist(DataOrDistances)
       requireNamespace('ProjectionBasedClustering')
       DataPoints=ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = 3)$ProjectedPoints

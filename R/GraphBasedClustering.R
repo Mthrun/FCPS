@@ -10,7 +10,7 @@ GraphBasedClustering=function(DataOrDistances,method="euclidean",PlotIt=FALSE,..
   }
   AnzData = nrow(DataOrDistances)
   
-  if (!isSymmetric(DataOrDistances)) {
+  if (!isSymmetric(unname(DataOrDistances))) {
     requireNamespace('parallelDist')
     
     Distances=as.matrix(parallelDist::parDist(DataOrDistances,method=method))
@@ -21,7 +21,7 @@ GraphBasedClustering=function(DataOrDistances,method="euclidean",PlotIt=FALSE,..
   Cls=results$cluster
   if(isTRUE(PlotIt)){
     requireNamespace('DataVisualizations')
-    if (!isSymmetric(DataOrDistances)) {
+    if (!isSymmetric(unname(DataOrDistances))) {
       print(DataVisualizations::Plot3D(DataOrDistances,Cls))
       
     }else{

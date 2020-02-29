@@ -30,7 +30,7 @@ does not work on hepta, see example
 tobedocumented
 }
 \references{
-Tibshirani, R., Walther, G. and Hastie, T: Estimating the number of data clusters via the Gap statistic, Journal of the Royal Statistical Society B,63, 411–423, 2003.
+Tibshirani, R., Walther, G. and Hastie, T: Estimating the number of data clusters via the Gap statistic, Journal of the Royal Statistical Society B, Vol. 63, pp. 411-423, 2003.
 }
 \author{
 Michael Thrun

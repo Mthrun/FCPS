@@ -13,14 +13,14 @@ cluster_analysis_fun=function(i,fun,DataOrDistance,ClusterNo,SetSeed=TRUE,...){
   }
   prior=Sys.time()
   if(is.null(ClusterNo)){
-    if (isSymmetric(DataOrDistance)) {
+    if (isSymmetric(unname(DataOrDistance))) {
       object=R.utils::doCall(fun, args=list(DataOrDistances=DataOrDistance,...),.ignoreUnusedArgs=TRUE)
     }else{
       object=R.utils::doCall(fun, args=list(Data=DataOrDistance,...),.ignoreUnusedArgs=TRUE)
     }
     #object=fun(DataOrDistance,...)
   }else{
-    if(isSymmetric(DataOrDistance)) {
+    if(isSymmetric(unname(DataOrDistance))) {
       object=R.utils::doCall(fun,  args=list(DataOrDistances=DataOrDistance,ClusterNo=ClusterNo,...),.ignoreUnusedArgs=TRUE)
     }else{
       object=R.utils::doCall(fun,  args=list(Data=DataOrDistance,ClusterNo=ClusterNo,...),.ignoreUnusedArgs=TRUE)
