@@ -32,13 +32,11 @@ APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,
   AnzData = nrow(DataOrDistances)
 
   if (isSymmetric(unname(DataOrDistances))) {
-    DataPoints=ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = 3)$ProjectedPoints
     s=-(DataOrDistances)^2
     apres <- apcluster::apcluster(s=s,p=InputPreference, details=TRUE,q=ExemplarPreferences,seed=Seed,...)
 
   }
   else{
-    DataPoints=DataOrDistances
     s=DataOrDistances
     apres <- apcluster::apcluster(apcluster::negDistMat(method = DistanceMethod,r=2), x=DataOrDistances,p=InputPreference,q=ExemplarPreferences, details=TRUE,seed=Seed,...)
   }
@@ -48,8 +46,8 @@ APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,
     Cls[ClsIndList[[i]]]=i  
   }
   if(PlotIt){
-    requireNamespace('DataVisualizations')
-    DataVisualizations::Plot3D(DataPoints,Cls)
+	ClusterPlotMDS(DataOrDistances,Cls)
   }
+  Cls=ClusterRename(Cls,DataOrDistances)
   return(list(Cls=Cls,Object=apres))
 }

@@ -1,14 +1,14 @@
 \name{ClusteringAccuracy}
-\alias{ClusteringAccuracy}
+\alias{ClusterAccuracy}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-ClusteringAccuracy
+ClusterAccuracy
 }
 \description{
-ClusteringAccuracy
+ClusterAccuracy
 }
 \usage{
-ClusteringAccuracy(PriorCls,CurrentCls,K=9)
+ClusterAccuracy(PriorCls,CurrentCls,K=9)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -47,14 +47,14 @@ Michael Thrun
 data('Hepta')
 Cls=kmeansClustering(Hepta$Data,7,method = "Hartigan",nstart=1)
 table(Cls$Cls,Hepta$Cls)
-ClusteringAccuracy(Hepta$Cls,Cls$Cls)
+ClusterAccuracy(Hepta$Cls,Cls$Cls)
 }
 
 \donttest{
 data('Hepta')
 Cls=kmeansClustering(Hepta$Data,7,method = "Hartigan",nstart=100)
 table(Cls$Cls,Hepta$Cls)
-ClusteringAccuracy(Hepta$Cls,Cls$Cls)
+ClusterAccuracy(Hepta$Cls,Cls$Cls)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

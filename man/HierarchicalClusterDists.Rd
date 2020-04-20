@@ -6,7 +6,9 @@
 HierarchicalClusterDists(pDist) HierarchicalClusterDists(pDist,0,"ward.D",100) Cls=HierarchicalClusterDists(pDist,6,"ward.D")    Zeichnet entweder ein Dendrogram oder liefert eine Klassenzuweisung
 }
 \usage{
-HierarchicalClusterDists(pDist,ClusterNo=0,method="ward.D2",ColorTreshold=0,\dots)
+HierarchicalClusterDists(pDist,ClusterNo=0,method="ward.D2",
+
+ColorTreshold=0,Fast=FALSE,\dots)
 }
 
 \description{
@@ -18,6 +20,7 @@ Hierarchical cluster analysis on a set of dissimilarities and methods for analyz
 \item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.}
 \item{method}{method of cluster analysis: "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".}
 \item{ColorTreshold}{draws cutline w.r.t. dendogram y-axis (height), height of line as scalar should be given}
+\item{Fast}{if TRUE and fastcluster installed, then a faster implementation of the methods above can be used}
 \item{\dots}{If ClusterNo=0, plot arugments for as.dendrogramm, e.g.
 
 leaflab

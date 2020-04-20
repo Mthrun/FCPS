@@ -18,12 +18,12 @@ PlotIt=FALSE,UpperLimitRadius,\dots)
 
   \item{Radius}{
  eps [Ester et al., 1996, p. 227] neighborhood in the R-ball graph/unit disk graph), size of the epsilon neighborhood.
- If missing, automatic estimation is done using insights of [Ultsch, 2005].
+ If NULL, automatic estimation is performed using insights of [Ultsch, 2005].
 }
   \item{minPts}{
  number of minimum points in the eps region (for core points). 
  In principle minimum number of points in the unit disk, if the unit disk is within the cluster (core) [Ester et al., 1996, p. 228].
- Default is 2.5 percent of points.
+ If NULL, 2.5 percent of points is selected.
 }
 
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
@@ -50,7 +50,7 @@ Michael Thrun
 \examples{
 data('Hepta')
 
-out=DBscan(Hepta$Data,PlotIt=FALSE)
+out=DBscan(Hepta$Data,Radius=NULL,minPts=NULL,PlotIt=FALSE)
 
 \donttest{
 #search for right parameter setting by grid search

@@ -14,15 +14,15 @@ OPTICSclustering(Data, MaxRadius,RadiusThreshold, minPts = 5, PlotIt=FALSE,\dots
 
   \item{MaxRadius}{
 upper limit neighborhood in the R-ball graph/unit disk graph), size of the epsilon neighborhood  (eps) [Ester et al., 1996, p. 227].
- If missing, automatic estimation is done using insights of [Ultsch, 2005].
+ If NULL, automatic estimation is done using insights of [Ultsch, 2005].
 }
   \item{RadiusThreshold}{
-Threshold to identify clusters (RadiusThreshold <= MaxRadius), if not given \code{0.9*MaxRadius} is set.
+Threshold to identify clusters (RadiusThreshold <= MaxRadius), if NULL \code{0.9*MaxRadius} is set.
 }
   \item{minPts}{
  number of minimum points in the eps region (for core points). 
  In principle minimum number of points in the unit disk, if the unit disk is within the cluster (core) [Ester et al., 1996, p. 228].
- Default is 2.5 percent of points.
+ If NULL, 2.5 percent of points.
 }
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
@@ -50,6 +50,6 @@ Michael Thrun
 }
 \examples{
 data('Hepta')
-out=OPTICSclustering(Hepta$Data,PlotIt = FALSE)
+out=OPTICSclustering(Hepta$Data,MaxRadius=NULL,RadiusThreshold=NULL,minPts=NULL,PlotIt = FALSE)
 }
 \keyword{optics}% use one of  RShowDoc("KEYWORDS")

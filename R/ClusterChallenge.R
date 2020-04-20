@@ -1,4 +1,4 @@
-GenerateFundamentalClusteringProblem=function(Name,SampleSize,PlotIt=TRUE){
+ClusterChallenge=GenerateFundamentalClusteringProblem=function(Name,SampleSize,PlotIt=TRUE,PointSize=1,Plotter3D="rgl",...){
   
   if(SampleSize<500){
     warning('SampleSize may be to small in order to represent clustering problem correctly.')
@@ -165,12 +165,7 @@ GenerateFundamentalClusteringProblem=function(Name,SampleSize,PlotIt=TRUE){
   }
   
   if(isTRUE(PlotIt)){
-    cols=DataVisualizations::DefaultColorSequence[-2]
-    cols=cols[1:length(unique(DataSample$ClassSample))]
-    if(ncol(DataSample$DataSample)==3)
-      DataVisualizations::Plot3D(Data = DataSample$DataSample,Cls = DataSample$ClassSample,UniqueColors =cols)
-    if(ncol(DataSample$DataSample)==2)
-      print(DataVisualizations::Plot3D(Data = DataSample$DataSample,Cls = DataSample$ClassSample,UniqueColors =cols))
+		ClusterPlotMDS(DataSample$DataSample,DataSample$ClassSample,PointSize=PointSize,Plotter3D=Plotter3D,...)
   }
   names(DataSample)=c(Name,'Cls')
   return(DataSample)

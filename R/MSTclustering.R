@@ -1,4 +1,4 @@
-GraphBasedClustering=function(DataOrDistances,method="euclidean",PlotIt=FALSE,...){
+MSTclustering=function(DataOrDistances,method="euclidean",PlotIt=FALSE,...){
   requireNamespace('mstknnclust')
   if(!is.matrix(DataOrDistances)){
     warning('DataOrDistances is not a matrix. Calling as.matrix()')
@@ -20,15 +20,8 @@ GraphBasedClustering=function(DataOrDistances,method="euclidean",PlotIt=FALSE,..
   results <- mstknnclust::mst.knn(distance.matrix = Distances,...)
   Cls=results$cluster
   if(isTRUE(PlotIt)){
-    requireNamespace('DataVisualizations')
-    if (!isSymmetric(unname(DataOrDistances))) {
-      print(DataVisualizations::Plot3D(DataOrDistances,Cls))
-      
-    }else{
-      requireNamespace('ProjectionBasedClustering')
-      
-      DataVisualizations::Plot3D(DataOrDistances,ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = 3)$ProjectedPoints)
-    }
+	ClusterPlotMDS(DataOrDistances,Cls)
   }
+  Cls=ClusterRename(Cls,DataOrDistances)
   return(list(Cls=Cls,Object=results))
 }

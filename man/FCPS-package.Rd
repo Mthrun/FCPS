@@ -27,7 +27,7 @@ sample size defined in the respective first publication mentioning the data was 
 }
 
 \author{
- Authors@R: c(person("Michael", "Thrun", email= "m.thrun@gmx.net",role=c("aut","cre","cph")),person("Peter", "Nahrgang",role=c("ctr","ctb")),person("Alfred", "Ultsch",role=c("dtc","ctb")))
+ Authors@R: c(person("Michael", "Thrun", email= "m.thrun@gmx.net",role=c("aut","cre","cph")),person("Peter", "Nahrgang",role=c("ctr","ctb")),person("Alfred", "Ultsch",role=c("dtc","ctb")),person("Guy","Brock", role=c("ctb")),person("Susmita","Datta", role=c("ctb")),person("Somnath","Datta", role=c("ctb")),person("Luis","Winckelmann", role=c("com")))
 
  Maintainer: Michael Thrun <m.thrun@gmx.net>
 }

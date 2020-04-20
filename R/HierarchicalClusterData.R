@@ -1,4 +1,4 @@
-HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,method="ward.D2",DistanceMethod="euclidean",ColorTreshold=0,Cls=NULL,...){
+HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,method="ward.D2",DistanceMethod="euclidean",ColorTreshold=0,Fast=FALSE,Cls=NULL,...){
 # HierarchicalClusterData(Data)
 # HierarchicalClusterDists(Data,0,"ward.D2",NULL,"cosine",100)
 # Cls=HierarchicalCluster(Data,6,"ward.D2")
@@ -82,8 +82,12 @@ stop('DistanceMethod with NaN in calculated. Please choose another DistanceMetho
 if(any(is.infinite(Y),na.rm=TRUE)) {
 stop('DistanceMethod with infinites in calculated. Please choose another DistanceMethod.')}
 #Clustering
-
-hc <- hclust(Y,method=method); #hclust liefer in Matlab andere Werte (Aufruf: Z = linkage(Y,method))
+  
+  if(isTRUE(Fast)&requireNamespace('fastcluster')){
+    hc <- fastcluster::hclust(Y,method=method)
+  }else{
+    hc <- hclust(Y,method=method); #liefert teilweise andere Werte wie Z = linkage(Y,method);
+  }
 if(DistanceMethod=='euclidean')
   DistanceMethod='Euclidean'
   
@@ -91,6 +95,7 @@ m=paste(method,"LinkCluster/ ",DistanceMethod," N=",nrow(as.matrix(Data)))
 # Classification or Dendrogram
 if (ClusterNo>0){
   Cls=cutree(hc,ClusterNo)
+   Cls=ClusterRename(Cls,Data)
   return(list(Cls=Cls,Dedrogram=as.dendrogram(hc)))
 } 
 else{

@@ -22,12 +22,12 @@ number of neighbors to consider to calculate the shared nearest neighbors.
 }
  \item{Radius}{
  eps [Ester et al., 1996, p. 227] neighborhood in the R-ball graph/unit disk graph), size of the epsilon neighborhood.
- If missing, automatic estimation is done using insights of [Ultsch, 2005].
+ If NULL, automatic estimation is done using insights of [Ultsch, 2005].
 }
   \item{minPts}{
  number of minimum points in the eps region (for core points). 
  In principle minimum number of points in the unit disk, if the unit disk is within the cluster (core) [Ester et al., 1996, p. 228].
- Default is 2.5 percent of points.
+ if NULL,   is 2.5 percent of points.
 }
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{UpperLimitRadius}{Limit for radius search, experimental}
@@ -55,7 +55,7 @@ Michael Thrun
 \examples{
 data('Hepta')
 out=SharedNearestNeighborClustering(
-Hepta$Data,PlotIt = FALSE)
+Hepta$Data,Radius=NULL,minPts=NULL,PlotIt = FALSE)
 }
 
 \keyword{snn}% use one of  RShowDoc("KEYWORDS")

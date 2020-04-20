@@ -1,14 +1,18 @@
-\name{GenerateFundamentalClusteringProblem}
+\name{ClusterChallenge}
+\alias{ClusterChallenge}
 \alias{GenerateFundamentalClusteringProblem}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Generates a Fundamental Clustering Problem based on specific artificial datasets.
+Generates a Fundamental Clustering Challenge based on specific artificial datasets.
 }
 \description{
 Lsun3D and FCPS datasets were introduced in various publications for a specific fixed size. This function generalites them for any sample size.
 }
 \usage{
-GenerateFundamentalClusteringProblem(Name,SampleSize,PlotIt=TRUE)
+ClusterChallenge(Name,SampleSize,
+
+
+PlotIt=TRUE,PointSize=PointSize,Plotter3D=Plotter3D,\dots)
 }
 \arguments{
   \item{Name}{
@@ -21,7 +25,16 @@ string, either 'Atom', 'Chainlink, 'EngyTime', 'GolfBall', 'Hepta', 'Lsun3D',  '
 Size of Sample higher than 300, preferable above 500
 }
   \item{PlotIt}{
-TRUE: Plots the Problem
+TRUE: Plots the challenge with \code{\link{ClusterPlotMDS}}
+}
+  \item{PointSize}{
+if PlotIt=TRUE: see \code{\link{ClusterPlotMDS}}
+}
+  \item{Plotter3D}{
+if PlotIt=TRUE: see \code{\link{ClusterPlotMDS}}
+}
+  \item{\dots}{
+if PlotIt=TRUE: further arguments for \code{\link{ClusterPlotMDS}}
 }
 }
 \details{
@@ -34,8 +47,9 @@ A detailed description of the datasets can be found in [Thrun, 2018]. Lsun was e
 
 }
 \references{
-[Thrun, 2018]  Thrun, M. C.: Projection Based Clustering through Self-Organization and Swarm Intelligence, Springer, Heidelberg, ISBN: 978-3-658-20539-3, \url{https://doi.org/10.1007/978-3-658-20540-9}, 2018. 
+[Thrun/Ultsch, 2020]  Thrun, M. C., & Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief, in press, 2020.
 
+\url{https://authors.elsevier.com/tracking/article/details.do?aid=105501&jid=DIB&surname=Thrun}
 }
 \author{
 Michael Thrun
@@ -43,12 +57,16 @@ Michael Thrun
 
 \examples{
 \dontshow{
-GenerateFundamentalClusteringProblem("Chainlink",10,FALSE)
+ClusterChallenge("Chainlink",10,FALSE)
 }
 \donttest{
-GenerateFundamentalClusteringProblem("Chainlink",2000,TRUE)
+ClusterChallenge("Chainlink",2000,TRUE)
 }
+}
+\seealso{
+\code{\link{ClusterPlotMDS}}
 }
 \keyword{GenerateFundamentalClusteringProblem}% use one of  RShowDoc("KEYWORDS")
 \keyword{FCPS}% __ONLY ONE__ keyword per line
 \keyword{Clustering}%
+\keyword{ClusterChallenge}%

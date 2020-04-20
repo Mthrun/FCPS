@@ -44,15 +44,8 @@ DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclid
   	warning('NoCluster could be found.')
   }
   if(PlotIt){
-    requireNamespace('DataVisualizations')
-    if (!isSymmetric(unname(DataOrDistances))) {
-      print(DataVisualizations::Plot3D(DataOrDistances,Cls))
-    
-    }else{
-      requireNamespace('ProjectionBasedClustering')
-      
-      DataVisualizations::Plot3D(DataOrDistances,ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = 3)$ProjectedPoints)
-    }
+	ClusterPlotMDS(DataOrDistances,Cls)
   }
+    Cls=ClusterRename(Cls,DataOrDistances)
   return(list(Cls=Cls,Object=DensityPeaks))
 } 

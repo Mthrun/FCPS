@@ -1,14 +1,14 @@
-\name{GraphBasedClustering}
-\alias{GraphBasedClustering}
+\name{MSTclustering}
+\alias{MSTclustering}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-MST-kNN clustering algorithm
+MST-kNN clustering algorithm [Inostroza-Ponta, 2008].
 }
 \description{
 Performs the MST-kNN clustering algorithm which generate a clustering solution with automatic k determination using two proximity graphs: Minimal Spanning Tree (MST) and k-Nearest Neighbor (kNN) which are recursively intersected.
 }
 \usage{
-GraphBasedClustering(DataOrDistances, method = "euclidean",PlotIt=FALSE, \dots)
+MSTclustering(DataOrDistances, method = "euclidean",PlotIt=FALSE, \dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -33,8 +33,7 @@ List of
 \item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
-Inostroza-Ponta, M.: An Integrated and Scalable Approach Based on Combinatorial Optimization Techniques for the Analysis of Microarray Data. Ph.D. thesis, School of Electrical Engineering and Computer Science. University of Newcastle, 2008.
-}
+[Inostroza-Ponta, 2008]  Inostroza-Ponta, M.: An integrated and scalable approach based on combinatorial optimization techniques for the analysis of microarray data, University of Newcastle, ISBN, 2008}
 \author{
 Michael Thrun
 }
@@ -46,10 +45,10 @@ Michael Thrun
 \examples{
 data(Hepta)
 \donttest{
-GraphBasedClustering(Hepta$Data)
+MSTclustering(Hepta$Data)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{GraphBasedClustering }% use one of  RShowDoc("KEYWORDS")
+\keyword{MSTclustering}% use one of  RShowDoc("KEYWORDS")
 \keyword{mst}% __ONLY ONE__ keyword per line

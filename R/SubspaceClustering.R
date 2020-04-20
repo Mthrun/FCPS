@@ -79,9 +79,8 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,method='Orclus',PlotIt=
   )
 
 if(PlotIt){
-  requireNamespace('DataVisualizations')
-
-  DataVisualizations::Plot3D(Data,Cls)
+  ClusterPlotMDS(Data,Cls)
 }
+Cls=ClusterRename(Cls,Data)
 return(list(Cls=Cls,Object=obj,Method=method))
 }

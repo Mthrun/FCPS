@@ -1,8 +1,8 @@
-cluster_analysis_fun=function(i,fun,DataOrDistance,ClusterNo,SetSeed=TRUE,...){
+cluster_analysis_fun=function(i,fun,DataOrDistances,ClusterNo,SetSeed=TRUE,...){
   #example
   # data(Hepta)
   # Distance=as.matrix(parallelDist::parallelDist(Hepta$Data))
-  # out=cluster_analysis_fun(i = 1,fun = APclustering,DataOrDistance = Distance,ClusterNo = 7)
+  # out=cluster_analysis_fun(i = 1,fun = APclustering,DataOrDistances = Distance,ClusterNo = 7)
   if(isTRUE(SetSeed)){
     seedno=1000+i
     set.seed(seed = seedno)
@@ -12,21 +12,28 @@ cluster_analysis_fun=function(i,fun,DataOrDistance,ClusterNo,SetSeed=TRUE,...){
     set.seed(seed = NULL)
   }
   prior=Sys.time()
+  string=names(formals(fun))
+  
   if(is.null(ClusterNo)){
-    if (isSymmetric(unname(DataOrDistance))) {
-      object=R.utils::doCall(fun, args=list(DataOrDistances=DataOrDistance,...),.ignoreUnusedArgs=TRUE)
+    if (isSymmetric(unname(DataOrDistances))) {
+      object=R.utils::doCall(fun, args=list(DataOrDistances=DataOrDistances,...),.ignoreUnusedArgs=TRUE)
     }else{
-      object=R.utils::doCall(fun, args=list(Data=DataOrDistance,...),.ignoreUnusedArgs=TRUE)
+      if(string[1]=="Data")
+        object=R.utils::doCall(fun, args=list(Data=DataOrDistances,...),.ignoreUnusedArgs=TRUE)
+      else
+        object=R.utils::doCall(fun, args=list(DataOrDistances=DataOrDistances,...),.ignoreUnusedArgs=TRUE)
     }
-    #object=fun(DataOrDistance,...)
+    #object=fun(DataOrDistances,...)
   }else{
-    if(isSymmetric(unname(DataOrDistance))) {
-      object=R.utils::doCall(fun,  args=list(DataOrDistances=DataOrDistance,ClusterNo=ClusterNo,...),.ignoreUnusedArgs=TRUE)
+    if(isSymmetric(unname(DataOrDistances))) {
+      object=R.utils::doCall(fun,  args=list(DataOrDistancess=DataOrDistances,ClusterNo=ClusterNo,...),.ignoreUnusedArgs=TRUE)
     }else{
-      object=R.utils::doCall(fun,  args=list(Data=DataOrDistance,ClusterNo=ClusterNo,...),.ignoreUnusedArgs=TRUE)
-      
+      if(string[1]=="Data")
+        object=R.utils::doCall(fun,  args=list(Data=DataOrDistances,ClusterNo=ClusterNo,...),.ignoreUnusedArgs=TRUE)
+      else
+        object=R.utils::doCall(fun,  args=list(DataOrDistances=DataOrDistances,ClusterNo=ClusterNo,...),.ignoreUnusedArgs=TRUE)
     }
-    #object=fun(DataOrDistance,ClusterNo,...)
+    #object=fun(DataOrDistances,ClusterNo,...)
   }
   past=Sys.time()
   delta=as.vector(as.numeric(difftime(past,prior,units = 'secs')))
@@ -34,10 +41,10 @@ cluster_analysis_fun=function(i,fun,DataOrDistance,ClusterNo,SetSeed=TRUE,...){
   nn=names(object)
   ind=which(nn=='Cls')
   if(length(ind)==1){
-    Liste=list(Cls=object[[ind]],ComputationTime=delta)
+    Liste=list(Cls=object[[ind]],ComputationTime=delta,Seed=seedno)
   }else{
     warning('"Cls" object could not be found. Everything available is returned.')
-    Liste=list(Cls=object,ComputationTime=delta)
+    Liste=list(Cls=object,ComputationTime=delta,Seed=seedno)
   }
   return(Liste)
 }#end help_fun

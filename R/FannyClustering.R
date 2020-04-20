@@ -9,13 +9,10 @@ FannyClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Standardization=
   requireNamespace('cluster')
     if (unname(isSymmetric(DataOrDistances))) {
       Input = as.dist(DataOrDistances)
-      requireNamespace('ProjectionBasedClustering')
-      DataPoints=ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = 3)$ProjectedPoints
       AnzVar = ncol(DataOrDistances)
       AnzData = nrow(DataOrDistances)
 	  diss =TRUE
     }else{
-      DataPoints=DataOrDistances
 	  Input=DataOrDistances
 	  diss =FALSE
     }
@@ -31,8 +28,8 @@ FannyClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Standardization=
   if(PlotIt){
     Cls2=Cls
     Cls2[Cls2==0]=999
-    requireNamespace('DataVisualizations')
-    DataVisualizations::Plot3D(DataPoints,Cls2)
+	ClusterPlotMDS(Data,Cls2)
   }
+    Cls=ClusterRename(Cls,DataOrDistances)
   return(list(Cls=Cls,Object=fan))
 }

@@ -25,6 +25,8 @@ List of
 \item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 
+
+
 \description{
  Clusters the Data into "ClusterNo" different clusters using the Spectal Clustering Method}
  
@@ -34,3 +36,7 @@ out=SpectralClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 }
 
 \author{Michael Thrun}
+
+\references{
+[Ng et al., 2002]  Ng, A. Y., Jordan, M. I., & Weiss, Y.: On spectral clustering: Analysis and an algorithm, Advances in neural information processing systems, Vol. 2, pp. 849-856. 2002.
+}

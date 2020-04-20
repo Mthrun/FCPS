@@ -1,4 +1,4 @@
-InterClusterDistances=function(FullDistanceMatrix,Cls,Names,PlotIt=FALSE){
+ClusterInterDistances=InterClusterDistances=function(FullDistanceMatrix,Cls,Names,PlotIt=FALSE){
   u=sort(unique(Cls))
   classdist=list(FullDistanceMatrix[upper.tri(FullDistanceMatrix,diag = F)])
   if(length(u)==1) return(unlist(classdist))
@@ -25,5 +25,12 @@ InterClusterDistances=function(FullDistanceMatrix,Cls,Names,PlotIt=FALSE){
       colnames(xmat)=c('Full',Names)
     }
   }
+  
+   if(PlotIt){
+      ggobject=DataVisualizations::MDplot(xmat,Scaling = 'CompleteRobust')$ggplotObj
+      print(ggobject)
+      return(list(ClusterDists=as.matrix(xmat),ggobject=ggobject))
+   }
+	
   return(as.matrix(xmat))
 }

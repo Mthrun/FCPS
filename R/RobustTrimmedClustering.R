@@ -1,4 +1,4 @@
-RobustTrimmedClustering=function(Data,ClusterNo,PlotIt=FALSE,...){
+RobustTrimmedClustering=function(Data,ClusterNo,Alpha,PlotIt=FALSE,...){
   # Cls=RobustTrimmedClustering(Data,ClusterNo)
   # liefert eine Klassenzuweisung
   # INPUT
@@ -13,12 +13,12 @@ RobustTrimmedClustering=function(Data,ClusterNo,PlotIt=FALSE,...){
   
   
   requireNamespace('tclust')
-  res=tclust::tclust(x=Data,k = ClusterNo,...)
+  res=tclust::tclust(x=Data,k = ClusterNo,alpha = Alpha,...)
   Cls=res$cluster	
   
   if(PlotIt){
-    requireNamespace('DataVisualizations')
-    DataVisualizations::Plot3D(Data,Cls)
+    ClusterPlotMDS(Data,Cls)
   }
+  Cls=ClusterRename(Cls,Data)
   return(list(Cls=Cls,Object=res))
 }

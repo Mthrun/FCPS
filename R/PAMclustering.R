@@ -8,13 +8,10 @@ PAMclustering=PAMClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Stan
   requireNamespace('cluster')
       if (isSymmetric(unname(DataOrDistances))) {
       Input = as.dist(DataOrDistances)
-      requireNamespace('ProjectionBasedClustering')
-      DataPoints=ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = 3)$ProjectedPoints
       AnzVar = ncol(DataOrDistances)
       AnzData = nrow(DataOrDistances)
 	  diss =TRUE
     }else{
-      DataPoints=DataOrDistances
 	  Input=DataOrDistances
 	  diss =FALSE
     }
@@ -27,8 +24,8 @@ PAMclustering=PAMClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Stan
     names(Cls)=1:nrow(DataOrDistances)
   
   if(PlotIt){
-    requireNamespace('DataVisualizations')
-    DataVisualizations::Plot3D(DataPoints,Cls)
+		ClusterPlotMDS(DataOrDistances,Cls)
   }
+  Cls=ClusterRename(Cls,DataOrDistances)
   return(list(Cls=Cls,Object=pam))
 }

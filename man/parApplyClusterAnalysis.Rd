@@ -1,25 +1,30 @@
 \name{parApplyClusterAnalysis}
 \alias{parApplyClusterAnalysis}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 Apply Operations using Workes for Cluster Analysis
 }
 \description{
-The functions provides several ways to parallelize clustering algorithms using a collection of workers,
+The functions provides several ways to parallelize clustering algorithms using a collection of workers.
+It was used for the benchmarking of clustering algorithms in [Thrun, 2018] and [Thrun/Ultsch, 2020].
 }
 \usage{
-parApplyClusterAnalysis(DataOrDistance, FUN, 
+parApplyClusterAnalysis(DataOrDistances,FUN,
 
-NumberOfTrials = 1:100, ClusterNo = NULL, 
+NumberOfTrials=1:100,ClusterNo=NULL,
 
-NoWorkers, Type = "PSOCK",SetSeed=TRUE, ...)
+WorkersOrNo,SocketType="PSOCK",
+
+SetSeed=TRUE,\dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{DataOrDistance}{
-Either [1:N,1:d] Matrix of Data (N cases, d dimensions) that will be used. One DataPoint per row
+  \item{DataOrDistances}{
+Option 1: Either [1:N,1:d] Matrix of Data (N cases, d dimensions) that will be used. One DataPoint per row
 
-or symmetric Distance matrix [1:N,1:N] depending on \code{FUN}
+or symmetric Distance matrix [1:N,1:N] depending on \code{FUN}.
+
+Option2: A list of Data or Distance
 }
   \item{FUN}{
 function of clustering algorithms. 
@@ -28,12 +33,12 @@ function of clustering algorithms.
 Number Of Trials to be performed with \code{FUN}
 }
   \item{ClusterNo}{
-Number of k clusters, if required in \code{FUN}
+Number of k clusters, if required in \code{FUN}, if Option2, then a vector of Number of k clusters in the same order as the list of DataOrDistance
 }
-  \item{NoWorkers}{
-Number of Workers (number of cores used). 
+  \item{WorkersOrNo}{
+Either already initialized workers using \code{\link[parallel]{makeCluster}} or Number of Workers (number of cores used). If not set, number is estimated. 
 }
-  \item{Type}{
+  \item{SocketType}{
 see \code{\link[parallel]{makeCluster}} for details, if default does not work.
 }  
 \item{SetSeed}{
@@ -45,16 +50,28 @@ further arguments required in \code{FUN}.
 }
 }
 \details{
-Default is the number of cores existing minus 1. In \pkg{FCPS} default parameters for each clustering algorithm are useda automatically if not specified by the user. \code{parApplyClusterAnalysis} expects in \code{FUN} a function of a clustering algorithm which returns a list of objects of which one is named \code{Cls}. If not given the whole output of \code{FUN} is return with a warning.
-\code{Cls} is a [1:N] numerical vector of k clusters.
+Default is the number of cores existing minus 1. 
+
+In \pkg{FCPS} default parameters for each clustering algorithm are useda automatically if not specified by the user. \code{parApplyClusterAnalysis} expects in \code{FUN} a function of a clustering algorithm which returns a list of objects of which one is named \code{Cls}. If not given the whole output of \code{FUN} is return with a warning.
+
+\code{Cls} is a [1:N] numerical vector of of numbers 1:k of the k clusters labelling the data points to the clusters.
 }
 \value{
+if Option1
+
 List of
 \item{Cls_Matrix}{[1:N,1:NumberOfTrials] numerical matrix consisting of columns, in which each column represents a \code{Cls} vector defining the clustering.}
 \item{ComputationTime}{[1:N] numerical vector of the computation time in seconds}
+
+\item{Seeds}{[1:N] seeds used for every trial, if set otherwise NULL}
+
+if Option2: a list of the list defined above named with the names of the DataOrDistance list.
 }
+
 \references{
-Thrun, M. C.: Projection-Based Clustering through Self-Organization and Swarm Intelligence , Springer, Heidelberg, ISBN: 978-3658205393, 2018. 
+Thrun, M. C.: Projection-Based Clustering through Self-Organization and Swarm Intelligence, Springer, Heidelberg, ISBN: 978-3658205393, 2018. 
+
+Thrun, M. C., & Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Journal of Artificial Intelligence, in press, 2020. 
 }
 \author{
 Michael Thrun
@@ -65,13 +82,30 @@ Michael Thrun
 }
 \examples{
 \donttest{
-Result=parApplyClusterAnalysis(FCPS$Hepta$Data,
-
-kmeansClustering,1:3,7,method="LBG")
+data(Hepta)
+Result=parApplyClusterAnalysis(Hepta$Data,
+kmeansClustering,1:3,7,Type="LBG")
 #clustering accuracy
 
-apply(Result$Cls_Matrix,2,ClusteringAccuracy,FCPS$Hepta$Cls)
+apply(Result$Cls_Matrix,2,ClusteringAccuracy,Hepta$Cls)
+}
+
+\dontrun{
+data(Hepta)
+data(Atom)
+DataV=list(Hepta=Hepta$Data,Atom=Atom$Data)
+Clusternumbers=c(7,2)
+ResultList=parApplyClusterAnalysis(DataV,
+kmeansClustering,1:3,ClusterNo=Clusternumbers,Type="LBG")
+#clustering accuracy
+
+Accuracies=mapply(FUN=function(x,y) return(apply(x$Cls_Matrix,2,ClusteringAccuracy,y)),ResultList,list(Hepta$Cls,Atom$Cls))
+colnames(Accuracies)=names(ResultList)
+Accuracies
 }
 }
 \keyword{clustering}% use one of  RShowDoc("KEYWORDS")
 \keyword{parallel cluster analysis}% __ONLY ONE__ keyword per line
+\keyword{parApply}% __ONLY ONE__ keyword per line
+\keyword{CA}% __ONLY ONE__ keyword per line
+\keyword{benchmarking}% __ONLY ONE__ keyword per line

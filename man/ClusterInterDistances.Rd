@@ -1,8 +1,9 @@
-\name{InterClusterDistances}
+\name{ClusterInterDistances}
+\alias{ClusterInterDistances}
 \alias{InterClusterDistances}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
-InterClusterDistances
+Computes Inter-Cluster Distances
 }
 \description{
 Computes inter-cluster distances which are the distance between each cluster and all other clusters
@@ -39,16 +40,17 @@ matrix [1:m,1:(k+1)] of k clusters, each columns consists of the distances betwe
 \author{
 Michael Thrun
 }
-\note{
-
-PlotIt is under development
-}
 
 \seealso{
 \code{\link[DataVisualizations]{MDplot}}
+
+\code{ClusterDistances}
 }
 \examples{
-##ToDo
+data(Hepta)
+Distance=as.matrix(dist(Hepta$Data))
+
+interdists=ClusterInterDistances(Distance,Hepta$Cls)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

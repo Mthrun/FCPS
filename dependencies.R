@@ -1,1 +1,1 @@
-c(mclust, gplots, kernlab, cclust, vegan, dbscan, kohonen, MCL, ADPclust, cluster, orclus, subspace, flexclust,clValid, ABCanalysis, apcluster, pracma,EMCluster, pdfCluster, parallelDist, plotly, ProjectionBasedClustering, mstknnclust, densityClust, rowr, parallel) energy
+c(mclust, gplots, kernlab, cclust, vegan, dbscan, kohonen, MCL, ADPclust, cluster, orclus, subspace, flexclust, ABCanalysis, apcluster, pracma,EMCluster, pdfCluster, parallelDist, plotly, ProjectionBasedClustering, mstknnclust, densityClust, rowr, parallel) energy

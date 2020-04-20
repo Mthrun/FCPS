@@ -56,8 +56,8 @@ SpectralClustering <- function(Data, ClusterNo,PlotIt=FALSE,...){
   #cls <- matrix(kernlab::specc(Data, centers=K,...))
 	Cls=sc@.Data
 	if(PlotIt){
-	  requireNamespace('DataVisualizations')
-	  DataVisualizations::Plot3D(Data,Cls)
+	  ClusterPlotMDS(Data,Cls)
 	}  
+	Cls=ClusterRename(Cls,Data)
 	return(list(Cls=Cls,Object=sc))
 }

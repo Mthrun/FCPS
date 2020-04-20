@@ -48,12 +48,11 @@ Hierarchical_DBSCAN <-function(Data,minPts=4,PlotTree=FALSE,PlotIt=FALSE,...){
   
   
   if(isTRUE(PlotIt)){
-    requireNamespace('DataVisualizations')
     Cls2=Cls
     Cls2[Cls2==0]=999
-    print(DataVisualizations::Plot3D(Data,Cls2))
+	ClusterPlotMDS(Data,Cls2)
   }
-  
+   Cls=ClusterRename(Cls,Data)
   return(list(Cls=Cls,Object=liste))
   
 }

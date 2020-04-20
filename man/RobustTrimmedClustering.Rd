@@ -1,11 +1,11 @@
 \name{RobustTrimmedClustering}
 \alias{RobustTrimmedClustering}
-\title{Robust Trimmed Clustering Clustering}
+\title{Robust Trimmed Clustering}
 \description{
-Robust Trimmed Clustering Clustering of  Garcia-Escudero (2008)
+Robust Trimmed Clustering invented by [Garcia-Escudero et al., 2008] and implemented by [Fritz et al., 2012].
 }
 \usage{
-RobustTrimmedClustering(Data, ClusterNo,
+RobustTrimmedClustering(Data, ClusterNo,Alpha,
 
 PlotIt=FALSE,...)
 }
@@ -16,11 +16,14 @@ PlotIt=FALSE,...)
 \item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.}
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 
-\item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
+\item{Alpha}{
+no trimming is done equals to alpha =0, otherwise proportion of datapoints to be trimmed
+}
+\item{\dots}{Further arguments to be set for the clustering algorithm, e.g.  \code{restr} and \code{restr.fact} described in details. If not set, default arguments are used.}
 }
 
 \details{
-Currently the easies dataset does not work with default parametrization, please see \code{\link[tclust]{tclust}} for parameter description.
+"The larger \code{restr.fact} is chosen, the looser is the restriction on the scatter matrices, allowing for more heterogeneity among the clusters. On the contrary, small values of restr.fact close to 1 imply very equally scattered clusters. This idea of constraining cluster scatters to avoid spurious solutions goes back to Hathaway (1985), who proposed it in mixture fitting problems" [Fritz et al., 2012]. The type of constraint \code{restr} can be set to "eigen", "deter" or "sigma.". Please see \code{\link[tclust]{tclust}} for further parameter description.
 }
 \value{
 List of
@@ -30,12 +33,12 @@ List of
 
 \examples{
 data('Hepta')
-out=RobustTrimmedClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE,restr.fact=1e3)
+out=RobustTrimmedClustering(Hepta$Data,ClusterNo=7,Alpha=0,PlotIt=FALSE)
 }
 \author{Michael Thrun}
 
 \references{
-Garcia-Escudero, L. A., Gordaliza, A., Matran, C., & Mayo-Iscar, A. (2008). A general trimming approach to robust cluster analysis. The Annals of Statistics, 36(3), 1324-1345.
+[Garcia-Escudero et al., 2008]  Garcia-Escudero, L. A., Gordaliza, A., Matran, C., & Mayo-Iscar, A.: A general trimming approach to robust cluster analysis, The annals of Statistics, Vol. 36(3), pp. 1324-1345. 2008.
 
-Fritz, H., Garcia-Escudero, L. A., & Mayo-Iscar, A. (2012). tclust: An R package for a trimming approach to cluster analysis. Journal of Statistical Software, 47(12), 1-26.
+[Fritz et al., 2012]  Fritz, H., Garcia-Escudero, L. A., & Mayo-Iscar, A.: tclust: An R package for a trimming approach to cluster analysis, Journal of statistical Software, Vol. 47(12), pp. 1-26. 2012.
 }

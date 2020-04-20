@@ -1,4 +1,4 @@
-HierarchicalClusterDists <-function(pDist,ClusterNo=0,method="ward.D2",ColorTreshold=0,...){
+HierarchicalClusterDists <-function(pDist,ClusterNo=0,method="ward.D2",ColorTreshold=0,Fast=FALSE,...){
 # HierarchicalClusterDists(pDist)
 # HierarchicalClusterDists(pDist,0,"ward.D2",100)
 # Cls=HierarchicalClusterDists(pDist,6,"ward.D2")
@@ -21,13 +21,17 @@ HierarchicalClusterDists <-function(pDist,ClusterNo=0,method="ward.D2",ColorTres
   if(!inherits(pDist,'dist'))
     pDist=as.dist(pDist)
   
-	hc <- hclust(pDist,method=method); #liefert teilweise andere Werte wie Z = linkage(Y,method);
-	
+  if(isTRUE(Fast)&requireNamespace('fastcluster')){
+    hc <- fastcluster::hclust(pDist,method=method)
+  }else{
+    hc <- hclust(pDist,method=method); #liefert teilweise andere Werte wie Z = linkage(Y,method);
+  }
 	m=paste(method,"LinkCluster/ "," N=",nrow(as.matrix(pDist)))
 	
 # Classification or Dendrogram
 	if (ClusterNo>0){
-		return (list(Cls=cutree(hc,ClusterNo),Dedrogram=hc))
+	Cls=cutree(hc,ClusterNo)
+		return (list(Cls=Cls,Dedrogram=hc))
 	} 
 	else{
 		x=as.dendrogram(hc);plot(x, main=m,xlab="Number of Data Points N", ylab="Distance",sub=" ",leaflab ="none",...)

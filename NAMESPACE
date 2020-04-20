@@ -1,4 +1,13 @@
-exportPattern("^[[:alpha:]]+")
+exportPattern("^[[:upper:]]+")
+export(kmeansClustering)
+export(kmeansDist)
+export(pdfClustering)
+export(parApplyClusterAnalysis)
+export(cluster_analysis_fun)
+import(DataVisualizations)
+
+
+import(ggplot2)
 importFrom('stats', hclust,cutree,kmeans,as.dendrogram,rect.hclust)
 #importFrom('cclust', cclust)
 #importFrom('kernlab', specc)
@@ -11,3 +20,4 @@ importFrom("stats","complete.cases", "cov", "dist", "pf","sd", "cutree", "hclust
 importFrom("stats", "as.hclust", "quantile","is.leaf")
   importFrom("utils", "head")
   importFrom("stats", "prcomp", "runif")
+   importFrom("stats", "cor")

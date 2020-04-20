@@ -8,18 +8,20 @@ Hierarchical Clustering
 Wrapper various agglomerative hierarchical clustering algorithms.
 }
 \usage{
-HierarchicalClustering(DataOrDistances,ClusterNo,method='SingleL',Data,\dots)
+HierarchicalClustering(DataOrDistances,ClusterNo,method='SingleL',Fast=TRUE,Data,\dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
 \item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
 
 \item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.}
-\item{method}{method of cluster analysis: "Ward", "SingleL", "CompleteL", "AverageL" (UPGMA), "WPGMA" (mcquitty), "MedianL" (WPGMC), "CentroidL" (UPGMC) or "MinEnergy".}
+\item{method}{method of cluster analysis: "Ward", "SingleL", "CompleteL", "AverageL" (UPGMA), "WPGMA" (mcquitty), "MedianL" (WPGMC), "CentroidL" (UPGMC), "Minimax", "MinEnergy" or "Gini".}
+\item{Fast}{if TRUE and fastcluster installed, then a faster implementation of the methods above can be used except "Minimax", "MinEnergy" or "Gini"}
+
 \item{Data}{[1:n,1:d] data matrix in the case that \code{DataOrDistances} is missing and partial matching does not work.}
 
   \item{\dots}{
-Further arguments passed on to either \code{\link{HierarchicalClusterData}}, \code{\link{HierarchicalClusterDists}} or \code{\link{MinimalEnergyClustering}}
+Further arguments passed on to either \code{\link{HierarchicalClusterData}}, \code{\link{HierarchicalClusterDists}}, \code{\link{MinimalEnergyClustering}} or \code{\link{GenieClustering}} (for "Gini").
 }
 }
 \details{

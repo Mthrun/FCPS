@@ -8,7 +8,7 @@ Internal function
 Do not use alone, please use \code{\link{parApplyClusterAnalysis}}.
 }
 \usage{
-cluster_analysis_fun(i, fun, DataOrDistance, ClusterNo,SetSeed=TRUE, ...)
+cluster_analysis_fun(i, fun, DataOrDistances, ClusterNo,SetSeed=TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -18,7 +18,7 @@ cluster_analysis_fun(i, fun, DataOrDistance, ClusterNo,SetSeed=TRUE, ...)
   \item{fun}{
 ...
 }
-  \item{DataOrDistance}{
+  \item{DataOrDistances}{
 ...
 }
   \item{ClusterNo}{
@@ -45,11 +45,11 @@ Michael Thrun
 \code{\link{parApplyClusterAnalysis}}
 }
 \examples{
-\donttest{
+\dontrun{
 #data(Hepta)
 #Distance=as.matrix(parallelDist::parallelDist(Hepta$Data))
 #out=cluster_analysis_fun(i = 1,fun = APclusterin
-#g,DataOrDistance = Distance,ClusterNo = 7)
+#g,DataOrDistances = Distance,ClusterNo = 7)
 }
 }
 

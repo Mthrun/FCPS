@@ -22,12 +22,10 @@ AgglomerativeNestingClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE
   if (isSymmetric(unname(DataOrDistances))) {
       Input = as.dist(DataOrDistances)
       requireNamespace('ProjectionBasedClustering')
-      DataPoints=ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = 3)$ProjectedPoints
       AnzVar = ncol(DataOrDistances)
       AnzData = nrow(DataOrDistances)
 	  diss =TRUE
     }else{
-      DataPoints=DataOrDistances
 	  Input=DataOrDistances
 	  diss =FALSE
     }
@@ -40,10 +38,9 @@ AgglomerativeNestingClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE
     Cls=cutree(as.hclust(res), k = ClusterNo)
     
     if(PlotIt){
-      requireNamespace('DataVisualizations')
-      DataVisualizations::Plot3D(DataPoints,Cls)
-      #plot(res)
+		ClusterPlotMDS(DataOrDistances,Cls)
     }
+	Cls=ClusterRename(Cls,DataOrDistances)
   }
   if(ClusterNo<=0){
     Cls=NULL

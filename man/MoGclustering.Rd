@@ -5,7 +5,7 @@
 MoGclustering
 }
 \description{
-call MixtureOfGaussians (MoG) clustering based on Expectation Maximization (EM)
+call MixtureOfGaussians (MoG) clustering based on Expectation Maximization (EM) of [Chen et al., 2012].
 }
 \usage{
 MoGclustering(Data,ClusterNo=2,method="EM",PlotIt=FALSE,...)
@@ -29,9 +29,9 @@ List of
 \item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
+[Chen et al., 2012]  Chen, W., Maitra, R., & Melnykov, V.: EMCluster: EM Algorithm for Model-Based Clustering of Finite Mixture Gaussian Distribution, R Package, URL http://cran. r-project. org/package= EMCluster, 2012.
+
 [Thrun, 2017]  Thrun, M. C.:A System for Projection Based Clustering through Self-Organization and Swarm Intelligence, (Doctoral dissertation), Philipps-Universitaet Marburg, Marburg, 2017.
-
-
 }
 \note{MoG used in [Thrun, 2017] was renamed to \code{\link{ModelBasedClustering}} in this package.}
 \author{

@@ -1,4 +1,4 @@
-DatabionicSwarmClustering=DBSclusteringAndVisualization=function(DataOrDistances,ClusterNo=0,StructureType=TRUE,DistancesMethod=NULL,PlotTree=FALSE,PlotMap=FALSE,Data){
+DatabionicSwarmClustering=DBSclusteringAndVisualization=function(DataOrDistances,ClusterNo=0,StructureType=TRUE,DistancesMethod=NULL,PlotTree=FALSE,PlotMap=FALSE,PlotIt=FALSE,Data){
   requireNamespace('DatabionicSwarm')
   if(StructureType==1) StructureType=TRUE
   if(StructureType==0) StructureType=FALSE
@@ -65,5 +65,9 @@ DatabionicSwarmClustering=DBSclusteringAndVisualization=function(DataOrDistances
     } 
     GeneralizedUmatrix::plotTopographicMap(generalizedUmatrix$Umatrix,generalizedUmatrix$Bestmatches,Cls = Cls)
   }
+  if(PlotIt){
+	ClusterPlotMDS(DataOrDistances,Cls)
+  }
+    Cls=ClusterRename(Cls,DataOrDistances)
   return(list(Cls=Cls,Object=list(Projection=proj,GeneralizedUmatrixOfSwarm=generalizedUmatrix,Call=match.call(),DataPoints=DataPoints)))
 }

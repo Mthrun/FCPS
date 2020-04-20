@@ -10,7 +10,7 @@ HierarchicalClusterData(Data,ClusterNo=0,
 
 method="ward.D2",DistanceMethod="euclidean",
 
-ColorTreshold=0,Cls=NULL,\dots)
+ColorTreshold=0,Fast=FALSE,Cls=NULL,\dots)
 }
 
 \description{
@@ -22,6 +22,7 @@ Hierarchical cluster analysis on a set of dissimilarities and methods for analyz
 \item{method}{Methode der Clusterung: "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".}
 \item{DistanceMethod}{see  \code{\link[parallelDist]{parDist}}, for example 'euclidean','mahalanobis','manhatten' (cityblock),'fJaccard','binary', 'canberra', 'maximum'. Any unambiguous substring can be given.}
 \item{ColorTreshold}{draws cutline w.r.t. dendogram y-axis (height), height of line as scalar should be given}
+\item{Fast}{if TRUE and fastcluster installed, then a faster implementation of the methods above can be used}
 \item{Cls}{[1:n] classification vector for coloring of dendrogram in plot}
 \item{\dots}{If ClusterNo=0, plot arugments for as.dendrogramm, e.g.leaflab
 

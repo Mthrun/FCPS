@@ -8,10 +8,9 @@ ADPclustering=function(Data,ClusterNo=NULL,PlotIt=FALSE,...){
   adp=ADPclust::adpclust(Data,nclust=ClusterNo,...)
   
   Cls=as.numeric(adp$clusters)
-  
+  Cls=ClusterRename(Cls,Data)
   if(PlotIt){
-    requireNamespace('DataVisualizations')
-    DataVisualizations::Plot3D(Data,Cls)
+    ClusterPlotMDS(Data,Cls)
   }
   return(list(Cls=Cls,Object=adp))
 }

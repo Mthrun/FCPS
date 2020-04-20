@@ -19,8 +19,8 @@ pdfClustering <-function(Data,PlotIt=FALSE,...){
     names(Cls)=rownames(Data)
   
   if(PlotIt){
-    requireNamespace('DataVisualizations')
-    DataVisualizations::Plot3D(Data,Cls)
+    ClusterPlotMDS(Data,Cls)
   }
+  Cls=ClusterRename(Cls,Data)
   return(list(Cls=Cls,Object=out))
 }

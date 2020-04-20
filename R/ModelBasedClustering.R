@@ -24,13 +24,15 @@ ModelBasedClustering <-function(Data,ClusterNo=2,PlotIt=FALSE,...){
       return(cls <- rep(1, nrow(Data)))
     }
   }
-  
+ 
   requireNamespace('mclust')
 
 res=mclust::Mclust(Data,G=ClusterNo,modelNames=mclust::mclust.options("emModelNames"),...)
+Cls=res$classification
 if(PlotIt){
-  requireNamespace('DataVisualizations')
-  DataVisualizations::Plot3D(Data,res$classification)
+  ClusterPlotMDS(Data,Cls)
+  DataVisualizations::Plot3D(Data,Cls)
 }
-return(list(Cls=res$classification,Object=res))
+Cls=ClusterRename(Cls,Data)
+return(list(Cls=Cls,Object=res))
 }

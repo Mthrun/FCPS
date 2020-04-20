@@ -1,4 +1,6 @@
 \name{ClusterDistances}
+\alias{ClusterIntraDistances}
+\alias{IntraClusterDistances}
 \alias{ClusterDistances}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
@@ -38,16 +40,17 @@ matrix [1:m,1:(k+1)] of k clusters, each columns consists of the distances in a 
 \author{
 Michael Thrun
 }
-\note{
-
-PlotIt is under development
-}
 
 \seealso{
 \code{\link[DataVisualizations]{MDplot}}
+
+\code{\link{ClusterInterDistances}}
 }
 \examples{
-##ToDo
+data(Hepta)
+Distance=as.matrix(dist(Hepta$Data))
+
+interdists=ClusterDistances(Distance,Hepta$Cls)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

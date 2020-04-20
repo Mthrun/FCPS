@@ -35,8 +35,8 @@ MarkovClustering=function(Data=NULL,Adjacency=NULL,Radius=TRUE,addLoops = TRUE,P
     names(Cls)=1:nrow(Data)
   
   if(PlotIt&!is.null(Data)){
-    requireNamespace('DataVisualizations')
-    DataVisualizations::Plot3D(Data,Cls)
+    ClusterPlotMDS(Data,Cls)
   }
+  	Cls=ClusterRename(Cls,Data)
   return(list(Cls=Cls,Object=mm))
 }

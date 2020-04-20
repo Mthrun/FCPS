@@ -16,9 +16,10 @@ NeuralGasClustering <-function(Data,ClusterNo,PlotIt=FALSE,...){
   
 requireNamespace('cclust')
 res=cclust::cclust(x=Data,centers=ClusterNo,method='neuralgas',...)
+Cls=res$cluster
 if(PlotIt){
-  requireNamespace('DataVisualizations')
-  DataVisualizations::Plot3D(Data,res$cluster)
+  ClusterPlotMDS(Data,Cls)
 }
-return(list(Cls=res$cluster,Object=res))
+Cls=ClusterRename(Cls,Data)
+return(list(Cls=Cls,Object=res))
 }

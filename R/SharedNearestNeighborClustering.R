@@ -17,12 +17,12 @@ SharedNearestNeighborClustering <-function(Data,Knn=7,Radius,minPts,PlotIt=FALSE
     return(cls <- rep(1,length(Data)))
   }
   
-  if(missing(Radius)){  
+  if(is.null(Radius)){  
   requireNamespace('DataVisualizations')
     warning('The Radius (eps) parameter is missing but it is required in DBscan. Trying to estimate..')
     Radius=0.5*DataVisualizations::ParetoRadius(Data)
   } 
-  if(missing(minPts)){
+  if(is.null(minPts)){
     minPts=min(round(0.0005*nrow(Data),2),20)## A point needs a least 16 (minPts) links in the sNN graph to be a core point.
     warning('The minPts parameter is missing but it is required in DBscan. Trying to estimate..')
   }   
@@ -48,12 +48,11 @@ SharedNearestNeighborClustering <-function(Data,Knn=7,Radius,minPts,PlotIt=FALSE
   }
   
   if(PlotIt){
-    requireNamespace('DataVisualizations')
     Cls2=Cls
     Cls2[Cls2==0]=999
-    DataVisualizations::Plot3D(Data,Cls2)
+    ClusterPlotMDS(Data,Cls2)
   }
-  
+  Cls=ClusterRename(Cls,Data)
   return(list(Cls=Cls,Object=liste))
   
 }

@@ -21,7 +21,7 @@ QTclustering=QTClustering <-function(Data,Radius,PlotIt=FALSE,...){
   
   requireNamespace('flexclust')
 
-    if(missing(Radius)){ #estimate Maximum diameter of cluster, i.e. group of large distances
+    if(is.null(Radius)){ #estimate Maximum diameter of cluster, i.e. group of large distances
       requireNamespace('parallelDist')
       Radius=EstimateRadiusByDistance(as.matrix(parallelDist::parallelDist(Data)))
     } 
@@ -34,8 +34,8 @@ QTclustering=QTClustering <-function(Data,Radius,PlotIt=FALSE,...){
   if(PlotIt){
     Cls2=Cls
     Cls2[Cls2==0]=999
-    requireNamespace('DataVisualizations')
-    DataVisualizations::Plot3D(Data,Cls2)
+	ClusterPlotMDS(Data,Cls2)
   }
+  Cls=ClusterRename(Cls,Data)
   return(list(Cls=Cls,Object=obj))
 }

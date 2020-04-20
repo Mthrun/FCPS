@@ -1,8 +1,19 @@
-ClusterDistances=function(FullDistanceMatrix,Cls,Names,PlotIt=FALSE){
+ClusterDistances=IntraClusterDistances=ClusterIntraDistances=function(FullDistanceMatrix,Cls,Names,PlotIt=FALSE){
   if(missing(Cls)){
     Cls=rep(1,nrow(FullDistanceMatrix))
   }
+  if(!is.vector(Cls)){
+    warning('ClusterDistances: Cls is not a vector. Calling as.numeric(as.character(Cls))')
+    Cls=as.numeric(as.character(Cls))
+  }
   
+  if(nrow(FullDistanceMatrix)!=length(Cls)){
+	stop('ClusterDistances: Dimensionality of Distance Matrix "FullDistanceMatrix" is not consistent with "Cls" classification vector')
+  }
+  
+  if(!isSymmetric(unname(FullDistanceMatrix))){
+	stop('ClusterDistances: Distance Matrix "FullDistanceMatrix" is not symmetric. Please check this, e.g. DataVisualizations::Pixelmatrix.')
+  }
   u=sort(unique(Cls))
 
   classdist=list(FullDistanceMatrix[upper.tri(FullDistanceMatrix,diag = F)])
@@ -17,25 +28,24 @@ ClusterDistances=function(FullDistanceMatrix,Cls,Names,PlotIt=FALSE){
   #  return(rowr::cbind.fill(...,fill = NaN))
   #}
   
-  # if(PlotIt){
-  #   ggobject=MDplot4multiplevectors(unlist(classdist))$ggplotObj
-  #   xmat=do.call(addcols,classdist)
-  #   colnames(xmat)=c('Full',paste0('Class',u))
-  #   print(ggobject)
-  #   return(list(ClusterDists=as.matrix(xmat),ggobject=ggobject))
-  # 
-  # }
+
     xmat=do.call(DataVisualizations::CombineCols,classdist)
     
     if(missing(Names)){
       colnames(xmat)=c('Full',paste0('Class',u))
     }else{
       if(length(u)!=length(Names)){
-        warning('Lengh of Names has to be equal of length of unique Cls.')
+        warning('ClusterDistances: Lengh of Names has to be equal of length of unique Cls.')
         colnames(xmat)=c('Full',paste0('Class',Names))
       }else{
         colnames(xmat)=c('Full',Names)
       }
+    }
+    
+    if(PlotIt){
+      ggobject=DataVisualizations::MDplot(xmat,Scaling = 'CompleteRobust')$ggplotObj
+      print(ggobject)
+      return(list(ClusterDists=as.matrix(xmat),ggobject=ggobject))
     }
 
   return(as.matrix(xmat))

@@ -1,10 +1,14 @@
-clusternumbers <- function (data,
-                            cls = NULL,
+ClusterNoEstimation <- function (Data,
+                            ClsMatrix = NULL,
                             max.nc,
                             index = 'all',
                             min.nc = 2,
-                            print.status = FALSE,
-                            method = NULL) {
+                            Silent = TRUE,
+                            method = NULL,
+                            PlotIt=TRUE) {
+							
+							data=Data
+							cls=ClsMatrix
   # berechnet die Kennzahlen zu den gegebenen Daten und Clusterungen und die darauf basierende empfohlene Klassenanzahl
   #
   #  INPUT
@@ -19,7 +23,7 @@ clusternumbers <- function (data,
   #  index           Vektor der Kennzahlen die berechnet werden sollen, Standard = 'all',
   #                  siehe DETAILS fuer moegliche Kennzahlen
   #  min.nc          niedrigste Klassenanzahl, die ueberprueft werden soll, Standard = 2
-  #  print.status    wenn TRUE werden Statusmeldungen ausgeben, Standard = FALSE
+  #  Silent    wenn TRUE werden Statusmeldungen ausgeben, Standard = FALSE
   #
   #  RETURN
   #  Kennzahlen          Matrix der berechneten Kennzahlen
@@ -473,12 +477,12 @@ clusternumbers <- function (data,
     colnames(clusters2) <- c(NA, min.nc:max.nc, NA)
   }
   
-  if (print.status) {
+  if (!Silent) {
    print("eingebene Clusterungen in Ordnung, starte Berechnung") 
   }
   }
   else {
-    if (print.status) {
+    if (!Silent) {
       print("Clusterungen werden erstellt") 
     }
     methodnames <- c("ward.D", "single", "complete", "average", "mcquitty", 
@@ -525,7 +529,7 @@ clusternumbers <- function (data,
     clusters <- clusters2[, 2:(range + 1)]
     colnames(clusters) <- c(min.nc:max.nc)
     
-    if (print.status) {
+    if (!Silent) {
       print("Clusterungen erstellt, starte Berechnung") 
     }
   }
@@ -565,23 +569,32 @@ clusternumbers <- function (data,
     return(rat)
   }
   scott <- function(zttw, clsize) {
+    scott=NaN
+    try({
     n <- sum(clsize)
     dettt <- prod(eigen(zttw$tt)$values)
     detw <- prod(eigen(zttw$w)$values)
     scott <- n * log(dettt / detw)
+    })
     return(scott)
   }
   marriot <- function(zttw, clsize) {
+    mar=NaN
+    try({
     k <- length(clsize)
     detw <- prod(eigen(zttw$w)$values)
     mar <- (k ^ 2) * detw
+    })
     return(mar)
   }
   ball <- function(withins, clsize) {
     ball <- sum(withins) / length(clsize)
   }
   tracecovw <- function(zttw) {
+    trcovw=NaN
+    try({
     trcovw <- sum(diag(cov(zttw$w)))
+    })
     return(trcovw)
   }
   tracew <- function(zttw) {
@@ -589,14 +602,20 @@ clusternumbers <- function (data,
     return(tracew)
   }
   friedman <- function(zttw) {
+    fried=NaN
+    try({
     b <- zttw$tt - zttw$w
     fried <- sum(diag(solve(zttw$w) %*% b))
+    })
     return(fried)
   }
   rubin <- function(zttw) {
+    friedm=NaN
+    try({
     dettt <- prod(eigen(zttw$tt)$values)
     detw <- prod(eigen(zttw$w)$values)
     friedm <- dettt / detw
+    })
     return(friedm)
   }
   ssi <- function(centers, clsize) {
@@ -1392,6 +1411,7 @@ clusternumbers <- function (data,
     }
     #Kennzahlen aus NbClust
     if (any(indexn >= 15) || indexn == all) {
+     
       jeu <- data
       nn <- numberObsAfter <- dim(jeu)[1]
       pp <- dim(jeu)[2]
@@ -1402,7 +1422,7 @@ clusternumbers <- function (data,
       # Only for indices using vv : CCC
       
       if (any(indexn == 16) || indexn == all)
-      {
+      { try({
         for (i400 in 1:sizeEigenTT)
         {
           if (eigenValues[i400] < 0) {
@@ -1420,6 +1440,7 @@ clusternumbers <- function (data,
             ss[i500] = s1[i500]
         }
         vv <- prod(ss)
+      })
       }
       md <- dist(jeu, method = "euclidean")
       
@@ -1439,6 +1460,8 @@ clusternumbers <- function (data,
     }
     if (any(indexn == 16) || indexn == all)
     {
+      res[i + 1, 16]=NaN
+      try({
       res[i + 1, 16] <- Indices.WBT(
         x = jeu,
         cl = cl1,
@@ -1446,6 +1469,7 @@ clusternumbers <- function (data,
         s = ss,
         vv = vv
       )
+      })
     }
     if (any(indexn == 17) || indexn == all)
     {
@@ -1514,13 +1538,13 @@ clusternumbers <- function (data,
       res[i + 1, 26] <- Index.SDbw(jeu, cl1)
     }
     
-    if (print.status) {
+    if (!Silent) {
       print(paste0("Kennzahlen fuer Klassenanzahl ",i+min.nc," berechnet, hoechste Klassenanzahl: ",max.nc))
     }
     
   }
   
-  if (print.status) {
+  if (!Silent) {
     print("Kennzahlen berechnet, ermittle optimale Klassenanzahlen")
   }
   
@@ -1719,15 +1743,19 @@ clusternumbers <- function (data,
     klassenanzahl <- t(klassenanzahl)
   }
   
-  if (print.status) {
-    print("optimale Klassenanzahlen ermittelt - ENDE")
+  if (!Silent) {
+    print("optimale Klassenanzahlen per Verfahren ermittelt - ENDE")
   }
-  
+  if(isTRUE(PlotIt)){
+    cat=paste('Cluster No.',klassenanzahl)
+    requireNamespace('DataVisualizations')
+    DataVisualizations::Fanplot(cat,main = 'Indicators for Cluster No.')
+  }
   resliste <- list(
-    Kennzahlen = res,
-    Klassenanzahl = klassenanzahl,
-    Clusterungen = clusters,
-    criticalValues = criticalValues
+    Indicators = res,
+    ClusterNo = klassenanzahl,
+    ClsMatrix = clusters,
+    HierarchicalIndicators = criticalValues
   )
   
   return(resliste)

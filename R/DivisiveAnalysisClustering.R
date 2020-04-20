@@ -21,13 +21,10 @@ DivisiveAnalysisClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE,Sta
   requireNamespace('cluster')
   if (isSymmetric(unname(DataOrDistances))) {
       Input = as.dist(DataOrDistances)
-      requireNamespace('ProjectionBasedClustering')
-      DataPoints=ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = 3)$ProjectedPoints
       AnzVar = ncol(DataOrDistances)
       AnzData = nrow(DataOrDistances)
 	  diss =TRUE
     }else{
-      DataPoints=DataOrDistances
 	  Input=DataOrDistances
 	  diss =FALSE
     }
@@ -40,9 +37,7 @@ DivisiveAnalysisClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE,Sta
     Cls=cutree(as.hclust(res), k = ClusterNo)
     
     if(PlotIt){
-      requireNamespace('DataVisualizations')
-      DataVisualizations::Plot3D(DataPoints,Cls)
-      #plot(res)
+		ClusterPlotMDS(DataOrDistances,Cls)
     }
   }
   if(ClusterNo<=0){
@@ -52,5 +47,6 @@ DivisiveAnalysisClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE,Sta
       warning(('ClusterNo cannot be a negativ number'))
     }
   }
+    Cls=ClusterRename(Cls,DataOrDistances)
   return(list(Cls=Cls,Object=res))
 }

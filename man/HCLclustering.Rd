@@ -6,7 +6,7 @@
 HCLclustering(Data, ClusterNo,PlotIt=FALSE,...)
 }
 \description{
-Hard Competitive learning clustering published by [Ripley, 2007] and implemented by [Dimitriadou, 2002].
+Hard Competitive learning clustering published by [Ripley, 2007].
 
 }
 \arguments{

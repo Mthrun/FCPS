@@ -42,8 +42,8 @@ SOMclustering=function(Data,LC=c(1,2),ClusterNo=NULL,Mode="online",PlotIt=FALSE,
     names(Cls)=1:nrow(Data)
   
   if(PlotIt){
-    requireNamespace('DataVisualizations')
-    DataVisualizations::Plot3D(Data,Cls)
+    ClusterPlotMDS(Data,Cls)
   }
+  Cls=ClusterRename(Cls,Data)
   return(list(Cls=Cls,Object=koh))
 }

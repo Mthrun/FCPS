@@ -14,7 +14,7 @@ QTclustering(Data,Radius,PlotIt=FALSE,...)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
-\item{Radius}{Maximum radius of clusters. Automatic estimation can be done with [Thrun et al., 2016] if not otherwise set.}
+\item{Radius}{Maximum radius of clusters. If NULL, Automatic estimation can be done with [Thrun et al., 2016] if not otherwise set.}
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 }
@@ -41,7 +41,7 @@ Michael Thrun
 
 \examples{
 data('Hepta')
-out=QTclustering(Hepta$Data,PlotIt=FALSE)
+out=QTclustering(Hepta$Data,Radius=NULL,PlotIt=FALSE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

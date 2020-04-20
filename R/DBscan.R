@@ -21,12 +21,12 @@ DBscan <-function(Data,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
     return(cls <- rep(1,length(Data)))
   }
   
-if(missing(Radius)){  
+if(is.null(Radius)){  
 	requireNamespace('DataVisualizations')
   warning('The Radius (eps) parameter is missing but it is required in DBscan. Trying to estimate..')
   Radius=0.5*DataVisualizations::ParetoRadius(Data)
 } 
-  if(missing(minPts)){
+  if(is.null(minPts)){
     minPts=round(0.04*nrow(Data),0)
     warning('The minPts parameter is missing but it is required in DBscan. Trying to estimate..')
   }   
@@ -53,12 +53,11 @@ if(missing(Radius)){
     liste=out$DBscanObject
   }
 	if(PlotIt){
-	  requireNamespace('DataVisualizations')
 	  Cls2=Cls
 	  Cls2[Cls2==0]=999
-	  print(DataVisualizations::Plot3D(Data,Cls2))
+	  ClusterPlotMDS(Data,Cls2)
 	}
-	
+	  Cls=ClusterRename(Cls,Data)
   return(list(Cls=Cls,Object=liste))
 
 }
