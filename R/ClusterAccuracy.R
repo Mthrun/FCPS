@@ -39,7 +39,7 @@ ClusterAccuracy=function(PriorCls,CurrentCls,K=9){
         p=length(seq(from=m,to=K,by=-1))-1
         for(i in 1:p){
           ClsTmp=ClsRes1
-          V=ClusterStats(ClsTmp)
+          V=ClusterCount(ClsTmp)
           ind=order(V$CountPerClass)
           u=head(V$UniqueClasses[ind],2)
           ClsTmp[c(which(ClsTmp==u[1]),which(ClsTmp==u[2]))]=u[1]

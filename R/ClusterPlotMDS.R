@@ -73,7 +73,10 @@ ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",O
     Cls[!is.finite(Cls)]=999
     Colors=DataVisualizations::DefaultColorSequence[-2]#no yellow
     Colors=Colors[1:length(unique(Cls))]
-    DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,type="s",size=PointSize,box=F,aspect=T,top=T,main=main,Plotter3D=Plotter3D,...)
+    if(Plotter3D=="rgl")
+      DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,type="s",size=PointSize,box=F,aspect=T,top=T,main=main,Plotter3D=Plotter3D,...)
+    else
+      DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,size=PointSize,main=main,Plotter3D=Plotter3D,...)
 
   }else{
     plot(Data[,1],Data[,2],cols=Cls,main = main,...)

@@ -39,13 +39,13 @@ kmeansClustering <-function(DataOrDistance,ClusterNo=2,Centers=NULL,Type='LBG',R
     switch(Type,
            'Hartigan'={
     	res=kmeans(Data,centers=ClusterNo,...)
-  	Cls=as.vector(res$cluster)
+    	Cls=as.vector(res$cluster)
   	
     	if(Verbose==TRUE){print(res)}
     	if(PlotIt){
   	  ClusterPlotMDS(Data,Cls)
     	}
-  	Cls=ClusterRename(Cls)
+  	Cls=ClusterRename(Cls,Data)
     	return(list(Cls=Cls,Object=list(SumDistsToCentroids=res$withinss,Centroids=res$centers)))
      },
      'LBG'={
@@ -74,7 +74,7 @@ kmeansClustering <-function(DataOrDistance,ClusterNo=2,Centers=NULL,Type='LBG',R
         requireNamespace('DataVisualizations')
         ClusterPlotMDS(Data,Cls)
       }
-      Cls=ClusterRename(Cls)
+      Cls=ClusterRename(Cls,Data)
       return(list(Cls=Cls,Object=list(SumDistsToCentroids=res$withinss,Centroids=res$centers)))
     },{
       res=kmeans(Data,centers=ClusterNo,algorithm = Type,...)

@@ -12,7 +12,7 @@ ClusterRenameDescendingSize <- function(Cls) {
     Cls=as.numeric(as.character(Cls))
   }
   
-  ListeV <- ClusterStats(Cls)
+  ListeV <- ClusterCount(Cls)
   countPerClass <- ListeV[[2]]
   UniqueClasses=ListeV[[1]]
   sortedClasses <- sort(na.last=TRUE,countPerClass, decreasing = TRUE, index.return=TRUE) # Original-Indizes mitliefern lassen

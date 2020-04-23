@@ -90,8 +90,14 @@ Michael Thrun
 }
 
 \examples{
+\donttest{
 data('Hepta')
 out=AutomaticProjectionBasedClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
+}
+\dontshow{
+data('Hepta')
+out=AutomaticProjectionBasedClustering(Hepta$Data[1:10,],ClusterNo=2,PlotIt=FALSE)
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

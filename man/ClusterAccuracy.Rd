@@ -42,17 +42,22 @@ Michael Thrun
 }
 
 \examples{
+\dontshow{
+data('Lsun3D')
+Cls=Cls=kmeansClustering(Lsun3D$Data,3)
+ClusterAccuracy(Lsun3D$Cls,Cls$Cls)
+}
 #Influence of random sets/ random starts on k-means
 \donttest{
 data('Hepta')
-Cls=kmeansClustering(Hepta$Data,7,method = "Hartigan",nstart=1)
+Cls=kmeansClustering(Hepta$Data,7,Type = "Hartigan",nstart=1)
 table(Cls$Cls,Hepta$Cls)
 ClusterAccuracy(Hepta$Cls,Cls$Cls)
 }
 
 \donttest{
 data('Hepta')
-Cls=kmeansClustering(Hepta$Data,7,method = "Hartigan",nstart=100)
+Cls=kmeansClustering(Hepta$Data,7,Type = "Hartigan",nstart=100)
 table(Cls$Cls,Hepta$Cls)
 ClusterAccuracy(Hepta$Cls,Cls$Cls)
 }

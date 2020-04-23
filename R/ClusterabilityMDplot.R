@@ -1,4 +1,4 @@
-ClusterabilityMDplot=function(DataOrDistance,Method="pca"){
+ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE){
   #author MT
   requireNamespace('clusterability')
   requireNamespace('ggplot2')
@@ -9,11 +9,32 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca"){
 
   ## real code
   if(!is.list(DataOrDistance)){
+    if(isFALSE(na.rm)){
+      if(sum(!is.finite(DataOrDistance))>0){
+        stop('ClusterabilityMDplot: Non-Finite Data found. Please perform imputation before using function because statistical testing will not work otherwise.')
+      }
+    }
     IsDistance=FALSE
     if(isSymmetric(unname(DataOrDistance))){
       Method="none"
       IsDistance=TRUE
       message("Distance detected, Method is set to 'none'")
+      if(isTRUE(na.rm)){
+        warning('ClusterabilityMDplot: Imputation of non-finite distances is not available.')
+      }
+    }else{
+      if(isTRUE(na.rm)){
+        message('ClusterabilityMDplot: Imputation per mean per cluster is performed. This is experimental.')
+        DataOrDistance=apply(DataOrDistance,2,function(x){
+          bb=!is.finite(x)
+          if(sum(bb)<length(x))
+            x[bb]=mean(x[!bb],na.rm = T)
+          else
+            x[bb]=0
+        
+          return(x)
+        })
+      }
     }
   pvalm=clusterability::clusterabilitytest(DataOrDistance,reduction = Method,test = 'dip',pca_scale=FALSE,pca_center=FALSE,is_dist_matrix = IsDistance)
   #print(pvalm$pvalue)
@@ -35,14 +56,15 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca"){
       ProjectedPoints=x[upper.tri(x,diag = FALSE)]
     }
   
-    plot=MDplot(as.vector(ProjectedPoints),Names = pvalue,Ordering = 'Columnwise')+ggplot2::ggtitle(main)+
+    plot=DataVisualizations::MDplot(as.vector(ProjectedPoints),Names = pvalue,Ordering = 'Columnwise',OnlyPlotOutput = TRUE)+ggplot2::ggtitle(main)+
       ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))+
       ggplot2::xlab('Probability that data has no cluster structure')+
       ggplot2::ylab('PDE of 1st Principal Component')
   }else{
       x=DataOrDistance[upper.tri(DataOrDistance,diag = FALSE)]
     
-    plot=MDplot(x,Names = pvalue,Ordering = 'Columnwise')+ggplot2::ggtitle(main)+
+    plot=DataVisualizations::MDplot(x,Names = pvalue,Ordering = 'Columnwise',OnlyPlotOutput = TRUE)+
+      ggplot2::ggtitle(main)+
       ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))+
       ggplot2::xlab('Probability that data has no cluster structure')+
       ggplot2::ylab('PDE of Distance Distribution')
@@ -52,14 +74,29 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca"){
     n=length(DataOrDistance)
     isDistance=unlist(lapply(DataOrDistance, function(x) isSymmetric(unname(x))))
     
-    pvalsL=lapply(DataOrDistance, function(x,Method){
+    pvalsL=lapply(DataOrDistance, function(x,Method,na.rm){
       IsDistance_hlp=FALSE
       if(isSymmetric(unname(x))){
         Method="none"
         IsDistance_hlp=TRUE
+        if(isTRUE(na.rm)){
+          warning('ClusterabilityMDplot: Imputation of non-finite distances is not available.')
+        }
+      }else{
+        if(isTRUE(na.rm)){
+          x=apply(x,2,function(x2){
+            bb=!is.finite(x2)
+            if(sum(bb)<length(x2))
+              x2[bb]=mean(x2[!bb],na.rm = T)
+            else
+              x2[bb]=0
+            
+            return(x2)
+          })
+        }
       }
       return(clusterability::clusterabilitytest(x,reduction = Method,test = 'dip',pca_scale=FALSE,pca_center=FALSE,is_dist_matrix = IsDistance_hlp)$pvalue)
-    },Method) 
+    },Method,na.rm) 
     Names=names(DataOrDistance)
     vals=unlist(pvalsL)
     vals=round(vals,2)

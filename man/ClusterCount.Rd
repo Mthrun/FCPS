@@ -1,11 +1,11 @@
-\name{ClusterStats}
-\alias{ClusterStats}
-\title{ClusterStats}
+\name{ClusterCount}
+\alias{ClusterCount}
+\title{ClusterCount}
 \description{
 Calulates statistics for clustering in each group of the data points
 }
 \usage{
-ClusterStats(Cls)
+ClusterCount(Cls)
 }
 \arguments{
   \item{Cls}{1:n numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.}
@@ -25,8 +25,8 @@ ClusterStats(Cls)
 \examples{
 data('Hepta')
 Cls=Hepta$Cls
-ClusterStats(Cls)
+ClusterCount(Cls)
 }
 
 
-\keyword{ClusterStats}
+\keyword{ClusterCount}

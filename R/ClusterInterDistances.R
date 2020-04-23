@@ -9,25 +9,22 @@ ClusterInterDistances=InterClusterDistances=function(FullDistanceMatrix,Cls,Name
     distvec=classdistcur[upper.tri(classdistcur,diag = F)]
     classdist=c(classdist,list(distvec))
   }
-  #addcols=function(...){
-  # return(rowr::cbind.fill(...,fill = NaN))
-  #}
   
   xmat=do.call(DataVisualizations::CombineCols,classdist)
   
   if(missing(Names)){
-    colnames(xmat)=c('Full',paste0('Class',u))
+    colnames(xmat)=c('Full',paste0('Cluster',u))
   }else{
     if(length(u)!=length(Names)){
       warning('Lengh of Names has to be equal of length of unique Cls.')
-      colnames(xmat)=c('Full',paste0('Class',Names))
+      colnames(xmat)=c('Full',paste0('Cluster',Names))
     }else{
       colnames(xmat)=c('Full',Names)
     }
   }
   
    if(PlotIt){
-      ggobject=DataVisualizations::MDplot(xmat,Scaling = 'CompleteRobust')$ggplotObj
+      ggobject=DataVisualizations::MDplot(xmat,OnlyPlotOutput = TRUE)
       print(ggobject)
       return(list(ClusterDists=as.matrix(xmat),ggobject=ggobject))
    }

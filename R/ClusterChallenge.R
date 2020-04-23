@@ -1,4 +1,4 @@
-ClusterChallenge=GenerateFundamentalClusteringProblem=function(Name,SampleSize,PlotIt=TRUE,PointSize=1,Plotter3D="rgl",...){
+ClusterChallenge=GenerateFundamentalClusteringProblem=function(Name,SampleSize,PlotIt=FALSE,PointSize=1,Plotter3D="rgl",...){
   
   if(SampleSize<500){
     warning('SampleSize may be to small in order to represent clustering problem correctly.')
@@ -165,7 +165,7 @@ ClusterChallenge=GenerateFundamentalClusteringProblem=function(Name,SampleSize,P
   }
   
   if(isTRUE(PlotIt)){
-		ClusterPlotMDS(DataSample$DataSample,DataSample$ClassSample,PointSize=PointSize,Plotter3D=Plotter3D,...)
+		ClusterPlotMDS(DataSample$DataSample,DataSample$ClassSample,main = Name,PointSize=PointSize,Plotter3D=Plotter3D,...)
   }
   names(DataSample)=c(Name,'Cls')
   return(DataSample)

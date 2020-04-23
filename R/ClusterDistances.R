@@ -24,29 +24,25 @@ ClusterDistances=IntraClusterDistances=ClusterIntraDistances=function(FullDistan
     distvec=classdistcur[upper.tri(classdistcur,diag = F)]
     classdist=c(classdist,list(distvec))
   }
-  #addcols=function(...){
-  #  return(rowr::cbind.fill(...,fill = NaN))
-  #}
-  
 
-    xmat=do.call(DataVisualizations::CombineCols,classdist)
-    
+    Intraclusterdistances=do.call(DataVisualizations::CombineCols,classdist)
+    Intraclusterdistances=as.matrix(Intraclusterdistances)
     if(missing(Names)){
-      colnames(xmat)=c('Full',paste0('Class',u))
+      colnames(Intraclusterdistances)=c('Full',paste0('Cluster',u))
     }else{
       if(length(u)!=length(Names)){
         warning('ClusterDistances: Lengh of Names has to be equal of length of unique Cls.')
-        colnames(xmat)=c('Full',paste0('Class',Names))
+        colnames(Intraclusterdistances)=c('Full',paste0('Cluster',Names))
       }else{
-        colnames(xmat)=c('Full',Names)
+        colnames(Intraclusterdistances)=c('Full',Names)
       }
     }
     
     if(PlotIt){
-      ggobject=DataVisualizations::MDplot(xmat,Scaling = 'CompleteRobust')$ggplotObj
+      ggobject=DataVisualizations::MDplot(Intraclusterdistances,OnlyPlotOutput = TRUE)
       print(ggobject)
-      return(list(ClusterDists=as.matrix(xmat),ggobject=ggobject))
+      return(list(ClusterDists=as.matrix(Intraclusterdistances),ggobject=ggobject))
     }
 
-  return(as.matrix(xmat))
+  return(Intraclusterdistances)
 }

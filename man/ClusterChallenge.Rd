@@ -11,8 +11,7 @@ Lsun3D and FCPS datasets were introduced in various publications for a specific 
 \usage{
 ClusterChallenge(Name,SampleSize,
 
-
-PlotIt=TRUE,PointSize=PointSize,Plotter3D=Plotter3D,\dots)
+PlotIt=FALSE,PointSize=1,Plotter3D="rgl",\dots)
 }
 \arguments{
   \item{Name}{
@@ -38,7 +37,7 @@ if PlotIt=TRUE: further arguments for \code{\link{ClusterPlotMDS}}
 }
 }
 \details{
-A detailed description of the datasets can be found in [Thrun, 2018]. Lsun was extended to Lsun3D in [Thrun, 2018]. Sampling works by combining Pareto Density Estimation with rejection sampling.
+A detailed description of the datasets can be found in [Thrun/Ultsch 2020]. Sampling works by combining Pareto Density Estimation with rejection sampling.
 }
 \value{
  LIST, with
@@ -47,9 +46,7 @@ A detailed description of the datasets can be found in [Thrun, 2018]. Lsun was e
 
 }
 \references{
-[Thrun/Ultsch, 2020]  Thrun, M. C., & Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief, in press, 2020.
-
-\url{https://authors.elsevier.com/tracking/article/details.do?aid=105501&jid=DIB&surname=Thrun}
+[Thrun/Ultsch, 2020]  Thrun, M. C., & Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief, Vol. in press, pp. 105501, \doi{10.1016/j.dib.2020.105501}, 2020.
 }
 \author{
 Michael Thrun

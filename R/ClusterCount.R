@@ -1,6 +1,6 @@
-ClusterStats <- function(Cls) {
+ClusterCount <- function(Cls) {
   # calulates statistics for clustering in each group of the data points
-  # C <-ClusterStats(Cls)
+  # C <-ClusterCount(Cls)
   # UniqueClusters <-C$UniqueClusters
   # CountPerCluster <-C$CountPerCluster
   # NrOfClusters   <-C$NumberOfClusters
@@ -18,7 +18,7 @@ ClusterStats <- function(Cls) {
   # Author MT
   
   if(!is.vector(Cls)){
-    warning('ClusterStats: Cls is not a vector. Calling as.numeric(as.character(Cls))')
+    warning('ClusterCount: Cls is not a vector. Calling as.numeric(as.character(Cls))')
     Cls=as.numeric(as.character(Cls))
   }
   Cls[!is.finite(Cls)]=9999

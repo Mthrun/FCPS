@@ -3,7 +3,7 @@
 
 \docType{data}
 \title{
-TwoDiamonds of  [Ultsch, 2003a, 2003b]
+TwoDiamonds introduced in  [Ultsch, 2003a, 2003b]
 }
 \description{
 cluster border defined by density. Detailed description of dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
@@ -21,7 +21,7 @@ Classes 2, stored in \code{TwoDiamonds$Cls}
 
 [Ultsch, 2003b]  Ultsch, A.: U*-matrix: a tool to visualize clusters in high dimensional data, Fachbereich Mathematik und Informatik, 2003.
 
-[Thrun/Ultsch, 2020]  Thrun, M. C., Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief, 2020.
+[Thrun/Ultsch, 2020]  Thrun, M. C., & Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief, Vol. in press, pp. 105501, \doi{10.1016/j.dib.2020.105501}, 2020.
 
 }
 \examples{
