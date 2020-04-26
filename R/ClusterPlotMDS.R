@@ -48,7 +48,7 @@ ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",O
     return(list(DataMDS=DataMDS,Cls=Cls))
   }#end prepareData
   
-  if (isSymmetric(DataOrDists)) {
+  if (isSymmetric(unname(DataOrDists))) {
     DataDists = DataOrDists
     AnzVar = ncol(DataOrDists)
     AnzData = nrow(DataOrDists)

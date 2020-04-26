@@ -39,7 +39,7 @@ MinimalEnergyClustering <-function(DataOrDistances,ClusterNo=0,DistanceMethod="e
 	if (ClusterNo>0){
 		Cls=cutree(hc,ClusterNo)
 		Cls=ClusterRename(Cls,DataOrDistances)
-		return (Cls)
+		return (list(Cls=Cls,Dendrogram=as.dendrogram(hc),Object=hc))
 	} 
 	else{
 		x=as.dendrogram(hc);plot(x, main=m,xlab="Number of Data Points N", ylab="Distance",sub=" ",leaflab ="none",...)
@@ -48,7 +48,7 @@ MinimalEnergyClustering <-function(DataOrDistances,ClusterNo=0,DistanceMethod="e
 		  rect.hclust(hc, h=ColorTreshold,border="red")}		  
 		else{
 		}
-		return(list(Cls=hc,Dedrogram=x))
+		return(list(Cls=NULL,Dendrogram=x,Object=hc))
 	}
 }
 

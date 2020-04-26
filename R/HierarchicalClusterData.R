@@ -96,7 +96,7 @@ m=paste(method,"LinkCluster/ ",DistanceMethod," N=",nrow(as.matrix(Data)))
 if (ClusterNo>0){
   Cls=cutree(hc,ClusterNo)
    Cls=ClusterRename(Cls,Data)
-  return(list(Cls=Cls,Dedrogram=as.dendrogram(hc)))
+  return(list(Cls=Cls,Dendrogram=as.dendrogram(hc),Object=hc))
 } 
 else{
 		x=as.dendrogram(hc)
@@ -120,6 +120,6 @@ else{
 		else{
 		#rect.hclust(hc, h=4*mean(hc$height),border="red")
 		}
-		return(list(Cls=NULL,Dedrogram=x))
+		return(list(Cls=NULL,Dendrogram=x,Object=hc))
 	}
 }

@@ -1,19 +1,18 @@
-ClusterNoEstimation <- function (Data,
+ClusterNoEstimation <- function (DataOrDistances,
                             ClsMatrix = NULL,
                             max.nc,
                             index = 'all',
                             min.nc = 2,
                             Silent = TRUE,
                             method = NULL,
-                            PlotIt=TRUE) {
-							
-							data=Data
-							cls=ClsMatrix
+                            PlotIt=TRUE,
+                            SelectByABC=TRUE) {
+
   # berechnet die Kennzahlen zu den gegebenen Daten und Clusterungen und die darauf basierende empfohlene Klassenanzahl
   #
   #  INPUT
-  #  data        Daten
-  #  cls         Clusterungen der zu ueberpruefenden Klassenanzahlen als Matrix mit einer Clusterung pro Spalte
+  #  DataOrDistances        Daten
+  #  ClsMatrix         Clusterungen der zu ueberpruefenden Klassenanzahlen als Matrix mit einer Clusterung pro Spalte
   #              (siehe auch Notes (1) und (2)), muss angegeben werden, wenn method = NULL
   #  max.nc      hoechste Klassenanzahl, die ueberprueft werden soll
   #  method      Clusterverfahren, mit dem die Clusterungen erstellt werden (siehe DETAILS fuer moegliche Methoden),
@@ -62,10 +61,36 @@ ClusterNoEstimation <- function (Data,
   #
   #  AUTHOR
   #  Peter Nahrgang
+  #  1.Edditor: MT: added distances, try() for indicator that not work always, further error catching, fan plotting
   #
   #  REFERENCES
   #  Charrad, Malika, et al. "Package 'NbClust'." J. Stat. Soft 61 (2014): 1-36.
   #  Dimtriadou, E. "cclust: Convex Clustering Methods and Clustering Indexes." R package version 0.6-16, URL http://CRAN. R-project. org/package= cclust (2009).
+  cls=ClsMatrix
+  if(!is.null(cls)){
+    if(!is.matrix(cls)){
+      warning('ClsMatrix is not a matrix. calling as.matrix')
+      cls=as.matrix(cls)
+    }
+    if(any(apply(cls,2,function(x) length(unique(x)))<2)){
+      stop('Amount of unqiue clusters for each column of ClsMatrix should be at least 2,')
+    }
+  }							
+  
+
+  if (isSymmetric(unname(DataOrDistances))) {
+							s=c()
+							for(i in 1:(nrow(DataOrDistances)-1)){
+							  s[i]= suppressWarnings(ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = i)$Stress)
+							  if(i>2)
+							    if(s[i]==s[i-1]& s[i]==s[i-2])
+							      break;
+							}
+							i=which.min(s)
+							data=ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = i)$ProjectedPoints
+  }else{
+    data=DataOrDistances
+  }	
   
   range <- max.nc - min.nc + 1
   
@@ -256,14 +281,20 @@ ClusterNoEstimation <- function (Data,
   }
   
   ttww <- function(x, clsize, cluster) {
+
+  
     n <- sum(clsize)
     k <- length(clsize)
     w <- 0
     tt <- cov(x) * n
+    zttw <- list(tt =  tt, w = w)
     for (l in 1:k) {
-      w <- w + cov(x[cluster == l, ]) * clsize[l]
+      wtemp=cov(x[cluster == l, ,drop=FALSE]) * clsize[l]
+      if(sum(is.na(wtemp))==0)
+        w <- w + wtemp
     }
-    zttw <- list(tt = tt, w = w)
+    zttw$w=w
+ 
     return(zttw)
   }
   
@@ -449,11 +480,11 @@ ClusterNoEstimation <- function (Data,
           indexn == 23,
           indexn == 27)) {
     if (dim(cls)[2] == range) {
-      stop("falsche cls")
+      stop("Columns of ClsMatrix are expexted to be from min.nc to max.nc. However to number of columns does not equal the range of cluster numbers to be investigated. Please provide appropriate choice for max.nc and min.nc. ")
     }
     else if (dim(cls)[2] == range + 1 &&
              any(indexn == 15, indexn == 27) && min.nc != 2) {
-      stop("falsche cls")
+      stop("Selected indicators requaire min.nc to be set with two.")
     }
     else if (dim(cls)[2] == range + 1) {
       clusters <- cls[, 1:range]
@@ -708,7 +739,7 @@ ClusterNoEstimation <- function (Data,
       bx <- numeric(0)
       for (x in 1:cn2) {
         if (x != w) {
-          swx <- dmat[cl2 == w, cl2 == x]
+          swx <- dmat[cl2 == w, cl2 == x,drop=FALSE]
           bx <- c(bx, swx)
           if (w < x) {
             separation.matrix[w, x] <- separation.matrix[x, w] <- min(swx)
@@ -988,6 +1019,10 @@ ClusterNoEstimation <- function (Data,
     
     gss <- function(x, cl, d)
     {
+      results <- list(wgss = NaN,
+                      bgss = NaN,
+                      centers = NaN)
+      try({
       n <- length(cl)
       k <- max(cl)
       centers <- matrix(nrow = k, ncol = ncol(x))
@@ -1007,7 +1042,7 @@ ClusterNoEstimation <- function (Data,
         }
         else
         {
-          centers[i, ] <- apply(x[cl == i, ], 2, mean)
+          centers[i, ] <- apply(x[cl == i, ,drop=FALSE], 2, mean)
         }
         
       }
@@ -1025,6 +1060,7 @@ ClusterNoEstimation <- function (Data,
       results <- list(wgss = wgss,
                       bgss = bgss,
                       centers = centers)
+      })
       return(results)
     }
     
@@ -1323,7 +1359,7 @@ ClusterNoEstimation <- function (Data,
   
   ####
   
-  #Berechnung der Kennzahlen
+  #Berechnung der Kennzahlen ----
   res <- matrix(data = 0,
                 nrow = range,
                 ncol = length(indexnames))
@@ -1518,6 +1554,7 @@ ClusterNoEstimation <- function (Data,
     }
     if (any(indexn == 22) || any(indexn == 23) || indexn == all)
     {
+      
       temp <- Index.15and28(cl1 = cl1,
                             cl2 = cl2,
                             md = md)
@@ -1749,7 +1786,7 @@ ClusterNoEstimation <- function (Data,
   if(isTRUE(PlotIt)){
     cat=paste('Cluster No.',klassenanzahl)
     requireNamespace('DataVisualizations')
-    DataVisualizations::Fanplot(cat,main = 'Indicators for Cluster No.')
+    DataVisualizations::Fanplot(cat,main = 'Indicators for Cluster No.',MaxNumberOfSlices = SelectByABC)
   }
   resliste <- list(
     Indicators = res,

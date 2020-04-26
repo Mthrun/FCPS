@@ -29,8 +29,9 @@ Please see \code{\link{HierarchicalClusterData}} and \code{\link{HierarchicalClu
 }
 \value{
 List of
-\item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
-\item{Dedrogram}{Dendrogram of hclust}
+\item{Cls}{If, ClusterNo>0: [1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering. Otherwise for ClusterNo=0: NULL}
+\item{Dendrogram}{Dendrogram of hierarchical clustering algorithm}
+\item{Object}{Ultrametric tree of hierarchical clustering algorithm}
 }
 
 \author{

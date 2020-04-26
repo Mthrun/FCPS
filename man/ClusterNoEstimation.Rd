@@ -10,15 +10,19 @@ For a given dataset and clusterings for this dataset, key indicators mentioned i
 An alternative estimation of the cluster number can be done by counting the valleys of the topographic map of the generalized U-Matrix for a specfic projection method using the \pkg{ProjectionBasesdClustering} and \pkg{GeneralizedUmatrix} packages on CRAN, see [Thrun/Ultsch, 2020] for details.
 }
 \usage{
-ClusterNoEstimation(Data, ClsMatrix = NULL, max.nc, 
+ClusterNoEstimation(DataOrDistances, ClsMatrix = NULL, max.nc, 
 
 index = "all", min.nc = 2,
 
-Silent = TRUE, method = NULL, PlotIt=TRUE)
+Silent = TRUE, method = NULL, PlotIt=TRUE,SelectByABC=TRUE)
 }
 \arguments{
-  \item{Data}{
-    [1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.
+  \item{DataOrDistances}{
+    Either [1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.
+    
+    or
+
+symmetric [1:n,1:n] distance matrix
   }
   \item{ClsMatrix}{
 [1:n,1:(max.nc)] Clustering of the number of classes to be checked as a matrix with one cluster per column (see also details (2) and (3)), must be specified if method = NULL
@@ -42,8 +46,13 @@ Silent = TRUE, method = NULL, PlotIt=TRUE)
     \item{PlotIt}{
       if TRUE plots fanplot with proposed cluster numbers
   }
+      \item{SelectByABC}{
+      if PlotIt=TRUE, TRUE: Plots group A of ABCanalysis of the most important ones (highest overlap in indicators), FALSE: plots all indicators
+  }
 }
 \details{
+Each column of \code{ClsMatrix} has to have at least two unqiue clusters defined. Otherwise the function will stop.
+
 (1)
 
 The following 26 indicators can be calculated:
@@ -74,6 +83,7 @@ The following methods can be used to create clusterings:
 
 The indicators duda, pseudot2, beale and frey are only intended for use in hierarchical cluster procedures.
 
+If a distances matrix is given, then \pkg{ProjectionBasedClustering} is required to be accessible.
 }
 \value{
 \item{Indicators}{

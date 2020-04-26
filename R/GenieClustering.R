@@ -18,7 +18,7 @@ GenieClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",
   if (ClusterNo>0){
 	Cls=cutree(hc,ClusterNo)
     Cls=ClusterRename(Cls,DataOrDistances)
-    return (Cls);
+    return (list(Cls=Cls,Dendrogram=as.dendrogram(hc),Object=hc))
   } 
   else{
     x=as.dendrogram(hc);plot(x, main=m,xlab="Number of Data Points N", ylab="Distance",sub=" ",leaflab ="none")
@@ -27,6 +27,6 @@ GenieClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",
       rect.hclust(hc, h=ColorTreshold,border="red")}		  
     else{
     }
-    return(list(Cls=hc,Dedrogram=x))
+    return(list(Cls=NULL,Dendrogram=x,Obkject=hc))
   }
 }

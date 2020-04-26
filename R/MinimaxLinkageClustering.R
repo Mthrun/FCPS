@@ -19,7 +19,7 @@ MinimaxLinkageClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="eu
     out=protoclust::protocut(hc,ClusterNo)
 	Cls=out$cl
 	Cls=ClusterRename(Cls,DataOrDistances)
-    return (list(Cls=Cls,Object=out))
+    return (list(Cls=Cls,Dendrogram=as.dendrogram(hc),Object=out))
   } 
   else{
     x=as.dendrogram(hc);plot(x, main=m,xlab="Number of Data Points N", ylab="Distance",sub=" ",leaflab ="none",...)
@@ -28,6 +28,6 @@ MinimaxLinkageClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="eu
       rect.hclust(hc, h=ColorTreshold,border="red")}		  
     else{
     }
-    return(list(Cls=hc,Dedrogram=x))
+    return(list(Cls=NULL,Dendrogram=x,Object=hc))
   }
 }

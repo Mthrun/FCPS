@@ -1,13 +1,13 @@
 Package: FCPS
 Type: Package
 Title: Fundamental Clustering Problems Suite
-Version: 1.2.0
-Date: 2020-04-23
+Version: 1.2.1
+Date: 2020-04-26
 Authors@R: c(person("Michael", "Thrun", email= "m.thrun@gmx.net",role=c("aut","cre","cph"), comment = c(ORCID = "0000-0001-9542-5543")),person("Peter", "Nahrgang",role=c("ctr","ctb")),person("Felix", "Pape",role=c("ctr","ctb")),person("Vasyl","Pihur", role=c("ctb")),person("Guy","Brock", role=c("ctb")),person("Susmita","Datta", role=c("ctb")),person("Somnath","Datta", role=c("ctb")),person("Luis","Winckelmann", role=c("com")),person("Alfred", "Ultsch",role=c("dtc","ctb")))
 Maintainer: Michael Thrun <m.thrun@gmx.net>
 Description: Many conventional clustering algorithms are provided in this package with consistent input and output, which enables the user to try out algorithms swiftly. Additionally, 26 statistical approaches for the estimation of the number of clusters as well as the the mirrored density plot (MD-plot) of clusterability are implemented. Moreover, the fundamental clustering problems suite (FCPS) offers a variety of clustering challenges any algorithm should handle when facing real world data, see Thrun, M.C., Ultsch A.: "Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems" (2020), Data in Brief, <DOI:10.1016/j.dib.2020.105501>.
 Imports: mclust, ggplot2, DataVisualizations
-Suggests: kernlab, cclust, dbscan, kohonen, MCL, ADPclust, cluster, DatabionicSwarm, orclus, subspace, flexclust, ABCanalysis, apcluster, pracma,EMCluster, pdfCluster, parallelDist, plotly, ProjectionBasedClustering, GeneralizedUmatrix, mstknnclust, densityClust, parallel, energy, R.utils, tclust, Spectrum, genie, protoclust, fastcluster, clusterability, signal, reshape2, PPCI, clustrd, MASS, rgl
+Suggests: kernlab, cclust, dbscan, kohonen, MCL, ADPclust, cluster, DatabionicSwarm, orclus, subspace, flexclust, ABCanalysis, apcluster, pracma,EMCluster, pdfCluster, parallelDist, plotly, ProjectionBasedClustering, GeneralizedUmatrix, mstknnclust, densityClust, parallel, energy, R.utils, tclust, Spectrum, genie, protoclust, fastcluster, clusterability, signal, reshape2, PPCI, clustrd, MASS, rgl,prclust, dendextend
 Depends: R (>= 3.5.0)
 License: GPL-3
 LazyData: TRUE

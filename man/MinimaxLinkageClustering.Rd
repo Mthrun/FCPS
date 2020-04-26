@@ -26,9 +26,9 @@ Wrapper for Minimax Linkage Hierarchical Clustering algorithm.
 }
 \value{
 List of
-\item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
-\item{Dendrogram}{Dendrogram of hclust, if ClusterNo=0}
-\item{Object}{object of protoclust if ClusterNo!=0}
+\item{Cls}{If, ClusterNo>0: [1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering. Otherwise for ClusterNo=0: NULL}
+\item{Dendrogram}{Dendrogram of hierarchical clustering algorithm}
+\item{Object}{Ultrametric tree of hierarchical clustering algorithm}
 }
 \references{
 [Bien/Tibshirani, 2011] Bien, J., and Tibshirani, R.: Hierarchical Clustering with Prototypes via Minimax Linkage, The Journal of the American Statistical Association, Vol. 106(495), pp. 1075-1084, 2011.
