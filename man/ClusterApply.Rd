@@ -2,20 +2,23 @@
 \alias{ClusterApply}
 \title{Applies a function over grouped data}
 \description{
-Applies a given function to each dimension for each class in Cls over the data.}
+Applies a given function to each dimension for each cluster in Cls over the data.}
 \usage{
-ClusterApply(Data,Cls,Func,\ldots)
+ClusterApply(DataOrDistances,FUN,Cls,\ldots)
 }
 \arguments{
-  \item{Data}{ A matrix containing data. Cases as rows, variables as columns.}
-  \item{Cls}{ The class identifiers for all rows in Data.}
-  \item{Func}{Function to be applied to each class.}
-  \item{\ldots}{Additional parameters to be passed to Func}
+  \item{DataOrDistances}{ Either A matrix containing data. n Cases as rows, d variables as columns or a nxn distance matrix}
+  \item{FUN}{Function to be applied to each cluster of data and each column of data}
+  \item{Cls}{The cluster identifiers for all rows in Data. If missing all data is in first cluster}
+  \item{\ldots}{Additional parameters to be passed on to FUN}
 }
-% \details{}
+\details{In case of a distance matrix an automatic MDS transformation is computed.
+
+If \code{FUN} has not function name, then ResultPerCluster is given back.
+}
 \value{
-\item{UniqueClasses}{The unique classes in cls}
-\item{FuncPerClass}{\code{FuncPerClass[i]} is the result of func for the data points in class \code{UniqueClasses[i]} named with the function name used.}
+\item{UniqueClusters}{The unique clusters in Cls}
+\item{FUNPerCluster}{\code{FUNPerCluster[i]} is the result of func for the data points in cluster \code{UniqueClusters[i]} named with the function name used.}
 }
 \examples{
 ##one dataset
@@ -23,6 +26,34 @@ data(Hepta)
 Data=Hepta$Data
 Cls=Hepta$Cls
 #mean per cluster
-ClusterApply(Data,Cls,mean)
+ClusterApply(Data,mean,Cls)
+
+#mean per cluster of MDS transformation
+# Beware, this is not the same!
+\donttest{
+ClusterApply(as.matrix(dist(Data)),mean,Cls)
+}
+
+\dontrun{
+Iris=datasets::iris
+Distances=as.matrix(Iris[,1:4])
+SomeFactors=Iris$Species
+V=ClusterCreateClassification(SomeFactors)
+Cls=V$Cls
+V$ClusterNames
+ClusterApply(Distances,mean,Cls)
+}
+#special case of identitiy
+\dontrun{
+suppressPackageStartupMessages(library('prabclus',quietly = TRUE))
+data(tetragonula)
+#Generated Specific Distance Matrix
+ta <- alleleconvert(strmatrix=as.matrix(tetragonula[1:236,]))
+tai <- alleleinit(allelematrix=ta,distance="none")
+Distance=alleledist((unbuild.charmatrix(tai$charmatrix,236,13)),236,13)
+
+MDStrans=ClusterApply(Distance,identity)
+}
 }
 \author{Felix Pape}
+\note{MT extended the function for distances}

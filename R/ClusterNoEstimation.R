@@ -79,15 +79,7 @@ ClusterNoEstimation <- function (DataOrDistances,
   
 
   if (isSymmetric(unname(DataOrDistances))) {
-							s=c()
-							for(i in 1:(nrow(DataOrDistances)-1)){
-							  s[i]= suppressWarnings(ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = i)$Stress)
-							  if(i>2)
-							    if(s[i]==s[i-1]& s[i]==s[i-2])
-							      break;
-							}
-							i=which.min(s)
-							data=ProjectionBasedClustering::MDS(DataOrDistances,OutputDimension = i)$ProjectedPoints
+    data=internalMDSestimate(DataOrDistances)
   }else{
     data=DataOrDistances
   }	
