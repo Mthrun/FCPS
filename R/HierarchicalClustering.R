@@ -19,6 +19,14 @@ HierarchicalClustering=function(DataOrDistances,ClusterNo,method='SingleL',Fast=
     return(GenieClustering(DataOrDistances = DataOrDistances,ClusterNo = ClusterNo,...))
   }else if(method=="Minimax"){
     return(MinimaxLinkageClustering(DataOrDistances = DataOrDistances,ClusterNo = ClusterNo,...))
+  }else if(method=="HDBSCAN"){
+    V=Hierarchical_DBSCAN(DataOrDistances = DataOrDistances,...)
+    if(ClusterNo>1){
+      Cls = cutree(V$Tree, ClusterNo)
+    }else{
+      Cls=ClusterDendrogram(V$Tree,1,Colorsequence = 'black',main = 'HDBSCAN Clustering')
+    }
+    return(list(Cls=Cls,Dendrogram=V$Dendrogram,Object=V$Tree,OriginalObject=V$Object))
   }
   else if (isSymmetric(unname(DataOrDistances))) {
     if(!inherits(DataOrDistances,'dist')){

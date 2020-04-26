@@ -1,9 +1,23 @@
-ClusterDendrogram=function(Tree,ClusterNo,Colorsequence,main='Name of Algorithm'){
+ClusterDendrogram=function(TreeOrDendrogram,ClusterNo,Colorsequence,main='Name of Algorithm'){
   if(ClusterNo<1){
     stop('ClusterNo has to be 1 or higher')
   }
-  if(!inherits(Tree,"hclust")){
-    warning('Tree is not of class hclust, cutree function may not work.')
+  if(!inherits(TreeOrDendrogram,"hclust")){
+    if(inherits(TreeOrDendrogram,"dendrogram")){
+      tryCatch({Tree=as.hclust(TreeOrDendrogram)},error=function(e){
+        warning(e)
+        warning('ClusterDendrogram: TreeOrDendrogram inherits class dendrogram but cannot be conversed to class hclust. cutree may not work.')
+        })
+    }else{
+      tryCatch({
+        Tree=as.hclust(as.dendrogram(TreeOrDendrogram))
+      },error=function(e){
+        warning(e)
+        warning('ClusterDendrogram: TreeOrDendrogram is neither of class hclust or dendrogram, cutree function may not work.')
+      })
+    }
+  }else{
+    Tree=TreeOrDendrogram
   }
   Cls = cutree(Tree, ClusterNo)
   x=as.dendrogram(Tree)
@@ -48,5 +62,5 @@ ClusterDendrogram=function(Tree,ClusterNo,Colorsequence,main='Name of Algorithm'
   }
   plot(x, main=main,xlab="No. of Data Points N", ylab="Ultrametric Portion of Distance",sub=" ",leaflab ="none")
   axis(1,col="black",las=1)
-  
+  return(invisible(Cls))
 }

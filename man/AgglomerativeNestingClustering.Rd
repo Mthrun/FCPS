@@ -31,6 +31,7 @@ if \code{ClusterNo=0}, the dendrogram is generated instead of a clustering to es
 \value{
 List of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
+\item{Dendrogram}{Dendrogram of hierarchical clustering algorithm}
 \item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
@@ -53,10 +54,11 @@ Michael Thrun
 }
  \examples{
 data('Hepta')
-out=AgglomerativeNestingClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
+CA=AgglomerativeNestingClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 \donttest{
-print(out$agnesObject)
-plot(out$agnesObject)
+print(CA$Object)
+plot(CA$Object)
+ClusterDendrogram(CA$Dendrogram,7,main='AGNES clustering')
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

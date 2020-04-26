@@ -48,5 +48,5 @@ DivisiveAnalysisClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE,Sta
     }
   }
     Cls=ClusterRename(Cls,DataOrDistances)
-  return(list(Cls=Cls,Object=res))
+  return(list(Cls=Cls,Dendrogram=as.dendrogram(as.hclust(res)),Object=res))
 }

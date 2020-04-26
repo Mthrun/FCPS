@@ -1,4 +1,4 @@
-Hierarchical_DBSCAN <-function(Data,minPts=4,PlotTree=FALSE,PlotIt=FALSE,...){
+Hierarchical_DBSCAN <-function(DataOrDistances,minPts=4,PlotTree=FALSE,PlotIt=FALSE,...){
   # Cls=Hierarchical_DBSCAN(FCPS$Hepta$Data,minPts=3)
   # DBscan nach  [Campello et al., 2015]
   # INPUT
@@ -16,20 +16,26 @@ Hierarchical_DBSCAN <-function(Data,minPts=4,PlotTree=FALSE,PlotIt=FALSE,...){
   #
   # [Campello et al., 2015]  Campello RJGB, Moulavi D, Zimek A, Sander J: Hierarchical density estimates for data clustering, visualization, and outlier detection, ACM Transactions on Knowledge Discovery from Data (TKDD), 10(5), pp. 1-51, 2015.
   
+
   
-  
-  if(is.null(nrow(Data))){# dann haben wir einen Vektor
+  if(is.null(nrow(DataOrDistances))){# dann haben wir einen Vektor
     return(cls <- rep(1,length(Data)))
   }
+  
+  if (isSymmetric(unname(DataOrDistances))) {
+    Data=stats::as.dist(DataOrDistances)
+  }else{
+    Data=DataOrDistances
+  }
 
-  if(missing(minPts)){
-    minPts=round(0.04*nrow(Data),0)
+  if(is.null(minPts)){
+    minPts=round(0.04*nrow(DataOrDistances),0)
     warning('The minPts parameter is missing but it is required in DBscan. Trying to estimate. PlotTree is set to TRUE, please look at the dendrogram...')
     PlotTree=TRUE
   }   
   
   requireNamespace('dbscan')
-  liste=dbscan::hdbscan(x = Data,minPts = minPts,...)
+  liste=dbscan::hdbscan(x = Data,minPts = minPts,gen_hdbscan_tree=TRUE,gen_simplified_tree =TRUE,...)
   Cls=liste$cluster
   ind=which(Cls==0)
   # if(length(ind)>0)
@@ -50,9 +56,9 @@ Hierarchical_DBSCAN <-function(Data,minPts=4,PlotTree=FALSE,PlotIt=FALSE,...){
   if(isTRUE(PlotIt)){
     Cls2=Cls
     Cls2[Cls2==0]=999
-	ClusterPlotMDS(Data,Cls2)
+	ClusterPlotMDS(DataOrDistances,Cls2)
   }
-   Cls=ClusterRename(Cls,Data)
-  return(list(Cls=Cls,Object=liste))
+   Cls=ClusterRename(Cls,DataOrDistances)
+  return(list(Cls=Cls,Dendrogram=as.dendrogram(liste$hdbscan_tree),Tree=as.hclust(as.dendrogram(liste$hdbscan_tree)),Object=liste))
   
 }

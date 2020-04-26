@@ -8,14 +8,18 @@ Cluster Dendrogram
 Presents a dendogram of a given tree using a colorsquence for the branches defined from the highest cluster size to the lowest cluster size.
 }
 \usage{
-ClusterDendrogram(Tree, ClusterNo, 
+ClusterDendrogram(TreeOrDendrogram, ClusterNo, 
 
 Colorsequence,main='Name of Algorithm')
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Tree}{
-Object of hc clust defining the tree, third list element of hierarchical cluster algorithms of this package.
+  \item{TreeOrDendrogram}{
+Either Object of hcclust defining the tree, third list element of hierarchical cluster algorithms of this package
+
+or
+
+Object of class dendrogram,  second list element of hierarchical cluster algorithms.
 }
   \item{ClusterNo}{
 k Number of clusters for cutree.
@@ -29,7 +33,9 @@ k Number of clusters for cutree.
 reqires the package \pkg{dendextend} to work correctly.
 }
 \value{
-dendrogram is presented
+in mode invisible:
+
+[1:n]  numerical vector defining the clustering of k clusters; this classification is the main output of the algorithm.
 }
 
 \author{

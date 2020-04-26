@@ -49,5 +49,5 @@ AgglomerativeNestingClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE
       warning(('ClusterNo cannot be a negativ number'))
     }
   }
-  return(list(Cls=Cls,Object=res))
+  return(list(Cls=Cls,Dendrogram=as.dendrogram(as.hclust(res)),Object=res))
 }
