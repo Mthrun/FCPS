@@ -8,7 +8,9 @@ Penalized Regression-Based Clustering of [Wu et al., 2016].
 Clustering is performed through penalized regression with grouping pursuit
 }
 \usage{
-PenalizedRegressionBasedClustering(Data, FirstLambda, SecondLambda, Tau, PlotIt = FALSE, \dots)
+PenalizedRegressionBasedClustering(Data, FirstLambda, 
+
+SecondLambda, Tau, PlotIt = FALSE, \dots)
 }
 
 \arguments{

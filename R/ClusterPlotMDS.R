@@ -31,16 +31,18 @@ ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",O
   }
   
   prepareData=function(DataDists,Cls){
-    if(requireNamespace('MASS')){
-      x=DataDists
-      x[upper.tri(x,diag = T)]=NaN
-      ind=which(x==0,arr.ind = T)
-      if(length(ind)>0){
-        DataDists=DataDists[-ind[,1],-ind[,2]]
-        Cls=Cls[-ind[,1]]
-      }
-      DataMDS = MASS::sammon(d = DataDists, y = cmdscale(d = DataDists, 
-                                                         k = OutputDimension), k = OutputDimension)$points
+    
+      # x=DataDists
+      # x[upper.tri(x,diag = T)]=NaN
+      # ind=which(x==0,arr.ind = T)
+      # if(length(ind)>0){
+      #   DataDists=DataDists[-ind[,1],-ind[,2]]
+      #   Cls=Cls[-ind[,1]]
+      # }
+    if(requireNamespace('smacof')){
+      DataMDS =smacof::mds(DataDists,ndim = 3)$conf
+      # DataMDS = MASS::sammon(d = DataDists, y = cmdscale(d = DataDists, 
+      #                                                    k = OutputDimension), k = OutputDimension)$points
     }else{
       DataMDS = cmdscale(d = DataDists, k = OutputDimension, eig = TRUE, 
                          add = FALSE, x.ret = FALSE)$points
@@ -73,11 +75,15 @@ ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",O
     Cls[!is.finite(Cls)]=999
     Colors=DataVisualizations::DefaultColorSequence[-2]#no yellow
     Colors=Colors[1:length(unique(Cls))]
-    if(Plotter3D=="rgl")
-      DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,type="s",size=PointSize,box=F,aspect=T,top=T,main=main,Plotter3D=Plotter3D,...)
-    else
-      DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,size=PointSize,main=main,Plotter3D=Plotter3D,...)
-
+    if(Plotter3D=="rgl"){
+      return(DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,type="s",size=PointSize,box=F,aspect=T,top=T,main=main,Plotter3D=Plotter3D,...))
+      
+    }else{
+      p=DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,size=PointSize,Plotter3D=Plotter3D,...)
+      p=plotly::layout(p,title=main)
+      p
+      return(p)
+    }
   }else{
     plot(Data[,1],Data[,2],cols=Cls,main = main,...)
   }

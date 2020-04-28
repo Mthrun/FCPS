@@ -12,7 +12,7 @@ ClusterApply(DataOrDistances,FUN,Cls,\ldots)
   \item{Cls}{The cluster identifiers for all rows in Data. If missing all data is in first cluster}
   \item{\ldots}{Additional parameters to be passed on to FUN}
 }
-\details{In case of a distance matrix an automatic MDS transformation is computed.
+\details{In case of a distance matrix an automatic classical multidimensional scalin transformation of distances to data is computed. Number of dimensions is selected by the minimal stress w.r.t. the possible output dimensions of cmdscale.
 
 If \code{FUN} has not function name, then ResultPerCluster is given back.
 }

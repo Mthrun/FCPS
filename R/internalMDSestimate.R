@@ -1,5 +1,7 @@
 internalMDSestimate=function(Distances){
+  #smacof is not fast enough
   s=c()
+  #fast mds
   for(i in 1:(nrow(Distances)-1)){
     s[i]= suppressWarnings(ProjectionBasedClustering::MDS(Distances,OutputDimension = i)$Stress)
     if(i>2)

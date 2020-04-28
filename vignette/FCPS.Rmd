@@ -1,0 +1,159 @@
+---
+title: "The FCPS package"
+author: "Michael C. Thrun"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  message=FALSE,
+  warning = FALSE,
+  comment = "#>"
+)
+```
+
+The package FCPS provides standardized access to state-of-the-art clustering algorithms, datasets defining common clustering challenges, and the estimation of the number of clusters. Additionally, the cluster tendency can be investigated, the number of clusters estimated, and an appropriate accuracy can be computed for arbitrary labels.
+
+In the following example, the high-dimensional leukemia dataset is loaded and a visualized:
+
+```{r, fig.show='hold',fig.width=5,fig.height=5}
+library(FCPS)
+data("Leukemia")
+Data=Leukemia$Distance
+Cls=Leukemia$Cls
+ClusterPlotMDS(Data,Cls,main = 'Leukemia',Plotter3D = 'plotly')
+```
+
+The function ClusterPlotMDS used for the figure above provides in case of datasets with dimensionality higher than three a 3D projection 
+using multidimensionl scaling of the R package smacof on CRAN \citep{smacof2016}. The user can decide if the rgl package \citep{adler2019} or the plotly package should be used \citep{sievert}.
+
+## Cluster Analysis with FCPS
+
+In the following code a high-dimensional dataset is loaded. The leukemia dataset provides a distance matrix instead of a data matrix. Without further adjustments the function AgglomerativeNestingClustering can be called with the correct number of clusters. The resulting clustering is stored in the list element Cls which is a named vector. The names are defined by the rows of the distance or data matrix. In the next step, the user can rename the clustering to consecutive number from 1 to 6 with 1 beeing the label of the cluster with the biggest size and 6 beeing the cluster of the smallest size. The names will still match all rownames of the data or distances. Besides the Cls element the output list CA stores the original object of the clustering. In the case of hierarchical algorithms another list element stores the Dendrogram which can be visualized with ClusterDendrogram which is shown in the next section.
+
+```{r, fig.show='hold',fig.width=5,fig.height=5}
+library(FCPS)
+data('Leukemia')
+set.seed(123)
+ClusterNo=length(unique(Leukemia$Cls))
+CA=AgglomerativeNestingClustering(Leukemia$DistanceMatrix,ClusterNo)
+Cls=ClusterRenameDescendingSize(CA$Cls)
+sum(match(names(Cls),rownames(Leukemia$DistanceMatrix),nomatch = 0)==0)
+```
+
+## Generating a Clustering Challenge
+Any clustering challenge listed in Table~2 can be generated with an arbitrary sample size. Here, Chainlink is selected and visualized in the figure below. 
+
+```{r, fig.show='hold',fig.width=5,fig.height=5}
+set.seed(600)
+library(FCPS)
+DataList=ClusterChallenge("Chainlink",SampleSize = 750)
+Data=DataList$Chainlink
+Cls=DataList$Cls
+ClusterPlotMDS(Data,Cls,Plotter3D = 'plotly',main = "Chainlink")
+ClusterCount(Cls)
+```
+
+Remark: ClusterPlotMDS detects that the dataset has only three dimensions and instead of projecting the data, visualizes the tree given dimensions.
+
+## Testing for Cluster Tendency
+
+The cluster tendency or so-called clusterability can be investigated with the ggplot2 \citep{RN96} syntax as follows for the example of Chainlink:
+
+```{r, fig.show='hold',fig.width=4,fig.height=4}
+set.seed(600)
+library(FCPS)
+DataList=ClusterChallenge("Chainlink",SampleSize = 750)
+Data=DataList$Chainlink
+Cls=DataList$Cls
+library(ggplot2)
+ClusterabilityMDplot(Data)+theme_bw()
+```
+
+The figure presents the result for the sample of Chainlink. The MD plot shows mulitmodality and the statistical testing agrees with the MD plot (p<0.01 that data has no cluster tendency). Therefore, the sample has a high cluster tendency.
+
+## Estimating the Number of Clusters
+
+Lets assume that there is no prior knowledge about the Chainlink data available and the hierarchical algorithm single linkage is selected. Looking at the dendrogram the highest change in fusion level is two. However, maybe each of the main clusters has two subclusters presented in Figure 3. Therefore the function ClusterNoEstimation is used to investigate this assumption.
+Figure 4 presents the Fan plot of the amount of indicators preferring a specific number of clusters for the sample of the Chainlink dataset. Majority vote proposes the cluster number 7 or 3 with the correct cluster number equal to 2 as the second. The appropriate number of clusters would be two because neither 7 or 3 are present in the dendrogram.
+The following code uses a numerical data matrix for the hierarchical clustering algorithm. If not set otherwise, internally the Euclidean distances computed by the parallelDist are computed and used. Furthermore, the fastcluster is used to compute the tree. The dendextend allows to color the branches user-specifc if the ClusterDendrogram is used. The function ClusterNoEstimation expects an matrix of clusterings, each column one "Cls" ordered in the range of cluster numbers of interest. In this example, the range from 2 to 7 is investigated.
+
+```{r, fig.show='hold',fig.width=7,fig.height=5}
+library(FCPS)
+set.seed(135)
+DataList=ClusterChallenge("Chainlink",SampleSize = 900)
+Data=DataList$Chainlink
+Cls=DataList$Cls
+Tree=HierarchicalClustering(Data,1,"SingleL")[[3]]
+ClusterDendrogram(Tree,4,main='Single Linkage')
+MaximumNunber=7
+clsm <- matrix(data = 0, nrow = dim(Data)[1],  ncol = MaximumNunber)
+for (i in 2:(MaximumNunber+1)) {
+  clsm[,i-1] <- cutree(Tree,i)
+}
+out=ClusterNoEstimation(Data,ClsMatrix = clsm, max.nc = MaximumNunber,PlotIt = TRUE)
+```
+
+## Accurate Comparison to a Given Ground Truth
+
+Usually, clustering accuracy can either be computed only correctly for binary classifications or is computed per cluster as shown below. The latter does not allow for a straightforward comparison between algorithms. Often a simple approach of computing the overall accuracy is provided in packages, for example, in see \citep{RN99}. The following code outlines why the  overall accuracy is not correct if computed straightforward. The solution is provided by the function ClusterAccuracy which calculates the correct accuracy of a clustering algorithm:
+
+```{r, fig.show='hold'}
+library(FCPS)
+data("Leukemia")
+Distance=Leukemia$DistanceMatrix
+Classification=Leukemia$Cls
+Cls=HierarchicalClustering(Distance,6,"SingleL")$Cls
+
+#Usual Computation Accuracy per Class
+cm=as.matrix(table(Cls,Classification))
+diag(cm)/rowSums(cm)
+# Usual overall Accuracy
+sum(diag(cm)) / sum(cm) 
+#e.g.
+#MLmetrics::Accuracy(Cls,Classification)
+#Correct Computation
+ClusterAccuracy(Cls,Classification)
+cm
+```
+
+## Further Functionality
+
+This section outlines further functionalities focussing on the possibilities in cases for which the definitions in Table 3 are not met.  
+The user can transform factors to numerical vectors using the function ClusterCreateClassification and perform simple cluster-based evaluations per column of data or used the created Cls otherwise. In the example below, the mean per cluster and feature is computed with ClusterApply:
+
+```{r, fig.show='hold'}
+library(datasets)
+library(FCPS)
+Iris=datasets::iris
+Data=as.matrix(Iris[,1:4])
+SomeFactors=Iris$Species
+V=ClusterCreateClassification(SomeFactors)
+Cls=V$Cls
+V$ClusterNames
+ClusterApply(Data,mean,Cls)
+```
+
+The same computations are possible for distance matrices. The function ClusterApply can also be used to transform distances to data. Exemplary the tetragonula dataset is loaded from the prablcus package \citep{prabclus}. The dataset consists of a data frame with 236 cases and 13 string features. For a brief overview about the data please see \citep{RN78}. The computed distance matrix can be used in this package directly or via MDS transformation to a numerical matrix:
+
+```{r, fig.show='hold'}
+suppressPackageStartupMessages(library('prabclus',quietly = TRUE))
+data(tetragonula)
+#Generated Specific Distance Matrix
+ta <- alleleconvert(strmatrix=as.matrix(tetragonula[1:236,]))
+tai <- alleleinit(allelematrix=ta,distance="none")
+Distances=alleledist((unbuild.charmatrix(tai$charmatrix,236,13)),236,13)
+Cls=rep(1,nrow(Distances))
+DataTrans=ClusterApply(Distances,identity,Cls)$identityPerCluster
+dim(DataTrans)
+dim(Distances)
+```
+
+## Summary
+Fifty-three conventional clustering algorithms are provided in the R}package FCPS on CRAN with consistent input and output. This enables the user to try out many algorithms swiftly. Additionally, 26 statistical approaches for the estimation of the number of clusters, as well as the mirrored density plot (MD-plot) of clusterability, are provided. Moreover, the fundamental clustering problems suite (FCPS) offers a variety of clustering challenges any algorithm should handle when facing real-world data. 

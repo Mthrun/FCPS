@@ -165,7 +165,10 @@ ClusterChallenge=GenerateFundamentalClusteringProblem=function(Name,SampleSize,P
   }
   
   if(isTRUE(PlotIt)){
-		ClusterPlotMDS(DataSample$DataSample,DataSample$ClassSample,main = Name,PointSize=PointSize,Plotter3D=Plotter3D,...)
+		p=ClusterPlotMDS(DataSample$DataSample,DataSample$ClassSample,main = Name,PointSize=PointSize,Plotter3D=Plotter3D,...)
+		p
+		if(!is.null(p))#plotly
+		  print(p)
   }
   names(DataSample)=c(Name,'Cls')
   return(DataSample)
