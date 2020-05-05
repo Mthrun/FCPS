@@ -30,12 +30,14 @@ ClusterabilityMDplot(DataOrDistance,Method,na.rm=FALSE)
   \item{na.rm}{statistical testing will not work with mssing values, if TRUE values are imputed with aveages}
 }
 \details{
-Uses the method of [Adolfsson et al., 2019] sepecified as pca plus dip-test (PCA dip) per default.
+Uses the method of [Adolfsson et al., 2019] sepecified as pca plus dip-test (PCA dip) per default without scaling or standardization of data because this step should never be done automatically. In [Thrun, 2020] the standardization and scaling did not improve the results.
 
 If list is named, than the names of the list will be used and the MDplots will be re-ordered according to multimodality in the plot, otherwise only the pvalues of [Adolfsson et al., 2019] will be the names and the ordering of the MDplots is the same as the of the list.
 
-
 Beware, as shown below, this test fails for alomost touching clusters of Tetra and is difficult to intepret on WingNut but with overlayed with a roubustly estimated unimodal Gaussian distribution it can be interpreted as multimodal). However,  it does not fail for chaining data contrary to the claim in [Adolfsson et al., 2019].
+
+Based on [Thrun, 2020], the author of this function disagrees with [Adolfsson et al., 2019] as to the preference which clusterablity method should be used because the approach "distance" is not preferable for density-based cluster structures.
+
 }
 \value{
 ggplot2 plotter handle
@@ -47,12 +49,15 @@ ggplot2 plotter handle
 
 [Thrun/Ultsch, 2020]  Thrun, M. C., and Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Artificial Intelligence, in press, \url{https://doi.org/10.1016/j.artint.2020.103237}, 2020.
 
+[Thrun, 2020]  Thrun, M. C.: Improving the Sensitivity of Statistical Testing for Clusterability with Mirrored-Density Plot, in Archambault, D., Nabney, I. & Peltonen, J. (eds.), Machine Learning Methods in Visualisation for Big Data, accepted, The Eurographics Association, Norrköping , Sweden, 2020.
+
+
 }
 \author{
 Michael Thrun
 }
 \note{
-Based on work currently under review, the author of this function disagrees with [Adolfsson et al., 2019] as to the preference which clusterablity method should be used and approach "distance" is not preferable for density-based cluster structures.
+"none" seems to call dip.test in clusterabilitytest with high-dimensional data. In that case dip.test just vectorizes the matrix of the data which does not make any sense. Since this could be a bug, "none" option should not be used.
 }
 
 \examples{
@@ -94,6 +99,10 @@ ClusterabilityMDplot(DataV[3:4])
 
 \seealso{
 \code{\link[DataVisualizations]{MDplot}}
+}
+
+\references{
+[Thrun, 2020]  Thrun, M. C.: Improving the Sensitivity of Statistical Testing for Clusterability with Mirrored-Density Plot, in Archambault, D., Nabney, I. & Peltonen, J. (eds.), Machine Learning Methods in Visualisation for Big Data, accepted, The Eurographics Association, NorrkÃ¶ping, Sweden, May, 2020.
 }
 
 \note{Imputation does not work for distance matrices. Imputation is still experimental. It is adviced to impute missing values before using this function}
