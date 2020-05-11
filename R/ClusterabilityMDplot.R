@@ -95,7 +95,7 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE){
           })
         }
       }
-      return(clusterability::clusterabilitytest(x,reduction = Method,test = 'dip',pca_scale=FALSE,pca_center=FALSE,is_dist_matrix = IsDistance_hlp)$pvalue)
+      return(clusterability::clusterabilitytest(x,reduction = Method,test = 'dip',pca_scale=TRUE,pca_center=TRUE,is_dist_matrix = IsDistance_hlp)$pvalue)
     },Method,na.rm) 
     Names=names(DataOrDistance)
     vals=unlist(pvalsL)
@@ -120,7 +120,7 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE){
       
       if(isFALSE(isSymmetric(unname(x)))){
         if(Method!="distance"){
-          res <- prcomp(x=x,retx=T,scale. =FALSE,tol = 0,center=FALSE)
+          res <- prcomp(x=x,retx=T,scale. =TRUE,tol = 0,center=TRUE)
           TransData=as.matrix(res$x)
           ProjectedPoints=as.vector(TransData[,1])
         }else{

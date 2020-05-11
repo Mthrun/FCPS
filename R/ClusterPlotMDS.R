@@ -76,13 +76,19 @@ ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",O
     Colors=DataVisualizations::DefaultColorSequence[-2]#no yellow
     Colors=Colors[1:length(unique(Cls))]
     if(Plotter3D=="rgl"){
-      return(DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,type="s",size=PointSize,box=F,aspect=T,top=T,main=main,Plotter3D=Plotter3D,...))
-      
+      if(dim(Data)[2]!=2)
+        return(DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,type="s",size=PointSize,box=F,aspect=T,top=T,main=main,Plotter3D=Plotter3D,...))
+      else
+        return(DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,size=PointSize,Plotter3D=Plotter3D,...)+ggplot2::ggtitle(main))
     }else{
-      p=DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,size=PointSize,Plotter3D=Plotter3D,...)
-      p=plotly::layout(p,title=main)
-      p
-      return(p)
+      if(dim(Data)[2]!=2){
+        p=DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,size=PointSize,Plotter3D=Plotter3D,...)
+        p=plotly::layout(p,title=main)
+        p
+        return(p)
+      }else{
+        return(DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,size=PointSize,Plotter3D=Plotter3D,...)+ggplot2::ggtitle(main))
+      }
     }
   }else{
     plot(Data[,1],Data[,2],cols=Cls,main = main,...)
