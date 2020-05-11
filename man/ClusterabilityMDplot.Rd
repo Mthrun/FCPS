@@ -11,7 +11,7 @@ A dataset has a high probabilty to posses cluster structures, if the first compo
 An alternative investigation of clusterability can be performed by inspecting the topographic map of the Generalized U-Matrix for a specfic projection method using the \pkg{ProjectionBasesdClustering} and \pkg{GeneralizedUmatrix} packages on CRAN, see [Thrun/Ultsch, 2020] for details.
 }
 \usage{
-ClusterabilityMDplot(DataOrDistance,Method,na.rm=FALSE)
+ClusterabilityMDplot(DataOrDistance,Method,na.rm=FALSE,\dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,6 +28,7 @@ ClusterabilityMDplot(DataOrDistance,Method,na.rm=FALSE)
   "distance" computes pairwise distances (using distance_metric as the metric).
 }
   \item{na.rm}{statistical testing will not work with mssing values, if TRUE values are imputed with aveages}
+  \item{\dots}{Further arguments like main, and Ordering}
 }
 \details{
 Uses the method of [Adolfsson et al., 2019] sepecified as pca plus dip-test (PCA dip) per default without scaling or standardization of data because this step should never be done automatically. In [Thrun, 2020] the standardization and scaling did not improve the results.
