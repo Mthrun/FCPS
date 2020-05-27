@@ -47,3 +47,8 @@ data('Leukemia')
 out=kmeansDist(Leukemia$DistanceMatrix,ClusterNo=6,PlotIt=TRUE,RandomNo=10)
 }
 }
+
+\keyword{kmeansClustering}
+\keyword{Clustering}
+\concept{kmeans Clustering}
+\keyword{distances}

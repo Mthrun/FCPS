@@ -19,68 +19,127 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,method='Orclus',PlotIt=
 # Author: MT 04/2018
   
   #Orclus
-  d=dim(Data)[2]
-  n=d=dim(Data)[1]
+  d = dim(Data)[2]
+  n = d = dim(Data)[1]
   
-  switch(method,
-         Orclus={
-           
-           if(missing(DimSubspace)){
-             if(d>3){
-               DimSubspace=dim(Data)[2]-1 
-               if(DimSubspace>n/ClusterNo){
-                 DimSubspace=n/ClusterNo-1
-               }
-               DimSubspace=min(c(DimSubspace,20)) #higher subsopace is not computable
-             }else{
-               DimSubspace=dim(Data)[2]*0.99
-             }
-           }
-
-           requireNamespace('orclus')
-           obj=orclus::orclus(x=Data, k=ClusterNo,l=DimSubspace,k0=OrclusInitialClustersNo, ...)
-           Cls=obj$cluster
-         },
-         ProClus ={
-           requireNamespace('subspace')
-           if(!missing(DimSubspace))
-            obj=subspace::ProClus(data=Data, k = ClusterNo,d=DimSubspace,...)
-           else
-             obj=subspace::ProClus(data=Data, k = ClusterNo,...)
-           
-           Cls=rep(NaN,nrow(Data))
-          for(i in 1:length(obj)){
-            Cls[obj[[i]]$objects]=i
+  switch(
+    method,
+    Orclus = {
+      if (missing(DimSubspace)) {
+        if (d > 3) {
+          DimSubspace = dim(Data)[2] - 1
+          if (DimSubspace > n / ClusterNo) {
+            DimSubspace = n / ClusterNo - 1
           }
-           Cls[!is.finite(Cls)]=9999
-         },
-         SubClu={
-           requireNamespace('subspace')
-          obj=subspace::SubClu(data=Data, ...)
-           
-           Cls=rep(NaN,nrow(Data))
-           for(i in 1:length(obj)){
-             Cls[obj[[i]]$objects]=i
-           }
-           Cls[!is.finite(Cls)]=9999
-         },
-         Clique={
-           requireNamespace('subspace')
-           obj=subspace::CLIQUE(data=Data, ...)
-           
-           Cls=rep(NaN,nrow(Data))
-           for(i in 1:length(obj)){
-             Cls[obj[[i]]$objects]=i
-           }
-           Cls[!is.finite(Cls)]=9999
-         },
-         stop("Wrong method string entered")
-         
+          DimSubspace = min(c(DimSubspace, 20)) #higher subsopace is not computable
+        } else{
+          DimSubspace = dim(Data)[2] * 0.99
+        }
+      }
+      
+      
+      if (!requireNamespace('orclus')) {
+        message(
+          'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+        )
+        return(
+          list(
+            Cls = rep(1, nrow(Data)),
+            Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+          )
+        )
+      }
+      obj = orclus::orclus(x = Data,
+                           k = ClusterNo,
+                           l = DimSubspace,
+                           k0 = OrclusInitialClustersNo,
+                           ...)
+      Cls = obj$cluster
+    },
+    ProClus = {
+      if (!requireNamespace('subspace')) {
+        message(
+          'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+        )
+        return(
+          list(
+            Cls = rep(1, nrow(Data)),
+            Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+          )
+        )
+      }
+      
+      if (!missing(DimSubspace))
+        obj = subspace::ProClus(data = Data, k = ClusterNo, d = DimSubspace, ...)
+      else
+        obj = subspace::ProClus(data = Data, k = ClusterNo, ...)
+      
+      Cls = rep(NaN, nrow(Data))
+      for (i in 1:length(obj)) {
+        Cls[obj[[i]]$objects] = i
+      }
+      Cls[!is.finite(Cls)] = 9999
+    },
+    SubClu = {
+      if (!requireNamespace('subspace')) {
+        message(
+          'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+        )
+        return(
+          list(
+            Cls = rep(1, nrow(Data)),
+            Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+          )
+        )
+      }
+      
+      obj = subspace::SubClu(data = Data, ...)
+      
+      Cls = rep(NaN, nrow(Data))
+      for (i in 1:length(obj)) {
+        Cls[obj[[i]]$objects] = i
+      }
+      Cls[!is.finite(Cls)] = 9999
+    },
+    Clique = {
+      if (!requireNamespace('subspace')) {
+        message(
+          'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+        )
+        return(
+          list(
+            Cls = rep(1, nrow(Data)),
+            Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+          )
+        )
+      }
+      obj = subspace::CLIQUE(data = Data, ...)
+      
+      Cls = rep(NaN, nrow(Data))
+      for (i in 1:length(obj)) {
+        Cls[obj[[i]]$objects] = i
+      }
+      Cls[!is.finite(Cls)] = 9999
+    },
+    stop("Wrong method string entered")
+    
   )
-
-if(PlotIt){
-  ClusterPlotMDS(Data,Cls)
-}
-Cls=ClusterRename(Cls,Data)
-return(list(Cls=Cls,Object=obj,Method=method))
+  
+  if (PlotIt) {
+    ClusterPlotMDS(Data, Cls)
+  }
+  Cls = ClusterRename(Cls, Data)
+  return(list(
+    Cls = Cls,
+    Object = obj,
+    Method = method
+  ))
 }

@@ -36,3 +36,6 @@ out=NeuralGasClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 
 [Martinetz et al., 1993]  Martinetz, T. M., Berkovich, S. G., & Schulten, K. J.: 'Neural-gas' network for vector quantization and its application to time-series prediction, IEEE Transactions on Neural Networks, Vol. 4(4), pp. 558-569. 1993.
 }
+
+\keyword{NeuralGasClustering}% __ONLY ONE__ keyword per line
+\concept{Neural Gas}% __ONLY ONE__ keyword per line

@@ -1,5 +1,19 @@
 MarkovClustering=function(Data=NULL,Adjacency=NULL,Radius=TRUE,addLoops = TRUE,PlotIt=FALSE,...){
   
+  if (!requireNamespace('MCL')) {
+    message(
+      'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Cls = rep(1, nrow(Data)),
+        Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
+  
   #author: MT, 04/2018
   if(!is.null(Data)){
       if(Radius==TRUE){
@@ -19,7 +33,6 @@ MarkovClustering=function(Data=NULL,Adjacency=NULL,Radius=TRUE,addLoops = TRUE,P
       Adjacency[i, RInd] = 1
     }
   }  
-  requireNamespace('MCL')
   
   mm=MCL::mcl(x = Adjacency,addLoops =addLoops,...)
 

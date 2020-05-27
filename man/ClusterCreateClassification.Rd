@@ -1,6 +1,6 @@
 \name{ClusterCreateClassification}
 \alias{ClusterCreateClassification}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 Create Classification for Cluster.. functions
 }
@@ -10,7 +10,7 @@ Creates a Cls from arbitrary list of objects
 \usage{
 ClusterCreateClassification(Objects)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{Objects}{
 listed objects, for example factor
@@ -41,7 +41,7 @@ Michael Thrun
   table(Cls,SomeFactors)
   }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ClusterCreateClassification}% use one of  RShowDoc("KEYWORDS")
-\keyword{factor}% __ONLY ONE__ keyword per line
+
+\keyword{ClusterCreateClassification}
+\keyword{factor}
+\concept{Create Cluster Classification}

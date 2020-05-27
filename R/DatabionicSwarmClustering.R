@@ -1,5 +1,19 @@
 DatabionicSwarmClustering=DBSclusteringAndVisualization=function(DataOrDistances,ClusterNo=0,StructureType=TRUE,DistancesMethod=NULL,PlotTree=FALSE,PlotMap=FALSE,PlotIt=FALSE,Data){
-  requireNamespace('DatabionicSwarm')
+  
+  if (!requireNamespace('DatabionicSwarm')) {
+    message(
+      'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Cls = rep(1, nrow(DataOrDistances)),
+        Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
+  
   if(StructureType==1) StructureType=TRUE
   if(StructureType==0) StructureType=FALSE
   if(missing(DataOrDistances)){

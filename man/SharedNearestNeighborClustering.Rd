@@ -59,4 +59,4 @@ Hepta$Data,Radius=NULL,minPts=NULL,PlotIt = FALSE)
 }
 
 \keyword{snn}% use one of  RShowDoc("KEYWORDS")
-\keyword{SharedNearestNeighborClustering}% __ONLY ONE__ keyword per line
+\concept{SharedNearest Neighbor Clustering}% __ONLY ONE__ keyword per line

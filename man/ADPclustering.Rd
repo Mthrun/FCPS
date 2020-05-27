@@ -42,7 +42,6 @@ Michael Thrun
 data('Hepta')
 out=ADPclustering(Hepta$Data,PlotIt=FALSE)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ADPclustering}% use one of  RShowDoc("KEYWORDS")
-\keyword{fast search and find of density peaks}% __ONLY ONE__ keyword per line
+
+\keyword{ADPclustering}
+\concept{fast search and find of density peaks}

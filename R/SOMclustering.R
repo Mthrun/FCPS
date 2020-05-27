@@ -1,7 +1,20 @@
 SOMclustering=function(Data,LC=c(1,2),ClusterNo=NULL,Mode="online",PlotIt=FALSE,rlen=100,alpha = c(0.05, 0.01),...){
+  if (!requireNamespace('kohonen')) {
+    message(
+      'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Cls = rep(1, nrow(Data)),
+        Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
   
   #author: MT, 04/2018
-  requireNamespace('kohonen')
+
   
   if(missing(LC)){
     if(is.null(ClusterNo)){stop('Either LinesColumns (LC) has to be set or the ClusterNo.')}

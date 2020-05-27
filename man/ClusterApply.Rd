@@ -57,3 +57,4 @@ MDStrans=ClusterApply(Distance,identity)
 }
 \author{Felix Pape}
 \note{MT extended the function for distances}
+\keyword{ClusterApply}

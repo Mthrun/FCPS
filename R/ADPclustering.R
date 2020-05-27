@@ -1,7 +1,20 @@
 ADPclustering=function(Data,ClusterNo=NULL,PlotIt=FALSE,...){
   
   #author: MT, 04/2018
-  requireNamespace('ADPclust')
+  if (!requireNamespace('ADPclust')) {
+    message(
+      'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Cls = rep(1, nrow(Data)),
+        Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
+  
   if(is.null(ClusterNo))
 	adp=ADPclust::adpclust(Data,...)
   else

@@ -13,6 +13,21 @@ SharedNearestNeighborClustering <-function(Data,Knn=7,Radius,minPts,PlotIt=FALSE
   # 
   # author: MT 2019
   
+  if (!requireNamespace('dbscan')) {
+    message(
+      'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Cls = rep(1, nrow(Data)),
+        Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
+  
+  
   if(is.null(nrow(Data))){# dann haben wir einen Vektor
     return(cls <- rep(1,length(Data)))
   }
@@ -28,8 +43,7 @@ SharedNearestNeighborClustering <-function(Data,Knn=7,Radius,minPts,PlotIt=FALSE
   }   
   if(missing(UpperLimitRadius))
     UpperLimitRadius=2*Radius
-  
-  requireNamespace('dbscan',quietly = TRUE)
+
   liste=dbscan::sNNclust(x = Data,k=Knn,eps=Radius,minPts=minPts,...)
   Cls=liste$cluster
 

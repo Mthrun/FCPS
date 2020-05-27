@@ -13,10 +13,10 @@ ClusterAccuracy(PriorCls,CurrentCls,K=9)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{PriorCls}{
-%ground truth
+ground truth,[1:n]  numerical vector with n numbers defining the classification. It has k unique numbers representing the arbitrary labels of the clustering.
 }
   \item{CurrentCls}{
-clustering result
+main output of the clustering, [1:n]  numerical vector with n numbers defining the classification. It has k unique numbers representing the arbitrary labels of the clustering.
 }
   \item{K}{
 Maximal number of classes for computation.
@@ -62,7 +62,6 @@ table(Cls$Cls,Hepta$Cls)
 ClusterAccuracy(Hepta$Cls,Cls$Cls)
 }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{Accuracy}% use one of  RShowDoc("KEYWORDS")
-\keyword{Clustering}% __ONLY ONE__ keyword per line
+
+\keyword{Accuracy}
+\keyword{Clustering}

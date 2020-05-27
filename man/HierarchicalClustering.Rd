@@ -1,6 +1,6 @@
 \name{HierarchicalClustering}
 \alias{HierarchicalClustering}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 Hierarchical Clustering
 }
@@ -10,7 +10,7 @@ Wrapper various agglomerative hierarchical clustering algorithms.
 \usage{
 HierarchicalClustering(DataOrDistances,ClusterNo,method='SingleL',Fast=TRUE,Data,\dots)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
 \item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
 
@@ -51,8 +51,8 @@ Michael Thrun
 data('Hepta')
 out=HierarchicalClustering(Hepta$Data,ClusterNo=7)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{HierarchicalClustering}% use one of  RShowDoc("KEYWORDS")
-\keyword{Hierarchical}% __ONLY ONE__ keyword per line
-\keyword{Clustering}% __ONLY ONE__ keyword per line
+
+\keyword{HierarchicalClustering}
+\keyword{Hierarchical}
+\keyword{Clustering}
+\concept{Hierarchical Clustering}

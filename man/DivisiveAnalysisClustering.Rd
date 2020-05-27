@@ -45,3 +45,6 @@ ClusterDendrogram(CA$Dendrogram,7,main='DIANA')
 \references{
 [Rousseeuw/Kaufman, 1990]	Rousseeuw, P. J., & Kaufman, L.: Finding groups in data, Belgium, John Wiley & Sons Inc., ISBN: 0471735787, 1990.
 }
+\concept{Divisive Analysis Clustering}
+\keyword{diana}
+\keyword{DivisiveAnalysisClustering}

@@ -1,6 +1,6 @@
 \name{ClusterabilityMDplot}
 \alias{ClusterabilityMDplot}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 Clusterability MDplot
 }
@@ -13,7 +13,7 @@ An alternative investigation of clusterability can be performed by inspecting th
 \usage{
 ClusterabilityMDplot(DataOrDistance,Method,na.rm=FALSE,\dots)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{DataOrDistance}{
   einer one datasets [1:n,1:d] of n cases and d features or  or symmetric distance matrix [1:d,1:d] 
@@ -50,15 +50,17 @@ ggplot2 plotter handle
 
 [Thrun/Ultsch, 2020]  Thrun, M. C., and Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Artificial Intelligence, in press, \url{https://doi.org/10.1016/j.artint.2020.103237}, 2020.
 
-[Thrun, 2020]  Thrun, M. C.: Improving the Sensitivity of Statistical Testing for Clusterability with Mirrored-Density Plot, in Archambault, D., Nabney, I. & Peltonen, J. (eds.), Machine Learning Methods in Visualisation for Big Data, accepted, The Eurographics Association, Norrköping , Sweden, 2020.
-
+[Thrun, 2020]  Thrun, M. C.: Improving the Sensitivity of Statistical Testing for Clusterability with Mirrored-Density Plot, in Archambault, D., Nabney, I. & Peltonen, J. (eds.), Machine Learning Methods in Visualisation for Big Data, The Eurographics Association, \url{https://diglib.eg.org:443/handle/10.2312/mlvis20201102}, Norrkoping, Sweden, May, 2020.
 
 }
 \author{
 Michael Thrun
 }
 \note{
+
 "none" seems to call dip.test in clusterabilitytest with high-dimensional data. In that case dip.test just vectorizes the matrix of the data which does not make any sense. Since this could be a bug, "none" option should not be used.
+
+Imputation does not work for distance matrices. Imputation is still experimental. It is adviced to impute missing values before using this function
 }
 
 \examples{
@@ -101,11 +103,5 @@ ClusterabilityMDplot(DataV[3:4])
 \seealso{
 \code{\link[DataVisualizations]{MDplot}}
 }
-
-\references{
-[Thrun, 2020]  Thrun, M. C.: Improving the Sensitivity of Statistical Testing for Clusterability with Mirrored-Density Plot, in Archambault, D., Nabney, I. & Peltonen, J. (eds.), Machine Learning Methods in Visualisation for Big Data, accepted, The Eurographics Association, NorrkÃ¶ping, Sweden, May, 2020.
-}
-
-\note{Imputation does not work for distance matrices. Imputation is still experimental. It is adviced to impute missing values before using this function}
-\keyword{Clusterability}% use one of  RShowDoc("KEYWORDS")
-\keyword{MDplot}% __ONLY ONE__ keyword per line
+\keyword{Clusterability}
+\keyword{MDplot}

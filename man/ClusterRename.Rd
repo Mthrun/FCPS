@@ -1,6 +1,6 @@
 \name{ClusterRename}
 \alias{ClusterRename}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 Renames Clustering
 }
@@ -41,6 +41,5 @@ Cls
 #Named Clustering
 ClusterRename(Cls)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
+
 \keyword{ClusterRename}% use one of  RShowDoc("KEYWORDS")

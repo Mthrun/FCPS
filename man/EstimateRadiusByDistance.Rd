@@ -13,7 +13,7 @@ EstimateRadiusByDistance(DistanceMatrix)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{DistanceMatrix}{
-[1:n,1:n]  Distance Matrix of n cases
+[1:n,1:n]  symmetric distance Matrix of n cases
 }
 }
 \details{
@@ -41,5 +41,5 @@ DistanceMatrix=as.matrix(parallelDist::parallelDist(Hepta$Data))
 Radius=EstimateRadiusByDistance(DistanceMatrix)
 }
 
-\keyword{Radius}% use one of  RShowDoc("KEYWORDS")
-\keyword{Clustering}% __ONLY ONE__ keyword per line
+\keyword{Radius}
+\keyword{Clustering}

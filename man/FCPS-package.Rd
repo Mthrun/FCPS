@@ -43,7 +43,8 @@ Maintainer: \packageMaintainer{FCPS}
 }
 
 \keyword{FCPS}
-\keyword{data set}
+\concept{data set}
 \keyword{benchmarking}
 \keyword{clustering}
 \keyword{cluster}
+\concept{Fundamental Clustering Problems Suite}

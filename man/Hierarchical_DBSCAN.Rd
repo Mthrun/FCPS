@@ -66,3 +66,7 @@ CA=Hierarchical_DBSCAN(Leukemia$DistanceMatrix)
 }
 
 }
+\keyword{Hierarchical}
+\keyword{DBSCAN}
+\keyword{Clustering}
+\concept{Hierarchical DBSCAN}

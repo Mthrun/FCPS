@@ -67,7 +67,6 @@ Michael Thrun
 data('Hepta')
 out=ProjectionPursuitClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ProjectionPursuitClustering}% use one of  RShowDoc("KEYWORDS")
-\keyword{PPCI}% __ONLY ONE__ keyword per line
+
+\keyword{ProjectionPursuitClustering}
+\keyword{PPCI}

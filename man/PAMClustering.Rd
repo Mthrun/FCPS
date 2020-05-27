@@ -43,5 +43,5 @@ data('Hepta')
 out=PAMclustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 }
 \keyword{PAM}
-\keyword{Partitioning Around Medoids}
+\concept{Partitioning Around Medoids}
 \keyword{clustering}

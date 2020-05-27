@@ -45,9 +45,8 @@ Michael Thrun
 data('Hepta')
 out=MoGclustering(Hepta$Data,PlotIt=FALSE)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{MixtureOfGaussians}% use one of  RShowDoc("KEYWORDS")
+
+\keyword{MixtureOfGaussians}
 \keyword{MoG}% __ONLY ONE__ keyword per line
-\keyword{EM clustering}% __ONLY ONE__ keyword per line
-\keyword{Expectation Maximization}
+\concept{EM clustering}% __ONLY ONE__ keyword per line
+\concept{Expectation Maximization}

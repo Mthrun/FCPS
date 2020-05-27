@@ -62,7 +62,7 @@ Data=Hepta$Data
 out=PenalizedRegressionBasedClustering(Data,0.4,1,2,FALSE)
 table(out$Cls,Hepta$Cls)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{PenalizedRegressionBasedClustering}% use one of  RShowDoc("KEYWORDS")
-\keyword{DC-ADMM}% __ONLY ONE__ keyword per line
+\keyword{ADMM}
+\keyword{PenalizedRegressionBasedClustering}
+\concept{DC-ADMM}
+\concept{Penalized Regression Based Clustering}

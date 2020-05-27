@@ -69,3 +69,6 @@ data('Hepta')
 out=SubspaceClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 }
 \author{Michael Thrun}
+
+\keyword{SubspaceClustering}
+\concept{Subspace Clustering}

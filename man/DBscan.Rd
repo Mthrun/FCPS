@@ -1,6 +1,6 @@
 \name{DBscan}
 \alias{DBscan}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 DBscan
 }
@@ -12,7 +12,7 @@ DBscan(Data,Radius,minPts,
 
 PlotIt=FALSE,UpperLimitRadius,\dots)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
 

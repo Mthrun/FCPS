@@ -47,6 +47,6 @@ Michael Thrun
 data('Hepta')
 out=GenieClustering(Hepta$Data,ClusterNo=7)
 }
-\keyword{Hierarchical}% use one of  RShowDoc("KEYWORDS")
-\keyword{Clustering}% __ONLY ONE__ keyword per line
-\keyword{Agglomerative}% __ONLY ONE__ keyword per line
+\keyword{Hierarchical}
+\keyword{Clustering}
+\keyword{Agglomerative}

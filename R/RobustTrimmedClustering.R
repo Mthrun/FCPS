@@ -11,8 +11,25 @@ RobustTrimmedClustering=function(Data,ClusterNo,Alpha,PlotIt=FALSE,...){
   # TClustObject         Object of sota Alorithm
   # Author: MT 09/2019  
   
+  #
   
-  requireNamespace('tclust')
+  if (!requireNamespace('tclust')) {
+    message(
+      'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Cls = rep(1, nrow(Data)),
+        Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
+  
+  
+  
+  
   res=tclust::tclust(x=Data,k = ClusterNo,alpha = Alpha,...)
   Cls=res$cluster	
   

@@ -1,6 +1,6 @@
 \name{ClusterPlotMDS}
 \alias{ClusterPlotMDS}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 Plot Clustering using MDS
 }
@@ -79,6 +79,5 @@ ClusterPlotMDS(Leukemia$DistanceMatrix,Leukemia$Cls)
 }
 
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ClusterPlotMDS}% use one of  RShowDoc("KEYWORDS")
+
+\keyword{ClusterPlotMDS}

@@ -22,7 +22,8 @@ Mode="online",PlotIt=FALSE,rlen=100,alpha = c(0.05, 0.01),...)
 
 \item{rlen}{Please see \code{\link[kohonen]{supersom}}}
 \item{alpha}{Please see \code{\link[kohonen]{supersom}}}
-\item{\dots}{Further arguments to be set for the clustering algorithm in \code{\link[kohonen]{somgrid}}, if not set, default arguments are used.}
+\item{\dots}{Further arguments to be set for the clustering algorithm in 
+\code{\link[kohonen:unit.distances]{somgrid}}, if not set, default arguments are used.}
 }
 \details{
 This clustering algorithm is based on very small maps and, hence, not emergent (c.f. [Thrun, 2018, p.37]). A 3x3 map means 9 units leading to 9 clusters.
@@ -47,9 +48,8 @@ Michael Thrun
 data('Hepta')
 out=SOMclustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{SOM}% use one of  RShowDoc("KEYWORDS")
-\keyword{k-batch}% __ONLY ONE__ keyword per line
-\keyword{k-batch clustering}% __ONLY ONE__ keyword per line
-\keyword{som clustering}% __ONLY ONE__ keyword per line
+
+\keyword{SOM}
+\keyword{k-batch}
+\concept{k-batch clustering}
+\concept{som clustering}

@@ -34,3 +34,6 @@ out=HCLclustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 [Ripley, 2007]  Ripley, B. D.: Pattern recognition and neural networks, Cambridge university press, ISBN: 0521717701, 2007.
 
 }
+
+\keyword{HCLclustering}
+\concept{Hard Competitive learning clustering}

@@ -17,8 +17,20 @@ AgglomerativeNestingClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE
   if(Standardization==0) Standardization=FALSE
 
 
-  
-  requireNamespace('cluster')
+  if (!requireNamespace('cluster')) {
+    message(
+      'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Cls = rep(1, nrow(DataOrDistances)),
+        Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
+ 
   if (isSymmetric(unname(DataOrDistances))) {
       Input = as.dist(DataOrDistances)
       requireNamespace('ProjectionBasedClustering')

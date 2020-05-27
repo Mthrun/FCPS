@@ -1,6 +1,6 @@
 \name{DensityPeakClustering}
 \alias{DensityPeakClustering}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 Density Peak Clustering algorithm using the Decision Graph
 }
@@ -12,7 +12,7 @@ DensityPeakClustering(DataOrDistances, Rho,Delta,Dc,Knn=7,
 
 method = "euclidean", PlotIt = FALSE, Data, ...)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{DataOrDistances}{
 Either [1:n,1:n] symmetric distance matrix or [1:n,1:d] not symmetric data matrix of n cased and d variable
@@ -52,7 +52,7 @@ The plot shows the density peaks (Cluster centers). Set Rho and Delta as boundar
 If Rho and Delta are set:
 
 list of
- \item{Cls}{Clustering as a numeric vector of k clusters}
+ \item{Cls}{[1:n numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.}
 
  \item{Object}{ output of [Pedersen et al., 2017] algorithm}
 
@@ -66,14 +66,10 @@ If Rho and Delta are missing:
 [Pedersen et al., 2017]  Thomas Lin Pedersen, Sean Hughes and Xiaojie Qiu: densityClust: Clustering by Fast Search and Find of Density Peaks. R package version 0.3. https://CRAN.R-project.org/package=densityClust, 2017.
 
 [Rodriguez/Laio, 2014]  Rodriguez, A., & Laio, A.: Clustering by fast search and find of density peaks, Science, Vol. 344(6191), pp. 1492-1496. 2014.
-
-
 }
 \author{
 Michael Thrun
 }
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
 \code{\link{ADPclustering}}
@@ -94,7 +90,7 @@ Cls=DensityPeakClustering(Hepta$Data,Dc=Dc,Rho = 0.028,
 Delta = 22,Knn = 7,PlotIt = TRUE)$Cls
 }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{Density Peak Clustering}% use one of  RShowDoc("KEYWORDS")
-\keyword{Density Peak}% __ONLY ONE__ keyword per line
+
+\concept{Density Peak Clustering}
+\concept{Density Peak}
+\keyword{DensityPeakClustering}

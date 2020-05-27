@@ -4,9 +4,8 @@ export(kmeansDist)
 export(pdfClustering)
 export(parApplyClusterAnalysis)
 export(cluster_analysis_fun)
+
 import(DataVisualizations)
-
-
 import(ggplot2)
 importFrom('stats', hclust,cutree,kmeans,as.dendrogram,rect.hclust)
 #importFrom('cclust', cclust)

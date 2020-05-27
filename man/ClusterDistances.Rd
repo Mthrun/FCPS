@@ -2,7 +2,7 @@
 \alias{ClusterIntraDistances}
 \alias{IntraClusterDistances}
 \alias{ClusterDistances}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 ClusterDistances
 }
@@ -52,7 +52,7 @@ Distance=as.matrix(dist(Hepta$Data))
 
 interdists=ClusterDistances(Distance,Hepta$Cls)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{intra-cluster}% use one of  RShowDoc("KEYWORDS")
-\keyword{distances}% __ONLY ONE__ keyword per line
+
+\concept{intra cluster}
+\keyword{distances}
+\keyword{intracluster}

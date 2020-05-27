@@ -47,3 +47,5 @@ out=SOTAclustering(Lsun3D$Data,ClusterNo=100,PlotIt=FALSE,UnrestGrowth=FALSE)
 [Herrero et al., 2001]  Herrero, J., Valencia, A., & Dopazo, J.: A hierarchical unsupervised growing neural network for clustering gene expression patterns, Bioinformatics, Vol. 17(2), pp. 126-136. 2001.
 
 }
+\keyword{SOTAclustering}
+\concept{Self-organizing Tree Algorithm}

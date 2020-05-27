@@ -1,4 +1,4 @@
-ClusterChallenge=GenerateFundamentalClusteringProblem=function(Name,SampleSize,PlotIt=FALSE,PointSize=1,Plotter3D="rgl",...){
+ClusterChallenge=function(Name,SampleSize,PlotIt=FALSE,PointSize=1,Plotter3D="rgl",...){
   
   if(SampleSize<500){
     warning('SampleSize may be to small in order to represent clustering problem correctly.')

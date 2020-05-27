@@ -19,7 +19,7 @@ Names,PlotIt=FALSE)
   [1:n,1:n] symmetric distance matrix
 }
   \item{Cls}{
-  [1:n] numerical vector of k classes
+[1:n] numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.
 }
   \item{Names}{
   Optional [1:k] character vector naming k classes
@@ -52,7 +52,7 @@ Distance=as.matrix(dist(Hepta$Data))
 
 interdists=ClusterInterDistances(Distance,Hepta$Cls)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{inter-cluster}% use one of  RShowDoc("KEYWORDS")
-\keyword{distances}% __ONLY ONE__ keyword per line
+
+\concept{inter cluster}
+\keyword{distances}
+\keyword{intercluster}

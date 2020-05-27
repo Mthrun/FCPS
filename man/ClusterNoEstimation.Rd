@@ -134,3 +134,5 @@ indicatorsList=ClusterNoEstimation(Data = data, ClsMatrix = clsm, max.nc = 7)
 ClusterNoEstimation(Data = data, max.nc = 7, method = "complete")
 #In this variant, the function clusterumbers also takes over the clustering
 }
+\concept{Estimation of Number of Clusters}
+\keyword{ClusterNoEstimation}

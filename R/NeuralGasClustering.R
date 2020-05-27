@@ -14,7 +14,22 @@ NeuralGasClustering <-function(Data,ClusterNo,PlotIt=FALSE,...){
 #1.Editor: MT 04/18
 
   
-requireNamespace('cclust')
+  if (!requireNamespace('cclust')) {
+    message(
+      'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Cls = rep(1, nrow(Data)),
+        Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
+  
+  
+
 res=cclust::cclust(x=Data,centers=ClusterNo,method='neuralgas',...)
 Cls=res$cluster
 if(PlotIt){

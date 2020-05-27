@@ -1,5 +1,19 @@
 MinimaxLinkageClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",ColorTreshold=0,...){
   
+  if (!requireNamespace('protoclust')) {
+    message(
+      'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Cls = rep(1, nrow(DataOrDistances)),
+        Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
+  
   if (!isSymmetric(unname(DataOrDistances))) {
     requireNamespace('parallelDist')
     pDist=as.dist(parallelDist::parDist(DataOrDistances,method=DistanceMethod))
@@ -9,7 +23,7 @@ MinimaxLinkageClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="eu
     pDist=DataOrDistances
   }
   
-  requireNamespace('protoclust')
+  
   hc <- protoclust::protoclust(pDist,...)
   
   m=paste("Minimax Linkage Clustering/ "," N=",nrow(as.matrix(pDist)))

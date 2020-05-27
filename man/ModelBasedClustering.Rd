@@ -46,8 +46,7 @@ out=ModelBasedClustering(Hepta$Data,PlotIt=FALSE)
 \code{\link{MoGclustering}}
 }
 
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{MixtureOfGaussians}% use one of  RShowDoc("KEYWORDS")
-\keyword{MoG}% __ONLY ONE__ keyword per line
-\keyword{Model based clustering}% __ONLY ONE__ keyword per line
+\keyword{MixtureOfGaussians}
+\keyword{MoG}
+\concept{Model based clustering}
+\concept{Mixture Of Gaussians}

@@ -43,7 +43,6 @@ Michael Thrun
 data('Hepta')
 out=QTclustering(Hepta$Data,Radius=NULL,PlotIt=FALSE)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{QTClustering}% use one of  RShowDoc("KEYWORDS")
+
+\keyword{QTClustering}
 

@@ -16,6 +16,20 @@ MinimalEnergyClustering <-function(DataOrDistances,ClusterNo=0,DistanceMethod="e
 # Dendrogram
 # Author: MT, 2019
 
+  if (!requireNamespace('energy')) {
+    message(
+      'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Cls = rep(1, nrow(DataOrDistances)),
+        Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
+  
 #Clustering
   if(missing(DataOrDistances)){
     DataOrDistances=Data
@@ -30,7 +44,7 @@ MinimalEnergyClustering <-function(DataOrDistances,ClusterNo=0,DistanceMethod="e
     pDist=DataOrDistances
   }
   
-  requireNamespace('energy')
+
 	hc <- energy::energy.hclust(pDist)
 	
 	m=paste("Minimal Energy Clustering/ "," N=",nrow(as.matrix(pDist)))

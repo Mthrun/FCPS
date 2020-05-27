@@ -70,7 +70,7 @@ out=Spectrum(Hepta$Data,PlotIt=FALSE)
 out=Spectrum(Hepta$Data,PlotIt=TRUE)
 }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{Spectrum}% use one of  RShowDoc("KEYWORDS")
-\keyword{FCPS}% __ONLY ONE__ keyword per line
+
+\keyword{Spectrum}
+\keyword{FCPS}
+\concept{Spectral Clustering}

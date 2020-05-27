@@ -52,7 +52,7 @@ Databionic swarm is like k-means an stochastic algorithm meaning that the cluste
 }
 \value{
 List of
-\item{Cls}{[1:n] numerical vector of k clusters}
+\item{Cls}{[1:n numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.}
 \item{Object}{List of further output of DBS}
 }
 \references{
@@ -120,10 +120,9 @@ Cls = DatabionicSwarmClustering(Chainlink$Data,
                                 PlotMap = T)
 }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{DBS}% use one of  RShowDoc("KEYWORDS")
-\keyword{DatabionicSwarm}% __ONLY ONE__ keyword per line
+
+\keyword{DBS}
+\keyword{DatabionicSwarm}
 \keyword{Clustering}
 \keyword{swarm}
 \keyword{databionic}

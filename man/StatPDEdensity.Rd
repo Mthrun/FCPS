@@ -40,6 +40,6 @@ PDE was published in [Ultsch, 2005], short explanation in [Thrun, Ultsch 2018] a
 }
 
 \keyword{density estimation}
-\keyword{ggproto density estimation}
+\concept{ggproto density estimation}
 \keyword{PDE}
-\keyword{Pareto Density Estimation}
+\concept{Pareto Density Estimation}

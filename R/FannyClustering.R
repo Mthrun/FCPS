@@ -1,12 +1,26 @@
 FannyClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Standardization=TRUE,Data,...){
   
+  if (!requireNamespace('cluster')) {
+    message(
+      'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Cls = rep(1, nrow(DataOrDistances)),
+        Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
+  
   if(missing(DataOrDistances)){
     DataOrDistances=Data
   }
   if(Standardization==1) Standardization=TRUE
   if(Standardization==0) Standardization=FALSE
   #author: MT, 04/2018
-  requireNamespace('cluster')
+
     if (unname(isSymmetric(DataOrDistances))) {
       Input = as.dist(DataOrDistances)
       AnzVar = ncol(DataOrDistances)

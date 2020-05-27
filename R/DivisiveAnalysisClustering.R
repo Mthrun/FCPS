@@ -10,6 +10,21 @@ DivisiveAnalysisClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE,Sta
   # Cls[1:n]                Clusterung der Daten
   # dianaObject         Object of sota Alorithm
   # Author: MT 04/2018
+  
+  if (!requireNamespace('cluster')) {
+    message(
+      'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Cls = rep(1, nrow(DataOrDistances)),
+        Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
+  
   if(missing(DataOrDistances)){
     DataOrDistances=Data
   }
@@ -18,7 +33,7 @@ DivisiveAnalysisClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE,Sta
 
 
   
-  requireNamespace('cluster')
+ 
   if (isSymmetric(unname(DataOrDistances))) {
       Input = as.dist(DataOrDistances)
       AnzVar = ncol(DataOrDistances)

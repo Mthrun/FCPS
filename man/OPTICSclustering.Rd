@@ -53,3 +53,4 @@ data('Hepta')
 out=OPTICSclustering(Hepta$Data,MaxRadius=NULL,RadiusThreshold=NULL,minPts=NULL,PlotIt = FALSE)
 }
 \keyword{optics}% use one of  RShowDoc("KEYWORDS")
+\keyword{Clustering}

@@ -1,6 +1,6 @@
 \name{ClusterDendrogram}
 \alias{ClusterDendrogram}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 Cluster Dendrogram
 }
@@ -12,7 +12,7 @@ ClusterDendrogram(TreeOrDendrogram, ClusterNo,
 
 Colorsequence,main='Name of Algorithm')
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{TreeOrDendrogram}{
 Either Object of hcclust defining the tree, third list element of hierarchical cluster algorithms of this package
@@ -59,7 +59,7 @@ ClusterCount(listofh$Cls)
 #because the order of the cluster sizes is
 #c1,c3,c4,c2
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ClusterDendrogram}% use one of  RShowDoc("KEYWORDS")
-\keyword{Dendrogram}% __ONLY ONE__ keyword per line
+
+\keyword{ClusterDendrogram}
+\keyword{Dendrogram}
+\concept{Cluster Dendrogram}

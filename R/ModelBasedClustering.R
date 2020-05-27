@@ -16,6 +16,20 @@ ModelBasedClustering <-function(Data,ClusterNo=2,PlotIt=FALSE,...){
   
 #  [Fraley/Raftery, 2006]  Fraley, C., & Raftery, A. E.MCLUST version 3: an R package for normal mixture modeling and model-based clustering,DTIC Document, 2006.
   
+  if (!requireNamespace('mclust')) {
+    message(
+      'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Cls = rep(1, nrow(Data)),
+        Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
+  
   if (ClusterNo<2){
     warning("ClusterNo should to be an integer > 2. Now, all of your data is in one cluster.")
     if(is.null(nrow(Data))){# dann haben wir einen Vektor
@@ -25,7 +39,7 @@ ModelBasedClustering <-function(Data,ClusterNo=2,PlotIt=FALSE,...){
     }
   }
  
-  requireNamespace('mclust')
+  
 
 res=mclust::Mclust(Data,G=ClusterNo,modelNames=mclust::mclust.options("emModelNames"),...)
 Cls=res$classification

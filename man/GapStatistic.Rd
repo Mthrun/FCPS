@@ -43,4 +43,4 @@ data(Hepta)
 GapStatistic(Hepta$Data,10,ClusterFun = kmeans)
 }
 \keyword{Gap}
-\keyword{GapStatistic}
+\concept{Gap Statistic}

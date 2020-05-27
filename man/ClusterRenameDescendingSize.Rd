@@ -7,7 +7,7 @@ Renames the clusters of a classification in descending order.}
 ClusterRenameDescendingSize(Cls)
 }
 \arguments{
-  \item{Cls}{1:n numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.}
+  \item{Cls}{[1:n numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.}
 }
 % \details{}
 \value{
@@ -16,8 +16,8 @@ ClusterRenameDescendingSize(Cls)
 \author{Michael Thrun, Alfred Ultsch}
 
 \keyword{ClusterRenameDescendingSize}
-\keyword{DescendingClustertering}% __ONLY ONE__ keyword per line
-
+\concept{Descending Clustertering}
+\concept{Rename Descending Cluster Size}
 
 \examples{
 data('Lsun3D')

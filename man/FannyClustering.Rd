@@ -1,6 +1,6 @@
 \name{FannyClustering}
 \alias{FannyClustering}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 Fuzzy Analysis Clustering [Rousseeuw/Kaufman, 1990, p. 164-198] 
 }
@@ -47,7 +47,6 @@ Michael Thrun
 data('Hepta')
 out=FannyClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{fanny}% use one of  RShowDoc("KEYWORDS")
-\keyword{fuzzy clustering}% __ONLY ONE__ keyword per line
+
+\keyword{fanny}
+\concept{fuzzy clustering}

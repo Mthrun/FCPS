@@ -42,3 +42,5 @@ out=RobustTrimmedClustering(Hepta$Data,ClusterNo=7,Alpha=0,PlotIt=FALSE)
 
 [Fritz et al., 2012]  Fritz, H., Garcia-Escudero, L. A., & Mayo-Iscar, A.: tclust: An R package for a trimming approach to cluster analysis, Journal of statistical Software, Vol. 47(12), pp. 1-26. 2012.
 }
+\keyword{RobustTrimmedClustering}
+\concept{Robust Trimmed Clustering}

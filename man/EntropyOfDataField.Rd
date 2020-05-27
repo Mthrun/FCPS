@@ -50,8 +50,7 @@ H=EntropyOfDataField(Hepta$Data,PlotIt=FALSE)
 Sigmamin=names(H)[which.min(H)]
 Dc=3/sqrt(2)*as.numeric(names(H)[which.min(H)])
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{data field}% use one of  RShowDoc("KEYWORDS")
-\keyword{entropy}% __ONLY ONE__ keyword per line
-\keyword{data entropy}% __ONLY ONE__ keyword per line
+
+\concept{data field}
+\keyword{entropy}
+\concept{data entropy}

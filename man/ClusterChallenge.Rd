@@ -1,7 +1,6 @@
 \name{ClusterChallenge}
 \alias{ClusterChallenge}
-\alias{GenerateFundamentalClusteringProblem}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 Generates a Fundamental Clustering Challenge based on specific artificial datasets.
 }
@@ -63,7 +62,7 @@ ClusterChallenge("Chainlink",2000,TRUE)
 \seealso{
 \code{\link{ClusterPlotMDS}}
 }
-\keyword{GenerateFundamentalClusteringProblem}% use one of  RShowDoc("KEYWORDS")
+\concept{Generate Fundamental Clustering Problem}
 \keyword{FCPS}% __ONLY ONE__ keyword per line
 \keyword{Clustering}%
-\keyword{ClusterChallenge}%
+\concept{Cluster Challenge}%

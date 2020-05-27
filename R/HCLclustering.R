@@ -12,7 +12,21 @@ HCLclustering <-function(Data,ClusterNo,PlotIt=FALSE,...){
   #
   # Author: MT 04/2018
 
-  requireNamespace('cclust')
+
+  if (!requireNamespace('cclust')) {
+    message(
+      'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Cls = rep(1, nrow(Data)),
+        Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
+  
   res=cclust::cclust(x=Data,centers=ClusterNo,method='hardcl',...)
   Cls=res$cluster
   if(PlotIt){

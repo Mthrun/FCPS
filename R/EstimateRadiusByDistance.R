@@ -1,5 +1,19 @@
 EstimateRadiusByDistance=function(DistanceMatrix){
-  requireNamespace('ABCanalysis')
+
+  if (!requireNamespace('ABCanalysis')) {
+    message(
+      'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Radius = 0,
+        Message = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
+  
   x=DistanceMatrix[lower.tri(DistanceMatrix, diag = FALSE)]
   xx=ABCanalysis::ABCRemoveSmallYields(x,0.5)
   x=xx$SubstantialData

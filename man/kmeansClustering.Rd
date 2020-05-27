@@ -79,3 +79,7 @@ The version using a distance matrix is is still in the test phase and not verifi
 \author{
 Alfred Ultsch, Michael Thrun
 }
+
+\keyword{kmeansClustering}
+\keyword{Clustering}
+\concept{kmeans Clustering}

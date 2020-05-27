@@ -40,3 +40,5 @@ out=SpectralClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 \references{
 [Ng et al., 2002]  Ng, A. Y., Jordan, M. I., & Weiss, Y.: On spectral clustering: Analysis and an algorithm, Advances in neural information processing systems, Vol. 2, pp. 849-856. 2002.
 }
+\keyword{SpectralClustering}
+\concept{Spectral Clustering}

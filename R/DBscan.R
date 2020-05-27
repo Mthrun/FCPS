@@ -17,6 +17,20 @@ DBscan <-function(Data,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
 # [Ester et al., 1996]  Ester, M., Kriegel, H.-P., Sander, J., & Xu, X.: A density-based algorithm for discovering clusters in large spatial databases with noise, Proc. Kdd, Vol. 96, pp. 226-231, 1996.
 
 
+  if (!requireNamespace('dbscan')) {
+    message(
+      'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Cls = rep(1, nrow(Data)),
+        Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
+  
  if(is.null(nrow(Data))){# dann haben wir einen Vektor
     return(cls <- rep(1,length(Data)))
   }
@@ -32,8 +46,7 @@ if(is.null(Radius)){
   }   
   if(missing(UpperLimitRadius))
     UpperLimitRadius=1.1*Radius
-  
-  requireNamespace('dbscan')
+
   liste=dbscan::dbscan(x = Data,eps = Radius,minPts = minPts,...)
   Cls=liste$cluster
   ind=which(Cls==0)

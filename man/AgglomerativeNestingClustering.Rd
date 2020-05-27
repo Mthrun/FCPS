@@ -1,6 +1,6 @@
 \name{AgglomerativeNestingClustering}
 \alias{AgglomerativeNestingClustering}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 AGNES clustering
 }
@@ -19,7 +19,7 @@ PlotIt = FALSE, Standardization = TRUE, Data, ...)
 \item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.
 if \code{ClusterNo=0}, the dendrogram is generated instead of a clustering to estimate the numbers of clusters.
 }
-\item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{PlotIt}{default: FALSE if code{ClusterNo!0}, If TRUE or code{ClusterNo=0} plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{Standardization}{
 \code{DataOrDistances} is standardized before calculating the dissimilarities. Measurements are standardized for each variable (column), by subtracting the variable's mean value and dividing by the variable's mean absolute deviation.If \code{DataOrDistances} is already a distance matrix, then this argument will be ignored.
 }
@@ -61,9 +61,8 @@ plot(CA$Object)
 ClusterDendrogram(CA$Dendrogram,7,main='AGNES clustering')
 }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
+
 \keyword{agnes}
-\keyword{Agglomerative Nestingg}
+\concept{Agglomerative Nestingg}
 \keyword{clustering}
 \keyword{cluster analysis}

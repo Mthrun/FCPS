@@ -78,5 +78,5 @@ DataVisualizations::Plot3D(Hepta$Data,res$Cls)
 \seealso{
 \pkg{apcluster}
 }
-\keyword{apcluster}% use one of  RShowDoc("KEYWORDS")
-\keyword{Affinity Propagation}% __ONLY ONE__ keyword per line
+\keyword{apcluster}
+\concept{Affinity Propagation}

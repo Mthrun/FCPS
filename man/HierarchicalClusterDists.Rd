@@ -1,7 +1,7 @@
 \name{HierarchicalClusterDists}
 
 \alias{HierarchicalClusterDists}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 HierarchicalClusterDists(pDist) HierarchicalClusterDists(pDist,0,"ward.D",100) Cls=HierarchicalClusterDists(pDist,6,"ward.D")    Zeichnet entweder ein Dendrogram oder liefert eine Klassenzuweisung
 }
@@ -40,6 +40,6 @@ List of
 data('Hepta')
 out=HierarchicalClusterData(Hepta$Data,ClusterNo=7)
 }
-\keyword{Hierarchical}% use one of  RShowDoc("KEYWORDS")
-\keyword{Clustering}% __ONLY ONE__ keyword per line
-\keyword{Agglomerative}% __ONLY ONE__ keyword per line
+\keyword{Hierarchical}
+\keyword{Clustering}
+\keyword{Distances}

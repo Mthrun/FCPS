@@ -8,9 +8,21 @@ pdfClustering <-function(Data,PlotIt=FALSE,...){
   # Cls[1:n]                k-means Clusterung der Daten
   # MT 2019
 
+  if (!requireNamespace('pdfCluster')) {
+    message(
+      'Subordinate clustering package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Cls = rep(1, nrow(Data)),
+        Object = "Subordinate clustering package is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
 
 
-  requireNamespace('pdfCluster')
   out=pdfCluster::pdfCluster(Data,...)
   
   Cls=as.vector(out@clusters)
