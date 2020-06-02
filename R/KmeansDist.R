@@ -1,19 +1,24 @@
 kmeansDist <- function(Distance, ClusterNo=2,Centers=NULL,RandomNo=1,maxIt = 2000, PlotIt=FALSE,verbose = F){
   message('kmeansDist function is still in test phase. Only experimental version usable.')
   # KMeans version using ONLY datapoints as centers
+  #
   # INPUT
-  # Distance:Distanzmatrix f?r den zu clusternden Datensatz.
-  # centers:  Vektor der die ids der initialen centers enth?lt. Alle centers m?ssen daher Datenpunkte sein
-  #				ODER: Integer, der angibt, wieviele Centroide es geben soll. Centroide werden zuf?llig aus Daten gew?hlt
-  
+  # Data[1:n,1:d]    Data set with n observations and d features
+  # ClusterNo        Number of clusters to search for
+  #
   # OPTIONAL
-  # maxIt:    Maximale Anzahl an Iterationen
-  # verbose:  Erh?ht Textuelle (Debug-)Ausgaben
+  # Centers       Vector with initial centers. All centers must be data points
+  # RandomNo      Only for Steinley method or in case of distance matrix, number of random initializations with
+  #               searching for minimal SSE, see [Steinley/Brusco, 2007]
+  # maxIt         Max number of iterations
+  # PlotIt        Boolean. Decision to plot or not
+  # verbose       Enables/Disables (TRUE/FALSE) text output during process. Default: FALSE
   #
   # OUTPUT
-  # nmu       k-elementiger Vektor mit den k-Means der Ausgabe
-  # nClusts   n elementiger Vektor der eine Clusterzuordnung von jeder Zeile des Datensatzes entspricht
-  
+  # Cls[1:n]     Clustering of data
+  # centerids    Centroids
+  # SSE          Sum of squared errors
+
   if(!is.null(Centers))  
     centers= Centers  # fuer Backward Compatibility
   else
@@ -48,7 +53,7 @@ kmeansDist <- function(Distance, ClusterNo=2,Centers=NULL,RandomNo=1,maxIt = 200
   
   kmeansdistpertrail=function(Distance, centers,maxIt = 2000,verbose = F){
   if(!is.vector(centers)){
-    warning("centerids is expected to be vector of indicies")
+    warning("Centers is expected to be a vector of indices")
     return
   }
   
@@ -69,7 +74,7 @@ kmeansDist <- function(Distance, ClusterNo=2,Centers=NULL,RandomNo=1,maxIt = 200
     }
 	
     if(verbose)
-      print(paste('Starting Iteration', toString(i)))
+      print(paste('Starting iteration', toString(i)))
 
     if(!is.null(clusts) && all(nClusts==clusts)){
       converged <- T

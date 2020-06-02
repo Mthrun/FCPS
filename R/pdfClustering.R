@@ -1,11 +1,17 @@
 pdfClustering <-function(Data,PlotIt=FALSE,...){
   # Cls <- pdfClustering(Data,ClusterNo);
   # Clustering via nonparametric density estimation
+  # 
   # INPUT
-  # Data[1:n]               der Datensatz in Zeilenvektoren 
+  # Data[1:n,1:d]     Data set with n observations and d features
   #
-  # OUTPUT List V with
-  # Cls[1:n]                k-means Clusterung der Daten
+  # OPTIONAL
+  # PlotIt            Boolean. Decision to plot or not
+  # 
+  # OUTPUT
+  # Cls[1:n]          Clustering of data
+  # Object            Object of pdfCluster::pdfCluster algorithm
+  # 
   # MT 2019
 
   if (!requireNamespace('pdfCluster')) {

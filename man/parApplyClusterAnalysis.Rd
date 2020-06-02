@@ -20,41 +20,41 @@ SetSeed=TRUE,\dots)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{DataOrDistances}{
-Option 1: Either [1:N,1:d] Matrix of Data (N cases, d dimensions) that will be used. One DataPoint per row
+Option 1: Either [1:N,1:d] matrix of data (N cases, d dimensions) that will be used. One DataPoint per row
 
-or symmetric Distance matrix [1:N,1:N] depending on \code{FUN}.
+or symmetric distance matrix [1:N,1:N] depending on \code{FUN}.
 
-Option2: A list of Data or Distance
+Option2: A list of data or distance
 }
   \item{FUN}{
-function of clustering algorithms. 
+Function of clustering algorithms. 
 }
   \item{NumberOfTrials}{
-Number Of Trials to be performed with \code{FUN}
+Number of trials to be performed with \code{FUN}
 }
   \item{ClusterNo}{
-Number of k clusters, if required in \code{FUN}, if Option2, then a vector of Number of k clusters in the same order as the list of DataOrDistance
+Number of k clusters, if required in \code{FUN}, if Option2, then a vector of number of k clusters in the same order as the list of DataOrDistance
 }
   \item{WorkersOrNo}{
-Either already initialized workers using \code{\link[parallel]{makeCluster}} or Number of Workers (number of cores used). If not set, number is estimated. 
+Either already initialized workers using \code{\link[parallel]{makeCluster}} or number of workers (number of cores used). If not set, number is estimated.
 }
   \item{SocketType}{
 see \code{\link[parallel]{makeCluster}} for details, if default does not work.
 }  
 \item{SetSeed}{
 TRUE: \code{\link{set.seed}} is set to 1000+ (Number Of Trial), \code{ComputationTime} is named with seed
-FALSE: \code{\link{set.seed}} is set to NULL), \code{ComputationTime} is named with Number Of Trial
+FALSE: \code{\link{set.seed}} is set to NULL), \code{ComputationTime} is named with number of trial
 }
   \item{\dots}{
-further arguments required in \code{FUN}. 
+Further arguments required in \code{FUN}. 
 }
 }
 \details{
 Default is the number of cores existing minus 1. 
 
-In \pkg{FCPS} default parameters for each clustering algorithm are useda automatically if not specified by the user. \code{parApplyClusterAnalysis} expects in \code{FUN} a function of a clustering algorithm which returns a list of objects of which one is named \code{Cls}. If not given the whole output of \code{FUN} is return with a warning.
+In \pkg{FCPS} default parameters for each clustering algorithm are used automatically if not specified by the user. \code{parApplyClusterAnalysis} expects in \code{FUN} a function of a clustering algorithm which returns a list of objects of which one is named \code{Cls}. If not given the whole output of \code{FUN} is returned with a warning.
 
-\code{Cls} is a [1:N] numerical vector of of numbers 1:k of the k clusters labelling the data points to the clusters.
+\code{Cls} is a [1:N] numerical vector of of numbers 1:k of the k clusters labeling the data points to the clusters.
 }
 \value{
 if Option1
@@ -85,7 +85,7 @@ Michael Thrun
 data(Hepta)
 Result=parApplyClusterAnalysis(Hepta$Data,
 kmeansClustering,1:3,7,Type="LBG")
-#clustering accuracy
+# clustering accuracy
 
 apply(Result$Cls_Matrix,2,ClusteringAccuracy,Hepta$Cls)
 }
@@ -97,7 +97,7 @@ DataV=list(Hepta=Hepta$Data,Atom=Atom$Data)
 Clusternumbers=c(7,2)
 ResultList=parApplyClusterAnalysis(DataV,
 kmeansClustering,1:3,ClusterNo=Clusternumbers,Type="LBG")
-#clustering accuracy
+# clustering accuracy
 
 Accuracies=mapply(FUN=function(x,y) return(apply(x$Cls_Matrix,2,ClusteringAccuracy,y)),ResultList,list(Hepta$Cls,Atom$Cls))
 colnames(Accuracies)=names(ResultList)

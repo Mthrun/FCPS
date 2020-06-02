@@ -1,20 +1,24 @@
 APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,DistanceMethod="euclidean",Seed=7568,PlotIt=FALSE,Data,...){
-#Cls=APcluster(Data,Seed=7568)$Cls
-#Affinity Propagation clustering introduced by Frey and Dueck (2007) <doi:10.1126/science.1136800>.
-#INPUT
-#DataOrDistances[1:n,1:l], if l=n and symmetric then distance matrix ausumed, otherwise l=k with k variables
-#Optional
-# InputPreference   see \code{apcluster}
-# ExemplarPreferencessee \code{apcluster}
-
-# Seed   see \code{apcluster}
-#OUTPUT
-# Cls[1:n]
-# APresults class of apcluster
-#
-# author MT: 04/2018
-
-#note: # NoNoise   see \code{apcluster}
+  # Cls=APcluster(Data,Seed=7568)$Cls
+  # Affinity Propagation clustering introduced by Frey and Dueck (2007) <doi:10.1126/science.1136800>.
+  #
+  # INPUT
+  # DataOrDistances[1:n,1:d]    Dataset with n observations and d features or distance matrix with size n
+  #
+  # OPTIONAL
+  # InputPreference see \code{apcluster}
+  # ExemplarPreferences \code{apcluster}
+  # DistanceMethod
+  # Seed
+  # PlotIt            Boolean. Decision to plot or not
+  # 
+  # OUTPUT
+  # Cls[1:n]    Clustering of data
+  # Object      Object of apcluster::apcluster algorithm
+  #
+  # Author MT: 04/2018
+  
+  # Note: # NoNoise see \code{apcluster}
   if (!requireNamespace('apcluster')) {
     message(
       'Subordinate clustering package is missing. No computations are performed.

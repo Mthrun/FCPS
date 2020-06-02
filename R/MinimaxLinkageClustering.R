@@ -1,5 +1,18 @@
 MinimaxLinkageClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",ColorTreshold=0,...){
-  
+  # INPUT
+  # DataOrDistances[1:n,1:d]    Dataset with n observations and d features or distance matrix with size n
+  # ClusterNo                   Number of clusters to search for
+  #
+  # OPTIONAL
+  # DistanceMethod    Choose distance metric.
+  # ColorTreshold     draws cutline w.r.t. dendogram y-axis (height), height of line as scalar should be given
+  # 
+  # OUTPUT
+  # Cls[1:n]          Clustering of data
+  # Dendrogram
+  # Object            Object of protoclust::protoclust algorithm
+  #
+  # Author: MT
   if (!requireNamespace('protoclust')) {
     message(
       'Subordinate clustering package is missing. No computations are performed.
@@ -23,7 +36,6 @@ MinimaxLinkageClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="eu
     pDist=DataOrDistances
   }
   
-  
   hc <- protoclust::protoclust(pDist,...)
   
   m=paste("Minimax Linkage Clustering/ "," N=",nrow(as.matrix(pDist)))
@@ -36,7 +48,7 @@ MinimaxLinkageClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="eu
     return (list(Cls=Cls,Dendrogram=as.dendrogram(hc),Object=out))
   } 
   else{
-    x=as.dendrogram(hc);plot(x, main=m,xlab="Number of Data Points N", ylab="Distance",sub=" ",leaflab ="none",...)
+    x=as.dendrogram(hc);plot(x, main=m,xlab="Number of data points N", ylab="Distance",sub=" ",leaflab ="none",...)
     axis(1,col="black",las=1)
     if (ColorTreshold!=0){
       rect.hclust(hc, h=ColorTreshold,border="red")}		  

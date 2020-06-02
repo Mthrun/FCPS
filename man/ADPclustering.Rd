@@ -2,7 +2,7 @@
 \alias{ADPclustering}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-(Adaptive) Density Peak Clustering algorithm using Automatic Parameter Selection
+(Adaptive) Density Peak Clustering algorithm using automatic parameter selection
 }
 \description{
 The algorithm was introduced in [Rodriguez/Laio, 2014] and here implemented by [Wang/Xu, 2017]. The algorithm is adaptive in the sense that only \code{ClusterNo} has to be set instead of the paramters of [Rodriguez/Laio, 2014] implemented in \code{\link{ADPclustering}}.
@@ -12,14 +12,14 @@ ADPclustering(Data,ClusterNo=NULL,PlotIt=FALSE,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
-\item{ClusterNo}{Optional, Either: A number k which defines k different Clusters to be build by the algorithm, or a range of \code{ClusterNo} to let the algorithm choose from.}
+\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
+\item{ClusterNo}{Optional, either: A number k which defines k different Clusters to be build by the algorithm, or a range of \code{ClusterNo} to let the algorithm choose from.}
 
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 }
 \details{
-The ADP algorithm decides the k number of clusters. This contrary to the other version of the algorithm of another package which can be called with \code{\link{DensityPeakClustering}}.
+The ADP algorithm decides the k number of clusters. This is contrary to the other version of the algorithm from another package which can be called with \code{\link{DensityPeakClustering}}.
 }
 \value{
 List of

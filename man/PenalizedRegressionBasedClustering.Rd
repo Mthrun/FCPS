@@ -15,19 +15,19 @@ SecondLambda, Tau, PlotIt = FALSE, \dots)
 
 \arguments{
   \item{Data}{
-[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.
+[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.
 }
   \item{FirstLambda}{
- set at 1 for quadratic penalty based algorithm, 0.4 for revised ADMM.
+ Set 1 for quadratic penalty based algorithm, 0.4 for revised ADMM.
 }
   \item{SecondLambda}{
-the magnitude of grouping penalty.
+The magnitude of grouping penalty.
 }
   \item{Tau}{
 Tuning parameter: tau, related to grouping penalty.
 }
   \item{PlotIt}{
-default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}
+Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}
 }
   \item{\dots}{
 Further arguments for \code{\link[prclust]{PRclust}}, enables also usage of [Pan et al., 2013].

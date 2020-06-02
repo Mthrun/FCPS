@@ -1,4 +1,21 @@
 SOMclustering=function(Data,LC=c(1,2),ClusterNo=NULL,Mode="online",PlotIt=FALSE,rlen=100,alpha = c(0.05, 0.01),...){
+  # INPUT
+  # Data[1:n,1:d]     Data set with n observations and d features
+  #
+  # OPTIONAL
+  # LC                Lines and Columns of a very small SOM, usually every unit is a cluster,
+  #                   will be ignored if ClusterNo is not NULL.
+  # ClusterNo         Number of clusters to search for
+  # Mode              Either "batch" or "online"
+  # PlotIt            Boolean. Decision to plot or not
+  # rlen              Please see kohonen::supersom
+  # alpha             Please see kohonen::supersom
+  # 
+  # OUTPUT
+  # Cls[1:n]          Clustering of data
+  # Object            Object of kohonen::supersom
+  #
+  # Author: MT, 04/2018
   if (!requireNamespace('kohonen')) {
     message(
       'Subordinate clustering package is missing. No computations are performed.
@@ -12,9 +29,6 @@ SOMclustering=function(Data,LC=c(1,2),ClusterNo=NULL,Mode="online",PlotIt=FALSE,
       )
     )
   }
-  
-  #author: MT, 04/2018
-
   
   if(missing(LC)){
     if(is.null(ClusterNo)){stop('Either LinesColumns (LC) has to be set or the ClusterNo.')}

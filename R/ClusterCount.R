@@ -1,5 +1,5 @@
 ClusterCount <- function(Cls) {
-  # calulates statistics for clustering in each group of the data points
+  # Calculates statistics for clustering
   # C <-ClusterCount(Cls)
   # UniqueClusters <-C$UniqueClusters
   # CountPerCluster <-C$CountPerCluster
@@ -10,11 +10,11 @@ ClusterCount <- function(Cls) {
   # Cls[d]                          numeric vector such as Cls(i) == ClusterNumber of Data[i,] of point i
   #
   # OUTPUT list with:
-  # UniqueClusters[1:NrOfClusters]      the  NrOfClusters unique Clusters in Cls
+  # UniqueClusters[1:NrOfClusters]     NrOfClusters unique Clusters in Cls
   # CountPerCluster(NrOfClusters,n)    CountPerCluster(i) is the Count of the data points in UniqueClusters(i)
-  # NumberOfClusters                     the number of Clusters
-  # ClusterPercentages                the percentages of the Clusters
-
+  # NumberOfClusters                   Number of Clusters
+  # ClusterPercentages                 Percentages of the Clusters
+  #
   # Author MT
   
   if(!is.vector(Cls)){

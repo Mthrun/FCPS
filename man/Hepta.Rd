@@ -6,7 +6,7 @@
 Hepta introduced in [Ultsch, 2003]
 }
 \description{
-clearly defined clusters, different variances. Detailed description of dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
+Clearly defined clusters, different variances. Detailed description of dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
 }
 \usage{data("Hepta")}
 

@@ -1,5 +1,23 @@
 DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclidean",PlotIt=FALSE,Data,...){
-  #Rodriguez, A., & Laio, A.: Clustering by fast search and find of density peaks. Science, 344(6191), 1492-1496. doi:10.1126/science.1242072, 2014.
+  #
+  # INPUT
+  # Data[1:n,1:d]     Data set with n observations and d features
+  # Rho               Local density of a point, see [Rodriguez/Laio, 2014] for explanation 
+  # Delta             Minimum distance between a point and any other point, see [Rodriguez/Laio, 2014] for explanation
+  # Dc                Optional, cutoff distance, will either be estimated by [Pedersen et al., 2017] or
+  #                   [Wang et al, 2015] (see example below)
+  #
+  # OPTIONAL
+  # Knn               Optional k nearest neighbors
+  # method            Optional distance method of data, default is euclid
+  # PlotIt            Boolean. Decision to plot or not
+  #
+  # OUTPUT
+  # Cls[1:n]        Clustering of data
+  # Object          Object of adpclust algorithm
+  #
+  # Author: MT
+  # Rodriguez, A., & Laio, A.: Clustering by fast search and find of density peaks. Science, 344(6191), 1492-1496. doi:10.1126/science.1242072, 2014.
 
   
   if (!requireNamespace('densityClust')) {
@@ -44,10 +62,10 @@ DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclid
   
   if(missing(Rho)|missing(Delta)){
     requireNamespace('plotly')
-    print('Please set Paramaters Rho and Delta')
+    print('Please set parameters Rho and Delta')
    
     p <- plotly::plot_ly( x = ~DensityPeaks$rho, y = ~DensityPeaks$delta,type = "scatter",mode="markers")
-    p=plotly::layout(p,title = "Decision Graph",xaxis=list(exponentformat = "E",  title = "Local Density Rho"),yaxis=list(exponentformat = "E",  title = "Minimum Distance Delta"),showlegend = FALSE)
+    p=plotly::layout(p,title = "Decision graph",xaxis=list(exponentformat = "E",  title = "Local Density Rho"),yaxis=list(exponentformat = "E",  title = "Minimum Distance Delta"),showlegend = FALSE)
 	return(p)
   }else{
     DensityPeaks=densityClust::findClusters(DensityPeaks,rho=Rho,delta=Delta)
@@ -56,7 +74,7 @@ DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclid
 
   if(sum(is.na(Cls))==length(Cls)){
   	Cls=rep(1,nrow(Distances))
-  	warning('NoCluster could be found.')
+  	warning('No cluster could be found.')
   }
   if(PlotIt){
 	ClusterPlotMDS(DataOrDistances,Cls)

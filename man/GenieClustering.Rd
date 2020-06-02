@@ -11,9 +11,9 @@ GenieClustering(DataOrDistances, ClusterNo = 0,
 DistanceMethod="euclidean", ColorTreshold = 0,\dots)
 }
 \arguments{
-\item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
+\item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
 
-\item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.}
+\item{ClusterNo}{A number k which defines k different clusters to be build by the algorithm.}
 
 \item{DistanceMethod}{see  \code{\link[parallelDist]{parDist}}, for example 'euclidean','mahalanobis','manhatten' (cityblock),'fJaccard','binary', 'canberra', 'maximum'. Any unambiguous substring can be given.}
 
@@ -45,7 +45,7 @@ Michael Thrun
 }
  \examples{
 data('Hepta')
-out=GenieClustering(Hepta$Data,ClusterNo=7)
+Clust=GenieClustering(Hepta$Data,ClusterNo=7)
 }
 \keyword{Hierarchical}
 \keyword{Clustering}

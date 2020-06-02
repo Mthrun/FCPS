@@ -11,9 +11,9 @@ PlotIt=FALSE,Standardization=TRUE,Data,...)
 }
 
 \arguments{
-\item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
+\item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
 
-\item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.
+\item{ClusterNo}{A number k which defines k different clusters to be build by the algorithm.
 if \code{ClusterNo=0}, the dendrogram is generated instead of a clustering to estimate the numbers of clusters.
 }
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}

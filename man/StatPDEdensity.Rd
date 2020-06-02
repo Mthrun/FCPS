@@ -5,7 +5,7 @@
 Pareto Density Estimation
 }
 \description{
-Density Estimation for ggplot with a clear model behind it.
+Density estimation for ggplot with a clear model behind it.
 }
 
 \format{

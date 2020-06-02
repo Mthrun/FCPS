@@ -18,7 +18,7 @@ Silent = TRUE, method = NULL, PlotIt=TRUE,SelectByABC=TRUE)
 }
 \arguments{
   \item{DataOrDistances}{
-    Either [1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.
+    Either [1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.
     
     or
 
@@ -28,7 +28,7 @@ symmetric [1:n,1:n] distance matrix
 [1:n,1:(max.nc)] Clustering of the number of classes to be checked as a matrix with one cluster per column (see also details (2) and (3)), must be specified if method = NULL
   }
   \item{max.nc}{
-    highest number of classes to be checked
+    Highest number of classes to be checked
   }
   \item{method}{
     Cluster procedure, with which the clusterings are created (see details (4) for possible methods), must be specified if ClsMatrix = NULL
@@ -38,16 +38,16 @@ symmetric [1:n,1:n] distance matrix
  String or vector of strings with the indicators to be calculated (see details (1)), default = "all
   }
   \item{min.nc}{
-   lowest number of classes to be checked, default = 2
+   Lowest number of classes to be checked, default = 2
   }
   \item{Silent}{
-      if TRUE status messages are output, default = FALSE
+      If TRUE status messages are output, default = FALSE
   }
     \item{PlotIt}{
-      if TRUE plots fanplot with proposed cluster numbers
+      If TRUE plots fanplot with proposed cluster numbers
   }
       \item{SelectByABC}{
-      if PlotIt=TRUE, TRUE: Plots group A of ABCanalysis of the most important ones (highest overlap in indicators), FALSE: plots all indicators
+      If PlotIt=TRUE, TRUE: Plots group A of ABCanalysis of the most important ones (highest overlap in indicators), FALSE: plots all indicators
   }
 }
 \details{
@@ -87,10 +87,10 @@ If a distances matrix is given, then \pkg{ProjectionBasedClustering} is required
 }
 \value{
 \item{Indicators}{
-  a table of the calculated indicators except Duda, Pseudot2 and Beale
+  A table of the calculated indicators except Duda, Pseudot2 and Beale
 }
 \item{ClusterNo}{
- the recommended number of clusters for each calculated indicator
+ The recommended number of clusters for each calculated indicator
 }
 \item{ClsMatrix}{
   [1:n,min.nc:(max.nc)] Output of the clusterings used for the calculation
@@ -132,7 +132,7 @@ indicatorsList=ClusterNoEstimation(Data = data, ClsMatrix = clsm, max.nc = 7)
 
 # Alternatively, the same calculation as above can be executed with the following call
 ClusterNoEstimation(Data = data, max.nc = 7, method = "complete")
-#In this variant, the function clusterumbers also takes over the clustering
+# In this variant, the function clusterumbers also takes over the clustering
 }
 \concept{Estimation of Number of Clusters}
 \keyword{ClusterNoEstimation}

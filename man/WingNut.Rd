@@ -6,7 +6,7 @@
 WingNut introduced in [Ultsch, 2005]
 }
 \description{
-density vs. distance. Detailed description of dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
+Density vs. distance. Detailed description of dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
 }
 \usage{data("WingNut")}
 

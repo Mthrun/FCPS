@@ -12,9 +12,9 @@ TandemClustering(Data,ClusterNo,Type="Reduced",PlotIt=FALSE,\dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
+\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
 
-\item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.}
+\item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
 \item{Type}{
  \code{Reduced}: Reduced k-means (RKM) [De Soete/Carroll, 1994].
 
@@ -22,7 +22,7 @@ TandemClustering(Data,ClusterNo,Type="Reduced",PlotIt=FALSE,\dots)
 
  \code{KernelPCA}: Kernel PCA with minimum normalised cut hyperplanes [Hofmeyr/Pavlidis, 2019] 
 }
-\item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{PlotIt}{default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 }
@@ -30,14 +30,14 @@ TandemClustering(Data,ClusterNo,Type="Reduced",PlotIt=FALSE,\dots)
 \details{
 If the ClusterNo exceeds the number of dimensions, than the function is called recursively with ClusterNo=2. In each iteration the cluster with the highest number of overall points is clustered again, until the number of clusters is met. 
 
-"KernelPCA" uses addtionally the package kernlab an is implemented as given in the fifth example on page 18, section "extension" of [Hofmeyr/Pavlidis, 2019] 
+"KernelPCA" uses addtionally the package kernlab and is implemented as given in the fifth example on page 18, section "extension" of [Hofmeyr/Pavlidis, 2019] 
 
 The first idea of using non-PCA projections for clustering was published by [Bock, 1987] as an definition. However, to the knowledge of the author it was not applied to any data. The first systematic comparison to Projection-Pursuit Methods \code{\link{ProjectionPursuitClustering}} and \code{\link{AutomaticProjectionBasedClustering}} can be found in [Thrun/Ultsch, 2018]. 
 }
 \value{
 List of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.
-. Points which cannot be assigned to a cluster will be reported with 0.
+Points which cannot be assigned to a cluster will be reported with 0.
 }
 \item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }

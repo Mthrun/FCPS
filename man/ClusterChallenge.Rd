@@ -5,7 +5,7 @@
 Generates a Fundamental Clustering Challenge based on specific artificial datasets.
 }
 \description{
-Lsun3D and FCPS datasets were introduced in various publications for a specific fixed size. This function generalites them for any sample size.
+Lsun3D and FCPS datasets were introduced in various publications for a specific fixed size. This function generalizes them for any sample size.
 }
 \usage{
 ClusterChallenge(Name,SampleSize,

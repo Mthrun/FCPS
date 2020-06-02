@@ -22,7 +22,7 @@ See example
 \value{
  LIST, with
 \item{Cls }{[1:n] numerical vector with n numbers defining the labels of the classification. It has 1 to k unique numbers representing the arbitrary labels of the classification.}
-\item{ClusterNames }{ClusterNames definined which names belongs to which unique number}
+\item{ClusterNames }{ClusterNames defined which names belongs to which unique number}
 
 }
 

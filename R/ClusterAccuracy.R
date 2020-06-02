@@ -1,12 +1,23 @@
 ClusterAccuracy=function(PriorCls,CurrentCls,K=9){
-  
+  #
+  # INPUT
+  # PriorCls      Ground truth,[1:n] numerical vector with n numbers defining the classification.
+  #               It has k unique numbers representing the arbitrary labels of the clustering.
+  # CurrentCls    Main output of the clustering, [1:n]  numerical vector with n numbers defining the classification.
+  #               It has k unique numbers representing the arbitrary labels of the clustering.              
+  # K             Maximal number of classes for computation. Default K=9.
+  # 
+  # OUTPUT
+  # Accuracy      Number
+  # 
+  # Author: 04/2018 MT
   PriorCls[!is.finite(PriorCls)]=9999
   CurrentCls[!is.finite(CurrentCls)]=9999
   
     if(length(unique(PriorCls))>9){
-      warning('Too many clusters in PriorCls for RAM of single PC. Please use Cloud Computing, e.g. SparkR')
+      warning('Too many clusters in PriorCls for RAM of single PC. Please use cloud computing, e.g. SparkR')
     }
-    #author: 04/2018 MT
+    
     #Note: symmetric ClsToTrueCls() which always works
     
     NormalizeCls <- function(Cls) {# Values in Cls are consistently recoded to positive consecutive integers
@@ -54,8 +65,8 @@ ClusterAccuracy=function(PriorCls,CurrentCls,K=9){
     standardCls <- NormalizeCls(PriorCls)
     givenCls <- NormalizeCls(CurrentCls)
     if(length(unique(givenCls))>K){
-      warning('Too many clusters in CurrentCls for RAM of single PC. Combining clusters of smalest size.
-            Alternativly, please use Cloud Computing, e.g. SparkR')
+      warning('Too many clusters in CurrentCls for RAM of single PC. Combining clusters of smallest size.
+            Alternatively, please use cloud Computing, e.g. SparkR')
       givenCls=ReduceClassesToK(givenCls,K=K)
     }
     givenCls<- NormalizeCls(givenCls)
@@ -69,20 +80,20 @@ ClusterAccuracy=function(PriorCls,CurrentCls,K=9){
     nrOfGivenClasses <- length(givenClasses)
     renamedCls <- givenCls
     bestAccuracy <- 0
-    #For every permutation
+    # For every permutation
     for (i in 1:nrOfPermutations) {
-      #set ground truth
+      # Set ground truth
       tryRenameCls <- givenCls
       
-      #set a permutation of cls to be inspected
+      # Set a permutation of cls to be inspected
       newClassNames <- c(1:nrOfGivenClasses)
       newClassNames[1:nrOfStdClasses] <- allPossiblePermutations[i,]
       
-      for (j in 1:nrOfGivenClasses) { #for every point
-        #search
+      for (j in 1:nrOfGivenClasses) { # For every point
+        # Search
         tryRenameCls[which(givenCls == givenClasses[j])] <- newClassNames[j]
       }
-      #true positives
+      # True positives
       accuracy <- sum(tryRenameCls == standardCls)
       
       if (accuracy > bestAccuracy) {

@@ -1,15 +1,24 @@
 LargeApplicationClustering <-function(Data,ClusterNo,PlotIt=FALSE,Standardization=TRUE,Samples=50,Random=TRUE,...){
   # Cls=LargeApplicationClustering(Data,ClusterNo=2)
   # Clustering Large Applications  (clara)
-  # liefert eine Klassenzuweisung
+  #
   # INPUT
-  # Data[1:n,1:d]             Der Datensatz
-  
-  # ClusterNo  in soviele Cluster werden die daten eingeteilt
-  
+  # Data[1:n,1:d]     Data set with n observations and d features
+  # ClusterNo         Number of clusters to search for
+  # 
+  # OPTIONAL
+  # PlotIt            Boolean. Decision to plot or not
+  # Standardization   Data is standardized before calculating the dissimilarities.
+  #                   Measurements are standardized for each variable (column), by subtracting the
+  #                   variable's mean value and dividing by the variable's mean absolute deviation.
+  # Samples           integer, say N, the number of samples to be drawn from the dataset. Default value
+  #                   set as recommended by documentation of cluster::clara.
+  # Random            logical indicating if R's random number generator should be used instead of the primitive clara()-builtin one.
+  #
   # OUTPUT
-  # Cls[1:n]                Clusterung der Daten
-  # claraObject         Object of sota Alorithm
+  # Cls[1:n]    Clustering of data
+  # Object      Object of cluster::clara algorithm
+  #
   # Author: MT 04/2018
   
   if (!requireNamespace('cluster')) {

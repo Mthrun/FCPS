@@ -1,55 +1,52 @@
-kmeansClustering <-function(DataOrDistance,ClusterNo=2,Centers=NULL,Type='LBG',RandomNo=5000,PlotIt=FALSE,Verbose=FALSE,...){
-# Cls <- kmeansClustering(Data,ClusterNo,Verbose);
-# calls one of two common approaches for kmeans
-# INPUT
-# Data[1:n]                  der Datensatz in Zeilenvektoren 
-# ClusterNo  in soviele Cluster werden die daten eingeteilt
-#
-# OPTIONAL
-# Centers                default(NULL), a set of initial (distinct) cluster centres
-# Type                 kind of kmeans algorithm, choose one of following strings
-#                       "Hartigan": Hartigan, J. A. and Wong, M. A. A K-means clustering algorithm. Applied Statistics 28, 100-108, 1979.
-#                       "LBG": Linde,Y.,Buzo,A.,Gray,R.M., An algorithm for vector quantizer design. IEEE Transactions on Communications, COM-28, 84-95, 1980
-# Verbose               '0' or '1' for a documentation of repetitions, default: Verbose==0
-#
-#
-# OUTPUT List V with
-# Cls[1:n]                k-means Clusterung der Daten
-# SumDistsToCentroids     Vector of within-cluster sum of squares, one component per cluster
-# Centroids               The final cluster centers.
-# ALU 2014, MT 2016
-# angepasst an Mdbt und Doku standards
+kmeansClustering <-function(DataOrDistance,ClusterNo=2,Type='LBG',RandomNo=5000,PlotIt=FALSE,Verbose=FALSE,...){
+  # Cls <- kmeansClustering(DataOrDistance,ClusterNo,Verbose);
+  # calls one of two common approaches for kmeans
+  #
+  # INPUT
+  # DataOrDistances[1:n,1:d]    Dataset with n observations and d features or distance matrix with size n
+  # ClusterNo                   Number of clusters to search for
+  #
+  # Type       Kind of kmeans algorithm. Choose one of the two following strings:
+  #            "Hartigan": Hartigan, J. A. and Wong, M. A. A K-means clustering algorithm. Applied Statistics 28, 100-108, 1979.
+  #            "LBG": Linde,Y.,Buzo,A.,Gray,R.M., An algorithm for vector quantizer design. IEEE Transactions on Communications, COM-28, 84-95, 1980
+  # RandomNo   Only for Steinley method or in case of distance matrix, number of random initializations with
+  #            searching for minimal SSE, see [Steinley/Brusco, 2007]
+  # PlotIt     Boolean. Decision to plot or not
+  # Verbose    '0' or '1' for a documentation of repetitions. Default: Verbose==0
+  #
+  # OUTPUT
+  # Cls[1:n]          Clustering of data
+  # Object            Contains two variables: Centroids and SumDistsToCentroids.
+  #
+  # ALU 2014, MT 2016
+  # Adaption to Mdbt and documentation standards
   if (!isSymmetric(unname(DataOrDistance))) {
-    Data = DataOrDistance
+    #Data = DataOrDistance
     
     if (ClusterNo < 2) {
-      warning("ClusterNo should to be an integer > 2. Now, all of your data is in one cluster.")
-      if (is.null(nrow(Data))) {
-        # dann haben wir einen Vektor
-        return(cls <- rep(1, length(Data)))
+      warning("ClusterNo should be an integer > 2. Now, all of your data is in one cluster.")
+      if (is.null(nrow(DataOrDistance))) {
+        # then we got a vector
+        return(cls <- rep(1, length(DataOrDistance)))
       } else{
         # Matrix
-        return(cls <- rep(1, nrow(Data)))
+        return(cls <- rep(1, nrow(DataOrDistance)))
       }
     }
-    
-    if (!is.null(Centers))
-      ClusterNo = Centers  # fuer Backward Compatibility
-  
     
     switch(
       Type,
       'Hartigan' = {
-        res = kmeans(Data, centers = ClusterNo, ...)
+        res = kmeans(DataOrDistance, centers = ClusterNo, ...)
         Cls = as.vector(res$cluster)
         
         if (Verbose == TRUE) {
           print(res)
         }
         if (PlotIt) {
-          ClusterPlotMDS(Data, Cls)
+          ClusterPlotMDS(DataOrDistance, Cls)
         }
-        Cls = ClusterRename(Cls, Data)
+        Cls = ClusterRename(Cls, DataOrDistance)
         return(list(
           Cls = Cls,
           Object = list(
@@ -66,7 +63,7 @@ kmeansClustering <-function(DataOrDistance,ClusterNo=2,Centers=NULL,Type='LBG',R
           )
           return(
             list(
-              Cls = rep(1, nrow(Data)),
+              Cls = rep(1, nrow(DataOrDistance)),
               Object = "Subordinate clustering package is missing.
                 Please install the package which is defined in 'Suggests'."
             )
@@ -74,7 +71,7 @@ kmeansClustering <-function(DataOrDistance,ClusterNo=2,Centers=NULL,Type='LBG',R
         }
         
         res = cclust::cclust(
-          x = Data,
+          x = DataOrDistance,
           centers = ClusterNo,
           method = 'kmeans',
           verbose = Verbose,
@@ -83,12 +80,12 @@ kmeansClustering <-function(DataOrDistance,ClusterNo=2,Centers=NULL,Type='LBG',R
         Cls = res$cluster
         SSE = res$withinss
         # s. http://epub.wu.ac.at/1542/1/document.pdf p.5
-        # An examination of indexes for determining the number of clusters in binary data sets
+        # An examination of indices for determining the number of clusters in binary data sets
         # Weingessel, Andreas and Dimitriadou, Evgenia and Dolnicar, Sara (1999)
         if (PlotIt) {
-          ClusterPlotMDS(Data, Cls)
+          ClusterPlotMDS(DataOrDistance, Cls)
         }
-        Cls = ClusterRename(Cls, Data)
+        Cls = ClusterRename(Cls, DataOrDistance)
         return(list(
           Cls = Cls,
           Object = list(
@@ -98,18 +95,18 @@ kmeansClustering <-function(DataOrDistance,ClusterNo=2,Centers=NULL,Type='LBG',R
         ))
       },
       "Steinley" = {
-        Liste = lapply(1:RandomNo, function(i, Data, centers, ...) {
-          c = kmeans(Data, centers = ClusterNo, ...)
+        Liste = lapply(1:RandomNo, function(i, DataOrDistance, centers, ...) {
+          c = kmeans(DataOrDistance, centers = ClusterNo, ...)
           return(list(sum(c$withinss), kmeansOut = c))
-        }, Data, ClusterNo, ...)
+        }, DataOrDistance, ClusterNo, ...)
         SSEs = unlist(lapply(Liste, "[[", 1))
         res = Liste[[which.min(SSEs)]]$kmeansOut
         Cls = as.vector(res$cluster)
         if (PlotIt) {
           requireNamespace('DataVisualizations')
-          ClusterPlotMDS(Data, Cls)
+          ClusterPlotMDS(DataOrDistance, Cls)
         }
-        Cls = ClusterRename(Cls, Data)
+        Cls = ClusterRename(Cls, DataOrDistance)
         return(list(
           Cls = Cls,
           Object = list(
@@ -119,16 +116,16 @@ kmeansClustering <-function(DataOrDistance,ClusterNo=2,Centers=NULL,Type='LBG',R
         ))
       },
       {#lloyd, forgy, mac queen
-        res = kmeans(Data, centers = ClusterNo, algorithm = Type, ...)
+        res = kmeans(DataOrDistance, centers = ClusterNo, algorithm = Type, ...)
         Cls = as.vector(res$cluster)
         
         if (Verbose == TRUE) {
           print(res)
         }
         if (PlotIt) {
-          ClusterPlotMDS(Data, Cls)
+          ClusterPlotMDS(DataOrDistance, Cls)
         }
-        Cls = ClusterRename(Cls, Data)
+        Cls = ClusterRename(Cls, DataOrDistance)
         return(list(
           Cls = Cls,
           Object = list(
@@ -146,7 +143,6 @@ kmeansClustering <-function(DataOrDistance,ClusterNo=2,Centers=NULL,Type='LBG',R
       kmeansDist(
         Distance = DataOrDistance,
         ClusterNo = ClusterNo,
-        Centers = Centers,
         RandomNo = RandomNo,
         PlotIt = PlotIt,
         verbose = Verbose,

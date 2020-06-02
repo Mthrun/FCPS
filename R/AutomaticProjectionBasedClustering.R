@@ -1,5 +1,19 @@
 AutomaticProjectionBasedClustering=function(DataOrDistances,ClusterNo,Type="NerV",StructureType = TRUE,PlotIt=FALSE,PlotTree=FALSE,PlotMap=FALSE,...){
-  #author: MT, 04/2020
+  #
+  # INPUT
+  # DataOrDistances[1:n,1:d]    Dataset with n observations and d features or distance matrix with size n
+  # ClusterNo                   Number of clusters to search for
+  # Type                        Type of Projection method. Choose: NerV, Pswarm, MDS, ICA, CCA, Sammon
+  # StructureType               Boolean. Either compact (TRUE) or connected (FALSE), see discussion in [Thrun, 2018] 
+  # PlotIt                      Boolean. Decision to plot or not
+  # PlotTree                    Boolean. Plots the dendrogram
+  # PlotMap                     Boolean. Plots the topographic map [Thrun et al., 2016].
+  # 
+  # OUTPUT
+  # Cls[1:n]    Clustering of data
+  # Object      List of projection and visualization
+  #
+  # Author: MT, 04/2020
   
   if (!requireNamespace('ProjectionBasedClustering')) {
     message(
@@ -19,10 +33,10 @@ AutomaticProjectionBasedClustering=function(DataOrDistances,ClusterNo,Type="NerV
     Type %in% c('Sammon','Pswarm','MDS')
     if(!(Type %in% c('Sammon','Pswarm','MDS'))){
       Type='MDS'
-      warning('Distances Matrix is given but the Type',Type,'is selected, which does not work with distances. Switching to MDS.')
+      warning('Distances matrix is given but the type',Type,'is selected, which does not work with distances. Switching to MDS.')
     }
    
-     message('Given a Distance Matrix instead of Data is experimental. MDS transformation is used to generated a Data Matrix.')
+     message('Given a distance matrix instead of data is experimental. MDS transformation is used to generate a data matrix.')
      Data=ProjectionBasedClustering::MDS(DataOrDists = DataOrDistances,OutputDimension = dim(DataOrDistances)[1]-2)$ProjectedPoints
     
   }else{
@@ -55,23 +69,23 @@ AutomaticProjectionBasedClustering=function(DataOrDistances,ClusterNo,Type="NerV
       'ICA'={
         out=ProjectionBasedClustering::ICA(Data = DataOrDistances,OutputDimension = 2,...)
       },{
-        warning('Incorrect Type Selected')
-        return('Incorrect Type Selected')
+        warning('Incorrect type selected')
+        return('Incorrect type selected')
       }
     )
   #  out=out
 
-  #Computation of Generalized Umatrix
+  # Computation of GeneralizedUmatrix
   if(Type!='Pswarm')
     visualization=GeneralizedUmatrix::GeneralizedUmatrix(Data = Data,out$ProjectedPoints,PlotIt = FALSE)
   else
     visualization=DatabionicSwarm::GeneratePswarmVisualization(Data = Data,out$ProjectedPoints,out$LC,PlotIt = FALSE)
-  # Visualizuation of GenerelizedUmatrix
+  # Visualization of GenerelizedUmatrix
 
   # Automatic Clustering
   if(Type!='Pswarm'){
     LC=c(visualization$Lines,visualization$Columns)
-    # number of Cluster from dendrogram or visualization (PlotIt=T)
+    # Number of cluster from dendrogram or visualization (PlotIt=T)
     Cls=ProjectionBasedClustering::ProjectionBasedClustering(k=ClusterNo, Data = Data, BestMatches = visualization$Bestmatches, LC,StructureType = StructureType,PlotIt=PlotTree)
   }else{
     Cls=DatabionicSwarm::DBSclustering(k = ClusterNo,DataOrDistance = DataOrDistances,BestMatches = visualization$Bestmatches,LC = visualization$LC,StructureType = StructureType,PlotIt = PlotTree)

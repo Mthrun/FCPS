@@ -12,12 +12,12 @@ MarkovClustering(Data=NULL,Adjacency=NULL,Radius=TRUE,addLoops =TRUE,PlotIt=FALS
 }
 
 \arguments{
-\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features. This is used if \code{Adjecency} is missing. Then a unit-disk (R-ball) graph is calculated.}
+\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features. This is used if \code{Adjecency} is missing. Then a unit-disk (R-ball) graph is calculated.}
 \item{Adjacency}{Used if \code{Data} is missing, matrix [1:n,1:n] defining which points are adjacent to each other by the number 1; not adjacent: 0}
 \item{Radius}{Radius for unit disk graph (r-ball graph) if adjacency matrix is missing. Automatic estimation can be done either with =TRUE [Ultsch, 2005] or FALSE [Thrun et al., 2016]}
 
 \item{addLoops}{
-logical; if TRUE, self-loops with weight 1 are added to each vertex of x (see \code{mcl} of CRAN package \code{MCL}).
+Logical; if TRUE, self-loops with weight 1 are added to each vertex of x (see \code{mcl} of CRAN package \code{MCL}).
 }
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
@@ -28,7 +28,7 @@ logical; if TRUE, self-loops with weight 1 are added to each vertex of x (see \c
 \value{
 List of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.
-. Points which cannot be assigned to a cluster will be reported with 0.}
+Points which cannot be assigned to a cluster will be reported with 0.}
 \item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{

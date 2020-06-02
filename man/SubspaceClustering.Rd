@@ -10,16 +10,16 @@ SubspaceClustering(Data,ClusterNo,DimSubspace,
 method='Orclus',PlotIt=FALSE,OrclusInitialClustersNo=ClusterNo+2,...)
 }
 \details{
-"The underlying assumption is that we can find valid clusters which are defined by only a subset of dimensions (it is not needed to have the agreement of all N features).The resulting clusters may be overlapping both in the space of features and observations" [Source: URL]. 
+"The underlying assumption is that we can find valid clusters which are defined by only a subset of dimensions (it is not needed to have the agreement of all N features). The resulting clusters may be overlapping both in the space of features and observations" [Source: URL]. 
 
 }
 \arguments{
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
 
-\item{ClusterNo}{A number k which defines k different Clusters to be build by the proclus or orclust algorithm.}
+\item{ClusterNo}{A number k which defines k different clusters to be built by the proclus or orclust algorithm.}
 \item{DimSubspace}{numerical number defining the dimensionality in which clusters should be search in in the orclust algorithm, for proclus it is an optional parameter}
 \item{method}{
-'Orclus', Subspace Clustering Based on Arbitrarily Oriented Projected Cluster Generation [Aggarwal and Yu, 2000]
+'Orclus', subspace clustering based on arbitrarily oriented projected cluster generation [Aggarwal and Yu, 2000]
 
 'ProClus' ProClus Algorithm for Projected Clustering [Aggarwal/Wolf, 1999] 
 
@@ -28,14 +28,14 @@ method='Orclus',PlotIt=FALSE,OrclusInitialClustersNo=ClusterNo+2,...)
 'SubClu' ProClus Algorithm for Projected Clustering [Kailing et al.,2004]  
 
 }
-\item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{PlotIt}{Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 
-\item{OrclusInitialClustersNo}{Only for Orclus algorithm: Initial number of clusters (that are computed in the entire data space). Must be greater than k. The number of clusters is iteratively decreased by factor a until the final number of k clusters is reached.}
+\item{OrclusInitialClustersNo}{Only for Orclus algorithm: Initial number of clusters (that are computed in the entire data space) must be greater than k. The number of clusters is iteratively decreased by a factor until the final number of k clusters is reached.}
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.
 
 For Subclue: "epsilon" and "minSupport", see \code{\link{DBscan}}
 
-For Clique: "xi" (number of intervalls for each dimension) and "tau" (Density Threshold), see \code{\link{DBscan}}
+For Clique: "xi" (number of intervals for each dimension) and "tau" (Density Threshold), see \code{\link{DBscan}}
 }
 }
 \value{

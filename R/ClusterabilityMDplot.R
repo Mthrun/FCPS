@@ -1,5 +1,15 @@
 ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
-  #author MT
+  #
+  # INPUT
+  # DataOrDistances[1:n,1:d]    Dataset with n observations and d features or distance matrix with size n
+  #
+  # OPTIONAL
+  # Method                      Choose option: "none" performs no dimension reductio
+  #                                            "pca" uses the scores from the first principal component.
+  #                                            "distance" computes pairwise distances (using distance_metric as the metric).
+  # na.rm                       statistical testing will not work with missing values, if TRUE values are imputed with averages
+  #
+  # Author: MT
   requireNamespace('clusterability')
   requireNamespace('ggplot2')
   requireNamespace('signal')
@@ -96,7 +106,7 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
     plot=DataVisualizations::MDplot(as.vector(ProjectedPoints),Names = pvalue,Ordering = Ordering,OnlyPlotOutput = TRUE)+ggplot2::ggtitle(main)+
       ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))+
       ggplot2::xlab('Probability that data has no cluster structure')+
-      ggplot2::ylab('PDE of 1st Principal Component')
+      ggplot2::ylab('PDE of 1st principal component')
   }else{
       x=DataOrDistance[upper.tri(DataOrDistance,diag = FALSE)]
     
@@ -104,7 +114,7 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
       ggplot2::ggtitle(main)+
       ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))+
       ggplot2::xlab('Probability that data has no cluster structure')+
-      ggplot2::ylab('PDE of Distance Distribution')
+      ggplot2::ylab('PDE of distance distribution')
   }
   
   }else{#dataordistance is list
@@ -141,7 +151,7 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
      ind2=which(vals!=0)
      vals[ind]='p < 0.01'
      vals[ind2]=paste("p =",vals[ind2])
-	 #modes depricated
+	 # Modes depricated
     if(is.null(Names)){
       #Ordering = 'Columnwise'
       Names=as.character(vals)
@@ -172,7 +182,7 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
     )
     
     if(is.null(dots[["main"]]))
-      main=paste('MDplot of Clusterability for Multiple Datasets')
+      main=paste('MDplot of clusterability for multiple datasets')
     else
       main=dots$main
     
@@ -182,9 +192,9 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
       ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))+
       ggplot2::xlab('Probability that data has no cluster structure')
     if(sum(isDistance)==0){
-      plot+ggplot2::ylab('PDE of 1st Principal Component')
+      plot+ggplot2::ylab('PDE of 1st principal component')
     }else{
-      plot+ ggplot2::ylab('PDE of 1st Principal Component/Distance Distribution')
+      plot+ ggplot2::ylab('PDE of 1st principal component/distance distribution')
     }
   }#end dataordistance is list
   return(plot)
@@ -225,7 +235,7 @@ stat_pde_density <- function(mapping = NULL,
 compute_pdedensity <- function(x) {
   nx <- length(x)
   
-  # if less than 2 points return data frame of NAs and a warning
+  # If less than 2 points, then return data frame of NAs and a warning
   if (nx < 2) {
     warning("stat_pde_density: Groups with fewer than two data points have been dropped.",
             call. = FALSE)
@@ -243,7 +253,7 @@ compute_pdedensity <- function(x) {
   ##MT: chatch error of one unique value
   Flag <- FALSE
   if (length(unique(x)) ==1) {
-    warning('stat_pde_density: Only one unique value in Data.')
+    warning('stat_pde_density: Only one unique value in data.')
     if(unique(x)!=0)
       x <- c(unique(x), head(x, 1) * runif(1, 0.999, 1.001))
     else
@@ -254,9 +264,9 @@ compute_pdedensity <- function(x) {
   requireNamespace('DataVisualizations')
   dens <- DataVisualizations::ParetoDensityEstimation(Data = x)
   
-  # Density cannot be estiamted, set density to value equal 1
+  # Density cannot be estimated, set density to value 1
   if (Flag) {
-    # scatter kernels a little to visualize several features if given
+    # Scatter kernels a little to visualize several features if given
     dens$kernels <- dens$kernels * runif(length(dens$kernels), 0.998, 1.002)
     x <- max(dens$kernels) - min(dens$kernels)
     dens$paretoDensity[1:length(dens$paretoDensity)] <- 1 / x # integral over pdf should be 1
@@ -313,16 +323,16 @@ StatPDEdensity <- ggproto("StatPDEdensity",
                               na.rm = na.rm
                             )
                             
-                            # choose how violins are scaled relative to each other
+                            # Choose how violins are scaled relative to each other
                             data$violinwidth <- switch(
                               scale,
-                              # area : keep the original densities but scale them to a max width of 1
+                              # Area : keep the original densities but scale them to a max width of 1
                               #        for plotting purposes only
                               area = data$density / max(data$density),
-                              # count: use the original densities scaled to a maximum of 1 (as above)
+                              # Count: use the original densities scaled to a maximum of 1 (as above)
                               #        and then scale them according to the number of observations
                               count = data$density / max(data$density) * data$n / max(data$n),
-                              # width: constant width (density scaled to a maximum of 1)
+                              # Width: constant width (density scaled to a maximum of 1)
                               width = data$scaled
                             )
                             data

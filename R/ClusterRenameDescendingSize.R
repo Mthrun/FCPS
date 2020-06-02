@@ -1,10 +1,12 @@
 ClusterRenameDescendingSize <- function(Cls) {
-  #   Cls are renamed such that largest class =1 ...
-  #   RenamedCls = ClusterRenameDescendingSize(GivenCls)
-  #   INPUT
-  #   Cls   vector of classifications
-  #   OUTPUT
-  #   RenamedCls               such that largest class =1 ...  
+  # Cls are renamed such that largest class =1 ...
+  # RenamedCls = ClusterRenameDescendingSize(GivenCls)
+  # 
+  # INPUT
+  # Cls    Vector of classifications
+  # 
+  # OUTPUT
+  # RenamedCls    such that largest class =1 ...  
   #   
   # Author: MT, ALU
   if(!is.vector(Cls)){

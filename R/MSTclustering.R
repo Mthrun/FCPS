@@ -1,6 +1,15 @@
 MSTclustering=function(DataOrDistances,method="euclidean",PlotIt=FALSE,...){
-
-  
+  # INPUT
+  # DataOrDistances[1:n,1:d]    Dataset with n observations and d features or distance matrix with size n
+  # OPTIONAL
+  # method     Choose distance metric.
+  # PlotIt     Boolean. Decision to plot or not
+  # 
+  # OUTPUT
+  # Cls[1:n]          Clustering of data
+  # Object            Object of mstknnclust::mst.knn algorithm
+  #
+  # Author: MT
   if (!requireNamespace('mstknnclust')) {
     message(
       'Subordinate clustering package is missing. No computations are performed.

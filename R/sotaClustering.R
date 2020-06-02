@@ -1,15 +1,14 @@
 SOTAclustering=sotaClustering =function(Data,ClusterNo,PlotIt=FALSE,UnrestGrowth,...){
   # Cls=sotaClustering(Data,ClusterNo=2)
   # Self-organizing Tree Algorithm (SOTA)
-  # liefert eine Klassenzuweisung
+  #
   # INPUT
-  # Data[1:n,1:d]             Der Datensatz
-  
-  # ClusterNo  in soviele Cluster werden die daten eingeteilt
-  
+  # Data[1:n,1:d]     Data set with n observations and d features
+  # ClusterNo         Number of clusters to search for
+  #
   # OUTPUT
-  # Cls[1:n]                Clusterung der Daten
-  # sotaObject         Object of sota Alorithm
+  # 
+  #
   # Author: Luis Winckelmann
   
   if(missing(UnrestGrowth)){
@@ -29,10 +28,10 @@ SOTAclustering=sotaClustering =function(Data,ClusterNo,PlotIt=FALSE,UnrestGrowth
   }
   Cls=ClusterRename(Cls,Data)
   return(list(Cls=Cls,sotaObject=res))
-}
+} #end of SOTAclustering
 
 
-#Helperfunctions needed for sota Clustering, copied from clValid cause it's ORPHANED
+# Helper functions needed for sota Clustering, copied from clValid cause it's ORPHANED
 
 sota <- function (data, maxCycles, maxEpochs = 1000, distance = "euclidean", 
                   wcell = 0.01, pcell = 0.005, scell = 0.001, delta = 1e-04, 

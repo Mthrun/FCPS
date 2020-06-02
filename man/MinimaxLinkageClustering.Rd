@@ -13,12 +13,12 @@ DistanceMethod="euclidean", ColorTreshold = 0,\dots)
 \arguments{
 \item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
 
-\item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.}
+\item{ClusterNo}{A number k which defines k different clusters to be build by the algorithm.}
 
 \item{DistanceMethod}{see  \code{\link[parallelDist]{parDist}}, for example 'euclidean','mahalanobis','manhatten' (cityblock),'fJaccard','binary', 'canberra', 'maximum'. Any unambiguous substring can be given.}
 
 \item{ColorTreshold}{draws cutline w.r.t. dendogram y-axis (height), height of line as scalar should be given}
-\item{\dots}{If ClusterNo=0, plot arugments for as.dendrogramm, e.g. leaflab
+\item{\dots}{In case of plotting further argument for \code{plot}, see \code{\link{as.dendrogram}}
 }
 }
 \details{

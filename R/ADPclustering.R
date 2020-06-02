@@ -1,6 +1,16 @@
 ADPclustering=function(Data,ClusterNo=NULL,PlotIt=FALSE,...){
-  
-  #author: MT, 04/2018
+  # INPUT
+  # Data[1:n,1:d]     Data set with n observations and d features
+  # ClusterNo         Number of clusters to search for
+  #
+  # OPTIONAL
+  # PlotIt            Boolean. Decision to plot or not
+  #
+  # OUTPUT
+  # Cls[1:n]          Clustering of data
+  # Object            Object of adpclust
+  #
+  # Author: MT, 04/2018
   if (!requireNamespace('ADPclust')) {
     message(
       'Subordinate clustering package is missing. No computations are performed.

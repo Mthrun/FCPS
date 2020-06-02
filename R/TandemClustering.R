@@ -1,7 +1,19 @@
 TandemClustering=function(Data,ClusterNo,Type="Reduced",PlotIt=FALSE,...){
-  
-
-  #author: MT, 04/2020
+  # INPUT
+  # Data[1:n,1:d]     Data set with n observations and d features
+  # ClusterNo         Number of clusters to search for
+  #
+  # OPTIONAL
+  # Type              Reduced:   Reduced k-means (RKM) [De Soete/Carroll, 1994].
+  #                   Factorial: Factorial k-mean (FKM) [Vichi/Kiers, 2001]
+  #                   KernelPCA: Kernel PCA with minimum normalised cut hyperplanes [Hofmeyr/Pavlidis, 2019]
+  # PlotIt            Boolean. Decision to plot or not
+  #
+  # OUTPUT
+  # Cls[1:n]          Clustering of data
+  # Object            Object of PPCI::ncuth algorithm
+  #
+  # Author: MT, 04/2020
   if (Type != 'KernelPCA') {
     d = dim(Data)[2]
     if (d < ClusterNo) {
@@ -31,16 +43,16 @@ TandemClustering=function(Data,ClusterNo,Type="Reduced",PlotIt=FALSE,...){
         if (requireNamespace('DataVisualizations'))
           DataVisualizations::Plot3D(Data, Cls1)
         else
-          warning('PlotIT unaavailable because DataVisualizations not installed')
+          warning('PlotIT unavailable because DataVisualizations not installed')
       }
       return(
-        list(Cls = Cls1, Object = 'Recusively called, because number of dimensions was less than the number of variables.')
+        list(Cls = Cls1, Object = 'Recursively called, because number of dimensions was less than the number of variables.')
       )
     }
   } else{
     if (!missing(ClusterNo))
       message(
-        'TandemClustering of Type KernelPCA does not require "ClusterNo" and will determine the number of clusters automatically.'
+        'TandemClustering of type KernelPCA does not require "ClusterNo" and will determine the number of clusters automatically.'
       )
   }
   
@@ -113,13 +125,12 @@ TandemClustering=function(Data,ClusterNo,Type="Reduced",PlotIt=FALSE,...){
           )
         )
       }
-      x2 = kernlab::kpca(Data, kernel = "rbfdot", kpar = list(sigma =
-                                                                3))@rotated
+      x2 = kernlab::kpca(Data, kernel = "rbfdot", kpar = list(sigma = 3))@rotated
       out = PPCI::ncuth(x2, ...)
     },
     {
-      warning('Incorrect Option Selected')
-      return('Incorrect Option Selected')
+      warning('Incorrect option selected')
+      return('Incorrect option selected')
     }
   )
   #  out=out

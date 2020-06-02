@@ -5,7 +5,7 @@
 Density Peak Clustering algorithm using the Decision Graph
 }
 \description{
-Density Peaks Clustering of [Rodriguez/Laio, 2014] is here implemented by [Pedersen et al., 2017] with estimation of [Wang et al, 2015] meaning its non adaptive in the sense of \code{\link{ADPclustering}}.
+Density peaks clustering of [Rodriguez/Laio, 2014] is here implemented by [Pedersen et al., 2017] with estimation of [Wang et al, 2015] meaning its non adaptive in the sense of \code{\link{ADPclustering}}.
 }
 \usage{
 DensityPeakClustering(DataOrDistances, Rho,Delta,Dc,Knn=7, 
@@ -15,17 +15,17 @@ method = "euclidean", PlotIt = FALSE, Data, ...)
 
 \arguments{
   \item{DataOrDistances}{
-Either [1:n,1:n] symmetric distance matrix or [1:n,1:d] not symmetric data matrix of n cased and d variable
+Either [1:n,1:n] symmetric distance matrix or [1:n,1:d] non symmetric data matrix of n cases and d variables
 }
 
   \item{Rho}{
-local density of a point, See [Rodriguez/Laio, 2014] for explanation
+Local density of a point, see [Rodriguez/Laio, 2014] for explanation
 }
   \item{Delta}{
-minimum distance between a point and any other point, See [Rodriguez/Laio, 2014] for explanation
+Minimum distance between a point and any other point, see [Rodriguez/Laio, 2014] for explanation
 }
   \item{Dc}{
-Optional, Cutoff distance, will either be estimated by [Pedersen et al., 2017] or  [Wang et al, 2015] (see example below)
+Optional, cutoff distance, will either be estimated by [Pedersen et al., 2017] or  [Wang et al, 2015] (see example below)
 }
   \item{Knn}{
 Optional k nearest neighbors
@@ -44,7 +44,7 @@ Optional, further arguments for  \code{\link[densityClust]{densityClust}}
 }
 }
 \details{
-The densityClust algorithm does not decide the k number of clusters, this has to be done by the parameter setting. This contrary to the other version of the algorithm of another package which can be called with \code{\link{ADPclustering}}.
+The densityClust algorithm does not decide the k number of clusters, this has to be done by the parameter setting. This is contrary to the other version of the algorithm from another package which can be called with \code{\link{ADPclustering}}.
 
 The plot shows the density peaks (Cluster centers). Set Rho and Delta as boundaries below the number of relevant cluster centers for your problem. (see example below).
 }
@@ -82,7 +82,7 @@ data(Hepta)
 H=EntropyOfDataField(Hepta$Data,  seq(from=0,to=1.5,by=0.05),PlotIt=FALSE)
 Sigmamin=names(H)[which.min(H)]
 Dc=3/sqrt(2)*as.numeric(names(H)[which.min(H)])
-#look at the plot and estimate rho and delta
+# Look at the plot and estimate rho and delta
 \donttest{
 DensityPeakClustering(Hepta$Data, Knn = 7,Dc=Dc)
 Cls=DensityPeakClustering(Hepta$Data,Dc=Dc,Rho = 0.028,

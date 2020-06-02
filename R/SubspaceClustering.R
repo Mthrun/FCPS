@@ -1,24 +1,29 @@
 SubspaceClustering <-function(Data,ClusterNo,DimSubspace,method='Orclus',PlotIt=FALSE,OrclusInitialClustersNo=ClusterNo+2,...){
-# Cls=SubspaceClustering(Data,ClusterNo=2)
-#  
-# liefert eine Klassenzuweisung
-# INPUT
-# Data[1:n,1:d]             Der Datensatz
-
-# ClusterNo  in soviele Cluster werden die daten eingeteilt
-# PlotIt
-# method     'Orclus', Subspace Clustering Based on Arbitrarily Oriented Projected Cluster Generation
-#               'ProClus'
-#               'SubClu'
-#               'Clique'
-# OrclusInitialClustersNo
-# note: JAVA_HOME has to be set for rJava to use this method
-# OUTPUT
-# Cls[1:n]                Clusterung der Daten
-#
-# Author: MT 04/2018
+  # Cls=SubspaceClustering(Data,ClusterNo=2)
+  #  
+  # liefert eine Klassenzuweisung
+  # INPUT
+  # Data[1:n,1:d]     Data set with n observations and d features
+  # ClusterNo         Number of clusters to search for
+  #
+  # OPTIONAL
+  # PlotIt            Boolean. Decision to plot or not
+  # method            'Orclus', Subspace Clustering Based on Arbitrarily Oriented Projected Cluster Generation
+  #                   'ProClus'
+  #                   'SubClu'
+  #                   'Clique'
+  #
+  # OrclusInitialClustersNo
+  # note: JAVA_HOME has to be set for rJava to use this method
+  # 
+  # OUTPUT
+  # Cls[1:n]          Clustering of data
+  # Object            Object of subspace::CLIQUE
+  # Method        
+  # 
+  # Author: MT 04/2018
   
-  #Orclus
+  # Orclus
   d = dim(Data)[2]
   n = d = dim(Data)[1]
   
@@ -31,7 +36,7 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,method='Orclus',PlotIt=
           if (DimSubspace > n / ClusterNo) {
             DimSubspace = n / ClusterNo - 1
           }
-          DimSubspace = min(c(DimSubspace, 20)) #higher subsopace is not computable
+          DimSubspace = min(c(DimSubspace, 20)) # Higher subspace is not computable
         } else{
           DimSubspace = dim(Data)[2] * 0.99
         }

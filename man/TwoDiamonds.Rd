@@ -6,7 +6,7 @@
 TwoDiamonds introduced in  [Ultsch, 2003a, 2003b]
 }
 \description{
-cluster border defined by density. Detailed description of dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
+Cluster border defined by density. Detailed description of dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
 }
 \usage{data("TwoDiamonds")}
 

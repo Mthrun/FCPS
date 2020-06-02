@@ -5,7 +5,7 @@
 self-organizing maps based clustering implemented by [Wherens, Buydens, 2017]. 
 }
 \description{
-Either the variant k-batch or k-online is possible in which every unit can be seen approximatly as an cluster.
+Either the variant k-batch or k-online is possible in which every unit can be seen approximately as an cluster.
 }
 \usage{
 SOMclustering(Data,LC=c(1,2),ClusterNo=NULL,
@@ -14,11 +14,11 @@ Mode="online",PlotIt=FALSE,rlen=100,alpha = c(0.05, 0.01),...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
-\item{LC}{Lines and Columns of a very small SOM, usually every unit is a cluster, will bhe ignored if ClusterNo is not NULL.}
-\item{ClusterNo}{Optional, A number k which defines k different Clusters to be build by the algorithm. LC will then be set accordingly.}
+\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
+\item{LC}{Lines and Columns of a very small SOM, usually every unit is a cluster, will be ignored if ClusterNo is not NULL.}
+\item{ClusterNo}{Optional, A number k which defines k different clusters to be built by the algorithm. LC will then be set accordingly.}
 \item{Mode}{either "batch" or "online"}
-\item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{PlotIt}{default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 
 \item{rlen}{Please see \code{\link[kohonen]{supersom}}}
 \item{alpha}{Please see \code{\link[kohonen]{supersom}}}
@@ -28,7 +28,7 @@ Mode="online",PlotIt=FALSE,rlen=100,alpha = c(0.05, 0.01),...)
 \details{
 This clustering algorithm is based on very small maps and, hence, not emergent (c.f. [Thrun, 2018, p.37]). A 3x3 map means 9 units leading to 9 clusters.
 
-Batch is a deterministic clustering approach whereas online ist stochastic clustering approach and research indicates that online should be prefereeed (c.f. [Thrun, 2018, p.37]).
+Batch is a deterministic clustering approach whereas online is a stochastic clustering approach and research indicates that online should be preferred (c.f. [Thrun, 2018, p.37]).
 }
 \value{
 List of

@@ -13,13 +13,13 @@ MSTclustering(DataOrDistances, method = "euclidean",PlotIt=FALSE, \dots)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
  \item{DataOrDistances}{
-Either [1:n,1:n] symmetric distance matrix or [1:n,1:d] not symmetric data matrix of n cased and d variable
+Either [1:n,1:n] symmetric distance matrix or [1:n,1:d] not symmetric data matrix of n cases and d variables
 }
 
   \item{method}{
 Optional distance method of data, default is euclid, see \code{\link[parallelDist]{parDist}} for details
 }
-\item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{PlotIt}{default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
   \item{\dots}{
 Optional, further arguments for   \code{\link[mstknnclust]{mst.knn}}
 }

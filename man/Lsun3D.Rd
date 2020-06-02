@@ -6,15 +6,15 @@
 Lsun3D inspired by FCPS introduced in [Thrun, 2018]
 }
 \description{
-clearly defined clusters, different variances.  Detailed description of dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
+Clearly defined clusters, different variances.  Detailed description of dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
 }
 \usage{data("Lsun3D")}
 
 \details{
 Size 404, Dimensions 3
 
-Dataset defined discontinuites, where the clusters have different variances.
-Three main Clusters, and four Outliers (in Cluster 4). See for a more detailed description in [Thrun, 2018].
+Dataset defines discontinuites, where the clusters have different variances.
+Three main clusters, and four outliers (in cluster 4). For a more detailed description see [Thrun, 2018].
 }
 
 \references{

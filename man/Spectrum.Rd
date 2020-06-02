@@ -5,7 +5,7 @@
 Fast Adaptive Spectral Clustering [John et al, 2020]
 }
 \description{
-Spectrum is a self-tuning spectral clustering method for single or multi-view data. In this wrapper restricted to the standard used in other clustering algorithms.
+Spectrum is a self-tuning spectral clustering method for single or multi-view data. In this wrapper restricted to the standard use in other clustering algorithms.
 }
 \usage{
 Spectrum(Data, Method = 2, ClusterNo = NULL, 
@@ -15,7 +15,7 @@ PlotIt = FALSE, Silent = TRUE,PlotResults = FALSE, \dots)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Data}{
-1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.
+1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.
 }
   \item{Method}{
 Method=1: default eigengap method (Gaussian clusters)
@@ -24,7 +24,7 @@ Method=2: multimodality gap method (Gaussian/ non-Gaussian clusters)
 
 Method=3: Allows to setClusterNo
 }
-  \item{ClusterNo}{Optional, A number k which defines k different Clusters to be build by the algorithm.
+  \item{ClusterNo}{Optional, A number k which defines k different clusters to be built by the algorithm.
 For default \code{ClusterNo=NULL} please see details.
 }
 
@@ -37,7 +37,7 @@ silent progress of algorithm=TRUE
 plots result of spectrum with plot function
 }
   \item{\dots}{
-method: Numerical value: 1 = default eigengap method (Gaussian clusters), 2 = multimodality
+method: numerical value: 1 = default eigengap method (Gaussian clusters), 2 = multimodality
 gap method (Gaussian/ non-Gaussian clusters), 3 = no automatic
 method (see fixk param)
 
@@ -45,7 +45,7 @@ other paras defined in Spectrum packages
 }
 }
 \details{
-Spectrum is a Partitioning algorithm and either uses  the eigengap or multimodality gap heuristics to determine the number of clusters, please see Spectrum package dor details
+Spectrum is a partitioning algorithm and either uses the eigengap or multimodality gap heuristics to determine the number of clusters, please see Spectrum package for details
 }
 \value{
 List of

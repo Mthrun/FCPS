@@ -7,12 +7,12 @@ Applies a given function to each dimension for each cluster in Cls over the data
 ClusterApply(DataOrDistances,FUN,Cls,\ldots)
 }
 \arguments{
-  \item{DataOrDistances}{ Either A matrix containing data. n Cases as rows, d variables as columns or a nxn distance matrix}
+  \item{DataOrDistances}{ Either a matrix containing data. n Cases as rows, d variables as columns or a nxn distance matrix}
   \item{FUN}{Function to be applied to each cluster of data and each column of data}
-  \item{Cls}{The cluster identifiers for all rows in Data. If missing all data is in first cluster}
+  \item{Cls}{The cluster identifiers for all rows in Data. If missing, all data is in first cluster}
   \item{\ldots}{Additional parameters to be passed on to FUN}
 }
-\details{In case of a distance matrix an automatic classical multidimensional scalin transformation of distances to data is computed. Number of dimensions is selected by the minimal stress w.r.t. the possible output dimensions of cmdscale.
+\details{In case of a distance matrix an automatic classical multidimensional scaling transformation of distances to data is computed. Number of dimensions is selected by the minimal stress w.r.t. the possible output dimensions of cmdscale.
 
 If \code{FUN} has not function name, then ResultPerCluster is given back.
 }
@@ -28,7 +28,7 @@ Cls=Hepta$Cls
 #mean per cluster
 ClusterApply(Data,mean,Cls)
 
-#mean per cluster of MDS transformation
+# Mean per cluster of MDS transformation
 # Beware, this is not the same!
 \donttest{
 ClusterApply(as.matrix(dist(Data)),mean,Cls)

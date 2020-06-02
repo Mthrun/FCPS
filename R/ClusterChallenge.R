@@ -1,12 +1,24 @@
 ClusterChallenge=function(Name,SampleSize,PlotIt=FALSE,PointSize=1,Plotter3D="rgl",...){
-  
+  #
+  # INPUT
+  # Name          String. Choose: 'Atom', 'Chainlink, 'EngyTime', 'GolfBall', 'Hepta',
+  #                               'Lsun3D', 'Target', 'Tetra', 'TwoDiamonds', 'WingNut
+  # SampleSize    Size of Sample higher than 300, preferable above 500
+  # PlotIt        Boolean. TRUE: Plots the challenge
+  # PointSize     If PlotIt=TRUE, plotting setting
+  # Plotter3D     If PlotIt=TRUE, plotting setting
+  #
+  # OUTPUT
+  # Name    data matrix
+  # Cls     numerical vector of classification
+  # 
   if(SampleSize<500){
     warning('SampleSize may be to small in order to represent clustering problem correctly.')
   }
   
   if(SampleSize<300){
     SampleSize=300
-    warning('SampleSize ise to small in order to represent clustering problem correctly. Setting SampleSize=300.')
+    warning('SampleSize is to small in order to represent clustering problem correctly. Setting SampleSize=300.')
   }
   
   runif3d=function(...){
@@ -43,7 +55,7 @@ ClusterChallenge=function(Name,SampleSize,PlotIt=FALSE,PointSize=1,Plotter3D="rg
     n=nrow(Data)
     Cls=DataV$Cls
     if(mode(Data)!='numeric'){
-      warning('Data is not numeric.. Calling "mode(Data)=numeric"')
+      warning('Data is not numeric. Calling "mode(Data)=numeric"')
       mode(Data)='numeric'
     }
     res <- prcomp(x = Data, retx = T, scale = FALSE, tol = 0, 
@@ -67,7 +79,7 @@ ClusterChallenge=function(Name,SampleSize,PlotIt=FALSE,PointSize=1,Plotter3D="rg
       d=dens(x,pde,maxdens)
       if(y<=d){
         i=i+1
-        #funktioniert nur wenn man wirklich alle indizes mitnimmt und nicht nur den ersten
+        # Works only if all indices are used (not only the first one)
         sampleind=c(sampleind,which(HighestVariance==x))
       }
     }
@@ -147,7 +159,7 @@ ClusterChallenge=function(Name,SampleSize,PlotIt=FALSE,PointSize=1,Plotter3D="rg
     }
   )
   DataSample=PDE_RejectionSamplingPCA(DataV,SampleSize = SampleSize)
-  #make sure that outliers are in sample
+  # Make sure that outliers are in sample
   if(Name=='Lsun3D'){
     if(length(unique(DataSample$ClassSample))<4){
       ind=sample(1:nrow(DataSample$DataSample),sum(DataV$Cls==4))
@@ -167,7 +179,7 @@ ClusterChallenge=function(Name,SampleSize,PlotIt=FALSE,PointSize=1,Plotter3D="rg
   if(isTRUE(PlotIt)){
 		p=ClusterPlotMDS(DataSample$DataSample,DataSample$ClassSample,main = Name,PointSize=PointSize,Plotter3D=Plotter3D,...)
 		p
-		if(!is.null(p))#plotly
+		if(!is.null(p))    # Plotly
 		  print(p)
   }
   names(DataSample)=c(Name,'Cls')

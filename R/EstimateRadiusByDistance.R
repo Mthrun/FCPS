@@ -1,4 +1,11 @@
 EstimateRadiusByDistance=function(DistanceMatrix){
+  # 
+  # INPUT
+  # DistanceMatrix    symmetric distance Matrix of n cases
+  # 
+  # OUTPUT
+  # Numerical scalar defining the radius
+  # 
 
   if (!requireNamespace('ABCanalysis')) {
     message(

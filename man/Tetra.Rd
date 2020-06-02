@@ -6,7 +6,7 @@
 Tetra introduced in [Ultsch, 1993]
 }
 \description{
-almost touching clusters. Detailed description of dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
+Almost touching clusters. Detailed description of dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
 }
 \usage{data("Tetra")}
 

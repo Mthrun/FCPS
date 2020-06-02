@@ -1,5 +1,17 @@
 PAMclustering=PAMClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Standardization=TRUE,Data,...){
-  
+  # INPUT
+  # Data[1:n,1:d]     Data set with n observations and d features
+  # ClusterNo         Number of clusters to search for
+  #
+  # OPTIONAL
+  # PlotIt            Boolean. Decision to plot or not
+  # Standardization   Boolean.
+  # 
+  # OUTPUT
+  # Cls[1:n]          Clustering of data
+  # Object            Object of cluster::pam algorithm
+  #
+  # Author: MT, 04/2018
   if (!requireNamespace('cluster')) {
     message(
       'Subordinate clustering package is missing. No computations are performed.
@@ -19,8 +31,6 @@ PAMclustering=PAMClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Stan
   }
   if(Standardization==1) Standardization=TRUE
   if(Standardization==0) Standardization=FALSE
-  #author: MT, 04/2018
-
       if (isSymmetric(unname(DataOrDistances))) {
       Input = as.dist(DataOrDistances)
       AnzVar = ncol(DataOrDistances)

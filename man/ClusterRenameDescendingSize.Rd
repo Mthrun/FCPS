@@ -26,6 +26,6 @@ Cls=Lsun3D$Cls
 Cls[Cls==1]=543
 Cls[Cls==4]=1
 
-#now ordered ber cluster size and descending
+# Now ordered ber cluster size and descending
 ClusterRenameDescendingSize(Cls)
 }

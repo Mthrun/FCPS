@@ -11,9 +11,9 @@ PlotIt=FALSE,Standardization=TRUE,Samples=50,Random=TRUE,...)
 }
 
 \arguments{
-\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
+\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
 
-\item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.}
+\item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
 \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{Standardization}{
 \code{Data} is standardized before calculating the dissimilarities. Measurements are standardized for each variable (column), by subtracting the variable's mean value and dividing by the variable's mean absolute deviation.

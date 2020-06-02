@@ -1,8 +1,22 @@
 ClusterInterDistances=InterClusterDistances=function(FullDistanceMatrix,Cls,Names,PlotIt=FALSE){
+  #
+  # INPUT
+  # FullDistanceMatrix    symmetric distance matrix
+  # Cls                   numerical vector of k classes
+  #
+  # OPTIONAL
+  # Names                 character vector naming k classes
+  # PlotIt                Boolean
+  # 
+  # OUTPUT
+  # Matrix of k clusters, each columns consists of the distances between a cluster and all other clusters,
+  # filled up with NaN at the end to be of the same lenght as the complete distance matrix.
+  # 
+  #
   u=sort(unique(Cls))
   classdist=list(FullDistanceMatrix[upper.tri(FullDistanceMatrix,diag = F)])
   if(length(u)==1) return(unlist(classdist))
-  #Funktioniert nicht wenn in custer genau 1 punkt
+  # Does not work for clusters with one point
   for(i in u){
     classdistcur=FullDistanceMatrix[Cls==i,Cls!=i]
     #if(i==1) print(classdistcur)
@@ -16,7 +30,7 @@ ClusterInterDistances=InterClusterDistances=function(FullDistanceMatrix,Cls,Name
     colnames(xmat)=c('Full',paste0('Cluster',u))
   }else{
     if(length(u)!=length(Names)){
-      warning('Lengh of Names has to be equal of length of unique Cls.')
+      warning('Length of Names has to be equal of length of unique Cls.')
       colnames(xmat)=c('Full',paste0('Cluster',Names))
     }else{
       colnames(xmat)=c('Full',Names)

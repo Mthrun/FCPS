@@ -1,5 +1,18 @@
 ProjectionPursuitClustering=function(Data,ClusterNo,Type="MinimumDensity",PlotIt=FALSE,PlotSolution=FALSE,...){
-    
+  # INPUT
+  # Data[1:n,1:d]     Data set with n observations and d features
+  # ClusterNo         Number of clusters to search for
+  # 
+  # OPTIONAL
+  # Type              Either MinimumDensity, MaximumClusterbility or NormalisedCut.
+  # PlotIt            Boolean. Decision to plot or not
+  # PlotSolution      Plots the partioning solution as a tree as described in 
+  #
+  # OUTPUT
+  # Cls[1:n]          Clustering of data
+  # Object            Object of PPCI::ncuth algorithm
+  #
+  # Author: MT, 04/2020
   if (!requireNamespace('PPCI')) {
     message(
       'Subordinate clustering package is missing. No computations are performed.
@@ -13,10 +26,6 @@ ProjectionPursuitClustering=function(Data,ClusterNo,Type="MinimumDensity",PlotIt
       )
     )
   }
-  
-    #author: MT, 04/2020
- 
-
     switch(Type,
       'MinimumDensity'={
         out=PPCI::mddc(X=Data,K=ClusterNo,...)
@@ -25,13 +34,13 @@ ProjectionPursuitClustering=function(Data,ClusterNo,Type="MinimumDensity",PlotIt
       'NormalisedCut'={out=PPCI::ncutdc(X=Data,K=ClusterNo,...)},
       'KernelPCA'={
         if(!missing(ClusterNo))
-          message('ProjectionPursuitClustering of Type KernelPCA does not require "ClusterNo" and will determine the number of clusters automatically.')
+          message('ProjectionPursuitClustering of type KernelPCA does not require "ClusterNo" and will determine the number of clusters automatically.')
         requireNamespace('kernlab')
         x2=kernlab::kpca(Data,kernel="rbfdot",kpar=list(sigma=3))@rotated
         out=PPCI::ncuth(x2,...) 
       },{
-        warning('Incorrect Option Selected')
-        return('Incorrect Option Selected')
+        warning('Incorrect option selected')
+        return('Incorrect option selected')
       }
     )
   #  out=out

@@ -1,5 +1,17 @@
 GenieClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",ColorTreshold=0,...){
-
+  # INPUT
+  # DataOrDistances[1:n,1:d]    Dataset with n observations and d features or distance matrix with size n
+  #
+  # OPTIONAL
+  # ClusterNo                   Number of clusters to search for
+  # DistanceMethod              String. 'euclidean','mahalanobis','manhatten' (cityblock),'fJaccard','binary', 'canberra', 'maximum'
+  # ColorTreshold               Number. Draws cutline w.r.t. dendogram y-axis (height), height of line as scalar should be given
+  # 
+  # OUTPUT
+  # Cls[1:n]    Clustering of data
+  # hc          Object of hclust2 algorithm
+  #
+  # Author: MT
   if (!requireNamespace('genie')) {
     message(
       'Subordinate clustering package is missing. No computations are performed.
@@ -28,19 +40,19 @@ GenieClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",
   
   m=paste("Genie Clustering/ "," N=",nrow(as.matrix(pDist)))
   
-  # Classification or Dendrogram
+  # Classification or dendrogram
   if (ClusterNo>0){
 	Cls=cutree(hc,ClusterNo)
     Cls=ClusterRename(Cls,DataOrDistances)
     return (list(Cls=Cls,Dendrogram=as.dendrogram(hc),Object=hc))
   } 
   else{
-    x=as.dendrogram(hc);plot(x, main=m,xlab="Number of Data Points N", ylab="Distance",sub=" ",leaflab ="none")
+    x=as.dendrogram(hc);plot(x, main=m,xlab="Number of data points N", ylab="Distance",sub=" ",leaflab ="none")
     axis(1,col="black",las=1)
     if (ColorTreshold!=0){
       rect.hclust(hc, h=ColorTreshold,border="red")}		  
     else{
     }
-    return(list(Cls=NULL,Dendrogram=x,Obkject=hc))
+    return(list(Cls=NULL,Dendrogram=x,Object=hc))
   }
 }

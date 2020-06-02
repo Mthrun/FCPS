@@ -40,7 +40,7 @@ Wrapper only
 }
 \examples{
 data(Hepta)
-GapStatistic(Hepta$Data,10,ClusterFun = kmeans)
+#GapStatistic(Hepta$Data,10,ClusterFun = kmeans)
 }
 \keyword{Gap}
 \concept{Gap Statistic}

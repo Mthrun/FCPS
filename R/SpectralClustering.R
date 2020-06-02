@@ -2,9 +2,12 @@ SpectralClustering <- function(Data, ClusterNo,PlotIt=FALSE,...){
   #Cls=SpectralClustering(Data,ClusterNo)
   #Cls=SpectralClustering(Data,ClusterNo,...)
   # Clusters the Data into "ClusterNo" different clusters using the Spectal Clustering Method
+  # 
   # INPUT
   # Data(1:n,1:m)           Data to be clustered. n Datapoints with m Attributes
   # ClusterNo    Number of different Clusters to build
+  #
+  # OPTIONAL
   # kernel		              Kernelmethod, possible options:
   #                         default:        unknown!, maybe kernel="rbfdot"
   #                         rbfdot          Radial Basis kernel function "Gaussian"
@@ -33,9 +36,10 @@ SpectralClustering <- function(Data, ClusterNo,PlotIt=FALSE,...){
   #                 mod.sample proportion of data to use when estimating sigma #                 (default: 0.75)
   #                 na.action	the action to perform on NA
   # OUTPUT
-  # cls[1:n]  vector of integer
+  # Cls[1:n]    Clustering of data
+  # Object      Object of kernlab::specc algorithm
   #
-  #author: MT 04/2018 (redone from new)
+  # Author: MT 04/2018 (redone from new)
   #
   # NOTA
   # see http://artax.karlin.mff.cuni.cz/r-help/library/kernlab/html/specc.html

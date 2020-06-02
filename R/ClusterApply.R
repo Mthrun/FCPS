@@ -1,19 +1,23 @@
 ClusterApply <- function(DataOrDistances, FUN, Cls, ...){
-  # Applies a given FUNtion to each dimension for each cluster in Cls over the data.
-   # INPUT
-  # DataOrDistances(d,n)         d cases,  n variables
-  # Cls(d)            Cls(i) == ClusterNumber of Data(i,:)
-  # FUN              Function to be applied
+  #
+  # Applies a given function to each dimension for each cluster in Cls for all observations in the data.
+  #
+  # INPUT
+  # DataOrDistances(n,d)    n cases, d variables
+  # FUN                     Function to be applied
+  # Cls(n)                  Cls(i) == ClusterNumber of Data(i,:)
+  # 
   # OUTPUT
-  # UniqueClasses[AnzCluster]             the  AnzCluster unique clusters in Cls
-  # FUNPerCluster[AnzCluster,Columns]    FUNPerCluster[i] is the result of FUN for the data points in Cluster UniqueClusters[i]
-
+  # UniqueClasses    The  AnzCluster unique clusters in Cls
+  # FUNPerCluster    FUNPerCluster[i] is the result of FUN for the data points in Cluster UniqueClusters[i]
+  #
+  # 
   if(!is.matrix(DataOrDistances)){
-    warning('ClusterApply: DataOrDistances is not a matrix Calling as.matrix')
+    warning('ClusterApply: DataOrDistances is not a matrix. Calling as.matrix')
     DataOrDistances=as.matrix(DataOrDistances)
   }
   if(mode(DataOrDistances)!="numeric"){
-    warning('ClusterApply: DataOrDistances is not a numeric, setting mode to numeric.')
+    warning('ClusterApply: DataOrDistances is not numeric, setting mode to numeric.')
     mode(DataOrDistances)="numeric"
   }
   if (isSymmetric(unname(DataOrDistances))) {
@@ -40,7 +44,7 @@ ClusterApply <- function(DataOrDistances, FUN, Cls, ...){
   for (i in 1:numberOfClusters) {
     inClusterInd <- which(Cls == uniqueClusters[i])
     x = Data[inClusterInd, ]
-    if(is.vector(x)) { # Wenns nur ein Datensatz, also ein Vektor, ist, macht R mist. Also konvertieren.
+    if(is.vector(x)) { # Creates problems if there is only one data point
       margin = 1
       x = as.matrix(x)
     } else {
@@ -77,7 +81,7 @@ ClusterApply <- function(DataOrDistances, FUN, Cls, ...){
     string=as.character(substitute(FUN))
     names(V)=c('UniqueClusters',paste0(string,'PerCluster'))
   },error=function(e){
-    message('ClusterApply: FUN cout not be extracted because:')
+    message('ClusterApply: FUN could not be extracted because:')
     message(e)
   })
   return(V)

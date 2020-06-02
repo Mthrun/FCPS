@@ -1,20 +1,24 @@
 MinimalEnergyClustering <-function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",ColorTreshold=0,Data,...){
-# HierarchicalClusterDists(pDist)
-# HierarchicalClusterDists(pDist,0,"ward.D2",100)
-# Cls=HierarchicalClusterDists(pDist,6,"ward.D2")
-  
-# Zeichnet entweder ein Dendrogram oder liefert eine Klassenzuweisung
-# INPUT
-# pDist                 Distanzen eines Datensatzesueber DistanceMatrix()
-# OPTIONAL
-# ClusterNo  in soviele Cluster werden die daten eingeteilt, wenn dieser Wert 
-#                       fehlt oder =0 gesetzt ist, wird ein Dendrogramm gezeichnet
-# ColorTreshold			    zeichnet Schnittlinie bei entsprechende, Dendogram y-Achsenwerte (Hoehe), Hoehe der Linie wird als Skalar angegeben
-#
-# OUTPUT Liste mit
-# HierarchicalCluster      Hierarchische Clusterung der Daten, falls ClusterNo angegeben
-# Dendrogram
-# Author: MT, 2019
+  # HierarchicalClusterDists(pDist)
+  # HierarchicalClusterDists(pDist,0,"ward.D2",100)
+  # Cls=HierarchicalClusterDists(pDist,6,"ward.D2")
+  #
+  # Either draws dendrogram or returns class assignment
+  #
+  # INPUT
+  # DataOrDistances[1:n,1:d]    Dataset with n observations and d features or distance matrix with size n
+  #
+  # OPTIONAL
+  # ClusterNo         Number of clusters to search for. ClusterNo=0 means use of dendrogram
+  # DistanceMethod    Choose distance metric.
+  # ColorTreshold			Draws intersection at appropriate dendrogram y-ax (height). Height of line is number.
+  #
+  # OUTPUT
+  # Cls[1:n]          Clustering of data
+  # Dendrogram
+  # Object            Object of energy::energy.hclust algorithm
+  # 
+  # Author: MT, 2019
 
   if (!requireNamespace('energy')) {
     message(
@@ -30,7 +34,7 @@ MinimalEnergyClustering <-function(DataOrDistances,ClusterNo=0,DistanceMethod="e
     )
   }
   
-#Clustering
+  # Clustering
   if(missing(DataOrDistances)){
     DataOrDistances=Data
   }
@@ -49,7 +53,7 @@ MinimalEnergyClustering <-function(DataOrDistances,ClusterNo=0,DistanceMethod="e
 	
 	m=paste("Minimal Energy Clustering/ "," N=",nrow(as.matrix(pDist)))
 	
-# Classification or Dendrogram
+  # Classification or Dendrogram
 	if (ClusterNo>0){
 		Cls=cutree(hc,ClusterNo)
 		Cls=ClusterRename(Cls,DataOrDistances)

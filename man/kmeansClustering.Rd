@@ -8,7 +8,7 @@ K-Means Clustering
 Perform k-means clustering on a data matrix. 
 }
 \usage{
-kmeansClustering(DataOrDistance, ClusterNo,Centers=NULL,
+kmeansClustering(DataOrDistance, ClusterNo,
 
  Type = 'LBG',RandomNo=5000, PlotIt=FALSE, Verbose = FALSE,\dots )
 }
@@ -17,14 +17,12 @@ kmeansClustering(DataOrDistance, ClusterNo,Centers=NULL,
 
 symmetric [1:n,1:n] distance matrix}
 
-\item{ClusterNo}{A number k which defines k different Clusters to be build by the algorithm.}
-
-  \item{Centers}{default(NULL) a set of initial (distinct) cluster centres.}
-  \item{RandomNo}{Only for " \code{Steinley}" or in case of distance matrix, Number of Random Initializations with searching for minimal SSE, see [Steinley/Brusco, 2007]}
-  \item{Type}{ Choice of Kmeans algorithm, currently either " \code{Hartigan}" [Hartigan/Wong, 1979], "\code{LBG}" [Linde et al., 1980],"code{Steinley}" best method of [Steinley/Brusco, 2007] proposed in Steinley 2003, " \code{Lloyd}" [Lloyd, 1982], "\code{Forgy}"[Forgy, 1965] or \code{MacQueen} [MacQueen, 1967]}
-  \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
-  \item{Verbose}{ print details, if true}
-  \item{\dots}{ Further arguments like \code{iter.max},\code{nstart},...}
+\item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
+  \item{RandomNo}{Only for " \code{Steinley}" or in case of distance matrix, number of random initializations with searching for minimal SSE, see [Steinley/Brusco, 2007]}
+  \item{Type}{ Choice of Kmeans algorithm, currently either " \code{Hartigan}" [Hartigan/Wong, 1979], "\code{LBG}" [Linde et al., 1980], "\code{Steinley}" best method of [Steinley/Brusco, 2007] proposed in Steinley 2003, " \code{Lloyd}" [Lloyd, 1982], "\code{Forgy}"[Forgy, 1965] or \code{MacQueen} [MacQueen, 1967]}
+  \item{PlotIt}{Default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+  \item{Verbose}{Print details, if true}
+  \item{\dots}{Further arguments like \code{iter.max}, \code{nstart},...}
 
 }
 
@@ -66,14 +64,37 @@ out=kmeansClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 
 \donttest{
 data('Leukemia')
-#as expected does not perform well
-#for non-spherical cluster structures:
+# As expected does not perform well
+# For non-spherical cluster structures:
 out=kmeansClustering(Leukemia$DistanceMatrix,ClusterNo=6,RandomNo =10,PlotIt=TRUE)
+}
+\dontshow{
+data('Hepta')
+out=kmeansClustering(Hepta$Data,ClusterNo=7,  
+PlotIt=FALSE,Type="Hartigan")
+
+out=kmeansClustering(Hepta$Data,ClusterNo=7,  
+PlotIt=FALSE,Type="Lloyd")
+
+out=kmeansClustering(Hepta$Data,ClusterNo=7,  
+PlotIt=FALSE,Type="Forgy")
+
+out=kmeansClustering(Hepta$Data,ClusterNo=7,  
+PlotIt=FALSE,Type="MacQueen")
+
+out=kmeansClustering(as.matrix(dist(Hepta$Data)),ClusterNo=7,  
+PlotIt=FALSE,RandomNo = 10)
+}
+
+\donttest{
+data('Hepta')
+out=kmeansClustering(Hepta$Data,ClusterNo=7,  
+PlotIt=FALSE,Type="Steinley")
 }
 }
 
 \note{
-The version using a distance matrix is is still in the test phase and not verified.
+The version using a distance matrix is still in the test phase and not yet verified.
 }
 
 \author{

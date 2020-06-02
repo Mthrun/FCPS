@@ -15,7 +15,7 @@ any algorithm shall be able to handle when facing real world data.  Nine of the 
 }
 
 \details{
-FCPS datasets consists of data sets with known a priori classifications that are to be reproduced by the algorithm.
+FCPS datasets consists of data sets with known a priori classification to be reproduced by the algorithms.
  All data sets are intentionally created to be simple and might be visualized in two or three dimensions.
  Each data sets represents a certain problem that is solved by known clustering algorithms with varying success. 
  This is done in order to reveal benefits and shortcomings of algorithms in question. Standard clustering methods,

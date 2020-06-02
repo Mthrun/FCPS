@@ -1,11 +1,27 @@
 ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",OutputDimension = 3,PointSize=1,Plotter3D="rgl",...){
-  
+  #
+  # INPUT
+  # DataOrDists        Either nonsymmetric [1:n,1:d] datamatrix of n cases and d features or
+  #                    symmetric [1:n,1:n] distance matrix
+  # Cls                1:n numerical vector of numbers defining the classification as the main
+  #                    output of the clustering algorithm for the n cases of data. It has k unique
+  #                    numbers representing the arbitrary labels of the clustering.
+  # main               String. Title of plot
+  # method             Method to compute distances, default "euclidean"
+  # OutputDimension    Either two or three depending on user choice
+  # PointSize          Size of points l
+  # Plotter3D          In case of 3 dimensions, choose either "plotly" or "rgl"
+  # 
+  # OUTPUT
+  # The rgl plot
+  # 
+  # 
   if(missing(DataOrDists)) stop('DataOrDists is missing.')
 
   if(is.null(DataOrDists)) stop('DataOrDists is missing.')
   
   if(!is.matrix(DataOrDists)){
-    warning('DataOrDists iis not a matrix. Calling as.matrix')
+    warning('DataOrDists is not a matrix. Calling as.matrix')
     DataOrDists=as.matrix(DataOrDists)
   }
   
@@ -48,7 +64,7 @@ ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",O
                          add = FALSE, x.ret = FALSE)$points
     }
     return(list(DataMDS=DataMDS,Cls=Cls))
-  }#end prepareData
+  }# End prepareData
   
   if (isSymmetric(unname(DataOrDists))) {
     DataDists = DataOrDists

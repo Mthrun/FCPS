@@ -26,13 +26,13 @@ symmetric [1:n,1:n] distance matrix
 Number of Clusters, if zero a the topographic map is ploted. Number of valleys equals number of clusters.
 }
   \item{StructureType}{
-Either TRUE or FALSE, has to be tested against the visualization. if colored points of clusters a divided by mountain ranges, parameter is incorrect.
+Either TRUE or FALSE. It has to be tested using the visualization. If colored points of clusters are divided by mountain ranges, then the parameter is incorrect.
 }
   \item{DistancesMethod}{
-Optional, if data matrix given, annon Euclidean distance can be selected
+Optional, if data matrix given, a non Euclidean distance can be selected as defined in the \pkg{parallelDist} package
 }
   \item{PlotTree}{
-Optional, if TRUE: dendrogram is plotted
+Optional, if TRUE: dendrogram is plotted.
 }
   \item{PlotMap}{
 Optional, if TRUE: topographic map is plotted.
@@ -47,12 +47,12 @@ This function does not enable the user first to project the data and then to tes
 
 Instead, this function is implemented for the purpose of automatic benchmarking because in such a case nobody will investigate many trials with one visualization per trial.
 
-If one would like to perform a clustering exploratively (in the sense that a prior clustering is not given of evaluation purposes), then please use the \pkg{DatabionicSwarm} package directly and read the vignette there.
-Databionic swarm is like k-means an stochastic algorithm meaning that the clustering and visualization may change between trials.
+If one would like to perform a clustering exploratively (in the sense that a prior clustering is not given for evaluation purposes), then please use the \pkg{DatabionicSwarm} package directly and read the vignette there.
+Databionic swarm is like k-means a stochastic algorithm meaning that the clustering and visualization may change between trials.
 }
 \value{
 List of
-\item{Cls}{[1:n numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.}
+\item{Cls}{1:n numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.}
 \item{Object}{List of further output of DBS}
 }
 \references{
@@ -62,7 +62,7 @@ List of
 Michael Thrun
 }
 \note{
-Current implementation is not efficient enough to cluster more than N=4000 cases as in that case in takes longer than a day for a result.
+Current implementation is not efficient enough to cluster more than N=4000 cases as in that case it takes longer than a day for a result.
 }
 \seealso{
 \code{\link[DatabionicSwarm]{Pswarm}}, \code{\link[DatabionicSwarm]{DBSclustering}},\code{\link[DatabionicSwarm]{GeneratePswarmVisualization}}
@@ -70,25 +70,25 @@ Current implementation is not efficient enough to cluster more than N=4000 cases
 
 \examples{
 \donttest{
-#Generate random but small non-structured data set
+# Generate random but small non-structured data set
 data = cbind(
   sample(1:100, 300, replace = T),
   sample(1:100, 300, replace = T),
   sample(1:100, 300, replace = T)
 )
-#make sure there are no structures
+# Make sure there are no structures
 # (sample size is small and still could generate structures randomly)
 Data = RobustNormalization(data, Centered = TRUE)
 #DataVisualizations::Plot3D(Data)
 
-#No structres are visible
-#topographic map looks like "egg carton"
+# No structres are visible
+# Topographic map looks like "egg carton"
 # with every point in its own valley
 Cls = DatabionicSwarmClustering(Data, 0, PlotMap = T)
 }
 
-#distance based cluster structures
-#7 valleys are visible, thus ClusterNo=7
+# Distance based cluster structures
+# 7 valleys are visible, thus ClusterNo=7
 \donttest{
 data(Hepta)
 #DataVisualizations::Plot3D(Hepta$Data)
@@ -101,19 +101,19 @@ Cls = DatabionicSwarmClustering(Hepta$Data, 0, PlotMap = T)
 data(Chainlink)
 #DataVisualizations::Plot3D(Chainlink$Data)
 
-#2 valleys are visible, thus ClusterNo=2
+# 2 valleys are visible, thus ClusterNo=2
 Cls = DatabionicSwarmClustering(Chainlink$Data, 0, PlotMap = T)
 
-#Trying of only parameter StructureType
-#reveals that clustering is appropriate
+# Experiment with parameter StructureType only
+# reveals that clustering is appropriate
 # if StructureType=FALSE
 Cls = DatabionicSwarmClustering(Chainlink$Data,
                                 2,
                                 StructureType = FALSE,
                                 PlotMap = T)
 
-#Here clusters (colored points)
-#are not seperated by valleys
+# Here clusters (colored points)
+# are not seperated by valleys
 Cls = DatabionicSwarmClustering(Chainlink$Data,
                                 2,
                                 StructureType = TRUE,

@@ -1,4 +1,13 @@
 ClusterCreateClassification=function(Objects){
+  #
+  # INPUT
+  # Objects          listed objects, for example factor
+  #
+  # OUTPUT
+  # Cls[1:n]         Clustering of data
+  # ClusterNames     Object of adpclust algorithm
+  #
+  # Author: MT
   if(is.list(Objects)) Objects=unlist(Objects)
   y=as.character(Objects)
   n=length(y)

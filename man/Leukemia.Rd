@@ -3,11 +3,11 @@
 
 \docType{data}
 \title{
-Leukemia Distancematrix and classificiation used in [Thrun, 2018]
+Leukemia distance matrix and classificiation used in [Thrun, 2018]
 }
 \description{
-Data is anonymized. Original dataset was pubished in [Haferlach et al., 2010]. Original dataset had around 12.000 Dimensions.
-Detailed descriptions of preprocessed dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
+Data is anonymized. Original dataset was published in [Haferlach et al., 2010]. Original dataset had around 12.000 dimensions.
+Detailed description of preprocessed dataset and its clustering challenge is provided in [Thrun/Ultsch, 2020].
 }
 \usage{data("Leukemia")}
 

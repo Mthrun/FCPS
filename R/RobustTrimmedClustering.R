@@ -1,17 +1,19 @@
 RobustTrimmedClustering=function(Data,ClusterNo,Alpha,PlotIt=FALSE,...){
   # Cls=RobustTrimmedClustering(Data,ClusterNo)
-  # liefert eine Klassenzuweisung
-  # INPUT
-  # Data[1:n,1:d]             Der Datensatz
-  
-  # ClusterNo  in soviele Cluster werden die daten eingeteilt
-  
-  # OUTPUT
-  # Cls[1:n]                Clusterung der Daten
-  # TClustObject         Object of sota Alorithm
-  # Author: MT 09/2019  
-  
   #
+  # INPUT
+  # Data[1:n,1:d]     Data set with n observations and d features
+  # ClusterNo         Number of clusters to search for
+  # Alpha             No trimming is done equals to alpha =0, otherwise proportion of datapoints to be trimmed.
+  # 
+  # OPTIONAL
+  # PlotIt            Boolean. Decision to plot or not.
+  #
+  # OUTPUT
+  # Cls[1:n]          Clustering of data
+  # Object            Object of tclust::tclust
+  #
+  # Author: MT 09/2019  
   
   if (!requireNamespace('tclust')) {
     message(
@@ -26,9 +28,6 @@ RobustTrimmedClustering=function(Data,ClusterNo,Alpha,PlotIt=FALSE,...){
       )
     )
   }
-  
-  
-  
   
   res=tclust::tclust(x=Data,k = ClusterNo,alpha = Alpha,...)
   Cls=res$cluster	

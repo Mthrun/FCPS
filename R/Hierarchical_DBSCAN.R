@@ -1,17 +1,25 @@
 Hierarchical_DBSCAN <-function(DataOrDistances,minPts=4,PlotTree=FALSE,PlotIt=FALSE,...){
   # Cls=Hierarchical_DBSCAN(FCPS$Hepta$Data,minPts=3)
-  # DBscan nach  [Campello et al., 2015]
-  # INPUT
-  # Data[1:n,1:d]          der Datensatz 
-  # minPts                 In principle minimum number of points in the unit disk, if the unit disk is within the cluster (core) [Ester et al., 1996, p. 228].
-  #                        number of minimum points in the eps region (for core points). 
-  # Optional
-  #PlotTree
-  #PlotIt
-  # OUTPUT List V with
-  # Cls[1:n]               Clusterung der Daten, Points which cannot be assigned to a cluster will be reported as members of the noise cluster with NaN.
-  # Object
+  # DBscan based on  [Campello et al., 2015]
   #
+  # INPUT
+  # DataOrDistances[1:n,1:d]    Dataset with n observations and d features or distance matrix with size n
+  # minPts                      In principle minimum number of points in the unit disk, if the unit disk is
+  #                             within the cluster (core) [Ester et al., 1996, p. 228].
+  #                             Number of minimum points in the eps region (for core points). 
+  # OPTIONAL
+  # PlotTree          Boolean. Default: FALSE, If TRUE plots the dendrogram. If minPts is missing, PlotTree
+  #                   is set to TRUE.
+  # PlotIt            Boolean. Default: FALSE, If TRUE plots the first three dimensions of the dataset with
+  #                   colored three-dimensional data points defined by the clustering stored in 
+  #
+  # OUTPUT
+  # Cls[1:n]      Clustering of data. Points which cannot be assigned to a cluster will be reported as members
+  #               of the noise cluster with NaN.
+  # Dendrogram    Dendrogram of hierarchical clustering algorithm
+  # Tree          Ultrametric tree of hierarchical clustering algorithm
+  # Object        Object of hdbscan algorithm
+  # 
   # author: MT2019
   #
   # [Campello et al., 2015]  Campello RJGB, Moulavi D, Zimek A, Sander J: Hierarchical density estimates for data clustering, visualization, and outlier detection, ACM Transactions on Knowledge Discovery from Data (TKDD), 10(5), pp. 1-51, 2015.
@@ -30,7 +38,7 @@ Hierarchical_DBSCAN <-function(DataOrDistances,minPts=4,PlotTree=FALSE,PlotIt=FA
     )
   }
   
-  if(is.null(nrow(DataOrDistances))){# dann haben wir einen Vektor
+  if(is.null(nrow(DataOrDistances))){# ensure vector
     return(cls <- rep(1,length(Data)))
   }
   
