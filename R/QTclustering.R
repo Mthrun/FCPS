@@ -29,10 +29,14 @@ QTclustering=QTClustering <-function(Data,Radius,PlotIt=FALSE,...){
     )
   }
 
-    if(is.null(Radius)){ #estimate Maximum diameter of cluster, i.e. group of large distances
-      requireNamespace('parallelDist')
+  if(is.null(Radius)){ #estimate Maximum diameter of cluster, i.e. group of large distances
+    if(requireNamespace("parallelDist")){
       Radius=EstimateRadiusByDistance(as.matrix(parallelDist::parallelDist(Data)))
-    } 
+    }
+    else{
+      stop('parallelDist package not loaded or installed.')
+    }
+  } 
   obj=flexclust::qtclust(Data,Radius,...)
   Cls=obj@cluster
   Cls[!is.finite(Cls)]=0

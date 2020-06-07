@@ -24,7 +24,7 @@ Either  \code{MinimumDensity}[Pavlidis et al., 2016]
 
   \code{NormalisedCut} [Hofmeyr, 2016] or KernelPCA [Hofmeyr/Pavlidis, 2019].
 }
-\item{PlotIt}{default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{PlotIt}{Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 
 \item{PlotSolution}{
 Plots the partioning solution as a tree as described in 

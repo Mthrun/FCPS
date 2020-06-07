@@ -22,7 +22,7 @@ TandemClustering(Data,ClusterNo,Type="Reduced",PlotIt=FALSE,\dots)
 
  \code{KernelPCA}: Kernel PCA with minimum normalised cut hyperplanes [Hofmeyr/Pavlidis, 2019] 
 }
-\item{PlotIt}{default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{PlotIt}{Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 }

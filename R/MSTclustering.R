@@ -35,9 +35,12 @@ MSTclustering=function(DataOrDistances,method="euclidean",PlotIt=FALSE,...){
   AnzData = nrow(DataOrDistances)
   
   if (!isSymmetric(unname(DataOrDistances))) {
-    requireNamespace('parallelDist')
-    
-    Distances=as.matrix(parallelDist::parDist(DataOrDistances,method=method))
+    if(requireNamespace("parallelDist")){
+      Distances=as.matrix(parallelDist::parDist(DataOrDistances,method=method))
+    }
+    else{
+      stop('parallelDist package not loaded or installed.')
+    }
   }else{
     Distances=DataOrDistances
   }

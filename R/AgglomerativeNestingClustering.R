@@ -40,15 +40,15 @@ AgglomerativeNestingClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE
   }
  
   if (isSymmetric(unname(DataOrDistances))) {
-      Input = as.dist(DataOrDistances)
-      requireNamespace('ProjectionBasedClustering')
-      AnzVar = ncol(DataOrDistances)
-      AnzData = nrow(DataOrDistances)
-	  diss =TRUE
-    }else{
-	  Input=DataOrDistances
-	  diss =FALSE
-    }
+    Input = as.dist(DataOrDistances)
+    requireNamespace('ProjectionBasedClustering')
+    AnzVar = ncol(DataOrDistances)
+    AnzData = nrow(DataOrDistances)
+    diss =TRUE
+  }else{
+    Input=DataOrDistances
+    diss =FALSE
+  }
 	
   res=cluster::agnes(x=Input,diss =diss,stand=Standardization,...)
   if(length(ClusterNo)!=1){

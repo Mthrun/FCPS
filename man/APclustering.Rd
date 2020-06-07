@@ -33,7 +33,7 @@ Seed=7568,PlotIt=FALSE,Data,\dots)
 }
 
   \item{Seed}{
-    set as integervalue to have reproducible results, see \pkg{apcluster}
+    Set as integervalue to have reproducible results, see \pkg{apcluster}
 }
 \item{PlotIt}{Default: FALSE, If TRUE and dataset of [1:n,1:d] dimensions then a plot of the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls} will be generated.}
 \item{Data}{[1:n,1:d] data matrix in the case that \code{DataOrDistances} is missing and partial matching does not work.}

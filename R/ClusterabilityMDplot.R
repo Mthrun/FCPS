@@ -103,18 +103,29 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
       ProjectedPoints=x[upper.tri(x,diag = FALSE)]
     }
   
-    plot=DataVisualizations::MDplot(as.vector(ProjectedPoints),Names = pvalue,Ordering = Ordering,OnlyPlotOutput = TRUE)+ggplot2::ggtitle(main)+
-      ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))+
-      ggplot2::xlab('Probability that data has no cluster structure')+
-      ggplot2::ylab('PDE of 1st principal component')
-  }else{
-      x=DataOrDistance[upper.tri(DataOrDistance,diag = FALSE)]
+    if(requireNamespace("DataVisualizations")){
+      plot=DataVisualizations::MDplot(as.vector(ProjectedPoints),Names = pvalue,Ordering = Ordering,OnlyPlotOutput = TRUE)+ggplot2::ggtitle(main)+
+        ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))+
+        ggplot2::xlab('Probability that data has no cluster structure')+
+        ggplot2::ylab('PDE of 1st principal component')
+    }
+    else{
+      stop('DataVisualizations package not loaded or installed.')
+    }
     
-    plot=DataVisualizations::MDplot(x,Names = pvalue,Ordering = Ordering,OnlyPlotOutput = TRUE)+
-      ggplot2::ggtitle(main)+
-      ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))+
-      ggplot2::xlab('Probability that data has no cluster structure')+
-      ggplot2::ylab('PDE of distance distribution')
+  }else{
+    x=DataOrDistance[upper.tri(DataOrDistance,diag = FALSE)]
+    
+    if(requireNamespace("DataVisualizations")){
+      plot=DataVisualizations::MDplot(x,Names = pvalue,Ordering = Ordering,OnlyPlotOutput = TRUE)+
+        ggplot2::ggtitle(main)+
+        ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))+
+        ggplot2::xlab('Probability that data has no cluster structure')+
+        ggplot2::ylab('PDE of distance distribution')
+    }
+    else{
+      stop('DataVisualizations package not loaded or installed.')
+    }
   }
   
   }else{#dataordistance is list
@@ -178,8 +189,7 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
       }else{
         return(x[upper.tri(x,diag = FALSE)])
       }
-    },Method,scale,center
-    )
+    },Method,scale,center)
     
     if(is.null(dots[["main"]]))
       main=paste('MDplot of clusterability for multiple datasets')
@@ -187,10 +197,17 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
       main=dots$main
     
     names(pcasordistances)=Names
-    plot=DataVisualizations::MDplot4multiplevectors(pcasordistances,Gaussian_lwd=0.5,Names = Names,Ordering = Ordering,Scaling = 'Robust')+
-      ggplot2::ggtitle(main)+
-      ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))+
-      ggplot2::xlab('Probability that data has no cluster structure')
+    
+    if(requireNamespace("DataVisualizations")){
+      plot=DataVisualizations::MDplot4multiplevectors(pcasordistances,Gaussian_lwd=0.5,Names = Names,Ordering = Ordering,Scaling = 'Robust')+
+        ggplot2::ggtitle(main)+
+        ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))+
+        ggplot2::xlab('Probability that data has no cluster structure')
+    }
+    else{
+      stop('DataVisualizations package not loaded or installed.')
+    }
+    
     if(sum(isDistance)==0){
       plot+ggplot2::ylab('PDE of 1st principal component')
     }else{

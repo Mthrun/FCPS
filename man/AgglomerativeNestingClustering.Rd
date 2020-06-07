@@ -5,7 +5,7 @@
 AGNES clustering
 }
 \description{
-agglomerative hierarchical clustering (AGNES)
+Agglomerative hierarchical clustering (AGNES)
 }
 \usage{
 AgglomerativeNestingClustering(DataOrDistances, ClusterNo,

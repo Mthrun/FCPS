@@ -20,12 +20,12 @@ or a [1:n,1:n] symmetric distance matrix.
 }
 
   \item{minPts}{
-classic smoothing factor in density estimates [Campello et al., 2015, p.9]
+Classic smoothing factor in density estimates [Campello et al., 2015, p.9]
 }
 
-\item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{PlotIt}{Default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 
-\item{PlotTree}{default: FALSE, If TRUE plots the dendrogram. If minPts is missing, PlotTree is set to TRUE.}
+\item{PlotTree}{Default: FALSE, If TRUE plots the dendrogram. If minPts is missing, PlotTree is set to TRUE.}
 
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 

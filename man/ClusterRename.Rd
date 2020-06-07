@@ -37,7 +37,7 @@ Data=Hepta$Data#
 #prior
 Cls
 #Named Clustering
-ClusterRename(Cls)
+ClusterRename(Cls,Data)
 }
 
 \keyword{ClusterRename}% use one of  RShowDoc("KEYWORDS")

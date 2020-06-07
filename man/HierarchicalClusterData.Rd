@@ -3,7 +3,7 @@
 \alias{HierarchicalCluster}
 
 \title{
-Hierarchical Clusterering
+Hierarchical Clusterering of Data
 }
 \usage{
 HierarchicalClusterData(Data,ClusterNo=0,
@@ -22,7 +22,7 @@ Hierarchical cluster analysis on a set of dissimilarities and methods for analyz
 \item{method}{Methode der Clusterung: "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".}
 \item{DistanceMethod}{see  \code{\link[parallelDist]{parDist}}, for example 'euclidean','mahalanobis','manhatten' (cityblock),'fJaccard','binary', 'canberra', 'maximum'. Any unambiguous substring can be given.}
 \item{ColorTreshold}{Draws cutline w.r.t. dendrogram y-axis (height), height of line as scalar should be given}
-\item{Fast}{if TRUE and fastcluster installed, then a faster implementation of the methods above can be used}
+\item{Fast}{If TRUE and fastcluster installed, then a faster implementation of the methods above can be used}
 \item{Cls}{[1:n] classification vector for coloring of dendrogram in plot}
 \item{\dots}{In case of plotting further argument for \code{plot}, see \code{\link{as.dendrogram}}
 }

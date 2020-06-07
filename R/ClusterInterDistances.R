@@ -24,7 +24,13 @@ ClusterInterDistances=InterClusterDistances=function(FullDistanceMatrix,Cls,Name
     classdist=c(classdist,list(distvec))
   }
   
-  xmat=do.call(DataVisualizations::CombineCols,classdist)
+  if(requireNamespace("DataVisualizations")){
+    xmat=do.call(DataVisualizations::CombineCols,classdist)
+  }
+  else{
+    stop('DataVisualizations package not loaded or installed.')
+  }
+  
   
   if(missing(Names)){
     colnames(xmat)=c('Full',paste0('Cluster',u))

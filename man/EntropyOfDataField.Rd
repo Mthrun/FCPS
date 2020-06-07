@@ -20,7 +20,7 @@ sigmarange = c(0.01, 0.1, 0.5, 1, 2, 5, 8, 10, 100)
 [1:n,1:d] data matrix
 }
   \item{sigmarange}{
-numeric vector [1:s] of relevant sigmas
+Numeric vector [1:s] of relevant sigmas
 }
   \item{PlotIt}{
 FALSE: disable plot, TRUE: Plot with upper boundary of H after [Wang et al., 2011].

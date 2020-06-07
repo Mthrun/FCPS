@@ -6,7 +6,7 @@ ClusterNoEstimation <- function (DataOrDistances,
                             Silent = TRUE,
                             method = NULL,
                             PlotIt=TRUE,
-                            SelectByABC=TRUE) {
+                            SelectByABC=TRUE,Colorsequence) {
 
   # Computes the operating numbers to the given data and clustering and a resulting recommended operating number of classes
   #
@@ -265,14 +265,10 @@ ClusterNoEstimation <- function (DataOrDistances,
         res[c] <- res[c] + 1
       }
     }
-    
     res
-    
   }
   
   ttww <- function(x, clsize, cluster) {
-
-  
     n <- sum(clsize)
     k <- length(clsize)
     w <- 0
@@ -499,12 +495,12 @@ ClusterNoEstimation <- function (DataOrDistances,
   }
   
   if (!Silent) {
-   print("Given clusterings are done, start computation") 
+   message("Given clusterings are done, start computation") 
   }
   }
   else {
     if (!Silent) {
-      print("Clustering in creation") 
+      message("Clustering in creation") 
     }
     methodnames <- c("ward.D", "single", "complete", "average", "mcquitty", 
                      "median", "centroid", "ward.D2","kmeans","DBSclustering")
@@ -530,8 +526,13 @@ ClusterNoEstimation <- function (DataOrDistances,
       }
     }
     else if (methodn == 10) {
-	requireNamespace('DatabionicSwarm')
-      projPoints <- DatabionicSwarm::Pswarm(data)
+      
+      if(requireNamespace("DatabionicSwarm")){
+        projPoints <- DatabionicSwarm::Pswarm(data)
+      }
+      else{
+        stop('DatabionicSwarm package not loaded or installed.')
+      }
       
       for (i in 0:(range + 1)) {
         if (i != 0 || !min.nc == 2) {
@@ -539,8 +540,6 @@ ClusterNoEstimation <- function (DataOrDistances,
           clusters2[,i+1] <- temp
         }
       }
-      
-      
     }
     else {
       stop("Wrong method")
@@ -551,7 +550,7 @@ ClusterNoEstimation <- function (DataOrDistances,
     colnames(clusters) <- c(min.nc:max.nc)
     
     if (!Silent) {
-      print("Clusterings created, start computation") 
+      message("Clusterings created, start computation") 
     }
   }
   
@@ -1566,13 +1565,13 @@ ClusterNoEstimation <- function (DataOrDistances,
     }
     
     if (!Silent) {
-      print(paste0("Operating numbers for number of classes ",i+min.nc," computed, highest number of classes: ",max.nc))
+      message(paste0("Operating numbers for number of classes ",i+min.nc," computed, highest number of classes: ",max.nc))
     }
     
   }
   
   if (!Silent) {
-    print("Operating numbers computed, investigate optimal number of classes")
+    message("Operating numbers computed, investigate optimal number of classes")
   }
   
   
@@ -1771,12 +1770,27 @@ ClusterNoEstimation <- function (DataOrDistances,
   }
   
   if (!Silent) {
-    print("Optimal number of classes per method investigated - END")
+    message("Optimal number of classes per method investigated - END")
   }
   if(isTRUE(PlotIt)){
     cat=paste('Cluster No.',klassenanzahl)
-    requireNamespace('DataVisualizations')
-    DataVisualizations::Fanplot(cat,main = 'Indicators for Cluster No.',MaxNumberOfSlices = SelectByABC)
+    if(requireNamespace("DataVisualizations")){
+      n=length(unique(klassenanzahl))
+      if(missing(Colorsequence))
+        Colorsequence=grDevices::topo.colors(n)
+      else{
+        if(n<=length(Colorsequence)){
+          Colorsequence=Colorsequence[1:n]
+        }else{
+          Colorsequence=c(Colorsequence,tail(DataVisualizations::DefaultColorSequence,n-length(Colorsequence)))
+          message('Colors added using the tail of DataVisualizations::DefaultColorSequence because number of colors was smaller than number of labels.')
+        }
+      }
+      DataVisualizations::Fanplot(Datavector = cat,Names = unique(cat),Labels = unique(cat),main = 'Indicators for Cluster No.',MaxNumberOfSlices = SelectByABC,col = Colorsequence)
+    }
+    else{
+      stop('DataVisualizations package not loaded or installed.')
+    }
   }
   resliste <- list(
     Indicators = res,

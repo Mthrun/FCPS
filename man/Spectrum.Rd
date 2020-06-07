@@ -28,20 +28,20 @@ Method=3: Allows to setClusterNo
 For default \code{ClusterNo=NULL} please see details.
 }
 
-\item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{PlotIt}{Default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 
   \item{Silent}{
-silent progress of algorithm=TRUE
+Silent progress of algorithm=TRUE
 }
   \item{PlotResults}{
-plots result of spectrum with plot function
+Plots result of spectrum with plot function
 }
   \item{\dots}{
-method: numerical value: 1 = default eigengap method (Gaussian clusters), 2 = multimodality
+Method: numerical value: 1 = default eigengap method (Gaussian clusters), 2 = multimodality
 gap method (Gaussian/ non-Gaussian clusters), 3 = no automatic
 method (see fixk param)
 
-other paras defined in Spectrum packages
+Other parameters defined in Spectrum packages
 }
 }
 \details{

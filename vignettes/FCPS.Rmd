@@ -4,7 +4,7 @@ author: "Michael C. Thrun"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{The FCPS package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -156,4 +156,4 @@ dim(Distances)
 ```
 
 ## Summary
-Fifty-three conventional clustering algorithms are provided in the R}package FCPS on CRAN with consistent input and output. This enables the user to try out many algorithms swiftly. Additionally, 26 statistical approaches for the estimation of the number of clusters, as well as the mirrored density plot (MD-plot) of clusterability, are provided. Moreover, the fundamental clustering problems suite (FCPS) offers a variety of clustering challenges any algorithm should handle when facing real-world data. 
+Fifty-four conventional clustering algorithms are provided in the R}package FCPS on CRAN with consistent input and output. This enables the user to try out many algorithms swiftly. Additionally, 26 statistical approaches for the estimation of the number of clusters, as well as the mirrored density plot (MD-plot) of clusterability, are provided. Moreover, the fundamental clustering problems suite (FCPS) offers a variety of clustering challenges any algorithm should handle when facing real-world data. 

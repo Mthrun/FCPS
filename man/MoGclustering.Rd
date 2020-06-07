@@ -16,7 +16,7 @@ MoGclustering(Data,ClusterNo=2,method="EM",PlotIt=FALSE,...)
 
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
 \item{method}{Initialization by either "EM" oder "kmeans"}
-\item{PlotIt}{default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{PlotIt}{Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 
 }

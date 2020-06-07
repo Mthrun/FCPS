@@ -17,8 +17,8 @@ Mode="online",PlotIt=FALSE,rlen=100,alpha = c(0.05, 0.01),...)
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
 \item{LC}{Lines and Columns of a very small SOM, usually every unit is a cluster, will be ignored if ClusterNo is not NULL.}
 \item{ClusterNo}{Optional, A number k which defines k different clusters to be built by the algorithm. LC will then be set accordingly.}
-\item{Mode}{either "batch" or "online"}
-\item{PlotIt}{default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{Mode}{Either "batch" or "online"}
+\item{PlotIt}{Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 
 \item{rlen}{Please see \code{\link[kohonen]{supersom}}}
 \item{alpha}{Please see \code{\link[kohonen]{supersom}}}

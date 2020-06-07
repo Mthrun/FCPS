@@ -19,7 +19,7 @@ Either [1:n,1:n] symmetric distance matrix or [1:n,1:d] not symmetric data matri
   \item{method}{
 Optional distance method of data, default is euclid, see \code{\link[parallelDist]{parDist}} for details
 }
-\item{PlotIt}{default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{PlotIt}{Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
   \item{\dots}{
 Optional, further arguments for   \code{\link[mstknnclust]{mst.knn}}
 }

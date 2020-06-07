@@ -1,19 +1,17 @@
-PenalizedRegressionBasedClustering=function(Data,FirstLambda,SecondLambda,Tau, PlotIt=FALSE,...){
+CrossEntropyClustering=function(Data,ClusterNo,PlotIt=FALSE,...){
   # INPUT
   # Data[1:n,1:d]     Data set with n observations and d features
-  # FirstLambda       Set 1 for quadratic penalty based algorithm, 0.4 for revised ADMM.
-  # SecondLambda      The magnitude of grouping penalty.
-  # Tau               Tuning parameter: tau, related to grouping penalty.
+  # ClusterNo         Number of clusters to search for
   # 
   # OPTIONAL
   # PlotIt            Boolean. Decision to plot or not
   # 
   # OUTPUT
   # Cls[1:n]          Clustering of data
-  # Object            Object of prclust::PRclust algorithm
+  # Object            Object of CEC::cec algorithm
   #
   # Author: MT
-  if (!requireNamespace('prclust')) {
+  if (!requireNamespace('CEC')) {
     message(
       'Subordinate clustering package is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
@@ -27,13 +25,13 @@ PenalizedRegressionBasedClustering=function(Data,FirstLambda,SecondLambda,Tau, P
     )
   }
   
-  Data=t(Data)
-  model=prclust::PRclust(Data,FirstLambda,SecondLambda,Tau)
+  model=CEC::cec(Data,centers = ClusterNo,...)
   
-  Cls=model$group
+  Cls=model$cluster
   if(PlotIt){
     ClusterPlotMDS(Data,Cls)
   }
-  Cls=ClusterRename(Cls,t(Data))
+  
+  Cls=ClusterRename(Cls,Data)
   return(list(Cls=Cls,Object=model))
 }

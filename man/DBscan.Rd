@@ -17,7 +17,7 @@ PlotIt=FALSE,UpperLimitRadius,\dots)
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
 
   \item{Radius}{
- eps [Ester et al., 1996, p. 227] neighborhood in the R-ball graph/unit disk graph), size of the epsilon neighborhood.
+ Eps [Ester et al., 1996, p. 227] neighborhood in the R-ball graph/unit disk graph), size of the epsilon neighborhood.
  If NULL, automatic estimation is performed using insights of [Ultsch, 2005].
 }
   \item{minPts}{
@@ -74,7 +74,7 @@ for (i in seq_len(nrow(DBSGrid))) {
     UpperLimitRadius = parameters$Radius
   )$Cls
   if (length(unique(Cls9)) < 5)
-    BestAcc[i] = ClusteringAccuracy(WingNut$Cls,
+    BestAcc[i] = DatabionicSwarm::ClusteringAccuracy(WingNut$Cls,
                                     
                                     Cls9) * 100
   else
@@ -88,8 +88,7 @@ Cls9 = DBscan(
   Data,
   minPts = parameters$minPTs,
   Radius = parameters$Radius,
-  PlotIt = F,
-  UpperLimitRadius = parameters$Radius,
+  UpperLimitRadius = parameters$Radius, 
   PlotIt = TRUE
 )$Cls
 }

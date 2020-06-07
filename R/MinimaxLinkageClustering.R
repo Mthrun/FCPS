@@ -28,8 +28,13 @@ MinimaxLinkageClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="eu
   }
   
   if (!isSymmetric(unname(DataOrDistances))) {
-    requireNamespace('parallelDist')
-    pDist=as.dist(parallelDist::parDist(DataOrDistances,method=DistanceMethod))
+    if(requireNamespace("parallelDist")){
+      pDist=as.dist(parallelDist::parDist(DataOrDistances,method=DistanceMethod))
+    }
+    else{
+      stop('parallelDist package not loaded or installed.')
+    }
+    
   }else if(!inherits(DataOrDistances,'dist')){
     pDist=as.dist(DataOrDistances)
   }else{

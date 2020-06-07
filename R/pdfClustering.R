@@ -33,8 +33,9 @@ pdfClustering <-function(Data,PlotIt=FALSE,...){
   
   Cls=as.vector(out@clusters)
   
-  if(!is.null(rownames(Data)))
+  if(!is.null(rownames(Data))){
     names(Cls)=rownames(Data)
+  }
   
   if(PlotIt){
     ClusterPlotMDS(Data,Cls)

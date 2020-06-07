@@ -19,7 +19,7 @@ MarkovClustering(Data=NULL,Adjacency=NULL,Radius=TRUE,addLoops =TRUE,PlotIt=FALS
 \item{addLoops}{
 Logical; if TRUE, self-loops with weight 1 are added to each vertex of x (see \code{mcl} of CRAN package \code{MCL}).
 }
-\item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{PlotIt}{Default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 }
 \details{

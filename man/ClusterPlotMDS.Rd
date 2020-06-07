@@ -39,7 +39,7 @@ Size of points l
 In case of 3 dimensions, choose either "plotly" or "rgl",
 }
   \item{\dots}{
-please see \code{\link[DataVisualizations]{Plot3D}}
+Please see \code{\link[DataVisualizations]{Plot3D}}
 }
 }
 \details{

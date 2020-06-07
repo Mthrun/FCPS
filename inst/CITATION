@@ -1,7 +1,7 @@
 citHeader("To cite the 'FCPS' R package in publications, please use:")
 
 citEntry(entry = "proceedings",
-  title = "Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems",
+  title = "Benchmarking Cluster Analysis Methods using PDE-Optimized Violin Plots",
   author = personList(person(given="Michael Christoph", family="Thrun"),person(given="Felix", family="Pape"),person(given="Alfred", family="Ultsch")),
   publisher = " European Conference on Data Analysis (ECDA)",
   year = "2018",

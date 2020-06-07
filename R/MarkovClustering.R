@@ -31,20 +31,20 @@ MarkovClustering=function(Data=NULL,Adjacency=NULL,Radius=TRUE,addLoops = TRUE,P
   }
   
   if(!is.null(Data)){
-      if(Radius==TRUE){
-		if(requireNamespace('DataVisualizations')){
+    if(Radius==TRUE){
+		  if(requireNamespace('DataVisualizations')){
 				Radius=DataVisualizations::ParetoRadius(Data)
 			}else{
 				stop('DataVisualizations package is missing.')
 			}
-        #Radius=AdaptGauss::ParetoRadius(Data)
-      }
+      #Radius=AdaptGauss::ParetoRadius(Data)
+    }
     if(Radius==FALSE){
       if(requireNamespace('parallelDist')){
-		Radius=EstimateRadiusByDistance(as.matrix(parallelDist::parallelDist(Data)))
-	  }else{
-		stop('parallelDist package is missing.')
-	  }
+  		  Radius=EstimateRadiusByDistance(as.matrix(parallelDist::parallelDist(Data)))
+  	  }else{
+		    stop('parallelDist package is missing.')
+	    }
     }
     DistanceMatrix = as.matrix(dist(Data))
     AnzPunkte = nrow(DistanceMatrix)
@@ -54,7 +54,7 @@ MarkovClustering=function(Data=NULL,Adjacency=NULL,Radius=TRUE,addLoops = TRUE,P
       RInd = which(DistanceMatrix[i, ] <= Radius, arr.ind = T)
       Adjacency[i, RInd] = 1
     }
-  }  
+  }
   
   mm=MCL::mcl(x = Adjacency,addLoops =addLoops,...)
 

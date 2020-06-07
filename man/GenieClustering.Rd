@@ -15,12 +15,12 @@ DistanceMethod="euclidean", ColorTreshold = 0,\dots)
 
 \item{ClusterNo}{A number k which defines k different clusters to be build by the algorithm.}
 
-\item{DistanceMethod}{see  \code{\link[parallelDist]{parDist}}, for example 'euclidean','mahalanobis','manhatten' (cityblock),'fJaccard','binary', 'canberra', 'maximum'. Any unambiguous substring can be given.}
+\item{DistanceMethod}{See  \code{\link[parallelDist]{parDist}}, for example 'euclidean','mahalanobis','manhatten' (cityblock),'fJaccard','binary', 'canberra', 'maximum'. Any unambiguous substring can be given.}
 
-\item{ColorTreshold}{draws cutline w.r.t. dendogram y-axis (height), height of line as scalar should be given}
+\item{ColorTreshold}{Draws cutline w.r.t. dendogram y-axis (height), height of line as scalar should be given}
 \item{\dots}{furter argument to genie like:
 
-\code{thresholdGini}  single numeric value in [0,1], threshold for the Gini index, 1 gives the standard single linkage algorithm
+\code{thresholdGini}  Single numeric value in [0,1], threshold for the Gini index, 1 gives the standard single linkage algorithm
 }
 }
 \details{

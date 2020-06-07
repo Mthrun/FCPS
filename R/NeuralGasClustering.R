@@ -29,7 +29,7 @@ NeuralGasClustering <-function(Data,ClusterNo,PlotIt=FALSE,...){
       )
     )
   }
-    res=cclust::cclust(x=Data,centers=ClusterNo,method='neuralgas',...)
+  res=cclust::cclust(x=Data,centers=ClusterNo,method='neuralgas',...)
   Cls=res$cluster
   if(PlotIt){
     ClusterPlotMDS(Data,Cls)

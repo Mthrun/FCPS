@@ -36,8 +36,8 @@ AutomaticProjectionBasedClustering=function(DataOrDistances,ClusterNo,Type="NerV
       warning('Distances matrix is given but the type',Type,'is selected, which does not work with distances. Switching to MDS.')
     }
    
-     message('Given a distance matrix instead of data is experimental. MDS transformation is used to generate a data matrix.')
-     Data=ProjectionBasedClustering::MDS(DataOrDists = DataOrDistances,OutputDimension = dim(DataOrDistances)[1]-2)$ProjectedPoints
+    message('Given a distance matrix instead of data is experimental. MDS transformation is used to generate a data matrix.')
+    Data=ProjectionBasedClustering::MDS(DataOrDists = DataOrDistances,OutputDimension = dim(DataOrDistances)[1]-2)$ProjectedPoints
     
   }else{
     Data=DataOrDistances
@@ -77,10 +77,21 @@ AutomaticProjectionBasedClustering=function(DataOrDistances,ClusterNo,Type="NerV
 
   # Computation of GeneralizedUmatrix
   if(Type!='Pswarm')
-    visualization=GeneralizedUmatrix::GeneralizedUmatrix(Data = Data,out$ProjectedPoints,PlotIt = FALSE)
-  else
-    visualization=DatabionicSwarm::GeneratePswarmVisualization(Data = Data,out$ProjectedPoints,out$LC,PlotIt = FALSE)
-  # Visualization of GenerelizedUmatrix
+    if(requireNamespace("GeneralizedUmatrix")){
+      visualization=GeneralizedUmatrix::GeneralizedUmatrix(Data = Data,out$ProjectedPoints,PlotIt = FALSE)
+    }
+    else{
+      stop('GeneralizedUmatrix package not loaded or installed.')
+    }
+  else{
+    if(requireNamespace("DatabionicSwarm")){
+      # Visualization of GenerelizedUmatrix
+      visualization=DatabionicSwarm::GeneratePswarmVisualization(Data = Data,out$ProjectedPoints,out$LC,PlotIt = FALSE)
+    }
+    else{
+      stop('DatabionicSwarm package not loaded or installed.')
+    }
+  }
 
   # Automatic Clustering
   if(Type!='Pswarm'){

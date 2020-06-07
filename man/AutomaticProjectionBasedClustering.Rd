@@ -18,7 +18,7 @@ StructureType = TRUE,PlotIt=FALSE,PlotTree=FALSE,PlotMap=FALSE,\dots)
 
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
 \item{Type}{
-Type of Projection method, Either
+Type of Projection method, either
 
 \code{NerV} [Venna et al., 2010] 
 
@@ -33,7 +33,7 @@ Type of Projection method, Either
 \code{Sammon} [Sammon, 1969] 
 }
 \item{StructureType}{
-either compact (TRUE) or connected (FALSE), see discussion in [Thrun, 2018] 
+Either compact (TRUE) or connected (FALSE), see discussion in [Thrun, 2018] 
 }
 
 \item{PlotIt}{Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}

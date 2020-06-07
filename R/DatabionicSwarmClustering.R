@@ -51,14 +51,25 @@ DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRU
   if(is.null(DistancesMethod)){
     if (isSymmetric(unname(DataOrDistances))) {
       DataDists = DataOrDistances
-      requireNamespace('ProjectionBasedClustering')
-      DataPoints=ProjectionBasedClustering::MDS(DataDists,OutputDimension = nrow(DataDists)-1)$ProjectedPoints
-      AnzVar = ncol(DataOrDistances)
-      AnzData = nrow(DataOrDistances)
+      if(requireNamespace("ProjectionBasedClustering")){
+        DataPoints=ProjectionBasedClustering::MDS(DataDists,OutputDimension = nrow(DataDists)-1)$ProjectedPoints
+        AnzVar = ncol(DataOrDistances)
+        AnzData = nrow(DataOrDistances)
+      }
+      else{
+        stop('ProjectionBasedClustering package not loaded or installed.')
+      }
+      
     }else{
       DataPoints=DataOrDistances
     }
-    proj= DatabionicSwarm::Pswarm(DataOrDistance = DataOrDistances)
+    if(requireNamespace("DatabionicSwarm")){
+      proj= DatabionicSwarm::Pswarm(DataOrDistance = DataOrDistances)
+    }
+    else{
+      stop('DatabionicSwarm package not loaded or installed.')
+    }
+    
   }else{
     requireNamespace('parallelDist')
     DataDists=as.matrix(parallelDist::parallelDist(DataOrDistances,method = DistancesMethod))

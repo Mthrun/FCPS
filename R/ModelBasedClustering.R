@@ -43,14 +43,12 @@ ModelBasedClustering <-function(Data,ClusterNo=2,PlotIt=FALSE,...){
       return(cls <- rep(1, nrow(Data)))
     }
   }
- 
   
-
-res=mclust::Mclust(Data,G=ClusterNo,modelNames=mclust::mclust.options("emModelNames"),...)
-Cls=res$classification
-if(PlotIt){
-  ClusterPlotMDS(Data,Cls)
-}
-Cls=ClusterRename(Cls,Data)
-return(list(Cls=Cls,Object=res))
-}
+  res=mclust::Mclust(Data,G=ClusterNo,modelNames=mclust::mclust.options("emModelNames"),...)
+  Cls=res$classification
+  if(PlotIt){
+    ClusterPlotMDS(Data,Cls)
+  }
+  Cls=ClusterRename(Cls,Data)
+  return(list(Cls=Cls,Object=res))
+  }

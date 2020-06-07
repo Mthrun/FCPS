@@ -26,7 +26,7 @@ ClusterabilityMDplot(DataOrDistance,Method,na.rm=FALSE,\dots)
   
   "distance" computes pairwise distances (using distance_metric as the metric).
 }
-  \item{na.rm}{statistical testing will not work with missing values, if TRUE values are imputed with averages}
+  \item{na.rm}{Statistical testing will not work with missing values, if TRUE values are imputed with averages}
   \item{\dots}{Further arguments like main, and ordering}
 }
 \details{

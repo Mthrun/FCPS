@@ -14,7 +14,7 @@ PlotIt=FALSE,...)
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
 
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
-\item{PlotIt}{default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{PlotIt}{Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 
 \item{Alpha}{
 No trimming is done equals to alpha =0, otherwise proportion of datapoints to be trimmed.

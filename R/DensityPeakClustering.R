@@ -79,6 +79,6 @@ DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclid
   if(PlotIt){
 	ClusterPlotMDS(DataOrDistances,Cls)
   }
-    Cls=ClusterRename(Cls,DataOrDistances)
+  Cls=ClusterRename(Cls,DataOrDistances)
   return(list(Cls=Cls,Object=DensityPeaks))
 } 

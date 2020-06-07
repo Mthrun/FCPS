@@ -26,13 +26,13 @@ Size of Sample higher than 300, preferable above 500
 TRUE: Plots the challenge with \code{\link{ClusterPlotMDS}}
 }
   \item{PointSize}{
-if PlotIt=TRUE: see \code{\link{ClusterPlotMDS}}
+If PlotIt=TRUE: see \code{\link{ClusterPlotMDS}}
 }
   \item{Plotter3D}{
-if PlotIt=TRUE: see \code{\link{ClusterPlotMDS}}
+If PlotIt=TRUE: see \code{\link{ClusterPlotMDS}}
 }
   \item{\dots}{
-if PlotIt=TRUE: further arguments for \code{\link{ClusterPlotMDS}}
+If PlotIt=TRUE: further arguments for \code{\link{ClusterPlotMDS}}
 }
 }
 \details{

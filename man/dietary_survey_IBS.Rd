@@ -29,7 +29,7 @@ str(dietary_survey_IBS)
 Data=dietary_survey_IBS$Data
 Cls=dietary_survey_IBS$Cls
 # The Pswarm is able to seperate density-based clusters
-res=Pswarm(RobustNormalization(Data,T),PlotIt = T,Cls = Cls)
+res=DatabionicSwarm::Pswarm(RobustNormalization(Data,T),PlotIt = T,Cls = Cls)
 # We clearly see that the U-Matrix visualization is unable to catch these structures
 # because it is only usable for distance structures
 

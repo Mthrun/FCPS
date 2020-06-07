@@ -18,18 +18,20 @@ PlotTree = FALSE, PlotMap = FALSE,PlotIt=FALSE,Data)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{DataOrDistances}{
-Either nonsymmetric [1:n,1:d] datamatrix of n cases and d features or
+Either nonsymmetric [1:n,1:d] datamatrix of n cases and d features
 
-symmetric [1:n,1:n] distance matrix
+or
+
+Symmetric [1:n,1:n] distance matrix
 }
   \item{ClusterNo}{
 Number of Clusters, if zero a the topographic map is ploted. Number of valleys equals number of clusters.
 }
   \item{StructureType}{
-Either TRUE or FALSE. It has to be tested using the visualization. If colored points of clusters are divided by mountain ranges, then the parameter is incorrect.
+Either TRUE or FALSE, has to be tested against the visualization. If colored points of clusters a divided by mountain ranges, parameter is incorrect.
 }
   \item{DistancesMethod}{
-Optional, if data matrix given, a non Euclidean distance can be selected as defined in the \pkg{parallelDist} package
+Optional, if data matrix given, annon Euclidean distance can be selected
 }
   \item{PlotTree}{
 Optional, if TRUE: dendrogram is plotted.
@@ -37,7 +39,7 @@ Optional, if TRUE: dendrogram is plotted.
   \item{PlotMap}{
 Optional, if TRUE: topographic map is plotted.
 }
-\item{PlotIt}{default: FALSE, If TRUE and dataset of [1:n,1:d] dimensions then a plot of the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls} will be generated.}
+\item{PlotIt}{Default: FALSE, If TRUE and dataset of [1:n,1:d] dimensions then a plot of the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls} will be generated.}
 
 \item{Data}{[1:n,1:d] data matrix in the case that \code{DataOrDistances} is missing and partial matching does not work.}
 
@@ -78,7 +80,7 @@ data = cbind(
 )
 # Make sure there are no structures
 # (sample size is small and still could generate structures randomly)
-Data = RobustNormalization(data, Centered = TRUE)
+Data = DatabionicSwarm::RobustNormalization(data, Centered = TRUE)
 #DataVisualizations::Plot3D(Data)
 
 # No structres are visible
@@ -119,6 +121,7 @@ Cls = DatabionicSwarmClustering(Chainlink$Data,
                                 StructureType = TRUE,
                                 PlotMap = T)
 }
+
 }
 
 \keyword{DBS}

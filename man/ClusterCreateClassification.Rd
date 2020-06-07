@@ -13,7 +13,7 @@ ClusterCreateClassification(Objects)
 
 \arguments{
   \item{Objects}{
-listed objects, for example factor
+Listed objects, for example factor
 }
 }
 \details{

@@ -3,7 +3,7 @@
 \alias{HierarchicalClusterDists}
 
 \title{
-HierarchicalClusterDists(pDist) HierarchicalClusterDists(pDist,0,"ward.D",100) Cls=HierarchicalClusterDists(pDist,6,"ward.D")    Zeichnet entweder ein Dendrogram oder liefert eine Klassenzuweisung
+Hierarchical Clustering with Distances
 }
 \usage{
 HierarchicalClusterDists(pDist,ClusterNo=0,method="ward.D2",
@@ -20,7 +20,7 @@ Hierarchical cluster analysis on a set of dissimilarities and methods for analyz
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
 \item{method}{Method of cluster analysis: "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".}
 \item{ColorTreshold}{Draws cutline w.r.t. dendogram y-axis (height), height of line as scalar should be given}
-\item{Fast}{if TRUE and fastcluster installed, then a faster implementation of the methods above can be used}
+\item{Fast}{If TRUE and fastcluster installed, then a faster implementation of the methods above can be used}
 \item{\dots}{In case of plotting further argument for \code{plot}, see \code{\link{as.dendrogram}}
 }
 }

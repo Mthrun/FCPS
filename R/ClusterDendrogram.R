@@ -39,8 +39,9 @@ ClusterDendrogram=function(TreeOrDendrogram,ClusterNo,Colorsequence,main='Name o
   # Get the right number of colors
   numberOfClasses <- length(unique(Cls))
   if(missing(Colorsequence)){
-    if(requireNamespace("DataVisualizations"))
+    if(requireNamespace("DataVisualizations")){
       cols= DataVisualizations::DefaultColorSequence[1:numberOfClasses]
+    }
     else{
       stop('DataVisualizations package not loaded or installed. Please provide Colorsequence manually.')
     }
@@ -48,8 +49,9 @@ ClusterDendrogram=function(TreeOrDendrogram,ClusterNo,Colorsequence,main='Name o
     cols=Colorsequence
     if(length(cols)!=numberOfClasses){
       warning('Default color sequence is used, because the number of colors does not equal the number of clusters.')
-      if(requireNamespace("DataVisualizations"))
+      if(requireNamespace("DataVisualizations")){
         cols= DataVisualizations::DefaultColorSequence[1:numberOfClasses]
+      }
       else{
         stop('DataVisualizations package not loaded or installed. Please provide Colorsequence manually.')
       }
@@ -69,7 +71,7 @@ ClusterDendrogram=function(TreeOrDendrogram,ClusterNo,Colorsequence,main='Name o
     }
     names(countPerClass)=uniqueClasses
     countPerClass=unlist(countPerClass)
-
+    
     # What would be the ordering of data based on frequency
     data_order=order(countPerClass,decreasing = TRUE) # From highest frequency
     # What would be the orders of the branches

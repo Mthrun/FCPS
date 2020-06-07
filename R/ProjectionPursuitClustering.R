@@ -33,10 +33,16 @@ ProjectionPursuitClustering=function(Data,ClusterNo,Type="MinimumDensity",PlotIt
       'MaximumClusterbility'={out=PPCI::mcdc(X=Data,K=ClusterNo,...)},
       'NormalisedCut'={out=PPCI::ncutdc(X=Data,K=ClusterNo,...)},
       'KernelPCA'={
-        if(!missing(ClusterNo))
+        if(!missing(ClusterNo)){
           message('ProjectionPursuitClustering of type KernelPCA does not require "ClusterNo" and will determine the number of clusters automatically.')
-        requireNamespace('kernlab')
-        x2=kernlab::kpca(Data,kernel="rbfdot",kpar=list(sigma=3))@rotated
+        }
+        
+        if(requireNamespace("kernlab")){
+          x2=kernlab::kpca(Data,kernel="rbfdot",kpar=list(sigma=3))@rotated
+        }
+        else{
+          stop('kernlab package not loaded or installed.')
+        }
         out=PPCI::ncuth(x2,...) 
       },{
         warning('Incorrect option selected')

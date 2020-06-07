@@ -17,12 +17,12 @@ PlotIt=FALSE,verbose = F)
   \item{Distance}{ Distance matrix. For n data points of the dimension n x n   }
   \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
 
-  \item{Centers}{default(NULL) a set of initial (distinct) cluster centres.}
+  \item{Centers}{Default(NULL) a set of initial (distinct) cluster centres.}
   
   \item{RandomNo}{If>1: Number of random initializations with searching for minimal SSE is defined by this scalar}
 	
-  \item{maxIt}{ Optional: Maximum number of iterations before the algorithm terminates.}
-    \item{PlotIt}{default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+  \item{maxIt}{Optional: Maximum number of iterations before the algorithm terminates.}
+    \item{PlotIt}{Default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
   \item{verbose}{Optional: Algorithm always outputs current iteration.}
 }
 

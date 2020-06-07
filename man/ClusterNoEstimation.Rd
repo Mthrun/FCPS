@@ -14,7 +14,8 @@ ClusterNoEstimation(DataOrDistances, ClsMatrix = NULL, max.nc,
 
 index = "all", min.nc = 2,
 
-Silent = TRUE, method = NULL, PlotIt=TRUE,SelectByABC=TRUE)
+Silent = TRUE, method = NULL, 
+PlotIt=TRUE,SelectByABC=TRUE,Colorsequence)
 }
 \arguments{
   \item{DataOrDistances}{
@@ -22,7 +23,7 @@ Silent = TRUE, method = NULL, PlotIt=TRUE,SelectByABC=TRUE)
     
     or
 
-symmetric [1:n,1:n] distance matrix
+Symmetric [1:n,1:n] distance matrix
   }
   \item{ClsMatrix}{
 [1:n,1:(max.nc)] Clustering of the number of classes to be checked as a matrix with one cluster per column (see also details (2) and (3)), must be specified if method = NULL
@@ -48,6 +49,9 @@ symmetric [1:n,1:n] distance matrix
   }
       \item{SelectByABC}{
       If PlotIt=TRUE, TRUE: Plots group A of ABCanalysis of the most important ones (highest overlap in indicators), FALSE: plots all indicators
+  }
+        \item{Colorsequence}{
+    Optional, character vector of sufficient length of colors for the fan plot.If the sequence is too long the first part of the sequence is used.
   }
 }
 \details{
@@ -114,6 +118,8 @@ Peter Nahrgang
 Code of "calinski", "cindex", "db", "hartigan",
 "ratkowsky", "scott", "marriot", "ball", "trcovw", "tracew", "friedman",
 "rubin", "ssi" of package cclust ist adapted for the purpose of this function.
+
+Colorsequence works if \pkg{DataVisualizations} 1.1.13 is installed (currently only on github available).
 }
 \examples{
 # Reading the iris dataset from the standard R-Package datasets

@@ -91,11 +91,30 @@ ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",O
     Cls[!is.finite(Cls)]=999
     Colors=DataVisualizations::DefaultColorSequence[-2]#no yellow
     Colors=Colors[1:length(unique(Cls))]
+    
     if(Plotter3D=="rgl"){
-      if(dim(Data)[2]!=2)
-        return(DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,type="s",size=PointSize,box=F,aspect=T,top=T,main=main,Plotter3D=Plotter3D,...))
-      else
-        return(DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,size=PointSize,Plotter3D=Plotter3D,...)+ggplot2::ggtitle(main))
+      if(dim(Data)[2]!=2){
+        return(DataVisualizations::Plot3D(Data = Data,
+                                          Cls = Cls,
+                                          UniqueColors = Colors,
+                                          type="s",
+                                          size=PointSize,
+                                          box=F,
+                                          aspect=T,
+                                          top=T,
+                                          main=main,
+                                          Plotter3D=Plotter3D,...))
+      }
+      else{
+        p=DataVisualizations::Plot3D(Data = Data,
+                                     Cls = Cls,
+                                     UniqueColors = Colors,
+                                     size=PointSize,
+                                     Plotter3D=Plotter3D,...)+ggplot2::ggtitle(main)
+        print(p)
+        return(p)
+      }
+  
     }else{
       if(dim(Data)[2]!=2){
         p=DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,size=PointSize,Plotter3D=Plotter3D,...)
@@ -103,11 +122,14 @@ ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",O
         p
         return(p)
       }else{
-        return(DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,size=PointSize,Plotter3D=Plotter3D,...)+ggplot2::ggtitle(main))
+        return(DataVisualizations::Plot3D(Data = Data,
+                                          Cls = Cls,
+                                          UniqueColors = Colors,
+                                          size=PointSize,
+                                          Plotter3D=Plotter3D,...)+ggplot2::ggtitle(main))
       }
     }
   }else{
     plot(Data[,1],Data[,2],cols=Cls,main = main,...)
   }
-
 }

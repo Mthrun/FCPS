@@ -41,7 +41,14 @@ HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,method="
   #else{
   
   dcls = Cls
-  col = DataVisualizations::DefaultColorSequence
+  
+  if(requireNamespace("DataVisualizations")){
+    col = DataVisualizations::DefaultColorSequence
+  }
+  else{
+    stop('DataVisualizations package not loaded or installed.')
+  }
+  
   setNodeAttributes <- function(node){
     classification = -1
     # Stop condition

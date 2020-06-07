@@ -17,7 +17,7 @@ method='Orclus',PlotIt=FALSE,OrclusInitialClustersNo=ClusterNo+2,...)
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
 
 \item{ClusterNo}{A number k which defines k different clusters to be built by the proclus or orclust algorithm.}
-\item{DimSubspace}{numerical number defining the dimensionality in which clusters should be search in in the orclust algorithm, for proclus it is an optional parameter}
+\item{DimSubspace}{Numerical number defining the dimensionality in which clusters should be search in in the orclust algorithm, for proclus it is an optional parameter}
 \item{method}{
 'Orclus', subspace clustering based on arbitrarily oriented projected cluster generation [Aggarwal and Yu, 2000]
 
