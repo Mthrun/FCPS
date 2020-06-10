@@ -2,23 +2,30 @@
 \alias{ClusterApply}
 \title{Applies a function over grouped data}
 \description{
-Applies a given function to each dimension for each cluster in Cls over the data.}
+Applies a given function to each dimension \code{d} of data separately for each cluster}
 \usage{
 ClusterApply(DataOrDistances,FUN,Cls,\ldots)
 }
 \arguments{
-  \item{DataOrDistances}{ Either a matrix containing data. n Cases as rows, d variables as columns or a nxn distance matrix}
+  \item{DataOrDistances}{  [1:n,1:d] with: if d=n and symmetric then distance matrix assumed, otherwise:
+  
+  [1:n,1:d] matrix of defining the dataset that consists of \code{n} cases or d-dimensional data points. Every case has \code{d} attributes, variables or features.
+}
   \item{FUN}{Function to be applied to each cluster of data and each column of data}
-  \item{Cls}{The cluster identifiers for all rows in Data. If missing, all data is in first cluster}
+  \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
   \item{\ldots}{Additional parameters to be passed on to FUN}
 }
-\details{In case of a distance matrix an automatic classical multidimensional scaling transformation of distances to data is computed. Number of dimensions is selected by the minimal stress w.r.t. the possible output dimensions of cmdscale.
+\details{
+Applies a given function to each feature of each cluster of data using the clustering stored in \code{Cls} which is the cluster identifiers for all rows in data. If missing, all data are in first cluster, The main output is \code{FUNPerCluster[i]} which is the result of \code{FUN} for the data points in cluster of \code{UniqueClusters[i]} named with the function's name used.
+
+In case of a distance matrix an automatic classical multidimensional scaling transformation of distances to data is computed. Number of dimensions is selected by the minimal stress w.r.t. the possible output dimensions of cmdscale.
 
 If \code{FUN} has not function name, then ResultPerCluster is given back.
 }
 \value{
 \item{UniqueClusters}{The unique clusters in Cls}
-\item{FUNPerCluster}{\code{FUNPerCluster[i]} is the result of func for the data points in cluster \code{UniqueClusters[i]} named with the function name used.}
+\item{FUNPerCluster}{a matrix of [1:k,1:d] of d features and k clusters
+}
 }
 \examples{
 ##one dataset
@@ -43,7 +50,7 @@ Cls=V$Cls
 V$ClusterNames
 ClusterApply(Distances,mean,Cls)
 }
-#special case of identitiy
+#special case of identity
 \dontrun{
 suppressPackageStartupMessages(library('prabclus',quietly = TRUE))
 data(tetragonula)
@@ -52,9 +59,8 @@ ta <- alleleconvert(strmatrix=as.matrix(tetragonula[1:236,]))
 tai <- alleleinit(allelematrix=ta,distance="none")
 Distance=alleledist((unbuild.charmatrix(tai$charmatrix,236,13)),236,13)
 
-MDStrans=ClusterApply(Distance,identity)
+MDStrans=ClusterApply(Distance,identity)$identityPerCluster
 }
 }
-\author{Felix Pape}
-\note{MT extended the function for distances}
+\author{Felix Pape, Michael Thrun}
 \keyword{ClusterApply}

@@ -37,31 +37,37 @@ ClusterApply <- function(DataOrDistances, FUN, Cls, ...){
     Cls=as.vector(Cls)
   }
   Names=colnames(Data)
-  uniqueClusters <- sort(na.last = T, unique(Cls))
-  numberOfClusters <- length(uniqueClusters)
+  #uniqueClusters <- sort(na.last = T, unique(Cls))
+  #numberOfClusters <- length(uniqueClusters)
   #resultPerCluster <- matrix(0, numberOfClusters, ncol(Data))
-
-  for (i in 1:numberOfClusters) {
-    inClusterInd <- which(Cls == uniqueClusters[i])
-    x = Data[inClusterInd, ]
-    if(is.vector(x)) { # Creates problems if there is only one data point
-      margin = 1
-      x = as.matrix(x)
-    } else {
-      margin = 2
-    }
-     y<-
-      apply(
-        X = x,
-        FUN = FUN,
-        MARGIN = margin,
-        ...
-      )
-    if(i==1)
-      resultPerCluster=matrix(y,ncol = ncol(Data))
-    else
-      resultPerCluster=rbind(resultPerCluster,y)
-  }
+  Liste=split(x = as.data.frame(Data),f = Cls)
+  uniqueClusters=names(Liste)
+  PerClusterV=lapply(Liste, function(x,FUN) apply(x,FUN=FUN,MARGIN = 2),FUN)
+  resultPerCluster=do.call(rbind,PerClusterV)
+  #Dims=dim(Data)[2]
+  # for (i in 1:numberOfClusters) {
+  #   #inClusterInd <- which(Cls == uniqueClusters[i])
+  #   #x = Data[inClusterInd, ,drop=FALSE]
+  #   x=Data[Cls== uniqueClusters[i], ,drop=FALSE]
+  #   #if(Dims==1) { # Creates problems if there is only one data point
+  #     #margin = 1
+  #   #  x = as.matrix(x)
+  #     
+  #   #} else {
+  #     margin = 2
+  #   #}
+  #    y<-
+  #     apply(
+  #       X = x,
+  #       FUN = FUN,
+  #       MARGIN = margin,
+  #       ...
+  #     )
+  #   if(i==1)
+  #     resultPerCluster=matrix(y,ncol = ncol(Data))
+  #   else
+  #     resultPerCluster=rbind(resultPerCluster,y)
+  # }
   if(!is.null(Names)){
     try({
       colnames(resultPerCluster)=Names
