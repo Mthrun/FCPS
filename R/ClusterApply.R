@@ -40,10 +40,20 @@ ClusterApply <- function(DataOrDistances, FUN, Cls, ...){
   #uniqueClusters <- sort(na.last = T, unique(Cls))
   #numberOfClusters <- length(uniqueClusters)
   #resultPerCluster <- matrix(0, numberOfClusters, ncol(Data))
+  
+  #Option 3
+  #laesst identity nicht zu
+  #erfordert seperates unique
+  #resultPerCluster=apply(Data,2,function(x,Cls,FUN) return(tapply(X = x, INDEX = Cls, FUN = FUN)),Cls,FUN)
+  #uniqueClusters =unique(Cls)
+  
+  #Option 2
   Liste=split(x = as.data.frame(Data),f = Cls)
   uniqueClusters=names(Liste)
   PerClusterV=lapply(Liste, function(x,FUN) apply(x,FUN=FUN,MARGIN = 2),FUN)
   resultPerCluster=do.call(rbind,PerClusterV)
+  
+  #Option 1
   #Dims=dim(Data)[2]
   # for (i in 1:numberOfClusters) {
   #   #inClusterInd <- which(Cls == uniqueClusters[i])

@@ -93,3 +93,5 @@ Cls9 = DBscan(
 )$Cls
 }
 }
+\keyword{DBscan}% use one of  RShowDoc("KEYWORDS")
+\keyword{Clustering}% __ONLY ONE__ keyword per line

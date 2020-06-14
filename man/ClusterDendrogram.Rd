@@ -5,7 +5,7 @@
 Cluster Dendrogram
 }
 \description{
-Presents a dendrogram of a given tree using a colorsquence for the branches defined from the highest cluster size to the lowest cluster size.
+Presents a dendrogram of a given tree using a colorsequence for the branches defined from the highest cluster size to the lowest cluster size.
 }
 \usage{
 ClusterDendrogram(TreeOrDendrogram, ClusterNo, 

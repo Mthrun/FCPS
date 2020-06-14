@@ -1,4 +1,4 @@
-ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",OutputDimension = 3,PointSize=1,Plotter3D="rgl",...){
+ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",OutputDimension = 3,PointSize=1,Plotter3D="rgl",Colorsequence,...){
   #
   # INPUT
   # DataOrDists        Either nonsymmetric [1:n,1:d] datamatrix of n cases and d features or
@@ -48,13 +48,8 @@ ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",O
   
   prepareData=function(DataDists,Cls){
     
-      # x=DataDists
-      # x[upper.tri(x,diag = T)]=NaN
-      # ind=which(x==0,arr.ind = T)
-      # if(length(ind)>0){
-      #   DataDists=DataDists[-ind[,1],-ind[,2]]
-      #   Cls=Cls[-ind[,1]]
-      # }
+    Cls[!is.finite(Cls)]=999
+
     if(requireNamespace('smacof')){
       DataMDS =smacof::mds(DataDists,ndim = 3)$conf
       # DataMDS = MASS::sammon(d = DataDists, y = cmdscale(d = DataDists, 
@@ -78,7 +73,12 @@ ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",O
     AnzVar = ncol(DataOrDists)
     AnzData = nrow(DataOrDists)
     if(AnzVar>3){
-      DataDists = as.matrix(dist(x = DataOrDists, method = method))
+      if(requireNamespace('parallelDist')){
+        DataDists = as.matrix(parallelDist::parallelDist(x = DataOrDists, method = method))
+      }else{
+        warning('ClusterPlotMDS: parallelDist package is missing. Using dist()')
+        DataDists = as.matrix(dist(x = DataOrDists, method = method))
+      }
       V=prepareData(DataDists,Cls)
       Data=V$DataMDS
       Cls=V$Cls
@@ -87,11 +87,30 @@ ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",O
     }#if anzVar>3
   }#if symmetric
 
+  numberOfClasses=length(unique(Cls))
+  
+  if(missing(Colorsequence)){
+    if(requireNamespace("DataVisualizations")){
+      Colors= DataVisualizations::DefaultColorSequence
+      Colors=Colors[1:numberOfClasses]
+    }
+    else{
+      stop('DataVisualizations package not loaded or installed. Please provide Colorsequence manually.')
+    }
+  }else{
+    Colors=Colorsequence
+    if(length(Colors)!=numberOfClasses){
+      warning('Default color sequence is used, because the number of colors does not equal the number of clusters.')
+      if(requireNamespace("DataVisualizations")){
+        Colors= DataVisualizations::DefaultColorSequence[1:numberOfClasses]
+      }
+      else{
+        stop('DataVisualizations package not loaded or installed. Please provide Colorsequence manually.')
+      }
+    }
+  }
+  
   if(requireNamespace('DataVisualizations')){
-    Cls[!is.finite(Cls)]=999
-    Colors=DataVisualizations::DefaultColorSequence[-2]#no yellow
-    Colors=Colors[1:length(unique(Cls))]
-    
     if(Plotter3D=="rgl"){
       if(dim(Data)[2]!=2){
         return(DataVisualizations::Plot3D(Data = Data,

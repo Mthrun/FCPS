@@ -4,7 +4,7 @@
 Minimax Linkage Hierarchical Clustering
 }
 \description{
-inimax linkage hierarchical clustering. Every cluster has an associated prototype element that represents that cluster [Bien/Tibshirani, 2011].
+In the minimax linkage hierarchical clustering every cluster has an associated prototype element that represents that cluster [Bien/Tibshirani, 2011].
 }
 \usage{
 MinimaxLinkageClustering(DataOrDistances, ClusterNo = 0,
@@ -21,9 +21,7 @@ DistanceMethod="euclidean", ColorTreshold = 0,\dots)
 \item{\dots}{In case of plotting further argument for \code{plot}, see \code{\link{as.dendrogram}}
 }
 }
-\details{
-Wrapper for Minimax Linkage Hierarchical Clustering algorithm.
-}
+
 \value{
 List of
 \item{Cls}{If, ClusterNo>0: [1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering. Otherwise for ClusterNo=0: NULL}
@@ -47,3 +45,5 @@ out=MinimaxLinkageClustering(Hepta$Data,ClusterNo=7)
 \keyword{Hierarchical}% use one of  RShowDoc("KEYWORDS")
 \keyword{Clustering}% __ONLY ONE__ keyword per line
 \keyword{Agglomerative}% __ONLY ONE__ keyword per line
+\concept{Minimax Linkage}
+\keyword{Minimax}

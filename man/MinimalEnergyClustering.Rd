@@ -45,3 +45,5 @@ out=MinimalEnergyClustering(Hepta$Data,ClusterNo=7)
 \keyword{Hierarchical}% use one of  RShowDoc("KEYWORDS")
 \keyword{Clustering}% __ONLY ONE__ keyword per line
 
+\concept{Minimal Energy}
+\keyword{MinimalEnergy}
