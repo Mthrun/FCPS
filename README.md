@@ -13,7 +13,7 @@ clustering accuracy for more than two clusters.
 
 
 
-```ruby
+```R
 library(FCPS)
 data("Leukemia")
 Data=Leukemia$Distance
