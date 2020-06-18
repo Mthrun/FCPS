@@ -33,7 +33,7 @@ Cls=Leukemia$Cls
 ClusterPlotMDS(Data,Cls,main = ’Leukemia’,Plotter3D = ’plotly’)
 ```
 
-![Visualization](https://user-images.githubusercontent.com/31764814/85043158-58b4c080-b18c-11ea-924f-0fb57ddf1150.png)
+![Visualization](https://user-images.githubusercontent.com/31764814/85057630-4ee98800-b1a1-11ea-8c5c-3adf0ad7b1e5.png)
 
 
 ### Cluster challenge
@@ -53,6 +53,8 @@ $ClusterPercentages
 [1] 2
 [1] 50.26667 49.73333
 ```
+![Visualization](https://user-images.githubusercontent.com/31764814/85043227-68cca000-b18c-11ea-822a-528f55227025.png)
+
 
 ### Clusterability / Cluster tendency
 
@@ -65,6 +67,8 @@ Cls=DataList$Cls
 library(ggplot2)
 ClusterabilityMDplot(Data)+theme_bw()
 ```
+
+![Visualization](https://user-images.githubusercontent.com/31764814/85043244-6f5b1780-b18c-11ea-96d2-3f0d8ccc400d.png)
 
 
 ### Estimation of number of clusters
@@ -85,6 +89,9 @@ clsm[,i-1] <- cutree(Tree,i)
 out=ClusterNoEstimation(Data, ClsMatrix = clsm,
 max.nc = MaximumNumber, PlotIt = TRUE)
 ```
+
+![Visualization](https://user-images.githubusercontent.com/31764814/85057641-5446d280-b1a1-11ea-8f50-4b9760d4eb5f.png)
+
 
 ## Installation
 
