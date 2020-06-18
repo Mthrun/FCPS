@@ -32,7 +32,8 @@ Data=Leukemia$Distance
 Cls=Leukemia$Cls
 ClusterPlotMDS(Data,Cls,main = ’Leukemia’,Plotter3D = ’plotly’)
 ```
-![Test](https://github.com/[quirinms]/[Images]/Fig0.png?raw=true)
+
+![Visualization](/images/leukemia.png)
 
 ### Cluster challenge
 
