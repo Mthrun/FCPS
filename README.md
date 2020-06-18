@@ -32,6 +32,7 @@ Data=Leukemia$Distance
 Cls=Leukemia$Cls
 ClusterPlotMDS(Data,Cls,main = ’Leukemia’,Plotter3D = ’plotly’)
 ```
+![Test](https://github.com/[quirinms]/[Images]/Fig0.png?raw=true)
 
 ### Cluster challenge
 
@@ -87,11 +88,14 @@ max.nc = MaximumNumber, PlotIt = TRUE)
 
 #### Installation using Github
 
+
+```R
 remotes::install_github("Mthrun/FCPS")
+```
 
+#### Installation using R Studio
 
-
-
+*Tools -> Install Packages -> Repository (CRAN) -> FCPS*
 
 
 
