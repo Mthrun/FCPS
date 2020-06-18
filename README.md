@@ -1,5 +1,14 @@
 # FCPS
+
 Fundamental Clustering Problems Suite
+
+*A R package for clustering algorithms in machine learning (AI)*
+
+## Table of contents
+
+1. Description
+2. Use cases
+3. Installation
 
 ## Description
 
@@ -74,8 +83,11 @@ out=ClusterNoEstimation(Data, ClsMatrix = clsm,
 max.nc = MaximumNumber, PlotIt = TRUE)
 ```
 
+## Installation
 
+#### Installation using Github
 
+remotes::install_github("Mthrun/FCPS")
 
 
 
