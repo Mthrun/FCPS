@@ -33,8 +33,8 @@ Cls=Leukemia$Cls
 ClusterPlotMDS(Data,Cls,main = ’Leukemia’,Plotter3D = ’plotly’)
 ```
 
-![Visualization](https://github.com/Quirinms/Images/blob/master/Leukemia.png)
-![Visualization](https://github.com/Quirinms/Images/issues/Leukemia.png)
+![Visualization](https://user-images.githubusercontent.com/31764814/85043158-58b4c080-b18c-11ea-924f-0fb57ddf1150.png)
+
 
 ### Cluster challenge
 
