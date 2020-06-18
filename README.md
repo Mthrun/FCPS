@@ -8,3 +8,17 @@ mirrored-density plots (MD plots) with statistical testing FCPS provides a tool 
 prior to the cluster analysis itself. Common clustering challenges can be generated with arbitrary sample size. Additionally,
 FCPS sums 26 indicators with the goal to estimate the number of clusters up and provides an appropriate implementation of the 
 clustering accuracy for more than two clusters.
+
+
+
+
+
+```ruby
+library(FCPS)
+data("Leukemia")
+Data=Leukemia$Distance
+Cls=Leukemia$Cls
+ClusterPlotMDS(Data,Cls,main = ’Leukemia’,Plotter3D = ’plotly’)
+```
+
+
