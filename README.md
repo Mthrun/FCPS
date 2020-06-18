@@ -22,3 +22,59 @@ ClusterPlotMDS(Data,Cls,main = ’Leukemia’,Plotter3D = ’plotly’)
 ```
 
 
+```R
+set.seed(600)
+library(FCPS)
+DataList=ClusterChallenge("Chainlink", SampleSize = 750,
+PlotIt=TRUE)
+Data=DataList$Chainlink
+Cls=DataList$Cls
+> ClusterCount(Cls)
+$CountPerCluster
+$NumberOfClusters
+$ClusterPercentages
+[1] 377 373
+[1] 2
+[1] 50.26667 49.73333
+```
+
+
+
+```R
+library(FCPS)
+set.seed(600)
+DataList=ClusterChallenge("Chainlink",SampleSize = 750)
+Data=DataList$Chainlink
+Cls=DataList$Cls
+library(ggplot2)
+ClusterabilityMDplot(Data)+theme_bw()
+```
+
+
+
+```R
+library(FCPS)
+set.seed(135)
+DataList=ClusterChallenge("Chainlink",SampleSize = 900)
+Data=DataList$Chainlink
+Cls=DataList$Cls
+Tree=HierarchicalClustering(Data,0,"SingleL")[[3]]
+ClusterDendrogram(Tree,4,main=’Single Linkage’)
+MaximumNumber=7
+clsm <- matrix(data = 0, nrow = dim(Data)[1], ncol = MaximumNumber)
+for (i in 2:(MaximumNumber+1)) {
+clsm[,i-1] <- cutree(Tree,i)
+}
+out=ClusterNoEstimation(Data, ClsMatrix = clsm,
+max.nc = MaximumNumber, PlotIt = TRUE)
+```
+
+
+
+
+
+
+
+
+
+
