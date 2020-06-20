@@ -12,6 +12,7 @@ Fundamental Clustering Problems Suite
 2. [Use cases](#use-cases)
 3. [Installation](#installation)
 4. [Manual](#manual)
+5. [Additional information](#additional-information)
 
 ## Description
 
@@ -113,4 +114,12 @@ remotes::install_github("Mthrun/FCPS")
 ## Manual
 
 https://cran.r-project.org/web/packages/FCPS/FCPS.pdf
+
+## Additional information
+
+Authors website: http://www.deepbionics.org/
+License: GPL-3
+Dependencies: R (>= 3.5.0)
+Bug reports: https://github.com/Mthrun/FCPS/issues
+
 
