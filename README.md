@@ -117,9 +117,8 @@ https://cran.r-project.org/web/packages/FCPS/FCPS.pdf
 
 ## Additional information
 
-Authors website: http://www.deepbionics.org/
-License: GPL-3
-Dependencies: R (>= 3.5.0)
-Bug reports: https://github.com/Mthrun/FCPS/issues
-
-
+| ---------------- |----------------------------:|
+| Authors website  | http://www.deepbionics.org/ |
+| License          | GPL-3 |
+| Dependencies     | R (>= 3.5.0) |
+| Bug reports      | https://github.com/Mthrun/FCPS/issues |
