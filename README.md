@@ -11,6 +11,7 @@ Fundamental Clustering Problems Suite
 1. [Description](#description)
 2. [Use cases](#use-cases)
 3. [Installation](#installation)
+4. [Manual](#manual)
 
 ## Description
 
@@ -109,4 +110,7 @@ remotes::install_github("Mthrun/FCPS")
 *Tools -> Install Packages -> Repository (CRAN) -> FCPS*
 
 
+## Manual
+
+https://cran.r-project.org/web/packages/FCPS/FCPS.pdf
 
