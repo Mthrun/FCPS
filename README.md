@@ -1,8 +1,8 @@
 # FCPS
 
-Fundamental Clustering Problems Suite
+*Fundamental Clustering Problems Suite*
 
-*A R package for clustering algorithms in machine learning (AI)*
+A R package for clustering algorithms in machine learning (AI)
 
 ## Table of contents
 
