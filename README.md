@@ -6,9 +6,11 @@ Fundamental Clustering Problems Suite
 
 ## Table of contents
 
-1. Description
-2. Use cases
-3. Installation
+
+
+1. [Description](#description)
+2. [Use cases](#use-cases)
+3. [Installation](#installation)
 
 ## Description
 
