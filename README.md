@@ -117,6 +117,7 @@ https://cran.r-project.org/web/packages/FCPS/FCPS.pdf
 
 ## Additional information
 
+|                  |                             |
 | ---------------- |----------------------------:|
 | Authors website  | http://www.deepbionics.org/ |
 | License          | GPL-3 |
