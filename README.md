@@ -5,7 +5,7 @@
 
 *Fundamental Clustering Problems Suite*
 
-The package provides many clustering algorithms in unsuperivsed machine learning.
+The package provides many clustering algorithms for unsupervised machine learning.
 
 ## Table of contents
 
