@@ -68,7 +68,6 @@ $ClusterPercentages
 [1] 2
 [1] 50.26667 49.73333
 ```
-![Visualization](https://user-images.githubusercontent.com/31764814/85043227-68cca000-b18c-11ea-822a-528f55227025.png){:height="200px" width="100px"}
 
 <img src="/img/Fig1.png" width="400" height="400">
 
@@ -84,8 +83,6 @@ Cls=DataList$Cls
 library(ggplot2)
 ClusterabilityMDplot(Data)+theme_bw()
 ```
-
-![Visualization](https://user-images.githubusercontent.com/31764814/85043244-6f5b1780-b18c-11ea-96d2-3f0d8ccc400d.png| width=100)
 
 <img src="/img/Fig2.png" width="400" height="400">
 
@@ -108,9 +105,8 @@ out=ClusterNoEstimation(Data, ClsMatrix = clsm,
 max.nc = MaximumNumber, PlotIt = TRUE)
 ```
 
-![Visualization](https://user-images.githubusercontent.com/31764814/85057641-5446d280-b1a1-11ea-8f50-4b9760d4eb5f.png| width=100)
 
-<img src="/img/Fig3.png" width="400" height="400">
+<img src="/img/Fig4.png" width="400" height="400">
 
 
 ## Installation
