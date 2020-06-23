@@ -5,7 +5,7 @@
 
 *Fundamental Clustering Problems Suite*
 
-A R package for clustering algorithms in machine learning (AI)
+A package for clustering algorithms in machine learning.
 
 ## Table of contents
 
@@ -136,7 +136,7 @@ remotes::install_github("Mthrun/FCPS")
 
 ## Manual
 
-An more extensive manual can be found on CRAN, where the package is published:
+A more extensive manual can be found on CRAN, where the package is published:
 
 https://cran.r-project.org/web/packages/FCPS/vignettes/FCPS.html
 
