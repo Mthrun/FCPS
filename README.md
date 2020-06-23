@@ -52,6 +52,8 @@ ClusterPlotMDS(Data,Cls,main = ’Leukemia’,Plotter3D = ’plotly’)
 
 <img src="https://user-images.githubusercontent.com/31764814/85057630-4ee98800-b1a1-11ea-8c5c-3adf0ad7b1e5.png" width="100" height="100">
 
+<img src="/img/fig0.png" width="100" height="100">
+
 ### Cluster challenge - Testing clustering algorithms on artificial data sets
 
 ```R
