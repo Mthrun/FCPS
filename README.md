@@ -1,5 +1,5 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/FCPS)](https://cran.r-project.org/package=FCPS)
-
+[![DOI](https://zenodo.org/badge/113846715.svg)](https://zenodo.org/badge/latestdoi/113846715)
 
 # FCPS
 
