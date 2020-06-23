@@ -25,9 +25,13 @@ FCPS sums 26 indicators with the goal to estimate the number of clusters up and 
 clustering accuracy for more than two clusters.
 
 The Fundamental Clustering Problems Suite (FCPS) summaries 54 state-of-the-art clustering algorithms available in R language. An important advantage is that the input and output of clustering algorithms is simplified and consistent in order to enable users a swift execution of cluster analysis. By combining mirrored-density plots (MD plots) with statistical testing FCPS provides a tool to investigate the cluster tendency quickly prior to the cluster analysis itself
-{DOI1 und link}.
-[![DOI](https://diglib.eg.org/handle/10.2312/mlvis20201102)](https://diglib.eg.org/handle/10.2312/mlvis20201102)
-Common clustering challenges can be generated with arbitrary sample size {DOI2 und link}. Additionally, FCPS sums 26 indicators with the goal to estimate the number of clusters up and provides an appropriate implementation of the clustering accuracy for more than two clusters {DOI3 und link}. A subset of methods was used in a benchmarking of algorithms published in {4 Zitat, DOI folgt}3
+[![Thrun 2020](https://diglib.eg.org/handle/10.2312/mlvis20201102)](https://diglib.eg.org/handle/10.2312/mlvis20201102).
+Common clustering challenges can be generated with arbitrary sample size
+[![Thrun and Ultsch 2020](https://doi.org/10.1016/j.dib.2020.105501)](https://doi.org/10.1016/j.dib.2020.105501).
+Additionally, FCPS sums 26 indicators with the goal to estimate the number of clusters up and provides an appropriate implementation of the clustering accuracy for more than two clusters
+[![Thrun and Ultsch 2020](https://doi.org/10.1016/j.artint.2020.103237)](https://doi.org/10.1016/j.artint.2020.103237).
+A subset of methods was used in a benchmarking of algorithms published in
+[![Thrun and Ultsch 2020](missingdoi)](missingdoi).
 
 
 ## Use cases
