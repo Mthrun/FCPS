@@ -48,7 +48,7 @@ Cls=Leukemia$Cls
 ClusterPlotMDS(Data,Cls,main = ’Leukemia’,Plotter3D = ’plotly’)
 ```
 
-![Visualization](https://user-images.githubusercontent.com/31764814/85057630-4ee98800-b1a1-11ea-8c5c-3adf0ad7b1e5.png)
+![Visualization](https://user-images.githubusercontent.com/31764814/85057630-4ee98800-b1a1-11ea-8c5c-3adf0ad7b1e5.png| width=100)
 
 
 ### Cluster challenge - Testing clustering algorithms on artificial data sets
@@ -68,7 +68,7 @@ $ClusterPercentages
 [1] 2
 [1] 50.26667 49.73333
 ```
-![Visualization](https://user-images.githubusercontent.com/31764814/85043227-68cca000-b18c-11ea-822a-528f55227025.png)
+![Visualization](https://user-images.githubusercontent.com/31764814/85043227-68cca000-b18c-11ea-822a-528f55227025.png | width=100)
 
 
 ### Clusterability / Cluster tendency - Estimating the potentiality of data sets to be clustered
@@ -83,7 +83,7 @@ library(ggplot2)
 ClusterabilityMDplot(Data)+theme_bw()
 ```
 
-![Visualization](https://user-images.githubusercontent.com/31764814/85043244-6f5b1780-b18c-11ea-96d2-3f0d8ccc400d.png)
+![Visualization](https://user-images.githubusercontent.com/31764814/85043244-6f5b1780-b18c-11ea-96d2-3f0d8ccc400d.png| width=100)
 
 
 ### Estimation of number of clusters
@@ -105,7 +105,7 @@ out=ClusterNoEstimation(Data, ClsMatrix = clsm,
 max.nc = MaximumNumber, PlotIt = TRUE)
 ```
 
-![Visualization](https://user-images.githubusercontent.com/31764814/85057641-5446d280-b1a1-11ea-8f50-4b9760d4eb5f.png)
+![Visualization](https://user-images.githubusercontent.com/31764814/85057641-5446d280-b1a1-11ea-8f50-4b9760d4eb5f.png| width=100)
 
 
 ## Installation
