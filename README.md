@@ -109,7 +109,7 @@ max.nc = MaximumNumber, PlotIt = TRUE)
 
 
 <p align="center">
-  <img src="/img/Fig4.png" width="500" height="200">
+  <img src="/img/Fig4.png" width="500" height="150">
 </p>
 
 ## Installation
