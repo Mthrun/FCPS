@@ -1,7 +1,7 @@
 [![Travis-CI Build Status](https://travis-ci.org/privefl/bigstatsr.svg?branch=master)](https://travis-ci.org/privefl/bigstatsr)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/privefl/bigstatsr?branch=master&svg=true)](https://ci.appveyor.com/project/privefl/bigstatsr)
 [![Coverage Status](https://img.shields.io/codecov/c/github/privefl/bigstatsr/master.svg)](https://codecov.io/github/privefl/bigstatsr?branch=master)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fcps)](https://cran.r-project.org/package=fcps)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/FCPS)](https://cran.r-project.org/package=FCPS)
 [![DOI](https://zenodo.org/badge/doi/10.1093/bioinformatics/bty185.svg)](https://doi.org/10.1093/bioinformatics/bty185)
 
 
