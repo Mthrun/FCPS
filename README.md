@@ -5,11 +5,9 @@
 
 *Fundamental Clustering Problems Suite*
 
-A package for clustering algorithms in machine learning.
+The package provides many clustering algorithms in machine learning.
 
 ## Table of contents
-
-
 
 1. [Description](#description)
 2. [Use cases](#use-cases)
