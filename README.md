@@ -13,9 +13,9 @@ The package provides many clustering algorithms for unsupervised machine learnin
 2. [Use cases](#use-cases)
 3. [Installation](#installation)
 4. [Manual](#manual)
-5. [References](#references)
+5. [Documentation](#documentation)
 6. [Additional information](#additional-information)
-
+7. [References](#references)
 
 ## Description
 
@@ -123,15 +123,6 @@ remotes::install_github("Mthrun/FCPS")
 
 *Tools -> Install Packages -> Repository (CRAN) -> FCPS*
 
-
-## References
-
-1. [Thrun, 2020] Thrun, M. C.: Improving the Sensitivity of Statistical Testing for Clusterability with Mirrored-Density Plot, in Archambault, D., Nabney, I. & Peltonen, J. (eds.), Machine Learning Methods in Visualisation for Big Data, DOI 10.2312/mlvis.20201102, The Eurographics Association, Norrköping , Sweden, 2020. 
-
-2. [Thrun/Ultsch, 2020a] Thrun, M. C., & Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief,Vol. 30(C), pp. 105501, DOI 10.1016/j.dib.2020.105501 , 2020.
-3. [Thrun/Ultsch, 2020b]  Thrun, M. C., & Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Journal of Artificial Intelligence, in press, DOI: 10.1016/j.artint.2020.103237, 2020.
-4. [Thrun/Ultsch, 2020c]  Thrun, M. C., & Ultsch, A. : Using Projection based Clustering to Find Distance and Density based Clusters in High-Dimensional Data, Journal of Classification, accepted, Springer, 2020.
-
 ## Manual
 
 A more extensive manual can be found on CRAN, where the package is published:
@@ -149,3 +140,13 @@ https://cran.r-project.org/web/packages/FCPS/FCPS.pdf
 | License          | GPL-3                                 |
 | Dependencies     | R (>= 3.5.0)                          |
 | Bug reports      | https://github.com/Mthrun/FCPS/issues |
+
+
+## References
+
+1. [Thrun, 2020] Thrun, M. C.: Improving the Sensitivity of Statistical Testing for Clusterability with Mirrored-Density Plot, in Archambault, D., Nabney, I. & Peltonen, J. (eds.), Machine Learning Methods in Visualisation for Big Data, DOI 10.2312/mlvis.20201102, The Eurographics Association, Norrköping , Sweden, 2020. 
+
+2. [Thrun/Ultsch, 2020a] Thrun, M. C., & Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief,Vol. 30(C), pp. 105501, DOI 10.1016/j.dib.2020.105501 , 2020.
+3. [Thrun/Ultsch, 2020b]  Thrun, M. C., & Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Journal of Artificial Intelligence, in press, DOI: 10.1016/j.artint.2020.103237, 2020.
+4. [Thrun/Ultsch, 2020c]  Thrun, M. C., & Ultsch, A. : Using Projection based Clustering to Find Distance and Density based Clusters in High-Dimensional Data, Journal of Classification, accepted, Springer, 2020.
+
