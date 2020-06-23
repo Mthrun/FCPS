@@ -48,7 +48,7 @@ Cls=Leukemia$Cls
 ClusterPlotMDS(Data,Cls,main = ’Leukemia’,Plotter3D = ’plotly’)
 ```
 
-![Visualization](https://user-images.githubusercontent.com/31764814/85057630-4ee98800-b1a1-11ea-8c5c-3adf0ad7b1e5.png| width=100)
+![Visualization](https://user-images.githubusercontent.com/31764814/85057630-4ee98800-b1a1-11ea-8c5c-3adf0ad7b1e5.png){width="100px"}
 
 
 ### Cluster challenge - Testing clustering algorithms on artificial data sets
@@ -68,7 +68,7 @@ $ClusterPercentages
 [1] 2
 [1] 50.26667 49.73333
 ```
-![Visualization](https://user-images.githubusercontent.com/31764814/85043227-68cca000-b18c-11ea-822a-528f55227025.png | width=100)
+![Visualization](https://user-images.githubusercontent.com/31764814/85043227-68cca000-b18c-11ea-822a-528f55227025.png){:height="200px" width="100px"}
 
 
 ### Clusterability / Cluster tendency - Estimating the potentiality of data sets to be clustered
