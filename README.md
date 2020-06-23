@@ -49,7 +49,7 @@ ClusterPlotMDS(Data,Cls,main = ’Leukemia’,Plotter3D = ’plotly’)
 ```
 
 
-<img src="/img/Fig0.png" width="500" height="500">
+<img src="/img/Fig0.png" width="400" height="400">
 
 ### Cluster challenge - Testing clustering algorithms on artificial data sets
 
@@ -70,6 +70,8 @@ $ClusterPercentages
 ```
 ![Visualization](https://user-images.githubusercontent.com/31764814/85043227-68cca000-b18c-11ea-822a-528f55227025.png){:height="200px" width="100px"}
 
+<img src="/img/Fig1.png" width="400" height="400">
+
 
 ### Clusterability / Cluster tendency - Estimating the potentiality of data sets to be clustered
 
@@ -85,6 +87,7 @@ ClusterabilityMDplot(Data)+theme_bw()
 
 ![Visualization](https://user-images.githubusercontent.com/31764814/85043244-6f5b1780-b18c-11ea-96d2-3f0d8ccc400d.png| width=100)
 
+<img src="/img/Fig2.png" width="400" height="400">
 
 ### Estimation of number of clusters
 
@@ -106,6 +109,8 @@ max.nc = MaximumNumber, PlotIt = TRUE)
 ```
 
 ![Visualization](https://user-images.githubusercontent.com/31764814/85057641-5446d280-b1a1-11ea-8f50-4b9760d4eb5f.png| width=100)
+
+<img src="/img/Fig3.png" width="400" height="400">
 
 
 ## Installation
