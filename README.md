@@ -136,7 +136,11 @@ remotes::install_github("Mthrun/FCPS")
 
 ## Manual
 
-An elaborating manual can be found on CRAN, where the package is published:
+An more extensive manual can be found on CRAN, where the package is published:
+
+https://cran.r-project.org/web/packages/FCPS/vignettes/FCPS.html
+
+## Documentation
 
 https://cran.r-project.org/web/packages/FCPS/FCPS.pdf
 
