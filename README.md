@@ -12,7 +12,9 @@ A R package for clustering algorithms in machine learning (AI)
 2. [Use cases](#use-cases)
 3. [Installation](#installation)
 4. [Manual](#manual)
-5. [Additional information](#additional-information)
+5. [References](#references)
+6. [Additional information](#additional-information)
+
 
 ## Description
 
@@ -111,6 +113,14 @@ remotes::install_github("Mthrun/FCPS")
 #### Installation using R Studio
 
 *Tools -> Install Packages -> Repository (CRAN) -> FCPS*
+
+
+## References
+
+1. [Thrun, 2020] Thrun, M. C.: Improving the Sensitivity of Statistical Testing for Clusterability with Mirrored-Density Plots, Eurographics, 2020.
+2. [Thrun/Ultsch, 2020] Thrun, M. C., & Ultsch, A.: Clustering benchmark datasets exploiting the fundamental clustering problems, Data in Brief, 2020.
+3. [Thrun/Ultsch, 2020] Thrun, M. C., & Ultsch, A.: Swarm intelligence for self-organized clustering, Artificial Intelligence, 2020.
+4. [Thrun/Ultsch, 2020]  Thrun, M. C., & Ultsch, A.: Using Projection based Clustering to Find Distance and Density based Clusters in High-Dimensional Data, Journal of Classification, accepted, 2020.
 
 
 ## Manual
