@@ -148,5 +148,5 @@ https://cran.r-project.org/web/packages/FCPS/FCPS.pdf
 
 2. [Thrun/Ultsch, 2020a] Thrun, M. C., & Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief,Vol. 30(C), pp. 105501, DOI 10.1016/j.dib.2020.105501 , 2020.
 3. [Thrun/Ultsch, 2020b]  Thrun, M. C., & Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Journal of Artificial Intelligence, in press, DOI: 10.1016/j.artint.2020.103237, 2020.
-4. [Thrun/Ultsch, 2020c]  Thrun, M. C., & Ultsch, A. : Using Projection based Clustering to Find Distance and Density based Clusters in High-Dimensional Data, Journal of Classification, accepted, Springer, 2020.
+4. [Thrun/Ultsch, 2020c]  Thrun, M. C., & Ultsch, A. : Using Projection based Clustering to Find Distance and Density based Clusters in High-Dimensional Data, Journal of Classification, DOI 10.1007/s00357-020-09373-2, accepted, Springer, 2020.
 
