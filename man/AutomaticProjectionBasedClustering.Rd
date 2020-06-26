@@ -5,7 +5,7 @@
 Automatic Projection-Based Clustering
 }
 \description{
-Summarizes recent projection methods for clustering based on [Thrun/Ultsch, 2017] and [Thrun/Ultsch, 2018] except projection pursuit methods which were published independendly.
+Performs projection-based clustering without user-interaction based on projection methods. The approach is published in [Thrun/Ultsch, 2017], [Thrun/Ultsch, 2020a].
 }
 \usage{
 AutomaticProjectionBasedClustering(DataOrDistances,ClusterNo,Type="NerV",
@@ -22,7 +22,7 @@ Type of Projection method, either
 
 \code{NerV} [Venna et al., 2010] 
 
-\code{Pswarm} [Thrun/Ultsch, 2020] 
+\code{Pswarm} [Thrun/Ultsch, 2020b] 
 
 \code{MDS} [Torgerson, 1952]  
   
@@ -48,7 +48,11 @@ Plots the topographic map [Thrun et al., 2016].
 }
 
 \details{
-Clustering is based on the Generalized U-Matrix [Ultsch/Thrun, 2017]. The first idea of using non-PCA projections for clustering was published by [Bock, 1987] as a definition. However, to the knowledge of the author it was not applied to any data. The first systematic comparison to Projection-Pursuit Methods \code{\link{ProjectionPursuitClustering}} can be found in [Thrun/Ultsch, 2018]. For PCA-based clustering methods please see \code{\link{TandemClustering}}
+The first idea of using non-PCA projections for clustering was published by [Bock, 1987] as a definition. However, to the knowledge of the author, it was not applied to any data. The coexistence of projection and clustering, which exploited the generalized U-Matrix and was introduced in [Thrun/Ultsch, 2017]. It should be noted that it is preferable to use a visualization for the Generalized U-Matrix like the topographic map \code{\link[GeneralizedUmatrix]{plotTopographicMap}} of [Thrun et al., 2016] to evaluate the clustering, improve it or set the number of clusters appropriately. However, a comparison with 32 clustering algorithms showed that PBC is always able to find the correct cluster structure while the best of the 32 clustering algorithms varies depending on the dataset [Thrun/Ultsch, 2020].
+
+The first systematic comparison to other DR clustering methods like Projection-Pursuit Methods \code{\link{ProjectionPursuitClustering}} and CA-based clustering methods can be found in [Thrun/Ultsch, 2020a]. For PCA-based clustering methods please see \code{\link{TandemClustering}}.
+
+
 }
 \value{
 List of
@@ -62,22 +66,17 @@ List of
 
 [Thrun/Ultsch, 2017]  Thrun, M. C., & Ultsch, A.: Projection based Clustering, Proc. International Federation of Classification Societies (IFCS), pp. 250-251, Tokai University, Japanese Classification Society (JCS), Tokyo, Japan August 7-10, 2017.
 
-[Thrun/Ultsch, 2018]  Thrun, M. C., & Ultsch, A.: Using Projection based Clustering to Find Distance and Density based Clusters in High-Dimensional Data, Journal of Classification, Vol. in revision, 2018.
-
-[Ultsch/Thrun, 2017]  Ultsch, A., & Thrun, M. C.: Credible Visualizations for Planar Projections, in Cottrell, M. (Ed.), 12th International Workshop on Self-Organizing Maps and Learning Vector Quantization, Clustering and Data Visualization (WSOM), 10.1109/WSOM.2017.8020010, pp. 1-5, IEEE, Nany, France, 2017.
+[Thrun/Ultsch, 2020a]  Thrun, M. C., & Ultsch, A.: Using Projection based Clustering to Find Distance and Density based Clusters in High-Dimensional Data, Journal of Classification. accepted, doi 10.1007/s00357-020-09373-2, 2020.
 
 [Thrun et al., 2016]  Thrun, M. C., Lerch, F., Loetsch, J., & Ultsch, A.: Visualization and 3D Printing of Multivariate Data of Biomarkers, in Skala, V. (Ed.), International Conference in Central Europe on Computer Graphics, Visualization and Computer Vision (WSCG), Vol. 24, pp. 7-16, Plzen, http://wscg.zcu.cz/wscg2016/short/A43-full.pdf, 2016.
 
-[Thrun, 2018]  Thrun, M. C.: Projection Based Clustering through Self-Organization and Swarm Intelligence, (Ultsch, A. & Huellermeier, E. Eds., 10.1007/978-3-658-20540-9), Extended and Corrected Version of Doctoral dissertation submitted Jan 2017, Heidelberg, Springer, ISBN: 978-3658205393, 2018.
-
-
-[Comon, 1992]  Comon, P.: Independent component analysis, Higher-Order Statistics, Vol., pp. 29-38. 1992.
+[Comon, 1992]  Comon, P.: Independent Component Analysis, In Lacoume, J. L. (Ed.), Higher-Order Statistics, https://hal.archives-ouvertes.fr/hal-00346684, pp. 29-38, France, Elsevier, 1992.
 
 [Demartines/Herault, 1995]  Demartines, P., & Herault, J.: CCA:" Curvilinear component analysis", Proc. 15 Colloque sur le traitement du signal et des images, Vol. 199, GRETSI, Groupe d Etudes du Traitement du Signal et des Images, France 18-21 September, 1995.
 
 [Sammon, 1969]  Sammon, J. W.: A nonlinear mapping for data structure analysis, IEEE Transactions on computers, Vol. 18(5), pp. 401-409. doi doi:10.1109/t-c.1969.222678, 1969.
 
-[Thrun/Ultsch, 2020]  Thrun, M. C., & Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Journal of Artificial Intelligence, Vol. in press, pp. doi 10.1016/j.artint.2020.103237, 2020.
+[Thrun/Ultsch, 2020b]  Thrun, M. C., & Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Journal of Artificial Intelligence, Vol. in press, pp. doi 10.1016/j.artint.2020.103237, 2020.
 
 [Torgerson, 1952]  Torgerson, W. S.: Multidimensional scaling: I. Theory and method, Psychometrika, Vol. 17(4), pp. 401-419. 1952.
 
@@ -101,3 +100,4 @@ out=AutomaticProjectionBasedClustering(Hepta$Data[1:10,],ClusterNo=2,PlotIt=FALS
 }
 
 \keyword{AutomaticProjectionBasedClustering}% use one of  RShowDoc("KEYWORDS")
+\concept{Projection Based Clustering}
