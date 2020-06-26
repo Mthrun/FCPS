@@ -52,7 +52,7 @@ https://cran.r-project.org/web/packages/FCPS/vignettes/FCPS.html
 The full manual for users or developers is available here:
 https://cran.r-project.org/web/packages/FCPS/FCPS.pdf
 
-## Use cases
+## Use Cases
 
 ### Cluster Analysis of High-dimensional Data
 The package FCPS provides a clear and consistent access to state-of-the-art clustering algorithms:
