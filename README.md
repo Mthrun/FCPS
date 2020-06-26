@@ -98,7 +98,7 @@ $ClusterPercentages
   <img src="/img/Fig1.png" width="400" height="400">
 </p>
 
-### Estimating the Potential of Datasets to be Clustered (Clusterbility)
+### Cluster-Tendency
 For many applications, it is crucial to decide if a dataset possesses cluster structures:
 
 ```R
