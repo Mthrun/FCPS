@@ -10,10 +10,10 @@ The package provides many clustering algorithms for unsupervised machine learnin
 ## Table of contents
 
 1. [Description](#description)
-2. [Use cases](#use-cases)
-3. [Installation](#installation)
-4. [Tutorial Examples](#manual)
-5. [Manual](#manual)
+2. [Installation](#installation)
+3. [Tutorial Examples](#manual)
+4. [Manual](#manual)
+5. [Use cases](#use-cases)
 6. [Additional information](#additional-information)
 7. [References](#references)
 
@@ -27,87 +27,6 @@ Additionally, FCPS sums 26 indicators with the goal to estimate the number of cl
 [![[Thrun and Ultsch 2020b]](https://doi.org/10.1016/j.artint.2020.103237)](https://doi.org/10.1016/j.artint.2020.103237).
 A subset of methods was used in a benchmarking of algorithms published in
 [![[Thrun and Ultsch 2020c]](missingdoi)](missingdoi).
-
-
-## Use cases
-
-### Visualization of high dimensional data
-
-```R
-library(FCPS)
-data("Leukemia")
-Data=Leukemia$Distance
-Cls=Leukemia$Cls
-ClusterPlotMDS(Data,Cls,main = ’Leukemia’,Plotter3D = ’plotly’)
-```
-
-<p align="center">
-  <img src="/img/Fig0.png" width="400" height="400">
-</p>
-
-
-### Cluster challenge - Testing clustering algorithms on artificial data sets
-
-```R
-set.seed(600)
-library(FCPS)
-DataList=ClusterChallenge("Chainlink", SampleSize = 750,
-PlotIt=TRUE)
-Data=DataList$Chainlink
-Cls=DataList$Cls
-> ClusterCount(Cls)
-$CountPerCluster
-$NumberOfClusters
-$ClusterPercentages
-[1] 377 373
-[1] 2
-[1] 50.26667 49.73333
-```
-
-<p align="center">
-  <img src="/img/Fig1.png" width="400" height="400">
-</p>
-
-### Clusterability / Cluster tendency - Estimating the potentiality of data sets to be clustered
-
-```R
-library(FCPS)
-set.seed(600)
-DataList=ClusterChallenge("Chainlink",SampleSize = 750)
-Data=DataList$Chainlink
-Cls=DataList$Cls
-library(ggplot2)
-ClusterabilityMDplot(Data)+theme_bw()
-```
-
-<p align="center">
-  <img src="/img/Fig2.png" width="400" height="400">
-</p>
-
-
-### Estimation of number of clusters
-
-```R
-library(FCPS)
-set.seed(135)
-DataList=ClusterChallenge("Chainlink",SampleSize = 900)
-Data=DataList$Chainlink
-Cls=DataList$Cls
-Tree=HierarchicalClustering(Data,0,"SingleL")[[3]]
-ClusterDendrogram(Tree,4,main=’Single Linkage’)
-MaximumNumber=7
-clsm <- matrix(data = 0, nrow = dim(Data)[1], ncol = MaximumNumber)
-for (i in 2:(MaximumNumber+1)) {
-clsm[,i-1] <- cutree(Tree,i)
-}
-out=ClusterNoEstimation(Data, ClsMatrix = clsm,
-max.nc = MaximumNumber, PlotIt = TRUE)
-```
-
-
-<p align="center">
-  <img src="/img/Fig4.png" width="400" height="200">
-</p>
 
 ## Installation
 
@@ -133,6 +52,95 @@ https://cran.r-project.org/web/packages/FCPS/vignettes/FCPS.html
 The full manual for users or developers is available here:
 https://cran.r-project.org/web/packages/FCPS/FCPS.pdf
 
+## Use cases
+
+### Cluster Analysis of High-dimensional Data
+The package FCPS provides a clear and consistent access to state-of-the-art clustering algorithms:
+
+```R
+library(FCPS)
+data("Leukemia")
+Data=Leukemia$Distance
+Classification=Leukemia$Cls
+ClusterNo=6
+CA=ADPclustering(Leukemia$DistanceMatrix,ClusterNo)
+Cls=ClusterRenameDescendingSize(CA$Cls)
+ClusterPlotMDS(Data,Cls,main = ’Leukemia’,Plotter3D = ’plotly’)
+ClusterAccuracy(Cls,Classification)
+[1] 0.9963899
+```
+
+<p align="center">
+  <img src="/img/Fig0.png" width="400" height="400">
+</p>
+
+
+### Generating Typical Challenges for Clustering Algorithms
+Several clustering challenge can be generated with an arbitrary sample size:
+
+```R
+set.seed(600)
+library(FCPS)
+DataList=ClusterChallenge("Chainlink", SampleSize = 750,
+PlotIt=TRUE)
+Data=DataList$Chainlink
+Cls=DataList$Cls
+> ClusterCount(Cls)
+$CountPerCluster
+$NumberOfClusters
+$ClusterPercentages
+[1] 377 373
+[1] 2
+[1] 50.26667 49.73333
+```
+
+<p align="center">
+  <img src="/img/Fig1.png" width="400" height="400">
+</p>
+
+### Estimating the Potential of Datasets to be Clustered (Clusterbility)
+For many applications, it is crucial to decide if a dataset possesses cluster structures:
+
+```R
+library(FCPS)
+set.seed(600)
+DataList=ClusterChallenge("Chainlink",SampleSize = 750)
+Data=DataList$Chainlink
+Cls=DataList$Cls
+library(ggplot2)
+ClusterabilityMDplot(Data)+theme_bw()
+```
+
+<p align="center">
+  <img src="/img/Fig2.png" width="400" height="400">
+</p>
+
+
+### Estimation of Number of Clusters
+The “FCPS” package provides up to 26 indicators to determine the number of clusters:
+
+```R
+library(FCPS)
+set.seed(135)
+DataList=ClusterChallenge("Chainlink",SampleSize = 900)
+Data=DataList$Chainlink
+Cls=DataList$Cls
+Tree=HierarchicalClustering(Data,0,"SingleL")[[3]]
+ClusterDendrogram(Tree,4,main=’Single Linkage’)
+MaximumNumber=7
+clsm <- matrix(data = 0, nrow = dim(Data)[1], ncol = MaximumNumber)
+for (i in 2:(MaximumNumber+1)) {
+clsm[,i-1] <- cutree(Tree,i)
+}
+out=ClusterNoEstimation(Data, ClsMatrix = clsm,
+max.nc = MaximumNumber, PlotIt = TRUE)
+```
+
+
+<p align="center">
+  <img src="/img/Fig4.png" width="400" height="200">
+</p>
+
 ## Additional information
 
 | Authors website  | http://www.deepbionics.org/           |
@@ -145,7 +153,6 @@ https://cran.r-project.org/web/packages/FCPS/FCPS.pdf
 ## References
 
 1. [Thrun, 2020] Thrun, M. C.: Improving the Sensitivity of Statistical Testing for Clusterability with Mirrored-Density Plot, in Archambault, D., Nabney, I. & Peltonen, J. (eds.), Machine Learning Methods in Visualisation for Big Data, DOI 10.2312/mlvis.20201102, The Eurographics Association, Norrköping , Sweden, May, 2020. 
-
 2. [Thrun/Ultsch, 2020a] Thrun, M. C., & Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief,Vol. 30(C), pp. 105501, DOI 10.1016/j.dib.2020.105501 , 2020.
 3. [Thrun/Ultsch, 2020b]  Thrun, M. C., & Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Journal of Artificial Intelligence, in press, DOI: 10.1016/j.artint.2020.103237, 2020.
 4. [Thrun/Ultsch, 2020c]  Thrun, M. C., & Ultsch, A. : Using Projection based Clustering to Find Distance and Density based Clusters in High-Dimensional Data, Journal of Classification, DOI 10.1007/s00357-020-09373-2, accepted, Springer, 2020.
