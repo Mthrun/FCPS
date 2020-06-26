@@ -12,7 +12,7 @@ The package provides many clustering algorithms for unsupervised machine learnin
 1. [Description](#description)
 2. [Use cases](#use-cases)
 3. [Installation](#installation)
-4. [Tutorial Examples](#tutorial)
+4. [Tutorial Examples](#manual)
 5. [Manual](#manual)
 6. [Additional information](#additional-information)
 7. [References](#references)
