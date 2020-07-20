@@ -24,17 +24,21 @@ ClusterCount <- function(Cls) {
   Cls[!is.finite(Cls)]=9999
   
   countPerCluster=table(Cls)
+  u= unique(Cls,fromLast = FALSE)
+ 
+  uniqueClusters = as.numeric(names(countPerCluster)) #order ist not as is!
   
-  uniqueClusters <- as.numeric(names(countPerCluster))
-  numberOfClusters <- length(uniqueClusters)
+  ind=match(u,table = uniqueClusters)
+  
+  numberOfClusters = length(uniqueClusters)
   
   ClusterPercentages = as.numeric(prop.table(countPerCluster)*100)
   return(
     list(
-      UniqueClusters = uniqueClusters,
-      CountPerCluster = as.numeric(countPerCluster),
+      UniqueClusters = uniqueClusters[ind],
+      CountPerCluster = as.numeric(countPerCluster)[ind],
       NumberOfClusters = numberOfClusters,
-      ClusterPercentages = ClusterPercentages
+      ClusterPercentages = ClusterPercentages[ind]
     )
   )
 }
