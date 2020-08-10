@@ -14,7 +14,14 @@ StructureType = TRUE,PlotIt=FALSE,PlotTree=FALSE,PlotMap=FALSE,\dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-\item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
+\item{DataOrDistances}{
+Either nonsymmetric [1:n,1:d] numerical matrix of a dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.
+
+or
+
+symmetric [1:n,1:n] distance matrix, e.g. \code{as.matrix(dist(Data,method))}
+
+}
 
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
 \item{Type}{

@@ -12,7 +12,14 @@ HierarchicalClustering(DataOrDistances,ClusterNo,method='SingleL',Fast=TRUE,Data
 }
 
 \arguments{
-\item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
+\item{DataOrDistances}{
+Either nonsymmetric [1:n,1:d] numerical matrix of a dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.
+
+or
+
+symmetric [1:n,1:n] distance matrix, e.g. \code{as.matrix(dist(Data,method))}
+
+}
 
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
 \item{method}{Method of cluster analysis: "Ward", "SingleL", "CompleteL", "AverageL" (UPGMA), "WPGMA" (mcquitty), "MedianL" (WPGMC), "CentroidL" (UPGMC), "Minimax", "MinEnergy", "Gini" or "HDBSCAN".}

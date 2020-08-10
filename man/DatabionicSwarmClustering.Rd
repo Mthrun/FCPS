@@ -17,12 +17,13 @@ PlotTree = FALSE, PlotMap = FALSE,PlotIt=FALSE,Data)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{DataOrDistances}{
-Either nonsymmetric [1:n,1:d] datamatrix of n cases and d features
+\item{DataOrDistances}{
+Either nonsymmetric [1:n,1:d] numerical matrix of a dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.
 
 or
 
-Symmetric [1:n,1:n] distance matrix
+symmetric [1:n,1:n] distance matrix, e.g. \code{as.matrix(dist(Data,method))}
+
 }
   \item{ClusterNo}{
 Number of Clusters, if zero a the topographic map is ploted. Number of valleys equals number of clusters.
