@@ -54,7 +54,7 @@ kmeansDist <- function(Distance, ClusterNo=2,Centers=NULL,RandomNo=1,maxIt = 200
   kmeansdistpertrail=function(Distance, centers,maxIt = 2000,verbose = F){
   if(!is.vector(centers)){
     warning("Centers is expected to be a vector of indices")
-    return
+    return("Centers is expected to be a vector of indices")
   }
   
   if(length(centers) == 1){
