@@ -6,7 +6,7 @@ internalMDSestimate=function(Distances){
       'Subordinate clustering package is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
-    return( "Subordinate clustering package is missing.
+    return("Subordinate clustering package is missing.
                 Please install the package which is defined in 'Suggests'."
     )
   }

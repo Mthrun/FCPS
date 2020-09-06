@@ -49,7 +49,7 @@ GenieClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",
   if (ClusterNo>0){
 	Cls=cutree(hc,ClusterNo)
     Cls=ClusterRename(Cls,DataOrDistances)
-    return (list(Cls=Cls,Dendrogram=as.dendrogram(hc),Object=hc))
+    return(list(Cls=Cls,Dendrogram=as.dendrogram(hc),Object=hc))
   } 
   else{
     x=as.dendrogram(hc);plot(x, main=m,xlab="Number of data points N", ylab="Distance",sub=" ",leaflab ="none")
