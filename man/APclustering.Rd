@@ -60,7 +60,7 @@ List of
 
 Further details in
 \url{
-http://www.bioinf.jku.at/software/apcluster 
+http://www.bioinf.jku.at/software/apcluster/ 
 }
 }
 \author{
