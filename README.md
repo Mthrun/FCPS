@@ -32,14 +32,22 @@ A subset of methods was used in a benchmarking of algorithms published in
 
 ## Installation
 
-#### Installation using Github
+#### Installation using CRAN
+Install automatically with all dependencies via
 
+```R
+install.packages("FCPS",dependencies = T)
+```
+
+#### Installation using Github
+Please note, that dependecies have to be installed manually.
 
 ```R
 remotes::install_github("Mthrun/FCPS")
 ```
 
 #### Installation using R Studio
+Please note, that dependecies have to be installed manually.
 
 *Tools -> Install Packages -> Repository (CRAN) -> FCPS*
 
