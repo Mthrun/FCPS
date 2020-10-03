@@ -18,6 +18,12 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r echo = FALSE}
+if (!requireNamespace("rmarkdown") || !rmarkdown::pandoc_available("1.12.3")) {
+  warning("This vignette requires pandoc version 1.12.3; code will not run in older versions.")
+  knitr::opts_chunk$set(eval = FALSE)
+}
+```
 The package FCPS provides standardized access to state-of-the-art clustering algorithms, datasets defining common clustering challenges, and the estimation of the number of clusters. Additionally, the cluster tendency can be investigated, the number of clusters estimated, and an appropriate accuracy can be computed for arbitrary labels.
 
 In the following example, the high-dimensional leukemia dataset is loaded and a visualized:
