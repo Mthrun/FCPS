@@ -19,15 +19,17 @@ symmetric [1:n,1:n] distance matrix}
 
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
   \item{RandomNo}{Only for " \code{Steinley}" or in case of distance matrix, number of random initializations with searching for minimal SSE, see [Steinley/Brusco, 2007]}
-  \item{Type}{ Choice of Kmeans algorithm, currently either " \code{Hartigan}" [Hartigan/Wong, 1979], "\code{LBG}" [Linde et al., 1980], "\code{Steinley}" best method of [Steinley/Brusco, 2007] proposed in Steinley 2003, " \code{Lloyd}" [Lloyd, 1982], "\code{Forgy}"[Forgy, 1965] or \code{MacQueen} [MacQueen, 1967]}
+  \item{Type}{ 
+  Choice of Kmeans algorithm, currently either " \code{Hartigan}" [Hartigan/Wong, 1979], "\code{LBG}" [Linde et al., 1980], "\code{Steinley}" best method of [Steinley/Brusco, 2007] proposed in Steinley 2003, " \code{Lloyd}" [Lloyd, 1982], "\code{Forgy}"[Forgy, 1965], \code{MacQueen} [MacQueen, 1967], or \code{kcentroids} [Leisch, 2006].
+  }
   \item{PlotIt}{Default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
   \item{Verbose}{Print details, if true}
-  \item{\dots}{Further arguments like \code{iter.max}, \code{nstart},...}
-
+  \item{\dots}{Further arguments like \code{iter.max}, \code{nstart}, for \code{kcentroids} please see \code{kcca} function of the \pkg{flexclust} package
+}
 }
 
 \details{
-Uses either stats package function 'kmeans', cclust package implemention or own code.
+Uses either \pkg{stats} package function 'kmeans', \pkg{cclust} package implemention, \pkg{flexclust} package implemention or own code.
 In case of a distance matrix, RandomNo should be significantly lower than 5000, otherwise a long computation time is to be expected.
 }
 \value{
@@ -36,12 +38,11 @@ List V of
 \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.
 }
 
-\item{Object}{ List V of
+\item{Object}{ Object of the clustering algorithm used if existent, otherwise
 
 SumDistsToCentroids: Vector of within-cluster sum of squares, one component per cluster
-	
-Centroids: the final cluster centers.
 }
+\item{Centroids}{the final cluster centers.}
 
 }
 
@@ -57,6 +58,9 @@ Centroids: the final cluster centers.
 [MacQueen, 1967]  MacQueen, J.: Some methods for classification and analysis of multivariate observations, Proc. Proceedings of the fifth Berkeley symposium on mathematical statistics and probability, Vol. 1, pp. 281-297, Oakland, CA, USA., 1967.
 
 [Lloyd, 1982]  Lloyd, S.: Least squares quantization in PCM, IEEE transactions on information theory, Vol. 28(2), pp. 129-137. 1982.
+
+[Leisch, 2006]  Leisch, F.: A toolbox for k-centroids cluster analysis, Computational Statistics & Data Analysis, Vol. 51(2), pp. 526-544. 2006.
+
 }
  \examples{
 data('Hepta')

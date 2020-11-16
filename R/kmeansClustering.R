@@ -37,7 +37,7 @@ kmeansClustering <-function(DataOrDistance,ClusterNo=2,Type='LBG',RandomNo=5000,
     switch(
       Type,
       'Hartigan' = {
-        res = kmeans(DataOrDistance, centers = ClusterNo, ...)
+        res = kmeans(DataOrDistance, centers = ClusterNo,algorithm = "Hartigan-Wong", ...)
         Cls = as.vector(res$cluster)
         
         if (Verbose == TRUE) {
@@ -50,13 +50,42 @@ kmeansClustering <-function(DataOrDistance,ClusterNo=2,Type='LBG',RandomNo=5000,
         return(list(
           Cls = Cls,
           Object = list(
-            SumDistsToCentroids = res$withinss,
-            Centroids = res$centers
+            res
+          ),
+          Centroids = res$centers
+        ))
+      },
+      'kcentroids' = {
+        if (!requireNamespace('flexclust',quietly = TRUE)) {
+          message(
+            'Subordinate clustering (flexclust) package is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
           )
+          return(
+            list(
+              Cls = rep(1, nrow(DataOrDistance)),
+              Object = "Subordinate clustering (flexclust) package is missing.
+                Please install the package which is defined in 'Suggests'."
+            )
+          )
+        }
+        res = flexclust::kcca(x = DataOrDistance, k = ClusterNo, ...)
+        
+        Cls = as.vector(res@cluster)
+        
+        Centroids=res@centers
+        if (PlotIt) {
+          ClusterPlotMDS(DataOrDistance, Cls)
+        }
+        Cls = ClusterRename(Cls, DataOrDistance)
+        return(list(
+          Cls = Cls,
+          Object = res,
+          Centroids = Centroids
         ))
       },
       'LBG' = {
-        if (!requireNamespace('cclust')) {
+        if (!requireNamespace('cclust',quietly = TRUE)) {
           message(
             'Subordinate clustering package is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
@@ -88,10 +117,8 @@ kmeansClustering <-function(DataOrDistance,ClusterNo=2,Type='LBG',RandomNo=5000,
         Cls = ClusterRename(Cls, DataOrDistance)
         return(list(
           Cls = Cls,
-          Object = list(
-            SumDistsToCentroids = SSE,
-            Centroids = res$centers
-          )
+          Object = res,
+          Centroids = res$centers
         ))
       },
       "Steinley" = {
@@ -103,7 +130,7 @@ kmeansClustering <-function(DataOrDistance,ClusterNo=2,Type='LBG',RandomNo=5000,
         res = Liste[[which.min(SSEs)]]$kmeansOut
         Cls = as.vector(res$cluster)
         if (PlotIt) {
-          requireNamespace('DataVisualizations')
+          requireNamespace('DataVisualizations',quietly = TRUE)
           ClusterPlotMDS(DataOrDistance, Cls)
         }
         Cls = ClusterRename(Cls, DataOrDistance)
@@ -111,8 +138,8 @@ kmeansClustering <-function(DataOrDistance,ClusterNo=2,Type='LBG',RandomNo=5000,
           Cls = Cls,
           Object = list(
             SumDistsToCentroids = res$withinss,
-            Centroids = res$centers
-          )
+          ),
+          Centroids = res$centers
         ))
       },
       {#lloyd, forgy, mac queen
@@ -128,10 +155,8 @@ kmeansClustering <-function(DataOrDistance,ClusterNo=2,Type='LBG',RandomNo=5000,
         Cls = ClusterRename(Cls, DataOrDistance)
         return(list(
           Cls = Cls,
-          Object = list(
-            SumDistsToCentroids = res$withinss,
-            Centroids = res$centers
-          )
+          Object = res,
+          Centroids = res$centers
         ))
       }
     )
