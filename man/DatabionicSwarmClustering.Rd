@@ -130,3 +130,6 @@ Cls = DatabionicSwarmClustering(Chainlink$Data,
 \keyword{Clustering}
 \keyword{swarm}
 \keyword{databionic}
+\concept{Databionic swarm}
+\concept{generalized Umatrix}
+\concept{cluster analysis}
