@@ -55,9 +55,11 @@ Plots the topographic map [Thrun et al., 2016].
 }
 
 \details{
+Projection-based clustering \code{\link{AutomaticProjectionBasedClustering}} projects the data (nonlinear) into two dimensions and tries only to preserve relevant neighborhoods prior to clustering. However, in projection-based clustering clustering includes the high-dimensional distances in the clustering process.
+
 The first idea of using non-PCA projections for clustering was published by [Bock, 1987] as a definition. However, to the knowledge of the author, it was not applied to any data. The coexistence of projection and clustering, which exploited the generalized U-Matrix and was introduced in [Thrun/Ultsch, 2017]. It should be noted that it is preferable to use a visualization for the Generalized U-Matrix like the topographic map \code{\link[GeneralizedUmatrix]{plotTopographicMap}} of [Thrun et al., 2016] to evaluate the clustering, improve it or set the number of clusters appropriately. However, a comparison with 32 clustering algorithms showed that PBC is always able to find the correct cluster structure while the best of the 32 clustering algorithms varies depending on the dataset [Thrun/Ultsch, 2020].
 
-The first systematic comparison to other DR clustering methods like Projection-Pursuit Methods \code{\link{ProjectionPursuitClustering}} and CA-based clustering methods can be found in [Thrun/Ultsch, 2020a]. For PCA-based clustering methods please see \code{\link{TandemClustering}}.
+The first systematic comparison to other DR clustering methods like Projection-Pursuit Methods \code{\link{ProjectionPursuitClustering}}, supspace clustering methods \code{\link{SubspaceClustering}},  and CA-based clustering methods can be found in [Thrun/Ultsch, 2020a]. For PCA-based clustering methods please see \code{\link{TandemClustering}}.
 
 
 }

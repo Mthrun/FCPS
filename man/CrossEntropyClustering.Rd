@@ -7,7 +7,7 @@ CrossEntropyClustering(Data, ClusterNo,PlotIt=FALSE,...)
 }
 
 \description{
-Neural gas clustering published by [Tabor/Spurek, 2014] and implemented by [Spurek et al., 2017].
+Cross-entropy clustering published by [Tabor/Spurek, 2014] and implemented by [Spurek et al., 2017].
 
 }
 \arguments{

@@ -2,7 +2,7 @@
 \alias{SubspaceClustering}
 \title{Algorithms for Subspace clustering}
 \description{
-Subspace clustering is a technique which finds clusters within different subspaces (a selection of one or more dimensions)
+Subspace (projected) clustering is a technique which finds clusters within different subspaces (a selection of one or more dimensions).
 }
 \usage{
 SubspaceClustering(Data,ClusterNo,DimSubspace,
@@ -10,8 +10,7 @@ SubspaceClustering(Data,ClusterNo,DimSubspace,
 method='Orclus',PlotIt=FALSE,OrclusInitialClustersNo=ClusterNo+2,...)
 }
 \details{
-"The underlying assumption is that we can find valid clusters which are defined by only a subset of dimensions (it is not needed to have the agreement of all N features). The resulting clusters may be overlapping both in the space of features and observations" [Source: URL]. 
-
+Subspace clustering algorithms have the goal to finde one or more subspaces with the assumation that sufficient dimensionality reduction is dimensionality reduction without loss of information. Hence subspace clustering aums at finding a linear subspace sucht that the subspace contains as much predictive information as the input space. The subspace is usually higher than two but lower than the input space. In contrast, projection-based clustering \code{\link{AutomaticProjectionBasedClustering}} projects the data (nonlinear) into two dimensions and tries only to preerve relevant neighborhoods.
 }
 \arguments{
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.}
@@ -19,13 +18,13 @@ method='Orclus',PlotIt=FALSE,OrclusInitialClustersNo=ClusterNo+2,...)
 \item{ClusterNo}{A number k which defines k different clusters to be built by the proclus or orclust algorithm.}
 \item{DimSubspace}{Numerical number defining the dimensionality in which clusters should be search in in the orclust algorithm, for proclus it is an optional parameter}
 \item{method}{
-'Orclus', subspace clustering based on arbitrarily oriented projected cluster generation [Aggarwal and Yu, 2000]
+'Orclus', Projected clustering based on arbitrarily oriented projected cluster generation [Aggarwal and Yu, 2000]
 
-'ProClus' ProClus Algorithm for Projected Clustering [Aggarwal/Wolf, 1999] 
+'ProClus' ProClus algorithm for projected clustering [Aggarwal/Wolf, 1999] 
 
-'Clique' ProClus Algorithm for Projected Clustering [Agrawal et al., 1999] and [Agrawal et al., 2005]
+'Clique' ProClus algorithm finds subspaces of high-density clusters [Agrawal et al., 1999] and [Agrawal et al., 2005]
 
-'SubClu' ProClus Algorithm for Projected Clustering [Kailing et al.,2004]  
+'SubClu' SubClu algorithm is a density-connected approach for subspace clustering [Kailing et al.,2004]  
 
 }
 \item{PlotIt}{Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
@@ -59,9 +58,6 @@ JAVA_HOME has to be set for rJava to the ProClus algorithm (in windows set PATH 
 
 Further "advertising" can be found in 
 
-\url{
-https://towardsdatascience.com/subspace-clustering-7b884e8fff73
-}
 }
 
  \examples{
