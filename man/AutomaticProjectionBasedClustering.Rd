@@ -33,11 +33,13 @@ Type of Projection method, either
 
 \code{MDS} [Torgerson, 1952]  
   
-\code{ICA} [Comon, 1992] 
+\code{Uwot} [McInnes et al., 2018]
     
 \code{CCA} [Demartines/Herault, 1995] 
       
 \code{Sammon} [Sammon, 1969] 
+
+\code{t-SNE} [Van der Maaten/Hinton, 2008]
 }
 \item{StructureType}{
 Either compact (TRUE) or connected (FALSE), see discussion in [Thrun, 2018] 
@@ -79,7 +81,7 @@ List of
 
 [Thrun et al., 2016]  Thrun, M. C., Lerch, F., Loetsch, J., & Ultsch, A.: Visualization and 3D Printing of Multivariate Data of Biomarkers, in Skala, V. (Ed.), International Conference in Central Europe on Computer Graphics, Visualization and Computer Vision (WSCG), Vol. 24, pp. 7-16, Plzen, http://wscg.zcu.cz/wscg2016/short/A43-full.pdf, 2016.
 
-[Comon, 1992]  Comon, P.: Independent Component Analysis, In Lacoume, J. L. (Ed.), Higher-Order Statistics, https://hal.archives-ouvertes.fr/hal-00346684, pp. 29-38, France, Elsevier, 1992.
+[McInnes et al., 2018]  McInnes, L., Healy, J., & Melville, J.: Umap: Uniform manifold approximation and projection for dimension reduction, arXiv preprint arXiv:1802.03426, 2018.
 
 [Demartines/Herault, 1995]  Demartines, P., & Herault, J.: CCA:" Curvilinear component analysis", Proc. 15 Colloque sur le traitement du signal et des images, Vol. 199, GRETSI, Groupe d Etudes du Traitement du Signal et des Images, France 18-21 September, 1995.
 
@@ -91,7 +93,7 @@ List of
 
 [Venna et al., 2010]  Venna, J., Peltonen, J., Nybo, K., Aidos, H., & Kaski, S.: Information retrieval perspective to nonlinear dimensionality reduction for data visualization, The Journal of Machine Learning Research, Vol. 11, pp. 451-490. 2010.
 
-
+[Van der Maaten/Hinton, 2008]  Van der Maaten, L., & Hinton, G.: Visualizing Data using t-SNE, Journal of Machine Learning Research, Vol. 9(11), pp. 2579-2605. 2008.
 }
 \author{
 Michael Thrun

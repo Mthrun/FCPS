@@ -33,6 +33,10 @@ NetworkClustering <-function(DataOrDistance=NULL,Adjacency=NULL,Type="louvain",R
       RInd = which(DistanceMatrix[i, ] <= Radius, arr.ind = T)
       Adjacency[i, RInd] = 1
     }
+    #Alternative:
+    #result=cccd::nng(dx = d, k = 7, mutual = TRUE, method = NULL)
+    #Adjacency=KNNGraphAdjMatrix=igraph::get.adjacency(result,sparse=FALSE,type='both')
+    #louvain dauert dann aber ewig...
   }#Adjacency not given
     switch(
       Type,
