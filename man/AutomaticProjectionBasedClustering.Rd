@@ -48,7 +48,7 @@ Either compact (TRUE) or connected (FALSE), see discussion in [Thrun, 2018]
 \item{PlotIt}{Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 
 \item{PlotTree}{
-Plots the dendrogram
+TRUE: Plots the dendrogram, FALSE: no plot
 }
 \item{PlotMap}{
 Plots the topographic map [Thrun et al., 2016].

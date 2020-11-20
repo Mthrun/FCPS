@@ -1,9 +1,9 @@
-Spectrum=function(Data,Method=2,ClusterNo=NULL,PlotIt=FALSE,Silent=TRUE,PlotResults=FALSE,...){
+Spectrum=function(Data,Type=2,ClusterNo=NULL,PlotIt=FALSE,Silent=TRUE,PlotResults=FALSE,...){
   # INPUT
   # Data[1:n,1:d]     Data set with n observations and d features
-  # Method            Method = 1: Default eigengap method (Gaussian clusters)
-  #                   Method = 2: multimodality gap method (Gaussian/ non-Gaussian clusters)
-  #                   Method = 3: Allows to setClusterNo
+  # Type            Type = 1: Default eigengap method (Gaussian clusters)
+  #                   Type = 2: multimodality gap method (Gaussian/ non-Gaussian clusters)
+  #                   Type = 3: Allows to setClusterNo
   # ClusterNo         Number of clusters to search for
   #
   # OPTIONAL
@@ -30,7 +30,7 @@ Spectrum=function(Data,Method=2,ClusterNo=NULL,PlotIt=FALSE,Silent=TRUE,PlotResu
     )
   }
   if(is.null(ClusterNo))
-    out=Spectrum::Spectrum(t(Data),method = Method,silent = Silent,showres =PlotResults ,...)
+    out=Spectrum::Spectrum(t(Data),method = Type,silent = Silent,showres =PlotResults ,...)
   else
     out=Spectrum::Spectrum(t(Data),fixk = ClusterNo,method = 3,ClusterNo,silent = Silent,showres =PlotResults,...)
   

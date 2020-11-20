@@ -1,4 +1,4 @@
-RandomForestClustering=function(Data,ClusterNo,method="ward.D2",NoTrees = 2000,PlotIt=FALSE,PlotForest=FALSE,...){
+RandomForestClustering=function(Data,ClusterNo,Type="ward.D2",NoTrees = 2000,PlotIt=FALSE,PlotForest=FALSE,...){
   if (!requireNamespace('randomForest')) {
     message(
       'Subordinate clustering package (randomForest) is missing. No computations are performed.
@@ -29,11 +29,11 @@ RandomForestClustering=function(Data,ClusterNo,method="ward.D2",NoTrees = 2000,P
   proximity=rf$proximity
   Dissimilarity=max(proximity)-proximity #sqrt(1-proximity)
   
-  if(method=="PAM"){
+  if(Type=="PAM"){
     CA=cluster::pam(x=Dissimilarity,diss = T,k=ClusterNo)
     Cls=CA$clustering
   }else{
-    CA=HierarchicalClusterDists(Dissimilarity,ClusterNo=ClusterNo,method=method,Fast=FALSE)
+    CA=HierarchicalClusterDists(Dissimilarity,ClusterNo=ClusterNo,method=Type,Fast=FALSE)
     Cls=CA$Cls
   }
   

@@ -6,7 +6,7 @@
 Hierarchical Clustering with Distances
 }
 \usage{
-HierarchicalClusterDists(pDist,ClusterNo=0,method="ward.D2",
+HierarchicalClusterDists(pDist,ClusterNo=0,Type="ward.D2",
 
 ColorTreshold=0,Fast=FALSE,\dots)
 }
@@ -18,7 +18,7 @@ Hierarchical cluster analysis on a set of dissimilarities and methods for analyz
 \arguments{
 \item{pDist}{Distances as either matrix [1:n,1:n] or dist object}
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
-\item{method}{Method of cluster analysis: "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".}
+\item{Type}{Method of cluster analysis: "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".}
 \item{ColorTreshold}{Draws cutline w.r.t. dendogram y-axis (height), height of line as scalar should be given}
 \item{Fast}{If TRUE and fastcluster installed, then a faster implementation of the methods above can be used}
 \item{\dots}{In case of plotting further argument for \code{plot}, see \code{\link{as.dendrogram}}

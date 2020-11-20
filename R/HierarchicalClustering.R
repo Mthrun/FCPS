@@ -1,13 +1,13 @@
-HierarchicalClustering=function(DataOrDistances,ClusterNo,method='SingleL',Fast=TRUE,Data,...){
+HierarchicalClustering=function(DataOrDistances,ClusterNo,Type='SingleL',Fast=TRUE,Data,...){
   # INPUT
   # Data[1:n,1:d]     Data set with n observations and d features or distance matrix of size n
   # ClusterNo         Number of clusters to search for
   #
   # OPTIONAL
-  # method            method of cluster analysis: "Ward", "SingleL", "CompleteL", "AverageL" (UPGMA),
+  # Type            Type of cluster analysis: "Ward", "SingleL", "CompleteL", "AverageL" (UPGMA),
   #                   "WPGMA" (mcquitty), "MedianL" (WPGMC), "CentroidL" (UPGMC), "Minimax", "MinEnergy",
   #                   "Gini" or "HDBSCAN".
-  # Fast              Boolean. If TRUE and fastcluster installed, then a faster implementation of the methods
+  # Fast              Boolean. If TRUE and fastcluster installed, then a faster implementation of the Types
   #                   above can be used except for "Minimax", "MinEnergy", "Gini" or "HDBSCAN"
   #
   # OUTPUT
@@ -20,22 +20,22 @@ HierarchicalClustering=function(DataOrDistances,ClusterNo,method='SingleL',Fast=
   }
 	if(missing(ClusterNo)) ClusterNo=0
   # Unification for paper
-  if(method=='SingleL') method="single"
-  if(method=="Ward") method="ward.D2"
-  if(method=='CompleteL') method="complete"
-  if(method=='AverageL') method="average"
-  if(method=='WPGMA') method="mcquitty"
-  if(method=='MedianL') method="median"
-  if(method=='CentroidL') method="centroid"
+  if(Type=='SingleL') Type="single"
+  if(Type=="Ward") Type="ward.D2"
+  if(Type=='CompleteL') Type="complete"
+  if(Type=='AverageL') Type="average"
+  if(Type=='WPGMA') Type="mcquitty"
+  if(Type=='MedianL') Type="median"
+  if(Type=='CentroidL') Type="centroid"
   
   # Backwards compatibility to matlab, otherwise could be programmed better :-(
-  if(method=='MinEnergy'){
+  if(Type=='MinEnergy'){
     return(MinimalEnergyClustering(DataOrDistances = DataOrDistances,ClusterNo = ClusterNo,...))
-  }else if(method=="Gini"){
+  }else if(Type=="Gini"){
     return(GenieClustering(DataOrDistances = DataOrDistances,ClusterNo = ClusterNo,...))
-  }else if(method=="Minimax"){
+  }else if(Type=="Minimax"){
     return(MinimaxLinkageClustering(DataOrDistances = DataOrDistances,ClusterNo = ClusterNo,...))
-  }else if(method=="HDBSCAN"){
+  }else if(Type=="HDBSCAN"){
     V=Hierarchical_DBSCAN(DataOrDistances = DataOrDistances,...)
     if(ClusterNo>1){
       Cls = cutree(V$Tree, ClusterNo)
@@ -50,9 +50,9 @@ HierarchicalClustering=function(DataOrDistances,ClusterNo,method='SingleL',Fast=
     }else{
       Input=DataOrDistances
     }
-    return(HierarchicalClusterDists(pDist = Input,ClusterNo = ClusterNo,method = method,Fast=Fast,...))
+    return(HierarchicalClusterDists(pDist = Input,ClusterNo = ClusterNo,Type = Type,Fast=Fast,...))
   }else{# Data given
-    return(HierarchicalClusterData(Data = DataOrDistances,ClusterNo = ClusterNo,method = method,Fast=Fast,...))
+    return(HierarchicalClusterData(Data = DataOrDistances,ClusterNo = ClusterNo,Type = Type,Fast=Fast,...))
   }#endisSymmetric(DataOrDistances)
   
 }

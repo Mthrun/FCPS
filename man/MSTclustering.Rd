@@ -8,7 +8,7 @@ MST-kNN clustering algorithm [Inostroza-Ponta, 2008].
 Performs the MST-kNN clustering algorithm which generate a clustering solution with automatic k determination using two proximity graphs: Minimal Spanning Tree (MST) and k-Nearest Neighbor (kNN) which are recursively intersected.
 }
 \usage{
-MSTclustering(DataOrDistances, method = "euclidean",PlotIt=FALSE, \dots)
+MSTclustering(DataOrDistances, DistanceMethod = "euclidean",PlotIt=FALSE, \dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -16,7 +16,7 @@ MSTclustering(DataOrDistances, method = "euclidean",PlotIt=FALSE, \dots)
 Either [1:n,1:n] symmetric distance matrix or [1:n,1:d] not symmetric data matrix of n cases and d variables
 }
 
-  \item{method}{
+  \item{DistanceMethod}{
 Optional distance method of data, default is euclid, see \code{\link[parallelDist]{parDist}} for details
 }
 \item{PlotIt}{Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}

@@ -80,30 +80,6 @@ Michael Thrun
 \seealso{
 \code{\link[parallel]{clusterApply}}
 }
-\examples{
-\donttest{
-data(Hepta)
-Result=parApplyClusterAnalysis(Hepta$Data,
-kmeansClustering,1:3,7,Type="LBG")
-# clustering accuracy
-
-apply(Result$Cls_Matrix,2,ClusteringAccuracy,Hepta$Cls)
-}
-
-\dontrun{
-data(Hepta)
-data(Atom)
-DataV=list(Hepta=Hepta$Data,Atom=Atom$Data)
-Clusternumbers=c(7,2)
-ResultList=parApplyClusterAnalysis(DataV,
-kmeansClustering,1:3,ClusterNo=Clusternumbers,Type="LBG")
-# clustering accuracy
-
-Accuracies=mapply(FUN=function(x,y) return(apply(x$Cls_Matrix,2,ClusteringAccuracy,y)),ResultList,list(Hepta$Cls,Atom$Cls))
-colnames(Accuracies)=names(ResultList)
-Accuracies
-}
-}
 \keyword{clustering}% use one of  RShowDoc("KEYWORDS")
 \keyword{parallel cluster analysis}% __ONLY ONE__ keyword per line
 \keyword{parApply}% __ONLY ONE__ keyword per line

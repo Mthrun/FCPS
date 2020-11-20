@@ -18,7 +18,7 @@ ConsensusClustering=function(DataOrDistances,ClusterNo=NULL,PlotIt=FALSE,PlotCon
     )
     return(
       list(
-        Cls = rep(1, nrow(Data)),
+        Cls = rep(1, nrow(DataOrDistances)),
         Object = "Subordinate clustering package (ConsensusClusterPlus of Bioconductor) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
@@ -42,7 +42,7 @@ ConsensusClustering=function(DataOrDistances,ClusterNo=NULL,PlotIt=FALSE,PlotCon
  
   Cls=ClusterRename(Cls,DataOrDistances)
   if(PlotIt){
-    ClusterPlotMDS(Data,Cls)
+    ClusterPlotMDS(DataOrDistances,Cls)
   }
   return(list(Cls=Cls,Object=CA))
 }

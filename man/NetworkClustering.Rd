@@ -8,7 +8,7 @@ Network Clustering
 Either leiden [Traag et al., 2019] or louvain [Blondel et al., 2008] clustering
 }
 \usage{
-NetworkClustering(DataOrDistance=NULL,Adjacency=NULL,
+NetworkClustering(DataOrDistances=NULL,Adjacency=NULL,
 
 Type="louvain",Radius=FALSE,PlotIt=FALSE,\dots)
 }
@@ -45,11 +45,11 @@ Michael Thrun
 \examples{
 \dontshow{
 data('Hepta')
-out=NetworkClustering(Data=Hepta$Data[sample(1:212,10),],PlotIt=FALSE)
+out=NetworkClustering(Hepta$Data[sample(1:212,10),],PlotIt=FALSE)
 }
 \donttest{
 data('Hepta')
-out=NetworkClustering(Data=Hepta$Data,PlotIt=FALSE)
+out=NetworkClustering(Hepta$Data,PlotIt=FALSE)
 }
 }
 \note{

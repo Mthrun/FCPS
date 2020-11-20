@@ -10,7 +10,7 @@ Density peaks clustering of [Rodriguez/Laio, 2014] is here implemented by [Peder
 \usage{
 DensityPeakClustering(DataOrDistances, Rho,Delta,Dc,Knn=7, 
 
-method = "euclidean", PlotIt = FALSE, Data, ...)
+DistanceMethod = "euclidean", PlotIt = FALSE, Data, ...)
 }
 
 \arguments{
@@ -31,7 +31,7 @@ Optional, cutoff distance, will either be estimated by [Pedersen et al., 2017] o
 Optional k nearest neighbors
 }
 
-  \item{method}{
+  \item{DistanceMethod}{
 Optional distance method of data, default is euclid, see \code{\link[parallelDist]{parDist}} for details
 }
   \item{PlotIt}{

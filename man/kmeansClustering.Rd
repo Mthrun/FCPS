@@ -86,8 +86,8 @@ PlotIt=FALSE,Type="Forgy")
 out=kmeansClustering(Hepta$Data,ClusterNo=7,  
 PlotIt=FALSE,Type="MacQueen")
 
-out=kmeansClustering(as.matrix(dist(Hepta$Data)),ClusterNo=7,  
-PlotIt=FALSE,RandomNo = 10)
+#out=kmeansClustering(as.matrix(dist(Hepta$Data)),ClusterNo=7,  
+#PlotIt=FALSE,RandomNo = 10)
 }
 
 \donttest{

@@ -8,15 +8,15 @@ Plot Clustering using Dimensionality Reduction by MDS
 This function uses a projection method to perform dimensionality reduction (DR) on order to visualize the data as 3D data points colored by a clustering.
 }
 \usage{
-ClusterPlotMDS(DataOrDists, Cls, main = "Clustering",
+ClusterPlotMDS(DataOrDistances, Cls, main = "Clustering",
 
-method = "euclidean", OutputDimension = 3,
+DistanceMethod = "euclidean", OutputDimension = 3,
 
 PointSize=1,Plotter3D="rgl",Colorsequence, ...)
 }
 
 \arguments{
-  \item{DataOrDists}{
+  \item{DataOrDistances}{
 Either nonsymmetric [1:n,1:d] datamatrix of n cases and d features or symmetric [1:n,1:n] distance matrix
 }
   \item{Cls}{
@@ -25,7 +25,7 @@ Either nonsymmetric [1:n,1:d] datamatrix of n cases and d features or symmetric 
   \item{main}{
 String, title of plot
 }
-  \item{method}{
+  \item{DistanceMethod}{
 Method to compute distances, default "euclidean"
 }
   \item{OutputDimension}{

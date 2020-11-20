@@ -1,4 +1,4 @@
-SubspaceClustering <-function(Data,ClusterNo,DimSubspace,method='Orclus',PlotIt=FALSE,OrclusInitialClustersNo=ClusterNo+2,...){
+SubspaceClustering <-function(Data,ClusterNo,DimSubspace,Type='Orclus',PlotIt=FALSE,OrclusInitialClustersNo=ClusterNo+2,...){
   # Cls=SubspaceClustering(Data,ClusterNo=2)
   #  
   # liefert eine Klassenzuweisung
@@ -8,7 +8,7 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,method='Orclus',PlotIt=
   #
   # OPTIONAL
   # PlotIt            Boolean. Decision to plot or not
-  # method            'Orclus', Subspace Clustering Based on Arbitrarily Oriented Projected Cluster Generation
+  # Type            'Orclus', Subspace Clustering Based on Arbitrarily Oriented Projected Cluster Generation
   #                   'ProClus'
   #                   'SubClu'
   #                   'Clique'
@@ -19,7 +19,7 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,method='Orclus',PlotIt=
   # OUTPUT
   # Cls[1:n]          Clustering of data
   # Object            Object of subspace::CLIQUE
-  # Method        
+  # Type        
   # 
   # Author: MT 04/2018
   
@@ -28,7 +28,7 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,method='Orclus',PlotIt=
   n = d = dim(Data)[1]
   
   switch(
-    method,
+    Type,
     Orclus = {
       if (missing(DimSubspace)) {
         if (d > 3) {
@@ -134,7 +134,7 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,method='Orclus',PlotIt=
       }
       Cls[!is.finite(Cls)] = 9999
     },
-    stop("Wrong method string entered")
+    stop("Wrong Type string entered")
     
   )
   
@@ -145,6 +145,6 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,method='Orclus',PlotIt=
   return(list(
     Cls = Cls,
     Object = obj,
-    Method = method
+    Method = Type
   ))
 }

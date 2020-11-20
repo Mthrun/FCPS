@@ -37,7 +37,7 @@ AutomaticProjectionBasedClustering=function(DataOrDistances,ClusterNo,Type="NerV
     }
    
     message('Given a distance matrix instead of data is experimental. MDS transformation is used to generate a data matrix.')
-    Data=ProjectionBasedClustering::MDS(DataOrDists = DataOrDistances,OutputDimension = dim(DataOrDistances)[1]-2)$ProjectedPoints
+    Data=ProjectionBasedClustering::MDS(DataOrDistances = DataOrDistances,OutputDimension = dim(DataOrDistances)[1]-2)$ProjectedPoints
     
   }else{
     Data=DataOrDistances
@@ -46,25 +46,25 @@ AutomaticProjectionBasedClustering=function(DataOrDistances,ClusterNo,Type="NerV
     switch(Type,
       'NerV'={
         out=list()
-        out$ProjectedPoints=ProjectionBasedClustering::NeRV(Data = DataOrDistances,OutputDimension = 2,...)
+        out$ProjectedPoints=ProjectionBasedClustering::NeRV(Data = DataOrDistances,OutputDimension = 2,PlotIt = FALSE,...)
         },
       'Pswarm'={
-          out=ProjectionBasedClustering::PolarSwarm(DataOrDistances = DataOrDistances,...)
+          out=ProjectionBasedClustering::PolarSwarm(DataOrDistances = DataOrDistances,PlotIt = FALSE,...)
         },
-      'MDS'={out=ProjectionBasedClustering::MDS(DataOrDistances = DataOrDistances,OutputDimension = 2,...)
+      'MDS'={out=ProjectionBasedClustering::MDS(DataOrDistances = DataOrDistances,OutputDimension = 2,PlotIt = FALSE,...)
       
       },
       'CCA'={
-        out=ProjectionBasedClustering::CCA(DataOrDistances = DataOrDistances,OutputDimension = 2,...)
+        out=ProjectionBasedClustering::CCA(DataOrDistances = DataOrDistances,OutputDimension = 2,PlotIt = FALSE,...)
       },
       'Sammon'={
-        out=ProjectionBasedClustering::SammonsMapping(DataOrDistances = DataOrDistances,OutputDimension = 2,...)
+        out=ProjectionBasedClustering::SammonsMapping(DataOrDistances = DataOrDistances,OutputDimension = 2,PlotIt = FALSE,...)
       },
       't-SNE'={
-        out=ProjectionBasedClustering::tSNE(DataOrDistances = DataOrDistances,OutputDimension = 2,...)
+        out=ProjectionBasedClustering::tSNE(DataOrDistances = DataOrDistances,OutputDimension = 2,PlotIt = FALSE,...)
       },
       'Uwot'={
-        out=ProjectionBasedClustering::UniformManifoldApproximationProjection(DataOrDistances = DataOrDistances,OutputDimension = 2,...)
+        out=ProjectionBasedClustering::UniformManifoldApproximationProjection(DataOrDistances = DataOrDistances,OutputDimension = 2,PlotIt = FALSE,...)
       },{
         warning('Incorrect type selected')
         return('Incorrect type selected')

@@ -15,7 +15,7 @@ ClusterNoEstimation(DataOrDistances, ClsMatrix = NULL, max.nc,
 index = "all", min.nc = 2,
 
 Silent = TRUE, method = NULL, 
-PlotIt=TRUE,SelectByABC=TRUE,Colorsequence)
+PlotIt=FALSE,SelectByABC=TRUE,Colorsequence)
 }
 \arguments{
   \item{DataOrDistances}{

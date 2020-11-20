@@ -1,4 +1,4 @@
-MoGclustering <-function(Data,ClusterNo=2,method="EM",PlotIt=FALSE,...){
+MoGclustering <-function(Data,ClusterNo=2,Type="EM",PlotIt=FALSE,...){
   # Cls <- MoGclustering(Data,ClusterNo);
   # MixtureOfGaussians (MoG) clustering using EM
   # 
@@ -7,7 +7,7 @@ MoGclustering <-function(Data,ClusterNo=2,method="EM",PlotIt=FALSE,...){
   # ClusterNo         Number of clusters to search for
   #
   # OPTIONAL
-  # method            Choose Method. EM = Expectation Maximization
+  # Type            Choose Method. EM = Expectation Maximization
   # PlotIt            Boolean. Decision to plot or not
   # 
   # OUTPUT
@@ -40,7 +40,7 @@ MoGclustering <-function(Data,ClusterNo=2,method="EM",PlotIt=FALSE,...){
     }
   }#
 
-  switch(method,
+  switch(Type,
     EM={
       out=EMCluster::starts.via.svd(Data, nclass = ClusterNo, method = c("em"),
                                     EMC = EMCluster::.EMC)

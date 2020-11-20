@@ -5,7 +5,7 @@ export(ADPclustering)
 export(AgglomerativeNestingClustering)
 export(APclustering)
 export(AutomaticProjectionBasedClustering)
-export(ConsensusClustering)
+#export(ConsensusClustering)doku is corrupted at the moment
 export(CrossEntropyClustering)
 export(DatabionicSwarmClustering)
 export(DBscan)

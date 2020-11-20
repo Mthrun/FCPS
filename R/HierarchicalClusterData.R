@@ -1,4 +1,4 @@
-HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,method="ward.D2",DistanceMethod="euclidean",ColorTreshold=0,Fast=FALSE,Cls=NULL,...){
+HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,Type="ward.D2",DistanceMethod="euclidean",ColorTreshold=0,Fast=FALSE,Cls=NULL,...){
   # HierarchicalClusterData(Data)
   # HierarchicalClusterDists(Data,0,"ward.D2",NULL,"cosine",100)
   # Cls=HierarchicalCluster(Data,6,"ward.D2")
@@ -9,7 +9,7 @@ HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,method="
   #
   # OPTIONAL
   # ClusterNo         Number of clusters to search for. If ClusterNo=0, then dendrogram will be plotted.
-  # method  		      Cluster method: "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".
+  # Type  		      Cluster method: "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".
   # DistanceMethod          see  DistanceMatrix(), for example 'euclidean','sqEuclidean','mahalanobis','cityblock=manhatten','cosine','chebychev','jaccard','minkowski','manhattan','binary', 'canberra', 'maximum'. Any unambiguous substring can be given.
   # ColorTreshold			Draws intersection at appropriate dendrogram y-axes (heigth), height of line is number
   # ...               Only if ClusterNo=0, arugments for plot
@@ -83,14 +83,14 @@ HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,method="
   # Clustering
     
     if(isTRUE(Fast)&requireNamespace('fastcluster')){
-      hc <- fastcluster::hclust(Y,method=method)
+      hc <- fastcluster::hclust(Y,method=Type)
     }else{
-      hc <- hclust(Y,method=method); # Returns partly different values than Z = linkage(Y,method);
+      hc <- hclust(Y,method=Type); # Returns partly different values than Z = linkage(Y,method);
     }
   if(DistanceMethod=='euclidean')
     DistanceMethod='Euclidean'
     
-  m=paste(method,"LinkCluster/ ",DistanceMethod," N=",nrow(as.matrix(Data)))
+  m=paste(Type,"LinkCluster/ ",DistanceMethod," N=",nrow(as.matrix(Data)))
   # Classification or dendrogram
   if (ClusterNo>0){
     Cls=cutree(hc,ClusterNo)

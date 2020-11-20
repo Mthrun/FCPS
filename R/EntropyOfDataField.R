@@ -1,4 +1,4 @@
-EntropyOfDataField=function(Data,sigmarange=c(0.01,0.1,0.5,1,2,5,8,10,100),PlotIt=TRUE){
+EntropyOfDataField=function(Data,sigmarange=c(0.01,0.1,0.5,1,2,5,8,10,100),PlotIt=FALSE){
   # EntropyOfDataField(Data, sigmarange = c(0.01, 0.1, 0.5, 1, 2, 5, 8, 10, 100), PlotIt = TRUE)
   # Entropy Of a Data Field [Wang et al., 2011].
   # Calculates the Potential Entropy Of a Data Field for a givven ranges of impact factors sigma
@@ -51,7 +51,7 @@ EntropyOfDataField=function(Data,sigmarange=c(0.01,0.1,0.5,1,2,5,8,10,100),PlotI
     
   }
 
-  if(PlotIt){
+  if(isTRUE(PlotIt)){
     # defined in Wang et al 2011
     # plot(sigmarange,H,ylab='Potential Entropy H',
     #      xlab = 'Points of  Selected Impact Factor Sigma in black, Red: Upper Boundary of H',main='Entropy of Data Field')

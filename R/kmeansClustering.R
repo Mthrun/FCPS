@@ -137,7 +137,7 @@ kmeansClustering <-function(DataOrDistance,ClusterNo=2,Type='LBG',RandomNo=5000,
         return(list(
           Cls = Cls,
           Object = list(
-            SumDistsToCentroids = res$withinss,
+            res
           ),
           Centroids = res$centers
         ))

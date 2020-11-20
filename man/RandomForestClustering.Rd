@@ -10,14 +10,14 @@ Clustering using the proximity matrix of random forest with either PAM or hierar
 \usage{
 RandomForestClustering(Data,ClusterNo,
 
-method="ward.D2",NoTrees = 2000,
+Type="ward.D2",NoTrees = 2000,
 
 PlotIt=FALSE,PlotForest=FALSE,\dots)
 }
 \arguments{
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features}
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
-\item{method}{Method of cluster analysis: "PAM", "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".}
+\item{Type}{Method of cluster analysis: "PAM", "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".}
 
 \item{NoTrees}{A number of trees used in the forest}
 

@@ -7,7 +7,7 @@ Subspace (projected) clustering is a technique which finds clusters within diffe
 \usage{
 SubspaceClustering(Data,ClusterNo,DimSubspace,
 
-method='Orclus',PlotIt=FALSE,OrclusInitialClustersNo=ClusterNo+2,...)
+Type='Orclus',PlotIt=FALSE,OrclusInitialClustersNo=ClusterNo+2,...)
 }
 \details{
 Subspace clustering algorithms have the goal to finde one or more subspaces with the assumation that sufficient dimensionality reduction is dimensionality reduction without loss of information. Hence subspace clustering aums at finding a linear subspace sucht that the subspace contains as much predictive information as the input space. The subspace is usually higher than two but lower than the input space. In contrast, projection-based clustering \code{\link{AutomaticProjectionBasedClustering}} projects the data (nonlinear) into two dimensions and tries only to preerve relevant neighborhoods.
@@ -17,10 +17,10 @@ Subspace clustering algorithms have the goal to finde one or more subspaces with
 
 \item{ClusterNo}{A number k which defines k different clusters to be built by the proclus or orclust algorithm.}
 \item{DimSubspace}{Numerical number defining the dimensionality in which clusters should be search in in the orclust algorithm, for proclus it is an optional parameter}
-\item{method}{
-'Orclus', Projected clustering based on arbitrarily oriented projected cluster generation [Aggarwal and Yu, 2000]
+\item{Type}{
+'Orclus',  subspace clustering based on arbitrarily oriented projected cluster generation [Aggarwal and Yu, 2000]
 
-'ProClus' ProClus algorithm for projected clustering [Aggarwal/Wolf, 1999] 
+'ProClus' ProClus algorithm for subspace clustering [Aggarwal/Wolf, 1999] 
 
 'Clique' ProClus algorithm finds subspaces of high-density clusters [Agrawal et al., 1999] and [Agrawal et al., 2005]
 

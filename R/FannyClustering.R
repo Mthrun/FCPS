@@ -49,10 +49,10 @@ FannyClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Standardization=
     names(Cls)=1:nrow(DataOrDistances)
   
   Cls[!is.finite(Cls)]=0
-  if(PlotIt){
+  if(isTRUE(PlotIt)){
     Cls2=Cls
     Cls2[Cls2==0]=999
-	ClusterPlotMDS(DataOrDistances,Cls2)
+	  ClusterPlotMDS(DataOrDistances,Cls2)
   }
     Cls=ClusterRename(Cls,DataOrDistances)
   return(list(Cls=Cls,Object=fan))

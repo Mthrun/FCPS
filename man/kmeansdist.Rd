@@ -40,11 +40,11 @@ Currently an experimental version
 data('Hepta')
 #out=kmeansDist(as.matrix(dist(Hepta$Data)),ClusterNo=7,PlotIt=FALSE,RandomNo = 10)
 
-\donttest{
+\dontrun{
 data('Leukemia')
 #as expected does not perform well
 #for non-spherical cluster structures:
-out=kmeansDist(Leukemia$DistanceMatrix,ClusterNo=6,PlotIt=TRUE,RandomNo=10)
+#out=kmeansDist(Leukemia$DistanceMatrix,ClusterNo=6,PlotIt=TRUE,RandomNo=10)
 }
 }
 

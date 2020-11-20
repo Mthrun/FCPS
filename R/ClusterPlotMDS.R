@@ -1,13 +1,13 @@
-ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",OutputDimension = 3,PointSize=1,Plotter3D="rgl",Colorsequence,...){
+ClusterPlotMDS=function(DataOrDistances,Cls,main='Clustering',DistanceMethod = "euclidean",OutputDimension = 3,PointSize=1,Plotter3D="rgl",Colorsequence,...){
   #
   # INPUT
-  # DataOrDists        Either nonsymmetric [1:n,1:d] datamatrix of n cases and d features or
+  # DataOrDistances        Either nonsymmetric [1:n,1:d] datamatrix of n cases and d features or
   #                    symmetric [1:n,1:n] distance matrix
   # Cls                1:n numerical vector of numbers defining the classification as the main
   #                    output of the clustering algorithm for the n cases of data. It has k unique
   #                    numbers representing the arbitrary labels of the clustering.
   # main               String. Title of plot
-  # method             Method to compute distances, default "euclidean"
+  # DistanceMethod             Method to compute distances, default "euclidean"
   # OutputDimension    Either two or three depending on user choice
   # PointSize          Size of points l
   # Plotter3D          In case of 3 dimensions, choose either "plotly" or "rgl"
@@ -16,18 +16,18 @@ ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",O
   # The rgl plot
   # 
   # 
-  if(missing(DataOrDists)) stop('DataOrDists is missing.')
+  if(missing(DataOrDistances)) stop('DataOrDistances is missing.')
 
-  if(is.null(DataOrDists)) stop('DataOrDists is missing.')
+  if(is.null(DataOrDistances)) stop('DataOrDistances is missing.')
   
-  if(!is.matrix(DataOrDists)){
-    warning('DataOrDists is not a matrix. Calling as.matrix')
-    DataOrDists=as.matrix(DataOrDists)
+  if(!is.matrix(DataOrDistances)){
+    warning('DataOrDistances is not a matrix. Calling as.matrix')
+    DataOrDistances=as.matrix(DataOrDistances)
   }
   
   if(missing(Cls)){
     message('Cls is missing, using default Cls with one cluster.')
-    Cls=rep(1,length(DataOrDists))
+    Cls=rep(1,length(DataOrDistances))
   }
   if(!is.vector(Cls)){
     warning('Cls is not a vector. Calling as.numeric(as.character(Cls))')
@@ -41,9 +41,9 @@ ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",O
     warning('OutputDimension can be only 2 or 3')
     OutputDimension=3
   } 
-  if(nrow(DataOrDists)!=length(Cls)){
-    warning('Cls has not the length or DataOrDists, using default Cls with one cluster.')
-    Cls=rep(1,length(DataOrDists))
+  if(nrow(DataOrDistances)!=length(Cls)){
+    warning('Cls has not the length or DataOrDistances, using default Cls with one cluster.')
+    Cls=rep(1,length(DataOrDistances))
   }
   
   prepareData=function(DataDists,Cls){
@@ -61,29 +61,29 @@ ClusterPlotMDS=function(DataOrDists,Cls,main='Clustering',method = "euclidean",O
     return(list(DataMDS=DataMDS,Cls=Cls))
   }# End prepareData
   
-  if (isSymmetric(unname(DataOrDists))) {
-    DataDists = DataOrDists
-    AnzVar = ncol(DataOrDists)
-    AnzData = nrow(DataOrDists)
+  if (isSymmetric(unname(DataOrDistances))) {
+    DataDists = DataOrDistances
+    AnzVar = ncol(DataOrDistances)
+    AnzData = nrow(DataOrDistances)
     
-    V=prepareData(DataOrDists,Cls)
+    V=prepareData(DataOrDistances,Cls)
     Data=V$DataMDS
     Cls=V$Cls
   }else {
-    AnzVar = ncol(DataOrDists)
-    AnzData = nrow(DataOrDists)
+    AnzVar = ncol(DataOrDistances)
+    AnzData = nrow(DataOrDistances)
     if(AnzVar>3){
       if(requireNamespace('parallelDist')){
-        DataDists = as.matrix(parallelDist::parallelDist(x = DataOrDists, method = method))
+        DataDists = as.matrix(parallelDist::parallelDist(x = DataOrDistances, method = DistanceMethod))
       }else{
         warning('ClusterPlotMDS: parallelDist package is missing. Using dist()')
-        DataDists = as.matrix(dist(x = DataOrDists, method = method))
+        DataDists = as.matrix(dist(x = DataOrDistances, method = DistanceMethod))
       }
       V=prepareData(DataDists,Cls)
       Data=V$DataMDS
       Cls=V$Cls
     }else{
-      Data=DataOrDists
+      Data=DataOrDistances
     }#if anzVar>3
   }#if symmetric
 

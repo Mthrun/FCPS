@@ -1,4 +1,4 @@
-DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclidean",PlotIt=FALSE,Data,...){
+DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,DistanceMethod="euclidean",PlotIt=FALSE,Data,...){
   #
   # INPUT
   # Data[1:n,1:d]     Data set with n observations and d features
@@ -9,7 +9,7 @@ DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclid
   #
   # OPTIONAL
   # Knn               Optional k nearest neighbors
-  # method            Optional distance method of data, default is euclid
+  # DistanceMethod            Optional distance method of data, default is euclid
   # PlotIt            Boolean. Decision to plot or not
   #
   # OUTPUT
@@ -43,7 +43,7 @@ DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclid
     DataOrDistances=as.matrix(DataOrDistances)
   }
   if(!mode(DataOrDistances)=='numeric'){
-    warning('Data is not a numeric matrix. Calling mode(DataOrDistances)="numeric"')
+    warning('DataOrDistances is not a numeric matrix. Calling mode(DataOrDistances)="numeric"')
     mode(DataOrDistances)='numeric'
   }
   AnzData = nrow(DataOrDistances)
@@ -51,7 +51,7 @@ DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,method="euclid
   if (!isSymmetric(unname(DataOrDistances))) {
     requireNamespace('parallelDist')
     
-    Distances=as.matrix(parallelDist::parDist(DataOrDistances,method=method))
+    Distances=as.matrix(parallelDist::parDist(DataOrDistances,method=DistanceMethod))
   }else{
     Distances=DataOrDistances
   }

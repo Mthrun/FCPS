@@ -28,12 +28,12 @@ str(dietary_survey_IBS)
 \donttest{
 Data=dietary_survey_IBS$Data
 Cls=dietary_survey_IBS$Cls
-# The Pswarm is able to seperate density-based clusters
-res=DatabionicSwarm::Pswarm(RobustNormalization(Data,T),PlotIt = T,Cls = Cls)
-# We clearly see that the U-Matrix visualization is unable to catch these structures
-# because it is only usable for distance structures
+## The Pswarm is able to seperate density-based clusters
+#res=DatabionicSwarm::Pswarm(RobustNormalization(Data,T),PlotIt = T,Cls = Cls)
+## We clearly see that the U-Matrix visualization is unable to catch these structures
+## because it is only usable for distance structures
 
-resU=GeneratePswarmVisualization(Data,res$ProjectedPoints,res$LC,PlotIt = T)
+#resU=GeneratePswarmVisualization(Data,res$ProjectedPoints,res$LC,PlotIt = T)
 }
 }
 \keyword{datasets,dietary_survey_IBS,FCPS}

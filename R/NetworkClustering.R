@@ -1,11 +1,11 @@
-NetworkClustering <-function(DataOrDistance=NULL,Adjacency=NULL,Type="louvain",Radius=FALSE,PlotIt=FALSE,...){
+NetworkClustering <-function(DataOrDistances=NULL,Adjacency=NULL,Type="louvain",Radius=FALSE,PlotIt=FALSE,...){
  
-   if(!is.null(DataOrDistance)){
-    if (!isSymmetric(unname(DataOrDistance))) {
-      #Data = DataOrDistance
+   if(!is.null(DataOrDistances)){
+    if (!isSymmetric(unname(DataOrDistances))) {
+      #Data = DataOrDistances
       if(Radius==TRUE){
         if(requireNamespace('DataVisualizations')){
-          Radius=DataVisualizations::ParetoRadius(DataOrDistance)
+          Radius=DataVisualizations::ParetoRadius(DataOrDistances)
         }else{
           stop('DataVisualizations package is missing.')
         }
@@ -13,15 +13,15 @@ NetworkClustering <-function(DataOrDistance=NULL,Adjacency=NULL,Type="louvain",R
       }
       if(Radius==FALSE){
         if(requireNamespace('parallelDist')){
-          Radius=EstimateRadiusByDistance(as.matrix(parallelDist::parallelDist(DataOrDistance)))
+          Radius=EstimateRadiusByDistance(as.matrix(parallelDist::parallelDist(DataOrDistances)))
         }else{
           stop('parallelDist package is missing.')
         }
       }
-      DistanceMatrix = as.matrix(dist(DataOrDistance))
+      DistanceMatrix = as.matrix(dist(DataOrDistances))
   
     }else{
-      DistanceMatrix=DataOrDistance
+      DistanceMatrix=DataOrDistances
       if(isFALSE(Radius))
         Radius=EstimateRadiusByDistance(DistanceMatrix)
     }
@@ -48,7 +48,7 @@ NetworkClustering <-function(DataOrDistance=NULL,Adjacency=NULL,Type="louvain",R
           )
           return(
             list(
-              Cls = rep(1, nrow(DataOrDistance)),
+              Cls = rep(1, nrow(DataOrDistances)),
               Object = "Subordinate clustering package is missing.
                 Please install the package which is defined in 'Suggests'."
             )
@@ -61,7 +61,7 @@ NetworkClustering <-function(DataOrDistance=NULL,Adjacency=NULL,Type="louvain",R
           )
           return(
             list(
-              Cls = rep(1, nrow(DataOrDistance)),
+              Cls = rep(1, nrow(DataOrDistances)),
               Object = "Subordinate clustering package is missing.
                 Please install the package which is defined in 'Suggests'."
             )
@@ -75,9 +75,9 @@ NetworkClustering <-function(DataOrDistance=NULL,Adjacency=NULL,Type="louvain",R
         # An examination of indices for determining the number of clusters in binary data sets
         # Weingessel, Andreas and Dimitriadou, Evgenia and Dolnicar, Sara (1999)
 
-        #Cls = ClusterRename(Cls, DataOrDistance)
+        #Cls = ClusterRename(Cls, DataOrDistances)
         #if (PlotIt) {
-        #  ClusterPlotMDS(DataOrDistance, Cls)
+        #  ClusterPlotMDS(DataOrDistances, Cls)
         #}
         return(list(
           Cls = NULL,
@@ -93,7 +93,7 @@ NetworkClustering <-function(DataOrDistance=NULL,Adjacency=NULL,Type="louvain",R
           )
           return(
             list(
-              Cls = rep(1, nrow(DataOrDistance)),
+              Cls = rep(1, nrow(DataOrDistances)),
               Object = "Subordinate clustering package is missing.
                 Please install the package which is defined in 'Suggests'."
             )
@@ -103,9 +103,9 @@ NetworkClustering <-function(DataOrDistance=NULL,Adjacency=NULL,Type="louvain",R
         CA=NetworkToolbox::louvain(A = Adjacency,...)
         Cls= CA$community
         
-        Cls = ClusterRename(Cls, DataOrDistance)
+        Cls = ClusterRename(Cls, DataOrDistances)
         if (PlotIt) {
-          ClusterPlotMDS(DataOrDistance, Cls)
+          ClusterPlotMDS(DataOrDistances, Cls)
         }
         return(list(
           Cls = Cls,
@@ -116,7 +116,7 @@ NetworkClustering <-function(DataOrDistance=NULL,Adjacency=NULL,Type="louvain",R
         message("Incorrect method selected")
         return(
           list(
-            Cls = rep(1, nrow(DataOrDistance)),
+            Cls = rep(1, nrow(DataOrDistances)),
             Object = "Incorrect method selected."
           )
         )

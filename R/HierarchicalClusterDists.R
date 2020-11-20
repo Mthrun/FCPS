@@ -1,4 +1,4 @@
-HierarchicalClusterDists <-function(pDist,ClusterNo=0,method="ward.D2",ColorTreshold=0,Fast=FALSE,...){
+HierarchicalClusterDists <-function(pDist,ClusterNo=0,Type="ward.D2",ColorTreshold=0,Fast=FALSE,...){
   # HierarchicalClusterDists(pDist)
   # HierarchicalClusterDists(pDist,0,"ward.D2",100)
   # Cls=HierarchicalClusterDists(pDist,6,"ward.D2")
@@ -9,7 +9,7 @@ HierarchicalClusterDists <-function(pDist,ClusterNo=0,method="ward.D2",ColorTres
   # ClusterNo        Number of clusters to search for. ClusterNo=0 means, that dendrogram will be used
   #
   # OPTIONAL
-  # method			     Cluster method: "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".
+  # Type			     Cluster method: "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".
   # ColorTreshold		 Draws intersection at appropriate dendrogram y-axes (heigth), height of line is number
   # Fast             Enables a fast computation.
   # 
@@ -24,11 +24,11 @@ HierarchicalClusterDists <-function(pDist,ClusterNo=0,method="ward.D2",ColorTres
     pDist=as.dist(pDist)
   
   if(isTRUE(Fast)&requireNamespace('fastcluster')){
-    hc <- fastcluster::hclust(pDist,method=method)
+    hc <- fastcluster::hclust(pDist,method=Type)
   }else{
-    hc <- hclust(pDist,method=method); #liefert teilweise andere Werte wie Z = linkage(Y,method);
+    hc <- hclust(pDist,method=Type); #liefert teilweise andere Werte wie Z = linkage(Y,Type);
   }
-	m=paste(method,"LinkCluster/ "," N=",nrow(as.matrix(pDist)))
+	m=paste(Type,"LinkCluster/ "," N=",nrow(as.matrix(pDist)))
 	
   # Classification or Dendrogram
 	if (ClusterNo>0){

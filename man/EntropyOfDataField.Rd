@@ -12,7 +12,7 @@ EntropyOfDataField(Data,
 
 sigmarange = c(0.01, 0.1, 0.5, 1, 2, 5, 8, 10, 100)
 
-, PlotIt = TRUE)
+, PlotIt = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

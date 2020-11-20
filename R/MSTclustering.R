@@ -1,8 +1,8 @@
-MSTclustering=function(DataOrDistances,method="euclidean",PlotIt=FALSE,...){
+MSTclustering=function(DataOrDistances,DistanceMethod="euclidean",PlotIt=FALSE,...){
   # INPUT
   # DataOrDistances[1:n,1:d]    Dataset with n observations and d features or distance matrix with size n
   # OPTIONAL
-  # method     Choose distance metric.
+  # DistanceMethod     Choose distance metric.
   # PlotIt     Boolean. Decision to plot or not
   # 
   # OUTPUT
@@ -36,7 +36,7 @@ MSTclustering=function(DataOrDistances,method="euclidean",PlotIt=FALSE,...){
   
   if (!isSymmetric(unname(DataOrDistances))) {
     if(requireNamespace("parallelDist")){
-      Distances=as.matrix(parallelDist::parDist(DataOrDistances,method=method))
+      Distances=as.matrix(parallelDist::parDist(DataOrDistances,method=DistanceMethod))
     }
     else{
       stop('parallelDist package not loaded or installed.')

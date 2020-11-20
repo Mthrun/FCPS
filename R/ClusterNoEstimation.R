@@ -5,7 +5,7 @@ ClusterNoEstimation <- function (DataOrDistances,
                             min.nc = 2,
                             Silent = TRUE,
                             method = NULL,
-                            PlotIt=TRUE,
+                            PlotIt=FALSE,
                             SelectByABC=TRUE,Colorsequence) {
 
   # Computes the operating numbers to the given data and clustering and a resulting recommended operating number of classes

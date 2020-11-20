@@ -16,15 +16,16 @@ parApplyDistanceBasedCA=function(Distances,FUN,NumberOfTrials=1:100,ClusterNo=NU
       }
     }
  
-  ShutDownAfter=TRUE
+  ShutDownAfter=FALSE
 
   if(is.na(ClusterNo)) ClusterNo=NULL
   
   if(any(class(WorkersOrNo)=="cluster")){
     message("Use clusters...")
       cl=WorkersOrNo
-      ShutDownAfter=FALSE
+   
     }else{
+      ShutDownAfter=TRUE
       if(!is.null(WorkersOrNo)){
         message("Make clusters...")
         cl=parallel::makeCluster(WorkersOrNo,type = SocketType)
@@ -45,8 +46,11 @@ parApplyDistanceBasedCA=function(Distances,FUN,NumberOfTrials=1:100,ClusterNo=NU
         parallel::stopCluster(cl)
     })
     
-    if(ShutDownAfter)
+    if(ShutDownAfter){
+      message("Stop clusters...")
       try(parallel::stopCluster(cl))
+    }
+     
   }else{
       out=lapply(X = NumberOfTrials,FUN = CA_dist_fun,FUN,Distances,ClusterNo,SetSeed,...)
     
@@ -66,8 +70,9 @@ parApplyDistanceBasedCA=function(Distances,FUN,NumberOfTrials=1:100,ClusterNo=NU
     if(any(class(WorkersOrNo)=="cluster")){
       message("Use clusters...")
       cl=WorkersOrNo
-      ShutDownAfter=FALSE
+ 
     }else{
+      ShutDownAfter=TRUE
       if(!is.null(WorkersOrNo)){
         message("Make clusters...")
         cl=parallel::makeCluster(WorkersOrNo,type = SocketType)
@@ -79,18 +84,19 @@ parApplyDistanceBasedCA=function(Distances,FUN,NumberOfTrials=1:100,ClusterNo=NU
     N=length(Distances)
     if(N!=length(ClusterNo)){
       ClusterNo=c(ClusterNo,rep(ClusterNo[1],N-length(ClusterNo)))
-      warning('parApplyClusterAnalysis: ClusterNo is not of length of list of Distances. Extending to equal lengths with ClusterNo[1] = ',ClusterNo[1],'. Benchmarking may not work correctly.')
+      warning('parApplyDistanceBasedCA: ClusterNo is not of length of list of Distances. Extending to equal lengths with ClusterNo[1] = ',ClusterNo[1],'. Benchmarking may not work correctly.')
     }
     for(i in 1:N){
       DistancesCur=Distances[[i]]
       ClusterNoCur=ClusterNo[i]
       message(paste('Computing Dataset',Datanames[i],'out of',N))
       if(!is.null(WorkersOrNo))
-        Benchmarking[[i]]=parApplyClusterAnalysis(Distances=DistancesCur,FUN,NumberOfTrials=NumberOfTrials,ClusterNo=ClusterNoCur,WorkersOrNo=cl,SocketType=NULL,SetSeed=SetSeed,...)
+        Benchmarking[[i]]=parApplyDistanceBasedCA(Distances=DistancesCur,FUN,NumberOfTrials=NumberOfTrials,ClusterNo=ClusterNoCur,WorkersOrNo=cl,SocketType=NULL,SetSeed=SetSeed,...)
       else
-        Benchmarking[[i]]=parApplyClusterAnalysis(Distances=DistancesCur,FUN,NumberOfTrials=NumberOfTrials,ClusterNo=ClusterNoCur,WorkersOrNo=NULL,SocketType=NULL,SetSeed=SetSeed,...)
+        Benchmarking[[i]]=parApplyDistanceBasedCA(Distances=DistancesCur,FUN,NumberOfTrials=NumberOfTrials,ClusterNo=ClusterNoCur,WorkersOrNo=NULL,SocketType=NULL,SetSeed=SetSeed,...)
     }
     names(Benchmarking)=Datanames
+    
     return(Benchmarking)
   }
 }
