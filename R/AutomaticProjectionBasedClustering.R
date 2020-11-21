@@ -30,23 +30,28 @@ AutomaticProjectionBasedClustering=function(DataOrDistances,ClusterNo,Type="NerV
   }
   
   if(isSymmetric(unname(DataOrDistances))){
-    Type %in% c('Sammon','Pswarm','MDS')
-    if(!(Type %in% c('Sammon','Pswarm','MDS'))){
+    #Type %in% c('Sammon','Pswarm','MDS')
+    if((Type %in% c('NerV'))){
+    #if(!(Type %in% c('Sammon','Pswarm','MDS'))){
       Type='MDS'
       warning('Distances matrix is given but the type',Type,'is selected, which does not work with distances. Switching to MDS.')
     }
    
-    message('Given a distance matrix instead of data is experimental. MDS transformation is used to generate a data matrix.')
-    Data=ProjectionBasedClustering::MDS(DataOrDistances = DataOrDistances,OutputDimension = dim(DataOrDistances)[1]-2)$ProjectedPoints
+    if(isTRUE(PlotMap)){
+      message('Given a distance matrix instead of data is experimental. MDS transformation is used to generate a data matrix.')
+    
+      Data=ProjectionBasedClustering::MDS(DataOrDistances = DataOrDistances,OutputDimension = dim(DataOrDistances)[1]-2)$ProjectedPoints
+    }
     
   }else{
-    Data=DataOrDistances
+    if(isTRUE(PlotMap))
+      Data=DataOrDistances#for plotting
   }
   n=dim(DataOrDistances)[1]
     switch(Type,
       'NerV'={
         out=list()
-        out$ProjectedPoints=ProjectionBasedClustering::NeRV(Data = DataOrDistances,OutputDimension = 2,PlotIt = FALSE,...)
+        out$ProjectedPoints=ProjectionBasedClustering::NeRV(Data = Data,OutputDimension = 2,PlotIt = FALSE,...)
         },
       'Pswarm'={
           out=ProjectionBasedClustering::PolarSwarm(DataOrDistances = DataOrDistances,PlotIt = FALSE,...)
@@ -71,6 +76,7 @@ AutomaticProjectionBasedClustering=function(DataOrDistances,ClusterNo,Type="NerV
       }
     )
   #  out=out
+  out$Type=Type
 #ToDo, vorgang abschalten, da fuer clusterung unnoetig----
   # Computation of GeneralizedUmatrix
   if (n > 4096/8) 
@@ -89,7 +95,7 @@ AutomaticProjectionBasedClustering=function(DataOrDistances,ClusterNo,Type="NerV
   # Automatic Clustering
   if(Type!='Pswarm'){
     # Number of cluster from dendrogram or visualization (PlotIt=T)
-    Cls=ProjectionBasedClustering::ProjectionBasedClustering(k=ClusterNo, Data = Data, BestMatches = Bestmatches, LC,StructureType = StructureType,PlotIt=PlotTree)
+    Cls=ProjectionBasedClustering::ProjectionBasedClustering(k=ClusterNo, DataOrDistances = DataOrDistances, BestMatches = Bestmatches, LC,StructureType = StructureType,PlotIt=PlotTree)
   }else{
     if(requireNamespace('DatabionicSwarm',quietly = TRUE)){
       Cls=DatabionicSwarm::DBSclustering(k = ClusterNo,DataOrDistance = DataOrDistances,BestMatches = Bestmatches,LC = LC,StructureType = StructureType,PlotIt = PlotTree)
@@ -122,7 +128,7 @@ AutomaticProjectionBasedClustering=function(DataOrDistances,ClusterNo,Type="NerV
 	
   }
   if(isTRUE(PlotIt)){
-    ClusterPlotMDS(Data,Cls)
+    ClusterPlotMDS(DataOrDistances,Cls)
   }
   Cls=ClusterRename(Cls,DataOrDistances)
     return(list(Cls=Cls,Object=list(Projection=out,Bestmatches=coordsres,GeneralizedUmatrix=visualization)))

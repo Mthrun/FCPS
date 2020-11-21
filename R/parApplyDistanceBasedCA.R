@@ -60,8 +60,9 @@ parApplyDistanceBasedCA=function(Distances,FUN,NumberOfTrials=1:100,ClusterNo=NU
   Cls_matrix=simplify2array(lapply(out, `[[`, 1),higher = FALSE)
   CompTimeVec=sapply(out, `[[`, 2)
   Seeds=sapply(out, `[[`, 3)
+  CAobjects=sapply(out, `[[`, 4)
   
-  return(list(Cls_Matrix=Cls_matrix,ComputationTime=CompTimeVec,Seeds=Seeds))
+  return(list(Cls_Matrix=Cls_matrix,ComputationTime=CompTimeVec,Seeds=Seeds,CAobjects=CAobjects))
   }else{#data is list
     if(missing(WorkersOrNo)){
       WorkersOrNo <- parallel::detectCores() - 1

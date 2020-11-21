@@ -25,10 +25,10 @@ CA_dist_fun=function(i,fun,Distances,ClusterNo,SetSeed=TRUE,...){
   nn=names(object)
   ind=which(nn=='Cls')
   if(length(ind)==1){
-    Liste=list(Cls=object[[ind]],ComputationTime=delta,Seed=seedno)
+    Liste=list(Cls=object[[ind]],ComputationTime=delta,Seed=seedno,CAs=object)
   }else{
     warning('"Cls" object could not be found. Everything available is returned.')
-    Liste=list(Cls=object,ComputationTime=delta,Seed=seedno)
+    Liste=list(Cls=NULL,ComputationTime=delta,Seed=seedno,CAs=object)
   }
   return(Liste)
 }#end help_fun
