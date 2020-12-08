@@ -1,12 +1,12 @@
 internalMDSestimate=function(Distances){
   #smacof is not fast enough
   
-  if (!requireNamespace('ProjectionBasedClustering')) {
+  if (!requireNamespace('ProjectionBasedClustering',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (ProjectionBasedClustering) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
-    return("Subordinate clustering package is missing.
+    return("Subordinate clustering package (ProjectionBasedClustering) is missing.
                 Please install the package which is defined in 'Suggests'."
     )
   }

@@ -19,15 +19,15 @@ APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,
   # Author MT: 04/2018
   
   # Note: # NoNoise see \code{apcluster}
-  if (!requireNamespace('apcluster')) {
+  if (!requireNamespace('apcluster',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (apcluster) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(DataOrDistances)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (apcluster) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )

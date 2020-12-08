@@ -1,4 +1,4 @@
-RobustTrimmedClustering=function(Data,ClusterNo,Alpha,PlotIt=FALSE,...){
+RobustTrimmedClustering=function(Data,ClusterNo,Alpha=0.05,PlotIt=FALSE,...){
   # Cls=RobustTrimmedClustering(Data,ClusterNo)
   #
   # INPUT
@@ -15,15 +15,15 @@ RobustTrimmedClustering=function(Data,ClusterNo,Alpha,PlotIt=FALSE,...){
   #
   # Author: MT 09/2019  
   
-  if (!requireNamespace('tclust')) {
+  if (!requireNamespace('tclust',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (tclust) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(Data)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (tclust) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )

@@ -20,15 +20,15 @@ MinimalEnergyClustering <-function(DataOrDistances,ClusterNo=0,DistanceMethod="e
   # 
   # Author: MT, 2019
 
-  if (!requireNamespace('energy')) {
+  if (!requireNamespace('energy',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (energy) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(DataOrDistances)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (energy) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )

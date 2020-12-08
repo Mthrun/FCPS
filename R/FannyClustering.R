@@ -11,15 +11,15 @@ FannyClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Standardization=
   # fanObject         Object of fanny algorithm
   #
   # Author: MT, 04/2018
-  if (!requireNamespace('cluster')) {
+  if (!requireNamespace('cluster',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (cluster) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(DataOrDistances)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (cluster) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )

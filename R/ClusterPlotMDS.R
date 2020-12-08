@@ -50,7 +50,7 @@ ClusterPlotMDS=function(DataOrDistances,Cls,main='Clustering',DistanceMethod = "
     
     Cls[!is.finite(Cls)]=999
 
-    if(requireNamespace('smacof')){
+    if(requireNamespace('smacof',quietly = TRUE)){
       DataMDS =smacof::mds(DataDists,ndim = 3)$conf
       # DataMDS = MASS::sammon(d = DataDists, y = cmdscale(d = DataDists, 
       #                                                    k = OutputDimension), k = OutputDimension)$points
@@ -73,7 +73,7 @@ ClusterPlotMDS=function(DataOrDistances,Cls,main='Clustering',DistanceMethod = "
     AnzVar = ncol(DataOrDistances)
     AnzData = nrow(DataOrDistances)
     if(AnzVar>3){
-      if(requireNamespace('parallelDist')){
+      if(requireNamespace('parallelDist',quietly = TRUE)){
         DataDists = as.matrix(parallelDist::parallelDist(x = DataOrDistances, method = DistanceMethod))
       }else{
         warning('ClusterPlotMDS: parallelDist package is missing. Using dist()')
@@ -90,7 +90,7 @@ ClusterPlotMDS=function(DataOrDistances,Cls,main='Clustering',DistanceMethod = "
   numberOfClasses=length(unique(Cls))
   
   if(missing(Colorsequence)){
-    if(requireNamespace("DataVisualizations")){
+    if(requireNamespace("DataVisualizations",quietly = TRUE)){
       Colors= DataVisualizations::DefaultColorSequence
       Colors=Colors[1:numberOfClasses]
     }
@@ -101,7 +101,7 @@ ClusterPlotMDS=function(DataOrDistances,Cls,main='Clustering',DistanceMethod = "
     Colors=Colorsequence
     if(length(Colors)!=numberOfClasses){
       warning('Default color sequence is used, because the number of colors does not equal the number of clusters.')
-      if(requireNamespace("DataVisualizations")){
+      if(requireNamespace("DataVisualizations",quietly = TRUE)){
         Colors= DataVisualizations::DefaultColorSequence[1:numberOfClasses]
       }
       else{
@@ -110,7 +110,7 @@ ClusterPlotMDS=function(DataOrDistances,Cls,main='Clustering',DistanceMethod = "
     }
   }
   
-  if(requireNamespace('DataVisualizations')){
+  if(requireNamespace('DataVisualizations',quietly = TRUE)){
     if(Plotter3D=="rgl"){
       if(dim(Data)[2]!=2){
         return(DataVisualizations::Plot3D(Data = Data,

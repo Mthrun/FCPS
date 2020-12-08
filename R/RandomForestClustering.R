@@ -1,18 +1,18 @@
 RandomForestClustering=function(Data,ClusterNo,Type="ward.D2",NoTrees = 2000,PlotIt=FALSE,PlotForest=FALSE,...){
   if (!requireNamespace('randomForest')) {
     message(
-      'Subordinate clustering package (randomForest) is missing. No computations are performed.
+      'Subordinate package (randomForest) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(Data)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate package (randomForest) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )
   }
-  if (!requireNamespace('cluster')) {
+  if (!requireNamespace('cluster',quietly = TRUE)) {
     message(
       'Subordinate clustering package (cluster) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
@@ -20,7 +20,7 @@ RandomForestClustering=function(Data,ClusterNo,Type="ward.D2",NoTrees = 2000,Plo
     return(
       list(
         Cls = rep(1, nrow(Data)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (cluster) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )

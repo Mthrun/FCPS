@@ -8,12 +8,12 @@ K-Means Clustering
 Perform k-means clustering on a data matrix. 
 }
 \usage{
-kmeansClustering(DataOrDistance, ClusterNo,
+kmeansClustering(DataOrDistances, ClusterNo,
 
  Type = 'LBG',RandomNo=5000, PlotIt=FALSE, Verbose = FALSE,\dots )
 }
 \arguments{
-\item{DataOrDistance}{Either nonsymmetric [1:n,1:d] datamatrix of n cases and d features or
+\item{DataOrDistances}{Either nonsymmetric [1:n,1:d] datamatrix of n cases and d features or
 
 symmetric [1:n,1:n] distance matrix}
 

@@ -12,10 +12,7 @@ CA_dist_fun=function(i,fun,Distances,ClusterNo,SetSeed=TRUE,...){
   string=names(formals(fun))
   
   if(is.null(ClusterNo)){
-
       object=R.utils::doCall(fun, args=list(DataOrDistances=Distances,...),.ignoreUnusedArgs=TRUE)
-    
-    #object=fun(Distances,...)
   }else{
       object=R.utils::doCall(fun,  args=list(DataOrDistances=Distances,ClusterNo=ClusterNo,...),.ignoreUnusedArgs=TRUE)
   }

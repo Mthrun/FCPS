@@ -12,22 +12,22 @@ GenieClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",
   # hc          Object of hclust2 algorithm
   #
   # Author: MT
-  if (!requireNamespace('genie')) {
+  if (!requireNamespace('genie',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (genie) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(DataOrDistances)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (genie) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )
   }
   
   if (!isSymmetric(unname(DataOrDistances))) {
-    if(requireNamespace("parallelDist")){
+    if(requireNamespace("parallelDist",quietly = TRUE)){
       pDist=as.dist(parallelDist::parDist(DataOrDistances,method=DistanceMethod))
     }
     else{

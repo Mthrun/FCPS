@@ -10,15 +10,15 @@ MSTclustering=function(DataOrDistances,DistanceMethod="euclidean",PlotIt=FALSE,.
   # Object            Object of mstknnclust::mst.knn algorithm
   #
   # Author: MT
-  if (!requireNamespace('mstknnclust')) {
+  if (!requireNamespace('mstknnclust',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (mstknnclust) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(DataOrDistances)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (mstknnclust) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )
@@ -35,11 +35,11 @@ MSTclustering=function(DataOrDistances,DistanceMethod="euclidean",PlotIt=FALSE,.
   AnzData = nrow(DataOrDistances)
   
   if (!isSymmetric(unname(DataOrDistances))) {
-    if(requireNamespace("parallelDist")){
+    if(requireNamespace("parallelDist",quietly = TRUE)){
       Distances=as.matrix(parallelDist::parDist(DataOrDistances,method=DistanceMethod))
-    }
-    else{
-      stop('parallelDist package not loaded or installed.')
+    }else{
+      warning("Please install the parallelDist package, using dist()")
+      Distances=as.matrix(dist(DataOrDistances,method=DistanceMethod))
     }
   }else{
     Distances=DataOrDistances

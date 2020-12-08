@@ -13,6 +13,10 @@ Computes intra-cluster distances which are the distance in-between each cluster.
 ClusterDistances(FullDistanceMatrix, Cls,
 
 Names, PlotIt = FALSE)
+
+ClusterIntraDistances(FullDistanceMatrix, Cls,
+
+Names, PlotIt = FALSE)
 }
 \arguments{
   \item{FullDistanceMatrix}{

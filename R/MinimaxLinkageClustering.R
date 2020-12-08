@@ -13,26 +13,27 @@ MinimaxLinkageClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="eu
   # Object            Object of protoclust::protoclust algorithm
   #
   # Author: MT
-  if (!requireNamespace('protoclust')) {
+  if (!requireNamespace('protoclust',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (protoclust) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(DataOrDistances)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (protoclust) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )
   }
   
   if (!isSymmetric(unname(DataOrDistances))) {
-    if(requireNamespace("parallelDist")){
+    if(requireNamespace("parallelDist",quietly = TRUE)){
       pDist=as.dist(parallelDist::parDist(DataOrDistances,method=DistanceMethod))
     }
     else{
-      stop('parallelDist package not loaded or installed.')
+      warning("Please install the parallelDist package, using dist()")
+      pDist=dist(DataOrDistances,method=DistanceMethod)
     }
     
   }else if(!inherits(DataOrDistances,'dist')){

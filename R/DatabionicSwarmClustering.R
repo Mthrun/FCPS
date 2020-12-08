@@ -22,15 +22,15 @@ DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRU
   # Object            List of further output of DBS.
   #
   # Author: MT
-  if (!requireNamespace('DatabionicSwarm')){
+  if (!requireNamespace('DatabionicSwarm',quietly = TRUE)){
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (DatabionicSwarm) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(DataOrDistances)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (DatabionicSwarm) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )
@@ -51,7 +51,7 @@ DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRU
   if(is.null(DistancesMethod)){
     if (isSymmetric(unname(DataOrDistances))) {
       DataDists = DataOrDistances
-      if(requireNamespace("ProjectionBasedClustering")){
+      if(requireNamespace("ProjectionBasedClustering",quietly = TRUE)){
         DataPoints=ProjectionBasedClustering::MDS(DataDists,OutputDimension = nrow(DataDists)-1)$ProjectedPoints
         AnzVar = ncol(DataOrDistances)
         AnzData = nrow(DataOrDistances)
@@ -63,7 +63,7 @@ DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRU
     }else{
       DataPoints=DataOrDistances
     }
-    if(requireNamespace("DatabionicSwarm")){
+    if(requireNamespace("DatabionicSwarm",quietly = TRUE)){
       proj= DatabionicSwarm::Pswarm(DataOrDistance = DataOrDistances)
     }
     else{

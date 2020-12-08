@@ -10,24 +10,57 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
   # na.rm                       statistical testing will not work with missing values, if TRUE values are imputed with averages
   #
   # Author: MT
-  requireNamespace('clusterability')
-  requireNamespace('ggplot2')
-  requireNamespace('signal')
-  requireNamespace('reshape2')
-  
+ 
   dots=list(...)
   
-  if (!requireNamespace('clusterability')) {
+  if (!requireNamespace('ggplot2',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate package (ggplot2) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
-      list(
-        Cls = rep(1, nrow(DataOrDistance)),
-        Object = "Subordinate clustering package is missing.
+      
+        
+        "Subordinate package (ggplot2) is missing.
                 Please install the package which is defined in 'Suggests'."
-      )
+      
+    )
+  }
+  if (!requireNamespace('reshape2',quietly = TRUE)) {
+    message(
+      'Subordinate package (reshape2) is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+
+       "Subordinate package (reshape2) is missing.
+                Please install the package which is defined in 'Suggests'."
+      
+    )
+  }
+  
+  if (!requireNamespace('signal',quietly = TRUE)) {
+    message(
+      'Subordinate package (signal) is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+
+       "Subordinate package (signal) is missing.
+                Please install the package which is defined in 'Suggests'."
+      
+    )
+  }
+  if (!requireNamespace('clusterability',quietly = TRUE)) {
+    message(
+      'Subordinate clustering package (clusterability) is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+
+        "Subordinate clustering package (clusterability) is missing.
+                Please install the package which is defined in 'Suggests'."
+      
     )
   }
   

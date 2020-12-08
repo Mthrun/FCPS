@@ -57,7 +57,7 @@ EntropyOfDataField=function(Data,sigmarange=c(0.01,0.1,0.5,1,2,5,8,10,100),PlotI
     #      xlab = 'Points of  Selected Impact Factor Sigma in black, Red: Upper Boundary of H',main='Entropy of Data Field')
     # abline(h = log(nrow(Data)),col='red')
     # 
-    requireNamespace('plotly')
+    requireNamespace('plotly',quietly = TRUE )
     
     p <- plotly::plot_ly( x = ~sigmarange, y = ~H,type = "scatter",mode="markers")
     

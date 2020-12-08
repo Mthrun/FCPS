@@ -54,15 +54,15 @@ SpectralClustering <- function(Data, ClusterNo,PlotIt=FALSE,...){
  #   library(kernlab)
 #  }
   #SpectralClustering <- function(Data, ClusterNo=2,kernel = "rbfdot", kpar="automatic",nystrom.red=F,nystrom.sample = dim(Data)[1]/6,iterations = 200,mod.sample = 0.75, na.action = na.omit,...){
-  if (!requireNamespace('kernlab')) {
+  if (!requireNamespace('kernlab',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (kernlab) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(Data)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering (kernlab) package is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )

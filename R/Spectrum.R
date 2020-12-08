@@ -16,23 +16,29 @@ Spectrum=function(Data,Type=2,ClusterNo=NULL,PlotIt=FALSE,Silent=TRUE,PlotResult
   # Object            Object of Spectrum::Spectrum algorithm
   #
   # Author: MT
-  if (!requireNamespace('Spectrum')) {
+  if (!requireNamespace('Spectrum',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (Spectrum) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(Data)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (Spectrum) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )
   }
-  if(is.null(ClusterNo))
+ 
+    
+  if(is.null(ClusterNo)){
     out=Spectrum::Spectrum(t(Data),method = Type,silent = Silent,showres =PlotResults ,...)
-  else
+  }else{
+    if(ClusterNo==0) ClusterNo=NULL
+    warning("Spectrum:: curently there is the unresolved bug:  Error in rowSums(A2) : object 'A2' not found in the Subordinate clustering package.")
     out=Spectrum::Spectrum(t(Data),fixk = ClusterNo,method = 3,ClusterNo,silent = Silent,showres =PlotResults,...)
+  }
+    
   
   Cls=out$assignments
   

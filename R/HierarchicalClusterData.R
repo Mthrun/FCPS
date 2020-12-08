@@ -42,7 +42,7 @@ HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,Type="wa
   
   dcls = Cls
   
-  if(requireNamespace("DataVisualizations")){
+  if(requireNamespace("DataVisualizations",quietly = TRUE)){
     col = DataVisualizations::DefaultColorSequence
   }
   else{
@@ -74,8 +74,12 @@ HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,Type="wa
     return(list(node=node,class=classification))
   }
   
-  requireNamespace('parallelDist')
+  if(requireNamespace('parallelDist',quietly = TRUE)){
     Y=parallelDist::parDist(Data,method=DistanceMethod)#}    # Case Corr und otherwise
+  }else{
+    Y=dist(Data,method=DistanceMethod)
+  }
+
   if(any(is.nan(Y),na.rm=TRUE)) {
   stop('DistanceMethod with NaN in calculated. Please choose another distance.')}
   if(any(is.infinite(Y),na.rm=TRUE)) {

@@ -20,15 +20,15 @@ DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,DistanceMethod
   # Rodriguez, A., & Laio, A.: Clustering by fast search and find of density peaks. Science, 344(6191), 1492-1496. doi:10.1126/science.1242072, 2014.
 
   
-  if (!requireNamespace('densityClust')) {
+  if (!requireNamespace('densityClust',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (densityClust) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(DataOrDistances)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (densityClust) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )
@@ -61,12 +61,16 @@ DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,DistanceMethod
     DensityPeaks=densityClust::densityClust(Distances,dc=Dc,k=Knn,...)
   
   if(missing(Rho)|missing(Delta)){
-    requireNamespace('plotly')
-    print('Please set parameters Rho and Delta')
-   
-    p <- plotly::plot_ly( x = ~DensityPeaks$rho, y = ~DensityPeaks$delta,type = "scatter",mode="markers")
-    p=plotly::layout(p,title = "Decision graph",xaxis=list(exponentformat = "E",  title = "Local Density Rho"),yaxis=list(exponentformat = "E",  title = "Minimum Distance Delta"),showlegend = FALSE)
-	return(p)
+    if(requireNamespace('plotly',quietly = TRUE)){
+      print('Please set parameters Rho and Delta')
+     
+      p <- plotly::plot_ly( x = ~DensityPeaks$rho, y = ~DensityPeaks$delta,type = "scatter",mode="markers")
+      p=plotly::layout(p,title = "Decision graph",xaxis=list(exponentformat = "E",  title = "Local Density Rho"),yaxis=list(exponentformat = "E",  title = "Minimum Distance Delta"),showlegend = FALSE)
+  	  return(p)
+    }else{
+      warning("Package plotly is missing.")
+      plot(DensityPeaks$rho,DensityPeaks$delta,ylab = "Minimum Distance Delta",main = "Decision graph",yx= "Local Density Rho")
+    }
   }else{
     DensityPeaks=densityClust::findClusters(DensityPeaks,rho=Rho,delta=Delta)
   }

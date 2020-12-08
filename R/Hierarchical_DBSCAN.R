@@ -24,15 +24,15 @@ Hierarchical_DBSCAN <-function(DataOrDistances,minPts=4,PlotTree=FALSE,PlotIt=FA
   #
   # [Campello et al., 2015]  Campello RJGB, Moulavi D, Zimek A, Sander J: Hierarchical density estimates for data clustering, visualization, and outlier detection, ACM Transactions on Knowledge Discovery from Data (TKDD), 10(5), pp. 1-51, 2015.
   
-  if (!requireNamespace('dbscan')) {
+  if (!requireNamespace('dbscan',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (dbscan) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(DataOrDistances)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (dbscan) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )

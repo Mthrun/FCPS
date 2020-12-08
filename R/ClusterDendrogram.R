@@ -58,7 +58,7 @@ ClusterDendrogram=function(TreeOrDendrogram,ClusterNo,Colorsequence,main='Name o
     }
   }
   
-  if(requireNamespace('dendextend')){
+  if(requireNamespace('dendextend',quietly = TRUE)){
     # What is the ordering of the cluster in dendrogram
     # from left to right
     Clstemp=Cls[order.dendrogram(x)]

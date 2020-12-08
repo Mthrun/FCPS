@@ -40,7 +40,8 @@ HierarchicalClustering=function(DataOrDistances,ClusterNo,Type='SingleL',Fast=TR
     if(ClusterNo>1){
       Cls = cutree(V$Tree, ClusterNo)
     }else{
-      Cls=ClusterDendrogram(V$Tree,1,Colorsequence = 'black',main = 'HDBSCAN Clustering')
+      #ClusterDendrogram(V$Tree,1,Colorsequence = 'black',main = 'HDBSCAN Clustering')
+      Cls=V$Cls#automatic number of clusters selection by Hierarchical_DBSCAN
     }
     return(list(Cls=Cls,Dendrogram=V$Dendrogram,Object=V$Tree,OriginalObject=V$Object))
   }

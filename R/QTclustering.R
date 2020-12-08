@@ -15,26 +15,27 @@ QTclustering=QTClustering <-function(Data,Radius,PlotIt=FALSE,...){
   #
   # Author: MT 04/2018
 
-  if (!requireNamespace('flexclust')) {
+  if (!requireNamespace('flexclust',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (flexclust) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(Data)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (flexclust) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )
   }
 
   if(is.null(Radius)){ #estimate Maximum diameter of cluster, i.e. group of large distances
-    if(requireNamespace("parallelDist")){
+    if(requireNamespace("parallelDist",quietly = TRUE)){
       Radius=EstimateRadiusByDistance(as.matrix(parallelDist::parallelDist(Data)))
     }
     else{
-      stop('parallelDist package not loaded or installed.')
+      warning('parallelDist package not loaded or installed, using dist()')
+      Radius=EstimateRadiusByDistance(as.matrix(dist(Data)))
     }
   } 
   obj=flexclust::qtclust(Data,Radius,...)

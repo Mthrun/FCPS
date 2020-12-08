@@ -13,13 +13,13 @@ ADPclustering=function(Data,ClusterNo=NULL,PlotIt=FALSE,...){
   # Author: MT, 04/2018
   if (!requireNamespace('ADPclust', quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (ADPclust) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(Data)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (ADPclust) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )

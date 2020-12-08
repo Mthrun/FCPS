@@ -5,9 +5,9 @@
 Robust Trimmed Clustering invented by [Garcia-Escudero et al., 2008] and implemented by [Fritz et al., 2012].
 }
 \usage{
-RobustTrimmedClustering(Data, ClusterNo,Alpha,
+RobustTrimmedClustering(Data, ClusterNo,
 
-PlotIt=FALSE,...)
+Alpha=0.05,PlotIt=FALSE,...)
 }
 
 \arguments{
@@ -17,13 +17,13 @@ PlotIt=FALSE,...)
 \item{PlotIt}{Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 
 \item{Alpha}{
-No trimming is done equals to alpha =0, otherwise proportion of datapoints to be trimmed.
+No trimming is done equals to alpha =0, otherwise proportion of datapoints to be trimmed, \code{\link[tclust]{tclust}} uses 0.05 as default.
 }
-\item{\dots}{Further arguments to be set for the clustering algorithm, e.g.  \code{restr} and \code{restr.fact} described in details. If not set, default arguments are used.}
+\item{\dots}{Further arguments to be set for the clustering algorithm, e.g.  ,\code{nstart} (number of random initializations),\code{iter.max} (maximum number of concentration steps),\code{restr} and \code{restr.fact} described in details. If not set, default arguments are used.}
 }
 
 \details{
-"The larger \code{restr.fact} is chosen, the looser is the restriction on the scatter matrices, allowing for more heterogeneity among the clusters. On the contrary, small values of restr.fact close to 1 imply very equally scattered clusters. This idea of constraining cluster scatters to avoid spurious solutions goes back to Hathaway (1985), who proposed it in mixture fitting problems" [Fritz et al., 2012]. The type of constraint \code{restr} can be set to "eigen", "deter" or "sigma.". Please see \code{\link[tclust]{tclust}} for further parameter description.
+"This iterative algorithm initializes k clusters randomly and performs "concentration steps" in order to improve the current cluster assignment. The number of maximum concentration steps to be performed is given by iter.max. For approximately obtaining the global optimum, the system is initialized nstart times and concentration steps are performed until convergence or iter.max is reached. When processing more complex data sets higher values of nstart and iter.max have to be specified (obviously implying extra computation time). ... The larger \code{restr.fact} is chosen, the looser is the restriction on the scatter matrices, allowing for more heterogeneity among the clusters. On the contrary, small values of restr.fact close to 1 imply very equally scattered clusters. This idea of constraining cluster scatters to avoid spurious solutions goes back to Hathaway (1985), who proposed it in mixture fitting problems" [Fritz et al., 2012]. The type of constraint \code{restr} can be set to "eigen", "deter" or "sigma.". Please see \code{\link[tclust]{tclust}} for further parameter description.
 }
 \value{
 List of

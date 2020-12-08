@@ -8,14 +8,18 @@ Markov Clustering
 Graph clustering algorithm introduced by [van Dongen, 2000].
 }
 \usage{
-MarkovClustering(Data=NULL,Adjacency=NULL,Radius=TRUE,addLoops =TRUE,PlotIt=FALSE,...)
+MarkovClustering(DataOrDistances=NULL,Adjacency=NULL,
+
+Radius=TRUE,DistanceMethod="euclidean",addLoops = TRUE,PlotIt=FALSE,\dots)
 }
 
 \arguments{
-\item{Data}{NULL or: [1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
+\item{DataOrDistances}{NULL or: Either [1:n,1:n] symmetric distance matrix or [1:n,1:d] not symmetric data matrix of n cases and d variables}
 \item{Adjacency}{Used if \code{Data} is NULL, matrix [1:n,1:n] defining which points are adjacent to each other by the number 1; not adjacent: 0}
-\item{Radius}{Scalar, Radius for unit disk graph (r-ball graph) if adjacency matrix is missing. Automatic estimation can be done either with =TRUE [Ultsch, 2005] or FALSE [Thrun et al., 2016]}
-
+\item{Radius}{Scalar, Radius for unit disk graph (r-ball graph) if adjacency matrix is missing. Automatic estimation can be done either with =TRUE [Ultsch, 2005] or FALSE [Thrun et al., 2016] if Data instead of Distances are given.}
+  \item{DistanceMethod}{
+Optional distance method of data, default is euclid, see \code{\link[parallelDist]{parDist}} for details
+}
 \item{addLoops}{
 Logical; if TRUE, self-loops with weight 1 are added to each vertex of x (see \code{mcl} of CRAN package \code{MCL}).
 }
@@ -23,7 +27,7 @@ Logical; if TRUE, self-loops with weight 1 are added to each vertex of x (see \c
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 }
 \details{
-\code{Data} is used to compute the \code{Adjecency} matrix if this input is missing. Then a unit-disk (R-ball) graph is calculated.
+\code{DataOrDistances} is used to compute the \code{Adjecency} matrix if this input is missing. Then a unit-disk (R-ball) graph is calculated.
 }
 \value{
 List of

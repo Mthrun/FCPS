@@ -43,15 +43,15 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,Type='Orclus',PlotIt=FA
       }
       
       
-      if (!requireNamespace('orclus')) {
+      if (!requireNamespace('orclus',quietly = TRUE)) {
         message(
-          'Subordinate clustering package is missing. No computations are performed.
+          'Subordinate clustering package (orclus) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
         )
         return(
           list(
             Cls = rep(1, nrow(Data)),
-            Object = "Subordinate clustering package is missing.
+            Object = "Subordinate clustering package (orclus) is missing.
                 Please install the package which is defined in 'Suggests'."
           )
         )
@@ -64,15 +64,15 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,Type='Orclus',PlotIt=FA
       Cls = obj$cluster
     },
     ProClus = {
-      if (!requireNamespace('subspace')) {
+      if (!requireNamespace('subspace',quietly = TRUE)) {
         message(
-          'Subordinate clustering package is missing. No computations are performed.
+          'Subordinate clustering package (subspace) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
         )
         return(
           list(
             Cls = rep(1, nrow(Data)),
-            Object = "Subordinate clustering package is missing.
+            Object = "Subordinate clustering package (subspace) is missing.
                 Please install the package which is defined in 'Suggests'."
           )
         )
@@ -90,15 +90,15 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,Type='Orclus',PlotIt=FA
       Cls[!is.finite(Cls)] = 9999
     },
     SubClu = {
-      if (!requireNamespace('subspace')) {
+      if (!requireNamespace('subspace',quietly = TRUE)) {
         message(
-          'Subordinate clustering package is missing. No computations are performed.
+          'Subordinate clustering package (subspace) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
         )
         return(
           list(
             Cls = rep(1, nrow(Data)),
-            Object = "Subordinate clustering package is missing.
+            Object = "Subordinate clustering package (subspace) is missing.
                 Please install the package which is defined in 'Suggests'."
           )
         )
@@ -113,15 +113,15 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,Type='Orclus',PlotIt=FA
       Cls[!is.finite(Cls)] = 9999
     },
     Clique = {
-      if (!requireNamespace('subspace')) {
+      if (!requireNamespace('subspace',quietly = TRUE)) {
         message(
-          'Subordinate clustering package is missing. No computations are performed.
+          'Subordinate clustering package (subspace) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
         )
         return(
           list(
             Cls = rep(1, nrow(Data)),
-            Object = "Subordinate clustering package is missing.
+            Object = "Subordinate clustering package (subspace) is missing.
                 Please install the package which is defined in 'Suggests'."
           )
         )

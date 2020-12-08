@@ -16,15 +16,15 @@ SOMclustering=function(Data,LC=c(1,2),ClusterNo=NULL,Mode="online",PlotIt=FALSE,
   # Object            Object of kohonen::supersom
   #
   # Author: MT, 04/2018
-  if (!requireNamespace('kohonen')) {
+  if (!requireNamespace('kohonen',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (kohonen) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(Data)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (kohonen) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )

@@ -13,15 +13,15 @@ ProjectionPursuitClustering=function(Data,ClusterNo,Type="MinimumDensity",PlotIt
   # Object            Object of PPCI::ncuth algorithm
   #
   # Author: MT, 04/2020
-  if (!requireNamespace('PPCI')) {
+  if (!requireNamespace('PPCI',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (PPCI) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(Data)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (PPCI) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )
@@ -37,7 +37,7 @@ ProjectionPursuitClustering=function(Data,ClusterNo,Type="MinimumDensity",PlotIt
           message('ProjectionPursuitClustering of type KernelPCA does not require "ClusterNo" and will determine the number of clusters automatically.')
         }
         
-        if(requireNamespace("kernlab")){
+        if(requireNamespace("kernlab",quietly = TRUE)){
           x2=kernlab::kpca(Data,kernel="rbfdot",kpar=list(sigma=3))@rotated
         }
         else{

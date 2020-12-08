@@ -21,15 +21,15 @@ ModelBasedClustering <-function(Data,ClusterNo=2,PlotIt=FALSE,...){
   # [Fraley/Raftery, 2002]  Fraley, C., & Raftery, A. E.: Model-based clustering, discriminant analysis, and density estimation, Journal of the American Statistical Association, Vol. 97(458), pp. 611-631. 2002.
   # [Fraley/Raftery, 2006]  Fraley, C., & Raftery, A. E.MCLUST version 3: an R package for normal mixture modeling and model-based clustering,DTIC Document, 2006.
   
-  if (!requireNamespace('mclust')) {
+  if (!requireNamespace('mclust',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (mclust) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(Data)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (mclust) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )

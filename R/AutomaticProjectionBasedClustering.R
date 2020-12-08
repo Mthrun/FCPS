@@ -17,13 +17,13 @@ AutomaticProjectionBasedClustering=function(DataOrDistances,ClusterNo,Type="NerV
   
   if (!requireNamespace('ProjectionBasedClustering',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (ProjectionBasedClustering) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(DataOrDistances)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (ProjectionBasedClustering) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )
@@ -44,7 +44,7 @@ AutomaticProjectionBasedClustering=function(DataOrDistances,ClusterNo,Type="NerV
     }
     
   }else{
-    if(isTRUE(PlotMap))
+    #if(isTRUE(PlotMap))
       Data=DataOrDistances#for plotting
   }
   n=dim(DataOrDistances)[1]
@@ -100,8 +100,8 @@ AutomaticProjectionBasedClustering=function(DataOrDistances,ClusterNo,Type="NerV
     if(requireNamespace('DatabionicSwarm',quietly = TRUE)){
       Cls=DatabionicSwarm::DBSclustering(k = ClusterNo,DataOrDistance = DataOrDistances,BestMatches = Bestmatches,LC = LC,StructureType = StructureType,PlotIt = PlotTree)
     }else{
-      warning('DatabionicSwarm is not installed.')
-      return('DatabionicSwarm is not installed.')
+      warning('DatabionicSwarm package is not installed.')
+      return('DatabionicSwarm package is not installed.')
     }
   }
   # Verification

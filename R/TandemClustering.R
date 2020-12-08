@@ -40,7 +40,7 @@ TandemClustering=function(Data,ClusterNo,Type="Reduced",PlotIt=FALSE,...){
         cc = length(unique(Cls1))
       }
       if (isTRUE(PlotIt)) {
-        if (requireNamespace('DataVisualizations'))
+        if (requireNamespace('DataVisualizations',quietly = TRUE))
           DataVisualizations::Plot3D(Data, Cls1)
         else
           warning('PlotIT unavailable because DataVisualizations not installed')
@@ -60,15 +60,15 @@ TandemClustering=function(Data,ClusterNo,Type="Reduced",PlotIt=FALSE,...){
   switch(
     Type,
     'Factorial' = {
-      if (!requireNamespace('clustrd')) {
+      if (!requireNamespace('clustrd',quietly = TRUE)) {
         message(
-          'Subordinate clustering package is missing. No computations are performed.
+          'Subordinate clustering package (clustrd) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
         )
         return(
           list(
             Cls = rep(1, nrow(Data)),
-            Object = "Subordinate clustering package is missing.
+            Object = "Subordinate clustering package (clustrd) is missing.
                 Please install the package which is defined in 'Suggests'."
           )
         )
@@ -79,15 +79,15 @@ TandemClustering=function(Data,ClusterNo,Type="Reduced",PlotIt=FALSE,...){
                              ...)
     },
     'Reduced' = {
-      if (!requireNamespace('clustrd')) {
+      if (!requireNamespace('clustrd',quietly = TRUE)) {
         message(
-          'Subordinate clustering package is missing. No computations are performed.
+          'Subordinate clustering package (clustrd) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
         )
         return(
           list(
             Cls = rep(1, nrow(Data)),
-            Object = "Subordinate clustering package is missing.
+            Object = "Subordinate clustering package (clustrd) is missing.
                 Please install the package which is defined in 'Suggests'."
           )
         )
@@ -99,28 +99,28 @@ TandemClustering=function(Data,ClusterNo,Type="Reduced",PlotIt=FALSE,...){
                              ...)
     },
     'KernelPCA' = {
-      if (!requireNamespace('kernlab')) {
+      if (!requireNamespace('kernlab',quietly = TRUE)) {
         message(
-          'Subordinate clustering package is missing. No computations are performed.
+          'Subordinate clustering package (kernlab) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
         )
         return(
           list(
             Cls = rep(1, nrow(Data)),
-            Object = "Subordinate clustering package is missing.
+            Object = "Subordinate clustering package (kernlab) is missing.
                 Please install the package which is defined in 'Suggests'."
           )
         )
       }
-      if (!requireNamespace('PPCI')) {
+      if (!requireNamespace('PPCI',quietly = TRUE)) {
         message(
-          'Subordinate clustering package is missing. No computations are performed.
+          'Subordinate clustering package (PPCI) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
         )
         return(
           list(
             Cls = rep(1, nrow(Data)),
-            Object = "Subordinate clustering package is missing.
+            Object = "Subordinate clustering package (PPCI) is missing.
                 Please install the package which is defined in 'Suggests'."
           )
         )

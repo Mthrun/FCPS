@@ -14,15 +14,15 @@ pdfClustering <-function(Data,PlotIt=FALSE,...){
   # 
   # MT 2019
 
-  if (!requireNamespace('pdfCluster')) {
+  if (!requireNamespace('pdfCluster',quietly = TRUE)) {
     message(
-      'Subordinate clustering package is missing. No computations are performed.
+      'Subordinate clustering package (pdfCluster) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
     )
     return(
       list(
         Cls = rep(1, nrow(Data)),
-        Object = "Subordinate clustering package is missing.
+        Object = "Subordinate clustering package (pdfCluster) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )
