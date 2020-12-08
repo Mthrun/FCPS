@@ -2,7 +2,7 @@
 \alias{FannyClustering}
 
 \title{
-Fuzzy Analysis Clustering [Rousseeuw/Kaufman, 1990, p. 164-198] 
+Fuzzy Analysis Clustering [Rousseeuw/Kaufman, 1990, p. 253-279] 
 }
 \description{
 ...
@@ -35,7 +35,7 @@ Points which cannot be assigned to a cluster will be reported with 0.
 \item{Object}{Object defined by clustering algorithm as the second output of this algorithm}
 }
 \references{
- [Rousseeuw/Kaufman, 1990]	Rousseeuw, P. J., & Kaufman, L.: Finding groups in data, Belgium, John Wiley & Sons Inc., ISBN: 0471735787, 1990.
+ [Rousseeuw/Kaufman, 1990]	Rousseeuw, P. J., & Kaufman, L.: Finding groups in data, Belgium, John Wiley & Sons Inc., ISBN: 0471735787, doi: 10.1002/9780470316801, Online ISBN: 9780470316801, 1990.
 
 }
 \author{

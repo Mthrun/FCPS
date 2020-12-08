@@ -1,5 +1,5 @@
-\name{Hierarchical_DBSCAN}
-\alias{Hierarchical_DBSCAN}
+\name{HierarchicalDBSCAN}
+\alias{HierarchicalDBSCAN}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Hierarchical DBSCAN
@@ -8,7 +8,7 @@ Hierarchical DBSCAN
 Hierarchical DBSCAN clustering [Campello et al., 2015].
 }
 \usage{
-Hierarchical_DBSCAN(DataOrDistances,minPts=4,
+HierarchicalDBSCAN(DataOrDistances,minPts=4,
 
 PlotTree=FALSE,PlotIt=FALSE,\dots)
 }
@@ -55,12 +55,12 @@ Michael Thrun
 \examples{
 data('Hepta')
 
-out=Hierarchical_DBSCAN(Hepta$Data,PlotIt=FALSE)
+out=HierarchicalDBSCAN(Hepta$Data,PlotIt=FALSE)
 
 \donttest{
 data('Leukemia')
 set.seed(1234)
-CA=Hierarchical_DBSCAN(Leukemia$DistanceMatrix)
+CA=HierarchicalDBSCAN(Leukemia$DistanceMatrix)
 #ClusterCount(CA$Cls)
 #ClusterDendrogram(CA$Dendrogram,5,main='H-DBscan')
 }

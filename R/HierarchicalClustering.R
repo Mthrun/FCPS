@@ -36,7 +36,7 @@ HierarchicalClustering=function(DataOrDistances,ClusterNo,Type='SingleL',Fast=TR
   }else if(Type=="Minimax"){
     return(MinimaxLinkageClustering(DataOrDistances = DataOrDistances,ClusterNo = ClusterNo,...))
   }else if(Type=="HDBSCAN"){
-    V=Hierarchical_DBSCAN(DataOrDistances = DataOrDistances,...)
+    V=HierarchicalDBSCAN(DataOrDistances = DataOrDistances,...)
     if(ClusterNo>1){
       Cls = cutree(V$Tree, ClusterNo)
     }else{

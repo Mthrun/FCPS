@@ -2,7 +2,7 @@
 \alias{LargeApplicationClustering}
 \title{Large Application Clustering}
 \description{
-Clustering Large Applications  (clara) of  [Rousseeuw/Kaufman, 1990]
+Clustering Large Applications  (clara) of  [Rousseeuw/Kaufman, 1990, pp. 126-163]
 }
 \usage{
 LargeApplicationClustering(Data, ClusterNo,
@@ -41,7 +41,7 @@ out=LargeApplicationClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 \author{Michael Thrun}
 
 \references{
-[Rousseeuw/Kaufman, 1990]	Rousseeuw, P. J., & Kaufman, L.: Finding groups in data, Belgium, John Wiley & Sons Inc., ISBN: 0471735787, 1990.
+[Rousseeuw/Kaufman, 1990]	Rousseeuw, P. J., & Kaufman, L.: Finding groups in data, Belgium, John Wiley & Sons Inc., ISBN: 0471735787, doi 10.1002/9780470316801, Online ISBN: 9780470316801, 1990.
 }
 \keyword{LargeApplicationClustering}
 \keyword{Clustering}

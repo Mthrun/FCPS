@@ -5,7 +5,7 @@
 AGNES clustering
 }
 \description{
-Agglomerative hierarchical clustering (AGNES)
+Agglomerative hierarchical clustering (AGNES)of [Rousseeuw/Kaufman, 1990, pp. 199-252]
 }
 \usage{
 AgglomerativeNestingClustering(DataOrDistances, ClusterNo,
@@ -34,15 +34,11 @@ List of
 \item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
-Kaufman, L. and Rousseeuw, P.J. (1990). Finding Groups in Data: An Introduction to Cluster Analysis. Wiley, New York.
+[Rousseeuw/Kaufman, 1990]	Rousseeuw, P. J., & Kaufman, L.: Finding groups in data, Belgium, John Wiley & Sons Inc., ISBN: 0471735787, doi 10.1002/9780470316801, Online ISBN: 9780470316801, 1990.
 
-Anja Struyf, Mia Hubert and Peter J. Rousseeuw (1996) Clustering in an Object-Oriented Environment. Journal of Statistical Software 1. 10.18637/jss.v001.i04
+[Struyf et al., 1996] Struyf,A., Hubert, M. and Rousseeuw, Peter J.: Clustering in an Object-Oriented Environment, Journal of Statistical Software, Vol. 1, doi: 10.18637/jss.v001.i04, 1996.
 
-Struyf, A., Hubert, M. and Rousseeuw, P.J. (1997). Integrating Robust Clustering Techniques in S-PLUS, Computational Statistics and Data Analysis, 26, 17--37.
-
-Lance, G.N., and W.T. Williams (1966). A General Theory of Classifactory Sorting Strategies, I. Hierarchical Systems. Computer J. 9, 373--380.
-
-Belbin, L., Faith, D.P. and Milligan, G.W. (1992). A Comparison of Two Approaches to Beta-Flexible Clustering. Multivariate Behavioral Research, 27, 417--433.
+[Struyf et al., 1997] Struyf, A., Hubert, M. and Rousseeuw, P.J.: Integrating Robust Clustering Techniques in S-PLUS, Computational Statistics and Data Analysis, Vol. 26, pp. 17--37, 1997.
 }
 \author{
 Michael Thrun

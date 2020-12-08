@@ -55,9 +55,6 @@ JAVA_HOME has to be set for rJava to the ProClus algorithm (in windows set PATH 
 [Agrawal et al., 2005]  Agrawal, R., Gehrke, J., Gunopulos, D., & Raghavan, P.: Automatic subspace clustering of high dimensional data, Data Mining and Knowledge Discovery, Vol. 11(1), pp. 5-33. 2005.
 
 [Kailing et al.,2004]  Kailing, Karin, Hans-Peter Kriegel, and Peer Kroeger: Density-connected subspace clustering for high-dimensional data, Proceedings of the 2004 SIAM international conference on data mining. Society for Industrial and Applied Mathematics, 2004
-
-Further "advertising" can be found in 
-
 }
 
  \examples{

@@ -1,7 +1,6 @@
-DBscan <-function(Data,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
-  # res=kmeans(FCPS$Hepta$Data,7)
-  # Cls=DBscan(FCPS$Hepta$Data,sqrt(min(res$withinss)))
-  # DBscan based on [Ester et al., 1996]
+DBSCAN <-function(Data,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
+  # Cls=DBSCAN(FCPS$Hepta$Data,sqrt(min(res$withinss)))
+  # DBSCAN based on [Ester et al., 1996]
   #
   # INPUT
   # Data[1:n,1:d]    Data set with n observations and d features
@@ -16,7 +15,7 @@ DBscan <-function(Data,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
   #
   # OUTPUT
   # Cls[1:n]         Clustering of data. Points which cannot be assigned to a cluster will be reported as members of the noise cluster with NaN.
-  # Object           Object of DBscan
+  # Object           Object of DBSCAN
   # 
   # Author: MT 2017, 1.Editor MT 04/2018, 2. Editor: MT 02/2019: Parameter Estimation significantly improved
   #
@@ -42,7 +41,7 @@ DBscan <-function(Data,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
   
   if(is.null(Radius)){
     if(requireNamespace("DataVisualizations",quietly = TRUE)){
-      warning('The Radius (eps) parameter is missing but it is required in DBscan. Trying to estimate..')
+      warning('The Radius (eps) parameter is missing but it is required in DBSCAN. Trying to estimate..')
       Radius=0.5*DataVisualizations::ParetoRadius(Data)
     }
     else{
@@ -51,7 +50,7 @@ DBscan <-function(Data,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
   }
   if(is.null(minPts)){
     minPts=round(0.04*nrow(Data),0)
-    warning('The minPts parameter is missing but it is required in DBscan. Trying to estimate..')
+    warning('The minPts parameter is missing but it is required in DBSCAN. Trying to estimate..')
   }   
   if(missing(UpperLimitRadius))
     UpperLimitRadius=1.1*Radius
@@ -70,7 +69,7 @@ DBscan <-function(Data,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
   # Calling recursively
   # In case of outliers wie have a boundary of 5% of objects
   if(Radius<UpperLimitRadius&sum(Cls==0)>round(0.05*nrow(Data))){
-    out=DBscan(Data,Radius*1.01,minPts,PlotIt,UpperLimitRadius=UpperLimitRadius,...)
+    out=DBSCAN(Data,Radius*1.01,minPts,PlotIt,UpperLimitRadius=UpperLimitRadius,...)
     Cls=out$Cls
     liste=out$DBscanObject
   }

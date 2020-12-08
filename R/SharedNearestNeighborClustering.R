@@ -1,4 +1,4 @@
-SharedNearestNeighborClustering <-function(Data,Knn=7,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
+SharedNearestNeighborClustering <-function(Data,Knn,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
   # Cls=SharedNearestNeighborClustering(FCPS$Hepta$Data,sqrt(min(res$withinss)))
   # DBscan nach [Ester et al., 1996]
   # 

@@ -5,7 +5,7 @@
 Partitioning Around Medoids (PAM)
 }
 \description{
-Partitioning (clustering) of the data into k clusters around medoids, a more robust version of k-means [Rousseeuw/Kaufman, 1990, p. 164-198] .
+Partitioning (clustering) of the data into k clusters around medoids, a more robust version of k-means [Rousseeuw/Kaufman, 1990, p. 68-125] .
 }
 \usage{
 PAMclustering(DataOrDistances,ClusterNo,
@@ -31,7 +31,7 @@ List of
 \item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \references{
- [Rousseeuw/Kaufman, 1990]	Rousseeuw, P. J., & Kaufman, L.: Finding groups in data, Belgium, John Wiley & Sons Inc., ISBN: 0471735787, 1990.
+ [Rousseeuw/Kaufman, 1990]	Rousseeuw, P. J., & Kaufman, L.: Finding groups in data, Belgium, John Wiley & Sons Inc., ISBN: 0471735787, doi:10.1002/9780470316801, Online ISBN: 9780470316801, 1990.
 
  [Reynolds et al., 1992]	Reynolds, A., Richards, G.,de la Iglesia, B. and Rayward-Smith, V.: Clustering rules: A comparison of partitioning and hierarchical clustering algorithms, Journal of Mathematical Modelling and Algorithms 5, 475-504, DOI:10.1007/s10852-005-9022-1, 1992.
 }

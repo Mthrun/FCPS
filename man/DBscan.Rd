@@ -1,14 +1,14 @@
-\name{DBscan}
-\alias{DBscan}
+\name{DBSCAN}
+\alias{DBSCAN}
 
 \title{
-DBscan
+DBSCAN
 }
 \description{
-DBscan clustering
+Density-Based Spatial Clustering of Applications with Noise of [Ester et al., 1996].
 }
 \usage{
-DBscan(Data,Radius,minPts,
+DBSCAN(Data,Radius,minPts,
 
 PlotIt=FALSE,UpperLimitRadius,\dots)
 }
@@ -50,7 +50,7 @@ Michael Thrun
 \examples{
 data('Hepta')
 
-out=DBscan(Hepta$Data,Radius=NULL,minPts=NULL,PlotIt=FALSE)
+out=DBSCAN(Hepta$Data,Radius=NULL,minPts=NULL,PlotIt=FALSE)
 
 \donttest{
 #search for right parameter setting by grid search
@@ -64,7 +64,7 @@ BestAcc = c()
 for (i in seq_len(nrow(DBSGrid))) {
   print(i)
   parameters <- DBSGrid[i,]
-  Cls9 = DBscan(
+  Cls9 = DBSCAN(
     Data,
     minPts = parameters$minPTs,
     
@@ -84,7 +84,7 @@ max(BestAcc)
 which.max(BestAcc)
 parameters <- DBSGrid[13,]
 
-Cls9 = DBscan(
+Cls9 = DBSCAN(
   Data,
   minPts = parameters$minPTs,
   Radius = parameters$Radius,
@@ -93,5 +93,5 @@ Cls9 = DBscan(
 )$Cls
 }
 }
-\keyword{DBscan}% use one of  RShowDoc("KEYWORDS")
+\keyword{DBSCAN}% use one of  RShowDoc("KEYWORDS")
 \keyword{Clustering}% __ONLY ONE__ keyword per line

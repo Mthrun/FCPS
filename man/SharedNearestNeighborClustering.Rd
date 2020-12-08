@@ -8,7 +8,7 @@ SNN clustering
 Shared Nearest Neighbor Clustering of [Ertoz et al., 2003].
 }
 \usage{
-SharedNearestNeighborClustering(Data,Knn=7,
+SharedNearestNeighborClustering(Data,Knn,
 
 Radius,minPts,PlotIt=FALSE,
 
@@ -55,7 +55,7 @@ Michael Thrun
 \examples{
 data('Hepta')
 out=SharedNearestNeighborClustering(
-Hepta$Data,Radius=NULL,minPts=NULL,PlotIt = FALSE)
+Hepta$Data, Knn=7,Radius=NULL,minPts=NULL,PlotIt = FALSE)
 }
 
 \keyword{snn}% use one of  RShowDoc("KEYWORDS")

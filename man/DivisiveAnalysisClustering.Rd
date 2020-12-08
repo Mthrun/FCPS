@@ -2,7 +2,7 @@
 \alias{DivisiveAnalysisClustering}
 \title{Large DivisiveAnalysisClustering Clustering}
 \description{
-Divisive Analysis Clustering (diana) of  [Rousseeuw/Kaufman, 1990]
+Divisive Analysis Clustering (diana) of  [Rousseeuw/Kaufman, 1990, pp. 253-279]
 }
 \usage{
 DivisiveAnalysisClustering(DataOrDistances, ClusterNo,
@@ -46,7 +46,7 @@ ClusterDendrogram(CA$Dendrogram,7,main='DIANA')
 \author{Michael Thrun}
 
 \references{
-[Rousseeuw/Kaufman, 1990]	Rousseeuw, P. J., & Kaufman, L.: Finding groups in data, Belgium, John Wiley & Sons Inc., ISBN: 0471735787, 1990.
+[Rousseeuw/Kaufman, 1990]	Rousseeuw, P. J., & Kaufman, L.: Finding groups in data, Belgium, John Wiley & Sons Inc., ISBN: 0471735787, doi: 10.1002/9780470316801, Online ISBN: 9780470316801, 1990.
 }
 \concept{Divisive Analysis Clustering}
 \keyword{diana}
