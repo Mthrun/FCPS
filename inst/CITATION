@@ -9,8 +9,8 @@ volume = "13",
 pages = "100642",
 year = "2021",
 issn = "2352-7110",
-doi = "https://doi.org/10.1016/j.softx.2020.100642",
-url = "http://www.sciencedirect.com/science/article/pii/S2352711020303551",
+doi = "10.1016/j.softx.2020.100642",
+url = "https://www.sciencedirect.com/science/article/pii/S2352711020303551",
   textVersion =
   paste(
 "Thrun, M. C., & Stier, Q.:",

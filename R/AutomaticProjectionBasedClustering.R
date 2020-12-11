@@ -95,7 +95,7 @@ AutomaticProjectionBasedClustering=function(DataOrDistances,ClusterNo,Type="NerV
   # Automatic Clustering
   if(Type!='Pswarm'){
     # Number of cluster from dendrogram or visualization (PlotIt=T)
-    Cls=ProjectionBasedClustering::ProjectionBasedClustering(k=ClusterNo, DataOrDistances = DataOrDistances, BestMatches = Bestmatches, LC,StructureType = StructureType,PlotIt=PlotTree)
+    Cls=ProjectionBasedClustering::ProjectionBasedClustering(k=ClusterNo, DataOrDistances, BestMatches = Bestmatches, LC = LC,StructureType = StructureType,PlotIt=PlotTree)
   }else{
     if(requireNamespace('DatabionicSwarm',quietly = TRUE)){
       Cls=DatabionicSwarm::DBSclustering(k = ClusterNo,DataOrDistance = DataOrDistances,BestMatches = Bestmatches,LC = LC,StructureType = StructureType,PlotIt = PlotTree)
