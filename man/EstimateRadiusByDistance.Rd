@@ -17,7 +17,7 @@ EstimateRadiusByDistance(DistanceMatrix)
 }
 }
 \details{
- For density-based clustering algorithms like \code{\link{DBscan}} it is not always usefull.
+ For density-based clustering algorithms like \code{\link{DBSCAN}} it is not always usefull.
 }
 \value{
 Numerical scalar defining the radius
@@ -37,7 +37,7 @@ Symmetric matrix is assumed.
 }
 \examples{
 data('Hepta')
-DistanceMatrix=as.matrix(parallelDist::parallelDist(Hepta$Data))
+DistanceMatrix=as.matrix(dist(Hepta$Data))
 Radius=EstimateRadiusByDistance(DistanceMatrix)
 }
 

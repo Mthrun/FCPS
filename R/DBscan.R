@@ -1,4 +1,4 @@
-DBSCAN <-function(Data,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
+DBSCAN = DBscan=function(Data,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
   # Cls=DBSCAN(FCPS$Hepta$Data,sqrt(min(res$withinss)))
   # DBSCAN based on [Ester et al., 1996]
   #

@@ -70,10 +70,6 @@ Michael Thrun
 \examples{
 data('Hepta')
 res=APclustering(Hepta$Data)
-\donttest{
-library(DataVisualizations)
-DataVisualizations::Plot3D(Hepta$Data,res$Cls)
-}
 }
 \seealso{
 \pkg{apcluster}

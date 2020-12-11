@@ -50,7 +50,7 @@ Michael Thrun
  \examples{
 data('Hepta')
 CA=AgglomerativeNestingClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
-\donttest{
+\dontrun{
 ClusterDendrogram(CA$Dendrogram,7,main='AGNES clustering')
 
 print(CA$Object)

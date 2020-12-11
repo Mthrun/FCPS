@@ -1,5 +1,7 @@
 \name{HierarchicalDBSCAN}
 \alias{HierarchicalDBSCAN}
+\alias{Hierarchical_DBscan}
+\alias{Hierarchical_DBSCAN}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Hierarchical DBSCAN

@@ -32,9 +32,9 @@ Subspace clustering algorithms have the goal to finde one or more subspaces with
 \item{OrclusInitialClustersNo}{Only for Orclus algorithm: Initial number of clusters (that are computed in the entire data space) must be greater than k. The number of clusters is iteratively decreased by a factor until the final number of k clusters is reached.}
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.
 
-For Subclue: "epsilon" and "minSupport", see \code{\link{DBscan}}
+For Subclue: "epsilon" and "minSupport", see \code{\link{DBSCAN}}
 
-For Clique: "xi" (number of intervals for each dimension) and "tau" (Density Threshold), see \code{\link{DBscan}}
+For Clique: "xi" (number of intervals for each dimension) and "tau" (Density Threshold), see \code{\link{DBSCAN}}
 }
 }
 \value{

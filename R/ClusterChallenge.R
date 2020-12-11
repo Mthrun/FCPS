@@ -11,7 +11,13 @@ ClusterChallenge=function(Name,SampleSize,PlotIt=FALSE,PointSize=1,Plotter3D="rg
   # OUTPUT
   # Name    data matrix
   # Cls     numerical vector of classification
-  # 
+  #
+  
+  if(!requireNamespace('pracma')){
+    message("ClusterChallenge requires the package (pracma) specified in suggest to be installed. Please install this package.")
+    return(NaN)
+  }
+  
   if(SampleSize<500){
     warning('SampleSize may be to small in order to represent clustering problem correctly.')
   }
@@ -93,7 +99,11 @@ ClusterChallenge=function(Name,SampleSize,PlotIt=FALSE,PointSize=1,Plotter3D="rg
       Min=1-x/y
       Max=1+x/y
       diff=Max-Min
-      M=as.matrix(parallelDist::parDist(takesample))
+      if(requireNamespace("parallelDist"))
+        M=as.matrix(parallelDist::parDist(takesample))
+      else
+        M=as.matrix(dist(takesample))
+      
       M[upper.tri(M)]=NaN
       #dubletten
       ind=which(M==0,arr.ind = TRUE)

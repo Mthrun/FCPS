@@ -53,10 +53,10 @@ Michael Thrun
 
 \examples{
 \dontshow{
-ClusterChallenge("Chainlink",10,FALSE)
+ClusterChallenge("Chainlink",500, PlotIt=FALSE)
 }
-\donttest{
-ClusterChallenge("Chainlink",2000,TRUE)
+\dontrun{
+ClusterChallenge("Chainlink",2000,PlotIt=TRUE)
 }
 }
 \seealso{

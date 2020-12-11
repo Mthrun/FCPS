@@ -16,6 +16,7 @@ ClusterPlotMDS=function(DataOrDistances,Cls,main='Clustering',DistanceMethod = "
   # The rgl plot
   # 
   # 
+
   if(missing(DataOrDistances)) stop('DataOrDistances is missing.')
 
   if(is.null(DataOrDistances)) stop('DataOrDistances is missing.')
@@ -113,42 +114,60 @@ ClusterPlotMDS=function(DataOrDistances,Cls,main='Clustering',DistanceMethod = "
   if(requireNamespace('DataVisualizations',quietly = TRUE)){
     if(Plotter3D=="rgl"){
       if(dim(Data)[2]!=2){
-        return(DataVisualizations::Plot3D(Data = Data,
-                                          Cls = Cls,
-                                          UniqueColors = Colors,
-                                          type="s",
-                                          size=PointSize,
-                                          box=F,
-                                          aspect=T,
-                                          top=T,
-                                          main=main,
-                                          Plotter3D=Plotter3D,...))
+        
+        if(requireNamespace("rgl",quietly = TRUE)){
+          return(DataVisualizations::Plot3D(Data = Data,
+                                            Cls = Cls,
+                                            UniqueColors = Colors,
+                                            type="s",
+                                            size=PointSize,
+                                            box=F,
+                                            aspect=T,
+                                            top=T,
+                                            main=main,
+                                            Plotter3D=Plotter3D,...))
+        }else{
+          plot(Data[,1],Data[,2],cols=Cls,main = main,...)
+        }
+
       }
       else{
-        p=DataVisualizations::Plot3D(Data = Data,
-                                     Cls = Cls,
-                                     UniqueColors = Colors,
-                                     size=PointSize,
-                                     Plotter3D=Plotter3D,...)+ggplot2::ggtitle(main)
-        print(p)
-        return(p)
+          if(requireNamespace("ggplot2",quietly = TRUE)){
+          p=DataVisualizations::Plot3D(Data = Data,
+                                       Cls = Cls,
+                                       UniqueColors = Colors,
+                                       size=PointSize,
+                                       Plotter3D=Plotter3D,...)+ggplot2::ggtitle(main)
+          print(p)
+          return(p)
+          }else{
+            plot(Data[,1],Data[,2],cols=Cls,main = main,...)
+          }
       }
   
     }else{
       if(dim(Data)[2]!=2){
-        p=DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,size=PointSize,Plotter3D=Plotter3D,...)
-        p=plotly::layout(p,title=main)
-        p
-        return(p)
+        if(requireNamespace("plotly",quietly = TRUE)){
+          p=DataVisualizations::Plot3D(Data = Data,Cls = Cls,UniqueColors = Colors,size=PointSize,Plotter3D=Plotter3D,...)
+          p=plotly::layout(p,title=main)
+          p
+          return(p)
+        }else{
+          plot(Data[,1],Data[,2],cols=Cls,main = main,...)
+        }
       }else{
-        return(DataVisualizations::Plot3D(Data = Data,
-                                          Cls = Cls,
-                                          UniqueColors = Colors,
-                                          size=PointSize,
-                                          Plotter3D=Plotter3D,...)+ggplot2::ggtitle(main))
-      }
-    }
-  }else{
+        if(requireNamespace("ggplot2",quietly = TRUE)){
+          return(DataVisualizations::Plot3D(Data = Data,
+                                            Cls = Cls,
+                                            UniqueColors = Colors,
+                                            size=PointSize,
+                                            Plotter3D=Plotter3D,...)+ggplot2::ggtitle(main))
+        }else{
+          plot(Data[,1],Data[,2],cols=Cls,main = main,...)
+        }
+      }# end if  if(dim(Data)[2]!=2){
+    }#end if(Plotter3D=="rgl")
+  }else{# 
     plot(Data[,1],Data[,2],cols=Cls,main = main,...)
-  }
+  } # end if(requireNamespace('DataVisualizations',quietly = TRUE)){
 }

@@ -28,7 +28,7 @@ symmetric [1:n,1:n] distance matrix, e.g. \code{as.matrix(dist(Data,method))}
 \item{Data}{[1:n,1:d] data matrix in the case that \code{DataOrDistances} is missing and partial matching does not work.}
 
   \item{\dots}{
-Further arguments passed on to either \code{\link{HierarchicalClusterData}}, \code{\link{HierarchicalClusterDists}}, \code{\link{MinimalEnergyClustering}} or \code{\link{GenieClustering}} (for "Gini") or \code{\link{Hierarchical_DBSCAN}} (for HDBSCAN) .
+Further arguments passed on to either \code{\link{HierarchicalClusterData}}, \code{\link{HierarchicalClusterDists}}, \code{\link{MinimalEnergyClustering}} or \code{\link{GenieClustering}} (for "Gini") or \code{\link{HierarchicalDBSCAN}} (for HDBSCAN) .
 }
 }
 \details{

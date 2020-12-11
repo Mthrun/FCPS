@@ -75,9 +75,9 @@ Current implementation is not efficient enough to cluster more than N=4000 cases
 \donttest{
 # Generate random but small non-structured data set
 data = cbind(
-  sample(1:100, 300, replace = T),
-  sample(1:100, 300, replace = T),
-  sample(1:100, 300, replace = T)
+  sample(1:100, 300, replace = TRUE),
+  sample(1:100, 300, replace = TRUE),
+  sample(1:100, 300, replace = TRUE)
 )
 # Make sure there are no structures
 # (sample size is small and still could generate structures randomly)
@@ -87,7 +87,7 @@ Data = DatabionicSwarm::RobustNormalization(data, Centered = TRUE)
 # No structres are visible
 # Topographic map looks like "egg carton"
 # with every point in its own valley
-Cls = DatabionicSwarmClustering(Data, 0, PlotMap = T)
+Cls = DatabionicSwarmClustering(Data, 0, PlotMap = TRUE)
 }
 
 # Distance based cluster structures
@@ -96,7 +96,7 @@ Cls = DatabionicSwarmClustering(Data, 0, PlotMap = T)
 data(Hepta)
 #DataVisualizations::Plot3D(Hepta$Data)
 
-Cls = DatabionicSwarmClustering(Hepta$Data, 0, PlotMap = T)
+Cls = DatabionicSwarmClustering(Hepta$Data, 0, PlotMap = TRUE)
 }
 
 #entagled, complex, and non-linear seperable structures 
@@ -105,7 +105,7 @@ data(Chainlink)
 #DataVisualizations::Plot3D(Chainlink$Data)
 
 # 2 valleys are visible, thus ClusterNo=2
-Cls = DatabionicSwarmClustering(Chainlink$Data, 0, PlotMap = T)
+Cls = DatabionicSwarmClustering(Chainlink$Data, 0, PlotMap = TRUE)
 
 # Experiment with parameter StructureType only
 # reveals that clustering is appropriate
@@ -113,14 +113,14 @@ Cls = DatabionicSwarmClustering(Chainlink$Data, 0, PlotMap = T)
 Cls = DatabionicSwarmClustering(Chainlink$Data,
                                 2,
                                 StructureType = FALSE,
-                                PlotMap = T)
+                                PlotMap = TRUE)
 
 # Here clusters (colored points)
 # are not seperated by valleys
 Cls = DatabionicSwarmClustering(Chainlink$Data,
                                 2,
                                 StructureType = TRUE,
-                                PlotMap = T)
+                                PlotMap = TRUE)
 }
 
 }

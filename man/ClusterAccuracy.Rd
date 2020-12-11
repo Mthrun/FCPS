@@ -44,7 +44,7 @@ Michael Thrun
 \examples{
 \dontshow{
 data('Lsun3D')
-Cls=Cls=kmeansClustering(Lsun3D$Data,3)
+Cls=Cls=kmeansClustering(Lsun3D$Data,Type = "Hartigan",3)
 ClusterAccuracy(Lsun3D$Cls,Cls$Cls)
 }
 #Influence of random sets/ random starts on k-means

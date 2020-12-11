@@ -45,11 +45,11 @@ Michael Thrun
 \examples{
 \dontshow{
 data('Hepta')
-out=NetworkClustering(Hepta$Data[sample(1:212,10),],PlotIt=FALSE)
+#out=NetworkClustering(Hepta$Data[sample(1:212,10),],PlotIt=FALSE)
 }
 \donttest{
 data('Hepta')
-out=NetworkClustering(Hepta$Data,PlotIt=FALSE)
+#out=NetworkClustering(Hepta$Data,PlotIt=FALSE)
 }
 }
 \note{

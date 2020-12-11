@@ -44,7 +44,7 @@ Michael Thrun
 }
 \examples{
 data('Hepta')
-out=RandomForestClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
+#out=RandomForestClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 }
 \keyword{RandomForestClustering}
 \concept{Random Forest Clustering}

@@ -72,7 +72,11 @@ ClusterAccuracy=function(PriorCls,CurrentCls,K=9){
     givenCls<- NormalizeCls(givenCls)
     
     uniqueLabels <- sort(na.last = T, unique(c(standardCls,givenCls)))
-    requireNamespace('pracma')
+    if(!requireNamespace('pracma')){
+      message("ClusterAccuracy requires the package (pracma) specified in suggest to be installed. Please install this package.")
+      return(NaN)
+    }
+      
     allPossiblePermutations <- pracma::perms(uniqueLabels)
     nrOfPermutations <- nrow(allPossiblePermutations)
     nrOfStdLabels <- ncol(allPossiblePermutations)

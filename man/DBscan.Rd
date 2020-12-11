@@ -1,5 +1,6 @@
 \name{DBSCAN}
 \alias{DBSCAN}
+\alias{DBscan}
 
 \title{
 DBSCAN
@@ -52,7 +53,7 @@ data('Hepta')
 
 out=DBSCAN(Hepta$Data,Radius=NULL,minPts=NULL,PlotIt=FALSE)
 
-\donttest{
+\dontrun{
 #search for right parameter setting by grid search
 data("WingNut")
 Data = WingNut$Data
