@@ -64,6 +64,6 @@ DivisiveAnalysisClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE,Sta
       warning(('ClusterNo cannot be a negativ number'))
     }
   }
-    Cls=ClusterRename(Cls,DataOrDistances)
+  Cls=ClusterRename(Cls,DataOrDistances)
   return(list(Cls=Cls,Dendrogram=Dendrogram,Object=res))
 }

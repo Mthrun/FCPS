@@ -47,7 +47,7 @@ GenieClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",
   
   # Classification or dendrogram
   if (ClusterNo>0){
-	Cls=cutree(hc,ClusterNo)
+	  Cls=cutree(hc,ClusterNo)
     Cls=ClusterRename(Cls,DataOrDistances)
     return(list(Cls=Cls,Dendrogram=as.dendrogram(hc),Object=hc))
   } 

@@ -47,12 +47,8 @@ MinimalEnergyClustering <-function(DataOrDistances,ClusterNo=0,DistanceMethod="e
   }else{
     pDist=DataOrDistances
   }
-  
-
 	hc <- energy::energy.hclust(pDist)
-	
 	m=paste("Minimal Energy Clustering/ "," N=",nrow(as.matrix(pDist)))
-	
   # Classification or Dendrogram
 	if (ClusterNo>0){
 		Cls=cutree(hc,ClusterNo)
@@ -60,7 +56,8 @@ MinimalEnergyClustering <-function(DataOrDistances,ClusterNo=0,DistanceMethod="e
 		return(list(Cls=Cls,Dendrogram=as.dendrogram(hc),Object=hc))
 	} 
 	else{
-		x=as.dendrogram(hc);plot(x, main=m,xlab="Number of Data Points N", ylab="Distance",sub=" ",leaflab ="none",...)
+		x=as.dendrogram(hc)
+		plot(x, main=m,xlab="Number of Data Points N", ylab="Distance",sub=" ",leaflab ="none",...)
 		axis(1,col="black",las=1)
 		if (ColorTreshold!=0){
 		  rect.hclust(hc, h=ColorTreshold,border="red")}		  

@@ -59,7 +59,7 @@ Data matrix is internally transposed in order to fit the definition of the algor
 \examples{
 data(Hepta)
 Data=Hepta$Data
-out=PenalizedRegressionBasedClustering(Data,0.4,1,2,FALSE)
+out=PenalizedRegressionBasedClustering(Data,0.4,1,2,PlotIt=FALSE)
 table(out$Cls,Hepta$Cls)
 }
 \keyword{ADMM}

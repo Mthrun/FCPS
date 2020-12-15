@@ -63,7 +63,7 @@ APclustering=function(DataOrDistances,InputPreference=NA,ExemplarPreferences=NA,
     Cls[ClsIndList[[i]]]=i  
   }
   if(PlotIt){
-	ClusterPlotMDS(DataOrDistances,Cls)
+	  ClusterPlotMDS(DataOrDistances,Cls)
   }
   Cls=ClusterRename(Cls,DataOrDistances)
   return(list(Cls=Cls,Object=apres))

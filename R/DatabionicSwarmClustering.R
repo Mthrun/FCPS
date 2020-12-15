@@ -85,10 +85,23 @@ DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRU
     if(!is.null(DistancesMethod))    
       DataPoints=ProjectionBasedClustering::MDS(DataDists,OutputDimension = nrow(DataDists))$ProjectedPoints
    
-   message("Operator: Generating topograhpic map of high-dimensional structures.")
-   generalizedUmatrix=DatabionicSwarm::GeneratePswarmVisualization(Data = DataPoints,ProjectedPoints = proj$ProjectedPoints,LC = proj$LC)
-   GeneralizedUmatrix::plotTopographicMap(generalizedUmatrix$Umatrix,generalizedUmatrix$Bestmatches)
-   
+    if (!requireNamespace('generalizedUmatrix',quietly = TRUE)){
+      message(
+        'Subordinate clustering package (generalizedUmatrix) is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+      )
+      return(
+        list(
+          Cls = rep(1, nrow(DataOrDistances)),
+          Object = "Subordinate clustering package (generalizedUmatrix) is missing.
+                Please install the package which is defined in 'Suggests'."
+        )
+      )
+    }else{
+     message("Operator: Generating topograhpic map of high-dimensional structures.")
+     generalizedUmatrix=DatabionicSwarm::GeneratePswarmVisualization(Data = DataPoints,ProjectedPoints = proj$ProjectedPoints,LC = proj$LC)
+     GeneralizedUmatrix::plotTopographicMap(generalizedUmatrix$Umatrix,generalizedUmatrix$Bestmatches)
+    }
   }else{
     message("Operator: Clustering the dataset.")
     TwoD_Points=proj$ProjectedPoints

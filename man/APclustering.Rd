@@ -69,7 +69,7 @@ Michael Thrun
 
 \examples{
 data('Hepta')
-res=APclustering(Hepta$Data)
+res=APclustering(Hepta$Data, PlotIt = FALSE)
 }
 \seealso{
 \pkg{apcluster}

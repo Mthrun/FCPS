@@ -16,4 +16,4 @@ URL: http://www.deepbionics.org
 BugReports: https://github.com/Mthrun/FCPS/issues
 Encoding: UTF-8
 VignetteBuilder: knitr
-SystemRequirements:  Pandoc (>= 1.12.3)
+SystemRequirements: Pandoc (>= 1.12.3)

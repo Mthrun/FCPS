@@ -41,7 +41,7 @@ Michael Thrun
 \code{\link{ModelBasedClustering}}
 }
 
- \examples{
+\examples{
 data('Hepta')
 out=MoGclustering(Hepta$Data,PlotIt=FALSE)
 }
