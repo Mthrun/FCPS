@@ -26,7 +26,11 @@ PlotIt=FALSE,SelectByABC=TRUE,Colorsequence)
 Symmetric [1:n,1:n] distance matrix
   }
   \item{ClsMatrix}{
-[1:n,1:(max.nc)] Clustering of the number of classes to be checked as a matrix with one cluster per column (see also details (2) and (3)), must be specified if method = NULL
+[1:n,1:(max.nc)] matrix of clusterings each columns is defined as: 
+
+1:n numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.
+
+(see also details (2) and (3)), must be specified if method = NULL
   }
   \item{max.nc}{
     Highest number of classes to be checked
@@ -124,17 +128,21 @@ Colorsequence works if \pkg{DataVisualizations} 1.1.13 is installed (currently o
 \examples{
 # Reading the iris dataset from the standard R-Package datasets
 data <- as.matrix(iris[,1:4])
-
+max.nc = 7
 # Creating the clusterings for the data set
 #(here with method complete) for the number of classes 2 to 8
 hc <- hclust(dist(data), method = "complete")
-clsm <- matrix(data = 0, nrow = dim(data)[1],  ncol = 7)
-for (i in 2:8) {
+clsm <- matrix(data = 0, nrow = dim(data)[1],
+
+ncol = max.nc)
+for (i in 2:(max.nc+1)) {
   clsm[,i-1] <- cutree(hc,i)
 }
 
 # Calculation of all indicators and recommendations for the number of classes
-indicatorsList=ClusterNoEstimation(Data = data, ClsMatrix = clsm, max.nc = 7)
+indicatorsList=ClusterNoEstimation(Data = data, 
+
+ClsMatrix = clsm, max.nc = max.nc)
 
 # Alternatively, the same calculation as above can be executed with the following call
 ClusterNoEstimation(Data = data, max.nc = 7, method = "complete")

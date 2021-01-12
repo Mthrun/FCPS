@@ -85,15 +85,15 @@ DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRU
     if(!is.null(DistancesMethod))    
       DataPoints=ProjectionBasedClustering::MDS(DataDists,OutputDimension = nrow(DataDists))$ProjectedPoints
    
-    if (!requireNamespace('generalizedUmatrix',quietly = TRUE)){
+    if (!requireNamespace('GeneralizedUmatrix',quietly = TRUE)){
       message(
-        'Subordinate clustering package (generalizedUmatrix) is missing. No computations are performed.
+        'Subordinate clustering package (GeneralizedUmatrix) is missing. No computations are performed.
             Please install the package which is defined in "Suggests".'
       )
       return(
         list(
           Cls = rep(1, nrow(DataOrDistances)),
-          Object = "Subordinate clustering package (generalizedUmatrix) is missing.
+          Object = "Subordinate clustering package (GeneralizedUmatrix) is missing.
                 Please install the package which is defined in 'Suggests'."
         )
       )
@@ -105,7 +105,7 @@ DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRU
   }else{
     message("Operator: Clustering the dataset.")
     TwoD_Points=proj$ProjectedPoints
-    # Make sure that grid dimensions are correct, even if generalizedUmatrix is not computed which is not necessary for clustering.
+    # Make sure that grid dimensions are correct, even if GeneralizedUmatrix is not computed which is not necessary for clustering.
     LC=c()
     LC[1]=ceiling(max(TwoD_Points[, 1])+1)
     LC[2]=ceiling(max(TwoD_Points[, 2])+1)
@@ -127,7 +127,21 @@ DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRU
     if(ClusterNo==0){#plotting is already performed in order to derive the number of clusters
       #GeneralizedUmatrix::plotTopographicMap(generalizedUmatrix$Umatrix,generalizedUmatrix$Bestmatches)
     }else{
+	    if (!requireNamespace('GeneralizedUmatrix',quietly = TRUE)){
+      message(
+        'Subordinate clustering package (GeneralizedUmatrix) is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+      )
+      return(
+        list(
+          Cls = rep(1, nrow(DataOrDistances)),
+          Object = "Subordinate clustering package (GeneralizedUmatrix) is missing.
+                Please install the package which is defined in 'Suggests'."
+        )
+      )
+		}else{
       GeneralizedUmatrix::plotTopographicMap(generalizedUmatrix$Umatrix,generalizedUmatrix$Bestmatches,Cls = Cls)
+	  }
     } 
   }
   if(PlotIt){

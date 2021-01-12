@@ -26,6 +26,8 @@ if (!requireNamespace("rmarkdown") || !rmarkdown::pandoc_available("1.12.3")) {
 ```
 The package FCPS provides standardized access to state-of-the-art clustering algorithms, datasets defining common clustering challenges, and the estimation of the number of clusters. Additionally, the cluster tendency can be investigated, the number of clusters estimated, and an appropriate accuracy can be computed for arbitrary labels.
 
+The installation guide can be found in the README.md file.
+
 In the following example, the high-dimensional leukemia dataset is loaded and a visualized:
 
 ```{r, fig.show='hold',fig.width=5,fig.height=5}
