@@ -47,7 +47,7 @@ ggplot2 plotter handle
 
 [Thrun et al., 2020]  Thrun, M. C., Gehlert, T. & Ultsch, A.: Analyzing the Fine Structure of Distributions, PLOS ONE, in press, pp. 1-66,DOI 10.1371/journal.pone.0238835, preprint available at arXiv:1908.06081, 2020. 
 
-[Thrun/Ultsch, 2020]  Thrun, M. C., and Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Artificial Intelligence, in press, \url{https://doi.org/10.1016/j.artint.2020.103237}, 2020.
+[Thrun/Ultsch, 2020]  Thrun, M. C., and Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Artificial Intelligence, in press, \doi{10.1016/j.artint.2020.103237}, 2020.
 
 [Thrun, 2020]  Thrun, M. C.: Improving the Sensitivity of Statistical Testing for Clusterability with Mirrored-Density Plot, in Archambault, D., Nabney, I. & Peltonen, J. (eds.), Machine Learning Methods in Visualisation for Big Data, The Eurographics Association, \url{https://diglib.eg.org:443/handle/10.2312/mlvis20201102}, Norrkoping, Sweden, May, 2020.
 
