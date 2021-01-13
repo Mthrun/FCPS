@@ -19,7 +19,7 @@ Classes 4, stored in \code{Tetra$Cls}
 \references{
 [Ultsch, 1993]  Ultsch, A.: Self-organizing neural networks for visualisation and classification, Information and classification, (pp. 307-313), Springer, 1993.
 
-[Thrun/Ultsch, 2020]  Thrun, M. C., & Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief, Vol. in press, pp. 105501, \doi{10.1016/j.dib.2020.105501}, 2020.
+[Thrun/Ultsch, 2020]  Thrun, M. C., & Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief, Vol. 30(C), pp. 105501, \doi{10.1016/j.dib.2020.105501}, 2020.
 }
 \examples{
 data(Tetra)

@@ -8,7 +8,7 @@ Clusterability MDplot
 Clusterability mirrored-density plot. Clusterability aims to quantify the degree of cluster structures [Adolfsson et al., 2019].
 A dataset has a high probabilty to possess cluster structures, if the first component of the PCA projection is multimodal [Adolfsson et al., 2019]. As the dip test is less exact than the MDplot [Thrun et al., 2020] , pvalues above 0.05 can be given for MDplots which are clearly multimodal. 
 
-An alternative investigation of clusterability can be performed by inspecting the topographic map of the Generalized U-Matrix for a specfic projection method using the \pkg{ProjectionBasesdClustering} and \pkg{GeneralizedUmatrix} packages on CRAN, see [Thrun/Ultsch, 2020] for details.
+An alternative investigation of clusterability can be performed by inspecting the topographic map of the Generalized U-Matrix for a specfic projection method using the \pkg{ProjectionBasesdClustering} and \pkg{GeneralizedUmatrix} packages on CRAN, see [Thrun/Ultsch, 2021] for details.
 }
 \usage{
 ClusterabilityMDplot(DataOrDistance,Method,na.rm=FALSE,\dots)
@@ -47,7 +47,7 @@ ggplot2 plotter handle
 
 [Thrun et al., 2020]  Thrun, M. C., Gehlert, T. & Ultsch, A.: Analyzing the Fine Structure of Distributions, PLOS ONE, in press, pp. 1-66,DOI 10.1371/journal.pone.0238835, preprint available at arXiv:1908.06081, 2020. 
 
-[Thrun/Ultsch, 2020]  Thrun, M. C., and Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Artificial Intelligence, in press, \doi{10.1016/j.artint.2020.103237}, 2020.
+[Thrun/Ultsch, 2021]  Thrun, M. C., and Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Artificial Intelligence, Vol. 290, pp. 103237, \doi{10.1016/j.artint.2020.103237}, 2021.
 
 [Thrun, 2020]  Thrun, M. C.: Improving the Sensitivity of Statistical Testing for Clusterability with Mirrored-Density Plot, in Archambault, D., Nabney, I. & Peltonen, J. (eds.), Machine Learning Methods in Visualisation for Big Data, The Eurographics Association, \url{https://diglib.eg.org:443/handle/10.2312/mlvis20201102}, Norrkoping, Sweden, May, 2020.
 

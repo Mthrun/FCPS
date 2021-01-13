@@ -28,7 +28,7 @@ Common clustering challenges can be generated with arbitrary sample size
 Additionally, FCPS sums 26 indicators with the goal to estimate the number of clusters up and provides an appropriate implementation of the clustering accuracy for more than two clusters
 [![[Thrun and Ultsch 2020b]](https://doi.org/10.1016/j.artint.2020.103237)](https://doi.org/10.1016/j.artint.2020.103237).
 A subset of methods was used in a benchmarking of algorithms published in
-[![[Thrun and Ultsch 2020c]](missingdoi)](missingdoi).
+[![[Thrun and Ultsch 2020c]](https://doi.org/10.1007/s00357-020-09373-2)](https://doi.org/10.1007/s00357-020-09373-2).
 
 ## Installation
 
@@ -184,6 +184,6 @@ max.nc = MaximumNumber, PlotIt = TRUE)
 
 1. [Thrun, 2020] Thrun, M. C.: Improving the Sensitivity of Statistical Testing for Clusterability with Mirrored-Density Plot, in Archambault, D., Nabney, I. & Peltonen, J. (eds.), Machine Learning Methods in Visualisation for Big Data, DOI 10.2312/mlvis.20201102, The Eurographics Association, Norrköping , Sweden, May, 2020. 
 2. [Thrun/Ultsch, 2020a] Thrun, M. C., & Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief,Vol. 30(C), pp. 105501, DOI 10.1016/j.dib.2020.105501 , 2020.
-3. [Thrun/Ultsch, 2020b]  Thrun, M. C., & Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Journal of Artificial Intelligence, in press, DOI: 10.1016/j.artint.2020.103237, 2020.
-4. [Thrun/Ultsch, 2020c]  Thrun, M. C., & Ultsch, A. : Using Projection based Clustering to Find Distance and Density based Clusters in High-Dimensional Data, Journal of Classification, DOI 10.1007/s00357-020-09373-2, accepted, Springer, 2020.
+3. [Thrun/Ultsch, 2021]  Thrun, M. C., and Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Artificial Intelligence, Vol. 290, pp. 103237, \doi{10.1016/j.artint.2020.103237}, 2021.
+4. [Thrun/Ultsch, 2020c]  Thrun, M. C., & Ultsch, A. : Using Projection based Clustering to Find Distance and Density based Clusters in High-Dimensional Data, Journal of Classification, \doi{10.1007/s00357-020-09373-2}, in press, Springer, 2020.
 

@@ -7,7 +7,7 @@ Estimates Number of Clusters using up to 26 Indicators
 Calculation of up to 26 indicators and the recommendations based on them for the number of clusters in data sets. 
 For a given dataset and clusterings for this dataset, key indicators mentioned in details are calculated and based on this a recommendation regarding the number of classes is given for each indicator.
 
-An alternative estimation of the cluster number can be done by counting the valleys of the topographic map of the generalized U-Matrix for a specfic projection method using the \pkg{ProjectionBasesdClustering} and \pkg{GeneralizedUmatrix} packages on CRAN, see [Thrun/Ultsch, 2020] for details.
+An alternative estimation of the cluster number can be done by counting the valleys of the topographic map of the generalized U-Matrix for a specfic projection method using the \pkg{ProjectionBasesdClustering} and \pkg{GeneralizedUmatrix} packages on CRAN, see [Thrun/Ultsch, 2021] for details.
 }
 \usage{
 ClusterNoEstimation(DataOrDistances, ClsMatrix = NULL, max.nc, 
@@ -112,7 +112,7 @@ Charrad, Malika, et al. "Package 'NbClust', J. Stat. Soft Vol.  61, pp. 1-36, 20
 
 Dimtriadou, E. "cclust: Convex Clustering Methods and Clustering Indexes." R package version 0.6-16, URL \url{https://CRAN.R-project.org/package=cclust}, 2009.
 
-[Thrun/Ultsch, 2020]  Thrun, M. C., and Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Artificial Intelligence, in press, \doi{10.1016/j.artint.2020.103237}, 2020.
+[Thrun/Ultsch, 2021]  Thrun, M. C., and Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Artificial Intelligence, Vol. 290, pp. 103237, \doi{10.1016/j.artint.2020.103237}, 2021.
 
 }
 \author{

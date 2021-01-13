@@ -6,7 +6,7 @@
 Databionic Swarm (DBS) Clustering and Visualization
 }
 \description{
-Swarm-based clustering by exploting self-organization, emergence, swarm intelligence and game theory.
+Swarm-based clustering by exploting self-organization, emergence, swarm intelligence and game theory published in [Thrun/Ultsch, 2021].
 }
 \usage{
 DatabionicSwarmClustering(DataOrDistances, ClusterNo = 0,
@@ -59,7 +59,9 @@ List of
 \item{Object}{List of further output of DBS}
 }
 \references{
-[Thrun/Ultsch, 2020]  Thrun, M. C., & Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Journal of Artificial Intelligence, Vol. in press, pp. doi 10.1016/j.artint.2020.103237, 2020.
+[Thrun/Ultsch, 2021]  Thrun, M. C., and Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Artificial Intelligence, Vol. 290, pp. 103237, \doi{10.1016/j.artint.2020.103237}, 2021.
+
+[Thrun/Ultsch, 2021] Thrun, M. C., & Ultsch, A.: Swarm Intelligence for Self-Organized Clustering (Extended Abstract), in Bessiere, C. (Ed.), 29th International Joint Conference on Artificial Intelligence (IJCAI), Vol. IJCAI-20, pp. 5125--5129, \doi{10.24963/ijcai.2020/720}, Yokohama, Japan, Jan., 2021. 
 }
 \author{
 Michael Thrun
