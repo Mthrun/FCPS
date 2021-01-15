@@ -38,7 +38,7 @@ Optional, if data matrix given, annon Euclidean distance can be selected
 Optional, if TRUE: dendrogram is plotted.
 }
   \item{PlotMap}{
-Optional, if TRUE: topographic map is plotted.
+Optional, if TRUE: topographic map is plotted if \pkg{GeneralizedUmatrix} is installed.
 }
 \item{PlotIt}{Default: FALSE, If TRUE and dataset of [1:n,1:d] dimensions then a plot of the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls} will be generated.}
 
@@ -83,6 +83,7 @@ data = cbind(
 )
 # Make sure there are no structures
 # (sample size is small and still could generate structures randomly)
+if(requireNamespace('DatabionicSwarm',quietly = TRUE)){
 Data = DatabionicSwarm::RobustNormalization(data, Centered = TRUE)
 #DataVisualizations::Plot3D(Data)
 
@@ -90,6 +91,12 @@ Data = DatabionicSwarm::RobustNormalization(data, Centered = TRUE)
 # Topographic map looks like "egg carton"
 # with every point in its own valley
 Cls = DatabionicSwarmClustering(Data, 0, PlotMap = TRUE)
+}else{
+# only for testing purposes of CRAN!
+# in case CRAN tests with no suggest packages available
+# please use alpways some kind of standardization!
+Cls = DatabionicSwarmClustering(data, 0, PlotMap = TRUE)
+}
 }
 
 # Distance based cluster structures
@@ -102,7 +109,8 @@ Cls = DatabionicSwarmClustering(Hepta$Data, 0, PlotMap = TRUE)
 }
 
 #entagled, complex, and non-linear seperable structures 
-\donttest{
+\dontrun{
+#takes too long for CRAN tests
 data(Chainlink)
 #DataVisualizations::Plot3D(Chainlink$Data)
 
