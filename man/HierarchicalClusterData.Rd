@@ -3,7 +3,7 @@
 \alias{HierarchicalCluster}
 
 \title{
-Hierarchical Clusterering of Data
+Internal function of Hierarchical Clusterering of Data
 }
 \usage{
 HierarchicalClusterData(Data,ClusterNo=0,
@@ -14,7 +14,7 @@ ColorTreshold=0,Fast=FALSE,Cls=NULL,\dots)
 }
 
 \description{
-Hierarchical cluster analysis on a set of dissimilarities and methods for analyzing it. Uses stats package function 'hclust'.
+Please use \code{\link{HierarchicalClustering}}. Hierarchical cluster analysis on a set of dissimilarities and methods for analyzing it. Uses stats package function 'hclust'.
 }
 \arguments{
 \item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
@@ -36,7 +36,13 @@ List of
 \author{
 Michael Thrun
 }
+\seealso{
+\code{\link{HierarchicalClusterData}}
 
+\code{\link{HierarchicalClusterDists}}
+
+\code{\link{HierarchicalClustering}}
+}
  \examples{
 data('Hepta')
 #out=HierarchicalClusterData(Hepta$Data,ClusterNo=7)

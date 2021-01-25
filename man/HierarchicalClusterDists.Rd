@@ -3,7 +3,7 @@
 \alias{HierarchicalClusterDists}
 
 \title{
-Hierarchical Clustering with Distances
+Internal Function of Hierarchical Clustering with Distances
 }
 \usage{
 HierarchicalClusterDists(pDist,ClusterNo=0,Type="ward.D2",
@@ -12,7 +12,7 @@ ColorTreshold=0,Fast=FALSE,\dots)
 }
 
 \description{
-Hierarchical cluster analysis on a set of dissimilarities and methods for analyzing it. Uses stats package function 'hclust'.
+Please use \code{\link{HierarchicalClustering}}. Cluster analysis on a set of dissimilarities and methods for analyzing it. Uses stats package function 'hclust'.
 }
 
 \arguments{
@@ -39,3 +39,12 @@ data('Hepta')
 \keyword{Hierarchical}
 \keyword{Clustering}
 \keyword{Distances}
+
+
+\seealso{
+\code{\link{HierarchicalClusterData}}
+
+\code{\link{HierarchicalClusterDists}}
+
+\code{\link{HierarchicalClustering}}
+}
