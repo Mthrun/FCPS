@@ -5,7 +5,7 @@
 Automatic Projection-Based Clustering
 }
 \description{
-Performs projection-based clustering without user-interaction based on projection methods. The approach is published in [Thrun/Ultsch, 2017], [Thrun/Ultsch, 2020a].
+Projection-based clustering \code{\link{AutomaticProjectionBasedClustering}} projects the data (nonlinear) into two dimensions and tries only to preserve relevant neighborhoods prior to clustering. The cluster analysis itself includes the high-dimensional distances in the clustering process. Performs non-interactive projection-based clustering based on non-linear projection methods [Thrun/Ultsch, 2017], [Thrun/Ultsch, 2020a].
 }
 \usage{
 AutomaticProjectionBasedClustering(DataOrDistances,ClusterNo,Type="NerV",
@@ -57,13 +57,13 @@ Plots the topographic map [Thrun et al., 2016].
 }
 
 \details{
-Projection-based clustering \code{\link{AutomaticProjectionBasedClustering}} projects the data (nonlinear) into two dimensions and tries only to preserve relevant neighborhoods prior to clustering. However, in projection-based clustering clustering includes the high-dimensional distances in the clustering process.
+The first idea of using non-PCA projections for clustering was published by [Bock, 1987] as a definition. However, to the knowledge of the author, it was not applied to any data. The coexistence of projection and clustering was introduced in [Thrun/Ultsch, 2017].
 
-The first idea of using non-PCA projections for clustering was published by [Bock, 1987] as a definition. However, to the knowledge of the author, it was not applied to any data. The coexistence of projection and clustering, which exploited the generalized U-Matrix and was introduced in [Thrun/Ultsch, 2017]. It should be noted that it is preferable to use a visualization for the Generalized U-Matrix like the topographic map \code{\link[GeneralizedUmatrix]{plotTopographicMap}} of [Thrun et al., 2016] to evaluate the clustering, improve it or set the number of clusters appropriately. However, a comparison with 32 clustering algorithms showed that PBC is always able to find the correct cluster structure while the best of the 32 clustering algorithms varies depending on the dataset [Thrun/Ultsch, 2020].
+Projection-based clustering is based on a nonlinear projection of high-dimensional data into a two-dimensional space [Thrun/Ultsch, 2020b].  Typical projection-methods like t-distributed stochastic neighbor embedding (t-SNE) [Van der Maaten/Hinton, 2008], or neighbor retrieval visualizer (NerV) [Venna et al., 2010] are used project data explicitly into two dimensions disregarding the subspaces of higher dimension than two and preserving only relevant neighborhoods in high-dimensional data. In the next step, the Delaunay graph [Delaunay, 1934] between the projected points is calculated, and each vertex between two projected points is weighted with the high-dimensional distance between the corresponding high-dimensional data points. Thereafter the shortest path between every pair of points is computed using the Dijkstra algorithm [Dijkstra, 1959]. The shortest paths are then used in the clustering process, which involves two choices depending on the structure type in the high-dimensional data [Thrun/Ultsch, 2020b]. This Boolean choice can be decided by looking at the topographic map of high-dimensional structures [Thrun/Ultsch, 2020a]. In a benchmarking of 34 comparable clustering methods, projection-based clustering was the only algorithm that always was able to find the high-dimensional distance or density-based structure of the dataset [Thrun/Ultsch, 2020b].
+
+It should be noted that it is preferable to use a visualization for the Generalized U-Matrix like the topographic map \code{\link[GeneralizedUmatrix]{plotTopographicMap}} of [Thrun et al., 2016] to evaluate the choice of the boolean parameter \code{StructureType} and the clustering, improve it or set the number of clusters appropriately. A comparison with 32 clustering algorithms showed that PBC is always able to find the correct cluster structure while the best of the 32 clustering algorithms varies depending on the dataset [Thrun/Ultsch, 2020].
 
 The first systematic comparison to other DR clustering methods like Projection-Pursuit Methods \code{\link{ProjectionPursuitClustering}}, supspace clustering methods \code{\link{SubspaceClustering}},  and CA-based clustering methods can be found in [Thrun/Ultsch, 2020a]. For PCA-based clustering methods please see \code{\link{TandemClustering}}.
-
-
 }
 \value{
 List of
