@@ -1,0 +1,83 @@
+SparseClustering=function(DataOrDistances, ClusterNo, Strategy="Hierarchical",PlotIt=F,
+                          silent=FALSE, NoPerms=10,Wbounds, ...){
+  # INPUT
+  # Data[1:n,1:d]     Data set with n observations and d features
+  # ClusterNo         Numeric indicating number to cluster to find in Tree/
+  #                   Dendrogramm in case of Strategy="Hierarchical" and to
+  #                   construct in case of Strategy="KMeans"
+  # 
+  # OPTIONAL
+  # ...               See more about parameters in mvnormalmixEM
+  # Strategy          Char selecting methods Hierarchical or k-means
+  #                   Default: "Hierarchical"
+  # PlotIt            Boolean. Default = FALSE = No plotting performed.
+  # silent            Boolean: print output or not (Default = FALSE = no output)
+  #
+  # OUTPUT
+  # Cls[1:n]          Clustering of data
+  # Object            Object of VSLCMresults-class.
+  # Tree              Object Tree if Strategy="Hierachical" is used
+  # 
+  # Author: QS, 06/2021
+  if (!requireNamespace('sparcl', quietly = TRUE)) {
+    message(
+      'SparseClustering: Subordinate clustering package (sparcl) is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+    )
+    return(
+      list(
+        Cls = rep(1, nrow(DataOrDistances)),
+        Object = "SparseClustering: Subordinate clustering package (sparcl) is missing.
+                Please install the package which is defined in 'Suggests'."
+      )
+    )
+  }
+  if(missing(DataOrDistances)){
+    message('SparseClustering: Variable Data is not given. Returning.')
+    return()
+  }
+  if(is.null(DataOrDistances)){
+    message('SparseClustering: Variable Data is not given. Returning.')
+    return()
+  }
+  if(missing(Wbounds)){
+    Wbounds=NULL
+  }
+  
+  if (isSymmetric(unname(DataOrDistances))) {
+    message('SparseClustering: For symmetric "DataOrDistances" distances are assumed and strategy is automatically set to "Hierarchical"
+            because for Strategy="kmeans" the usage of distances is not preferable.')
+    Strategy="Hierarchical"
+  }
+  if(Strategy=="Hierarchical"){
+    # N = dim(Data)[1]
+    # D = dim(Data)[2]
+    if (isSymmetric(unname(DataOrDistances))) {
+      V      = sparcl::HierarchicalSparseCluster(dists=DataOrDistances, silent=silent,wbound = Wbounds,...)
+    }else{
+      perm.out = sparcl::HierarchicalSparseCluster.permute(DataOrDistances,,wbounds = Wbounds,nperms = NoPerms)
+      dists  = perm.out$dists
+      wbound = perm.out$bestw
+      V      = sparcl::HierarchicalSparseCluster(x=NULL, dists=dists,
+                                                 wbound=wbound, silent=silent,...)
+    }
+    Tree = V$hc
+    Cls  = as.vector(cutree(Tree, ClusterNo))
+    Cls=ClusterRename(Cls,DataOrDistances)
+    if(PlotIt == TRUE){
+      ClusterDendrogram(Tree, ClusterNo, main='Hierarchical Sparse Clustering')
+    }
+    return(list("Cls"=Cls, "Object"=V, "Dendrogram"=Tree))
+  }else{
+    km.perm = sparcl::KMeansSparseCluster.permute(DataOrDistances, K=ClusterNo, silent=silent,nperms = NoPerms,wbounds = Wbounds)
+    km.out  = sparcl::KMeansSparseCluster(DataOrDistances, K=ClusterNo,wbounds = km.perm$bestw, silent=silent, ...)
+    Cls     = as.vector(km.out[[1]]$Cs)
+    Cls=ClusterRename(Cls,DataOrDistances)
+    if(PlotIt == TRUE){
+      FCPS::ClusterPlotMDS(DataOrDistances, Cls, main = "KMeans SparseClustering",
+                           DistanceMethod = "euclidean", OutputDimension = 3,
+                           PointSize=1,Plotter3D="rgl", ...)
+    }
+    return(list("Cls"=Cls, "Object"=km.out))
+  }
+}

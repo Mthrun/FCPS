@@ -35,6 +35,8 @@ HierarchicalClustering=function(DataOrDistances,ClusterNo,Type='SingleL',Fast=TR
     return(GenieClustering(DataOrDistances = DataOrDistances,ClusterNo = ClusterNo,...))
   }else if(Type=="Minimax"){
     return(MinimaxLinkageClustering(DataOrDistances = DataOrDistances,ClusterNo = ClusterNo,...))
+  }else if(Type=="Sparse"){
+    return(SparseClustering(DataOrDistances = DataOrDistances,ClusterNo = ClusterNo,Strategy = "Hierarchical",...))
   }else if(Type=="HDBSCAN"){
     V=HierarchicalDBSCAN(DataOrDistances = DataOrDistances,...)
     if(ClusterNo>1){
@@ -44,8 +46,7 @@ HierarchicalClustering=function(DataOrDistances,ClusterNo,Type='SingleL',Fast=TR
       Cls=V$Cls#automatic number of clusters selection by Hierarchical_DBSCAN
     }
     return(list(Cls=Cls,Dendrogram=V$Dendrogram,Object=V$Tree,OriginalObject=V$Object))
-  }
-  else if (isSymmetric(unname(DataOrDistances))) {
+  }else if (isSymmetric(unname(DataOrDistances))) {
     if(!inherits(DataOrDistances,'dist')){
       Input=as.dist(DataOrDistances)
     }else{

@@ -1,4 +1,4 @@
-ClusterCount <- function(Cls) {
+ClusterCount <- function(Cls,Ordered=FALSE) {
   # Calculates statistics for clustering
   # C <-ClusterCount(Cls)
   # UniqueClusters <-C$UniqueClusters
@@ -33,12 +33,23 @@ ClusterCount <- function(Cls) {
   numberOfClusters = length(uniqueClusters)
   
   ClusterPercentages = as.numeric(prop.table(countPerCluster)*100)
+  
+  Overview=cbind(
+  uniqueClusters[ind],
+  as.numeric(countPerCluster)[ind],
+  ClusterPercentages[ind]
+  )
+  if(isTRUE(Ordered)){
+    ind=order(Overview[,1],decreasing = FALSE,na.last = T)
+    Overview=Overview[ind,]
+  }
+
   return(
     list(
-      UniqueClusters = uniqueClusters[ind],
-      CountPerCluster = as.numeric(countPerCluster)[ind],
+      UniqueClusters = Overview[,1],
+      CountPerCluster = Overview[,2],
       NumberOfClusters = numberOfClusters,
-      ClusterPercentages = ClusterPercentages[ind]
+      ClusterPercentages = Overview[,3]
     )
   )
 }

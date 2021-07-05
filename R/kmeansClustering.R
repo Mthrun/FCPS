@@ -121,6 +121,14 @@ kmeansClustering <-function(DataOrDistances,ClusterNo=2,Type='LBG',RandomNo=5000
           Centroids = res$centers
         ))
       },
+      "Sparse" = {
+        out=SparseClustering(DataOrDistances = DataOrDistances,
+                             ClusterNo = ClusterNo,Strategy = 'kmeans',...)
+        return(list(
+          Cls = out$Cls,
+          Object = out$Object,
+        ))
+      },
       "Steinley" = {
         Liste = lapply(1:RandomNo, function(i, DataOrDistances, centers, ...) {
           c = kmeans(DataOrDistances, centers = ClusterNo, ...)
