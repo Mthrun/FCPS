@@ -24,7 +24,7 @@ symmetric [1:n,1:n] distance matrix}
   }
   \item{PlotIt}{Default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
   \item{Verbose}{Print details, if true}
-  \item{\dots}{Further arguments like \code{iter.max}, \code{nstart}, for \code{kcentroids} please see \code{kcca} function of the \pkg{flexclust} package, or  \code{\link[sparc]{KMeansSparseCluster}} 
+  \item{\dots}{Further arguments like \code{iter.max}, \code{nstart}, for \code{kcentroids} please see \code{kcca} function of the \pkg{flexclust} package, or  \code{\link[sparcl]{KMeansSparseCluster}} 
 }
 }
 

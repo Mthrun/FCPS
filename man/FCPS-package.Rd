@@ -11,7 +11,9 @@
 \packageDescription{FCPS}
 
 The package consists of many algorithms and fundamental datasets for clustering published in [Thrun/Stier, 2021]. Originally, the 'Fundamental Clustering Problems Suite' (FCPS) offered a variety of clustering problems
-any algorithm shall be able to handle when facing real world data.  Nine of the here presented artificial datasets were priorly named FCPS in Ultsch, A.: "Clustering with SOM: U*C", In Workshop on Self-Organizing Maps, 2005. FCPS often served in the paper as an elementary benchmark for clustering algorithms. The FCPS package extends datasets and provides a standardized and easy access to many clustering algorithms.
+any algorithm shall be able to handle when facing real world data.  Nine of the here presented artificial datasets were priorly named FCPS with a fixed sample size in Ultsch, A.: "Clustering with SOM: U*C", In Workshop on Self-Organizing Maps, 2005. FCPS often served in the paper as an elementary benchmark for clustering algorithms. The FCPS package extends datasets, enables variable sample sizes for these datasets, and provides a standardized and easy access to many clustering algorithms.
+
+\url{https://www.deepbionics.org/}
 }
 
 \details{

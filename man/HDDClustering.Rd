@@ -8,7 +8,7 @@ HDD clustering is a model-based clustering method of [Bouveyron et al., 2007].
 HDD clustering is based on the Gaussian Mixture Model and on the idea that the data lives in subspaces with a lower dimension than the dimension of the original space. It uses the EM algorithm to estimate the parameters of the model [Berge et al., 2012].
 }
 \usage{
-HDDClustering(Data,ClusterNo,PlotIt=FALSE,...)
+HDDClustering(Data, ClusterNo, PlotIt=F,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

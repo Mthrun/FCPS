@@ -11,7 +11,7 @@ kmeansClustering <-function(DataOrDistances,ClusterNo=2,Type='LBG',RandomNo=5000
   #            "LBG": Linde,Y.,Buzo,A.,Gray,R.M., An algorithm for vector quantizer design. IEEE Transactions on Communications, COM-28, 84-95, 1980
   # RandomNo   Only for Steinley method or in case of distance matrix, number of random initializations with
   #            searching for minimal SSE, see [Steinley/Brusco, 2007]
-  # PlotIt     Boolean. Decision to plot or not
+  # PlotIt     Boolean. Decision tgo plot or not
   # Verbose    '0' or '1' for a documentation of repetitions. Default: Verbose==0
   #
   # OUTPUT
@@ -126,7 +126,7 @@ kmeansClustering <-function(DataOrDistances,ClusterNo=2,Type='LBG',RandomNo=5000
                              ClusterNo = ClusterNo,Strategy = 'kmeans',...)
         return(list(
           Cls = out$Cls,
-          Object = out$Object,
+          Object = out$Object
         ))
       },
       "Steinley" = {

@@ -20,7 +20,8 @@ MoGclustering(Data,ClusterNo=2,Type,PlotIt=FALSE,Silent=TRUE,...)
 [Benaglia[Chauveau/Hoang, 2016].
 }
 \item{PlotIt}{Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
-\item{verb}{Boolean: print output or not (Default = FALSE = no output).}
+\item{Silent}{(optional) Boolean: print output or not (Default = FALSE = no
+output)}
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used, see package mixtools \pkg{EMCluster} or \pkg{mixtools} for details.}
 
 }
@@ -42,7 +43,7 @@ List of
 [McLachlan/Peel, 2000] D. McLachlan, G. J. and Peel, D.: Finite Mixture Models, John Wiley and Sons, Inc, 2000.
 
 }
-\note{MoG used in [Thrun, 2017] was renamed to \code{\link{ModelBasedClustering}} in this package.}
+\note{MoG used in [Thrun, 2017] was renamed to \code{\link{ModelBasedClustering}} in this package. \code{Type="mvnormalmixEM"} sometimes fails }
 \author{
 Michael Thrun
 }
@@ -56,14 +57,19 @@ Data = Hepta$Data
 out=MoGclustering(Data,ClusterNo=7,Type="EM",PlotIt=FALSE)
 V=out$Cls
 
-V1 = MoGclustering(Data,ClusterNo=7,Type="mvnormalmixEM")
+\donttest{
+V1 = MoGclustering(Data,ClusterNo=7,Type="mvnpEM")
 Cls1 = V1$Cls
 
-V2 = MoGclustering(Data,ClusterNo=7,Type="mvnpEM")
+V2 = MoGclustering(Data,ClusterNo=7,Type="npEM")
 Cls2 = V2$Cls
+}
 
-V3 = MoGclustering(Data,ClusterNo=7,Type="npEM")
-Cls3 = V3$Cls
+\dontrun{
+#does not work always
+  V3 = MoGclustering(Data,ClusterNo=7,Type="mvnormalmixEM")
+  Cls3 = V3$Cls
+}
 
 }
 

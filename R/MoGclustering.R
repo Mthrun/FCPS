@@ -65,17 +65,56 @@ MoGclustering <-function(Data,ClusterNo=2,Type,PlotIt=FALSE,Silent=TRUE,...){
       Cls=as.vector(out$class)
     },
     mvnormalmixEM = {  
+      if (!requireNamespace('mixtools',quietly = TRUE)) {
+        message(
+          'Subordinate clustering package (mixtools) is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+        )
+        return(
+          list(
+            Cls = rep(1, nrow(Data)),
+            Object = "Subordinate clustering package (mixtools) is missing.
+                Please install the package which is defined in 'Suggests'."
+          )
+        )
+     }   
       out = mixtools::mvnormalmixEM(Data, k=ClusterNo,verb = !Silent, ...)
-      Cls = apply(out$posteriors, 1, which.max)
+      Cls = apply(out$posterior, 1, which.max)
       # Error can arize sometimes at least!:
       # Error in qr.solve(a) : singular matrix 'a' in solve 
       # Why?
     },
     mvnpEM = {  
+      if (!requireNamespace('mixtools',quietly = TRUE)) {
+        message(
+          'Subordinate clustering package (mixtools) is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+        )
+        return(
+          list(
+            Cls = rep(1, nrow(Data)),
+            Object = "Subordinate clustering package (mixtools) is missing.
+                Please install the package which is defined in 'Suggests'."
+          )
+        )
+      } 
       out = mixtools::mvnpEM(Data, mu0=ClusterNo, verb=!Silent, ...)
       Cls = apply(out$posteriors, 1, which.max)
     },
     npEM = {  
+      if (!requireNamespace('mixtools',quietly = TRUE)) {
+        message(
+          'Subordinate clustering package (mixtools) is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+        )
+        return(
+          list(
+            Cls = rep(1, nrow(Data)),
+            Object = "Subordinate clustering package (mixtools) is missing.
+                Please install the package which is defined in 'Suggests'."
+          )
+        )
+      } 
       out = mixtools::npEM(Data, mu0=ClusterNo, verb=!Silent, ...)
       Cls = apply(out$posteriors, 1, which.max)
     },

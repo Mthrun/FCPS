@@ -8,20 +8,22 @@ Sparse Clustering
 Implements the sparse clustering methods of [Witten/Tibshirani, 2010].
 }
 \usage{
-SparseClustering=function(Data, ClusterNo, Strategy="Hierarchical",\\
-PlotIt=FALSE,silent=FALSE,NoPerms=10,Wbounds,  \dots)
+SparseClustering(DataOrDistances, ClusterNo, Strategy="Hierarchical",
+
+PlotIt=F,Silent=FALSE, NoPerms=10,Wbounds, \dots)
 }
 \arguments{
-\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases
-of d-dimensional data points. Every case has d attributes, variables or
-features.}
+\item{DataOrDistances}{Either a [1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.
+
+or a [1:n,1:n] symmetric distance matrix.
+}
 \item{ClusterNo}{Numeric indicating number to cluster to find in Tree/
 Dendrogramm in case of Strategy="Hierachical" or numer of cluster to use in
 Strategy="kmeans"}
 \item{Strategy}{(optional) Char selecting methods Hierarchical or kmeans.
 Default: "Hierarchical"}
 \item{PlotIt}{(optional) Boolean. Default = FALSE = No plotting performed.}
-\item{silent}{(optional) Boolean: print output or not (Default = FALSE = no
+\item{Silent}{(optional) Boolean: print output or not (Default = FALSE = no
 output)}
 \item{NoPerms}{(optional), numeric scalar, Number of permutations.}
 \item{Wbounds}{(optional) numeric vector, range of tuning parameters to consider. This is the L1 bound on w, the feature weights [Witten/Tibshirani, 2010].}

@@ -1,4 +1,4 @@
-ModelBasedVarSelClustering=function(Data,ClusterNo,Type,PlotIt=F, ...){
+ModelBasedVarSelClustering=function(Data,ClusterNo,Type,PlotIt=FALSE, ...){
   # INPUT
   # Data[1:n,1:d]     Data set with n observations and d features
   # ClusterNo         Numeric. It defines number of components to consider.

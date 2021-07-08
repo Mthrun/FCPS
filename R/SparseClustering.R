@@ -1,5 +1,5 @@
 SparseClustering=function(DataOrDistances, ClusterNo, Strategy="Hierarchical",PlotIt=F,
-                          silent=FALSE, NoPerms=10,Wbounds, ...){
+                          Silent=FALSE, NoPerms=10,Wbounds, ...){
   # INPUT
   # Data[1:n,1:d]     Data set with n observations and d features
   # ClusterNo         Numeric indicating number to cluster to find in Tree/
@@ -11,7 +11,7 @@ SparseClustering=function(DataOrDistances, ClusterNo, Strategy="Hierarchical",Pl
   # Strategy          Char selecting methods Hierarchical or k-means
   #                   Default: "Hierarchical"
   # PlotIt            Boolean. Default = FALSE = No plotting performed.
-  # silent            Boolean: print output or not (Default = FALSE = no output)
+  # Silent            Boolean: print output or not (Default = FALSE = no output)
   #
   # OUTPUT
   # Cls[1:n]          Clustering of data
@@ -53,13 +53,13 @@ SparseClustering=function(DataOrDistances, ClusterNo, Strategy="Hierarchical",Pl
     # N = dim(Data)[1]
     # D = dim(Data)[2]
     if (isSymmetric(unname(DataOrDistances))) {
-      V      = sparcl::HierarchicalSparseCluster(dists=DataOrDistances, silent=silent,wbound = Wbounds,...)
+      V      = sparcl::HierarchicalSparseCluster(dists=DataOrDistances, silent=Silent,wbound = Wbounds,...)
     }else{
       perm.out = sparcl::HierarchicalSparseCluster.permute(DataOrDistances,,wbounds = Wbounds,nperms = NoPerms)
       dists  = perm.out$dists
       wbound = perm.out$bestw
       V      = sparcl::HierarchicalSparseCluster(x=NULL, dists=dists,
-                                                 wbound=wbound, silent=silent,...)
+                                                 wbound=wbound, silent=Silent,...)
     }
     Tree = V$hc
     Cls  = as.vector(cutree(Tree, ClusterNo))
@@ -69,8 +69,8 @@ SparseClustering=function(DataOrDistances, ClusterNo, Strategy="Hierarchical",Pl
     }
     return(list("Cls"=Cls, "Object"=V, "Dendrogram"=Tree))
   }else{
-    km.perm = sparcl::KMeansSparseCluster.permute(DataOrDistances, K=ClusterNo, silent=silent,nperms = NoPerms,wbounds = Wbounds)
-    km.out  = sparcl::KMeansSparseCluster(DataOrDistances, K=ClusterNo,wbounds = km.perm$bestw, silent=silent, ...)
+    km.perm = sparcl::KMeansSparseCluster.permute(DataOrDistances, K=ClusterNo, silent=Silent,nperms = NoPerms,wbounds = Wbounds)
+    km.out  = sparcl::KMeansSparseCluster(DataOrDistances, K=ClusterNo,wbounds = km.perm$bestw, silent=Silent, ...)
     Cls     = as.vector(km.out[[1]]$Cs)
     Cls=ClusterRename(Cls,DataOrDistances)
     if(PlotIt == TRUE){
