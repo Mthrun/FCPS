@@ -21,7 +21,7 @@ The package provides many clustering algorithms for unsupervised machine learnin
 
 ## Description
 
-The Fundamental Clustering Problems Suite (FCPS) summaries 54 state-of-the-art clustering algorithms available in R language. An important advantage is that the input and output of clustering algorithms is simplified and consistent in order to enable users a swift execution of cluster analysis. By combining mirrored-density plots (MD plots) with statistical testing FCPS provides a tool to investigate the cluster tendency quickly prior to the cluster analysis itself
+The Fundamental Clustering Problems Suite (FCPS) summaries over sixty state-of-the-art clustering algorithms available in R language. An important advantage is that the input and output of clustering algorithms is simplified and consistent in order to enable users a swift execution of cluster analysis. By combining mirrored-density plots (MD plots) with statistical testing FCPS provides a tool to investigate the cluster tendency quickly prior to the cluster analysis itself
 [![[Thrun 2020]](https://doi.org/10.2312/mlvis.20201102)](https://doi.org/10.2312/mlvis.20201102).
 Common clustering challenges can be generated with arbitrary sample size
 [![[Thrun and Ultsch 2020a]](https://doi.org/10.1016/j.dib.2020.105501)](https://doi.org/10.1016/j.dib.2020.105501).
