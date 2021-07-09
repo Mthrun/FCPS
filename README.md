@@ -7,7 +7,7 @@
 
 *Fundamental Clustering Problems Suite*
 
-The package provides many clustering algorithms for unsupervised machine learning.
+The package provides over sixty state-of-the-art clustering algorithms for unsupervised machine learning published in [![[Thrun and Stier 2021]](https://doi.org/10.1016/j.softx.2020.100642)](https://doi.org/10.1016/j.softx.2020.100642).
 
 ## Table of contents
 
@@ -21,7 +21,7 @@ The package provides many clustering algorithms for unsupervised machine learnin
 
 ## Description
 
-The Fundamental Clustering Problems Suite (FCPS) summaries 54 state-of-the-art clustering algorithms available in R language. An important advantage is that the input and output of clustering algorithms is simplified and consistent in order to enable users a swift execution of cluster analysis. By combining mirrored-density plots (MD plots) with statistical testing FCPS provides a tool to investigate the cluster tendency quickly prior to the cluster analysis itself
+The Fundamental Clustering Problems Suite (FCPS) summaries over sixty state-of-the-art clustering algorithms available in R language. An important advantage is that the input and output of clustering algorithms is simplified and consistent in order to enable users a swift execution of cluster analysis. By combining mirrored-density plots (MD plots) with statistical testing FCPS provides a tool to investigate the cluster tendency quickly prior to the cluster analysis itself
 [![[Thrun 2020]](https://doi.org/10.2312/mlvis.20201102)](https://doi.org/10.2312/mlvis.20201102).
 Common clustering challenges can be generated with arbitrary sample size
 [![[Thrun and Ultsch 2020a]](https://doi.org/10.1016/j.dib.2020.105501)](https://doi.org/10.1016/j.dib.2020.105501).
@@ -48,8 +48,9 @@ Suggested=c("kernlab", "cclust", "dbscan", "kohonen",
             "mstknnclust", "densityClust", "parallel", "energy", "R.utils",
             "tclust", "Spectrum", "genie", "protoclust", "fastcluster", 
 			"clusterability", "signal", "reshape2", "PPCI", "clustrd", "smacof",
-			"rgl", "prclust", "CEC", "dendextend",
-            "moments", "prabclus", "knitr", "rmarkdown")
+			"rgl", "prclust", "dendextend",
+            "moments", "prabclus", "VarSelLCM", "sparcl", "mixtools",
+            "HDclassif", "clustvarsel", "knitr", "rmarkdown")
 
 for(i in 1:length(Suggested)) {
   if (!requireNamespace(Suggested[i], quietly = TRUE)) {
@@ -156,14 +157,14 @@ DataList=ClusterChallenge("Chainlink",SampleSize = 900)
 Data=DataList$Chainlink
 Cls=DataList$Cls
 Tree=HierarchicalClustering(Data,0,"SingleL")[[3]]
-ClusterDendrogram(Tree,4,main=’Single Linkage’)
+ClusterDendrogram(Tree,4,main="Single Linkage")
 MaximumNumber=7
 clsm <- matrix(data = 0, nrow = dim(Data)[1], ncol = MaximumNumber)
 for (i in 2:(MaximumNumber+1)) {
 clsm[,i-1] <- cutree(Tree,i)
 }
 out=ClusterNoEstimation(Data, ClsMatrix = clsm,
-max.nc = MaximumNumber, PlotIt = TRUE)
+MaxClusterNo = MaximumNumber, PlotIt = TRUE)
 ```
 
 
@@ -181,9 +182,9 @@ max.nc = MaximumNumber, PlotIt = TRUE)
 
 
 ## References
-
+0. [Thrun/Stier, 2021]  Thrun, M. C., & Stier, Q.: Fundamental Clustering Algorithms Suite SoftwareX, Vol. 13(C), pp. 100642. doi 10.1016/j.softx.2020.100642, 2021.
 1. [Thrun, 2020] Thrun, M. C.: Improving the Sensitivity of Statistical Testing for Clusterability with Mirrored-Density Plot, in Archambault, D., Nabney, I. & Peltonen, J. (eds.), Machine Learning Methods in Visualisation for Big Data, DOI 10.2312/mlvis.20201102, The Eurographics Association, Norrköping , Sweden, May, 2020. 
 2. [Thrun/Ultsch, 2020a] Thrun, M. C., & Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief,Vol. 30(C), pp. 105501, DOI 10.1016/j.dib.2020.105501 , 2020.
 3. [Thrun/Ultsch, 2021]  Thrun, M. C., and Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Artificial Intelligence, Vol. 290, pp. 103237, \doi{10.1016/j.artint.2020.103237}, 2021.
-4. [Thrun/Ultsch, 2020b]  Thrun, M. C., & Ultsch, A. : Using Projection based Clustering to Find Distance and Density based Clusters in High-Dimensional Data, Journal of Classification, \doi{10.1007/s00357-020-09373-2}, in press, Springer, 2020.
+4. [Thrun/Ultsch, 2020b]  Thrun, M. C., & Ultsch, A. : Using Projection based Clustering to Find Distance and Density based Clusters in High-Dimensional Data, Journal of Classification, \doi{10.1007/s00357-020-09373-2}, Springer, 2020.
 
