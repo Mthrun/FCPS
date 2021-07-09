@@ -164,7 +164,7 @@ for (i in 2:(MaximumNumber+1)) {
 clsm[,i-1] <- cutree(Tree,i)
 }
 out=ClusterNoEstimation(Data, ClsMatrix = clsm,
-max.nc = MaximumNumber, PlotIt = TRUE)
+MaxClusterNo = MaximumNumber, PlotIt = TRUE)
 ```
 
 
