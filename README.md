@@ -157,7 +157,7 @@ DataList=ClusterChallenge("Chainlink",SampleSize = 900)
 Data=DataList$Chainlink
 Cls=DataList$Cls
 Tree=HierarchicalClustering(Data,0,"SingleL")[[3]]
-ClusterDendrogram(Tree,4,main=’Single Linkage’)
+ClusterDendrogram(Tree,4,main="Single Linkage")
 MaximumNumber=7
 clsm <- matrix(data = 0, nrow = dim(Data)[1], ncol = MaximumNumber)
 for (i in 2:(MaximumNumber+1)) {
