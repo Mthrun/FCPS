@@ -7,7 +7,7 @@
 
 *Fundamental Clustering Problems Suite*
 
-The package provides many clustering algorithms for unsupervised machine learning.
+The package provides over sixty state-of-the-art clustering algorithms for unsupervised machine learning published in [![[Thrun and Stier 2021]](https://doi.org/10.1016/j.softx.2020.100642)](https://doi.org/10.1016/j.softx.2020.100642).
 
 ## Table of contents
 
@@ -48,8 +48,9 @@ Suggested=c("kernlab", "cclust", "dbscan", "kohonen",
             "mstknnclust", "densityClust", "parallel", "energy", "R.utils",
             "tclust", "Spectrum", "genie", "protoclust", "fastcluster", 
 			"clusterability", "signal", "reshape2", "PPCI", "clustrd", "smacof",
-			"rgl", "prclust", "CEC", "dendextend",
-            "moments", "prabclus", "knitr", "rmarkdown")
+			"rgl", "prclust", "dendextend",
+            "moments", "prabclus", "VarSelLCM", "sparcl", "mixtools",
+            "HDclassif", "clustvarsel", "knitr", "rmarkdown")
 
 for(i in 1:length(Suggested)) {
   if (!requireNamespace(Suggested[i], quietly = TRUE)) {
@@ -181,9 +182,9 @@ max.nc = MaximumNumber, PlotIt = TRUE)
 
 
 ## References
-
+0. [Thrun/Stier, 2021]  Thrun, M. C., & Stier, Q.: Fundamental Clustering Algorithms Suite SoftwareX, Vol. 13(C), pp. 100642. doi 10.1016/j.softx.2020.100642, 2021.
 1. [Thrun, 2020] Thrun, M. C.: Improving the Sensitivity of Statistical Testing for Clusterability with Mirrored-Density Plot, in Archambault, D., Nabney, I. & Peltonen, J. (eds.), Machine Learning Methods in Visualisation for Big Data, DOI 10.2312/mlvis.20201102, The Eurographics Association, Norrköping , Sweden, May, 2020. 
 2. [Thrun/Ultsch, 2020a] Thrun, M. C., & Ultsch, A.: Clustering Benchmark Datasets Exploiting the Fundamental Clustering Problems, Data in Brief,Vol. 30(C), pp. 105501, DOI 10.1016/j.dib.2020.105501 , 2020.
 3. [Thrun/Ultsch, 2021]  Thrun, M. C., and Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Artificial Intelligence, Vol. 290, pp. 103237, \doi{10.1016/j.artint.2020.103237}, 2021.
-4. [Thrun/Ultsch, 2020b]  Thrun, M. C., & Ultsch, A. : Using Projection based Clustering to Find Distance and Density based Clusters in High-Dimensional Data, Journal of Classification, \doi{10.1007/s00357-020-09373-2}, in press, Springer, 2020.
+4. [Thrun/Ultsch, 2020b]  Thrun, M. C., & Ultsch, A. : Using Projection based Clustering to Find Distance and Density based Clusters in High-Dimensional Data, Journal of Classification, \doi{10.1007/s00357-020-09373-2}, Springer, 2020.
 
