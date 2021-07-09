@@ -1,12 +1,12 @@
 ClusterNoEstimation <- function (DataOrDistances,
                             ClsMatrix = NULL,
-                            max.nc,
-                            index = 'all',
-                            min.nc = 2,
+                            MaxClusterNo,
+                            ClusterIndex = 'all',
+                            Method = NULL,
+                            MinClusterNo = 2,
                             Silent = TRUE,
-                            method = NULL,
                             PlotIt=FALSE,
-                            SelectByABC=TRUE,Colorsequence) {
+                            SelectByABC=TRUE,Colorsequence,...) {
 
   # Computes the operating numbers to the given data and clustering and a resulting recommended operating number of classes
   #
@@ -14,15 +14,15 @@ ClusterNoEstimation <- function (DataOrDistances,
   #  DataOrDistances    Data
   #  ClsMatrix          Clustering of the number of classes, which needs to be checked as matrix with one
   #                     clustering as one column
-  #                     (see also notes (1) und (2)), needs to be given, if method = NULL
-  #  max.nc             Highest number of classes, which should get checked
-  #  method             Clustering method, with which clustering got created (see DETAILS for possible methods),
+  #                     (see also notes (1) und (2)), needs to be given, if Method = NULL
+  #  MaxClusterNo             Highest number of classes, which should get checked
+  #  Method             Clustering Method, with which clustering got created (see DETAILS for possible Methods),
   #                     needs to be given, if cls = NULL
   #
   #  OPTIONAL
-  #  index           Vector of operating number which should be computed, standard = 'all',
+  #  ClusterIndex           Vector of operating number which should be computed, standard = 'all',
   #                  see DETAILS for possible operating numbers
-  #  min.nc          Lowest number of classes, which should get checked, standard = 2
+  #  MinClusterNo          Lowest number of classes, which should get checked, standard = 2
   #  Silent          If TRUE, then status messages will be given, standard = FALSE
   #
   #  RETURN
@@ -43,18 +43,18 @@ ClusterNoEstimation <- function (DataOrDistances,
   #  Those can be computed individually via the parameter or as vector.
   #  If input "all", then all operating numbers will get computed.
   #
-  #  For the creation of the clustering, following methods can be used
+  #  For the creation of the clustering, following Methods can be used
   #
   #  "ward.D", "single", "complete", "average", "mcquitty", 
   #  "median", "centroid", "ward.D2", "kmeans", "DBSclustering"
   #
   #  NOTES
   #  (1) The operating numbers kl, duda, pseudot2, beale, frey und mcclain needs a clustering
-  #  for max.nc+1 classes. If those operating numbers should get computed, the clustering in cls
+  #  for MaxClusterNo+1 classes. If those operating numbers should get computed, the clustering in cls
   #  has to be stated.
   #
-  #  (2) the index kl requires a clustering for min.nc-1 number of cluster.If this index has to be computed,
-  #  each clustering has to be given in the function in matrix style. In the case of min.nc = 2 no clustering for cluster number equal to 1 is required
+  #  (2) the ClusterIndex kl requires a clustering for MinClusterNo-1 number of cluster.If this ClusterIndex has to be computed,
+  #  each clustering has to be given in the function in matrix style. In the case of MinClusterNo = 2 no clustering for cluster number equal to 1 is required
   #
   #  (3) the indices duda, pseudot2, beale und frey can only be applied in case of hierarchical cluster algorithms
   #
@@ -83,7 +83,7 @@ ClusterNoEstimation <- function (DataOrDistances,
     data=DataOrDistances
   }	
   
-  range <- max.nc - min.nc + 1
+  range <- MaxClusterNo - MinClusterNo + 1
   
   alphabeale <- 0.1
   
@@ -119,7 +119,7 @@ ClusterNoEstimation <- function (DataOrDistances,
   indexanzahl <- length(indexnames)
   all <- indexanzahl + 1
   
-  indexn <- pmatch(index, c(indexnames,"all"))
+  indexn <- pmatch(ClusterIndex, c(indexnames,"all"))
   
   crits <- c()
   if (any(indexn == 18)) {
@@ -451,12 +451,12 @@ ClusterNoEstimation <- function (DataOrDistances,
     Dis <- (Dmax / Dmin) * s2
     return(Dis)
   }
-  # End: helper methods
+  # End: helper Methods
   ########
   
   # Processing of clss
   
-  if (is.null(method)) {
+  if (is.null(Method)) {
   
   if (any(indexn == 15,
           indexn == 18,
@@ -466,32 +466,32 @@ ClusterNoEstimation <- function (DataOrDistances,
           indexn == 23,
           indexn == 27)) {
     if (dim(cls)[2] == range) {
-      stop("Columns of ClsMatrix are expected to be from min.nc to max.nc. However to number of columns does not equal the range of cluster numbers to be investigated. Please provide appropriate choice for max.nc and min.nc. ")
+      stop("Columns of ClsMatrix are expected to be from MinClusterNo to MaxClusterNo. However to number of columns does not equal the range of cluster numbers to be investigated. Please provide appropriate choice for MaxClusterNo and MinClusterNo. ")
     }
     else if (dim(cls)[2] == range + 1 &&
-             any(indexn == 15, indexn == 27) && min.nc != 2) {
-      stop("Selected indicators require min.nc to be set with two.")
+             any(indexn == 15, indexn == 27) && MinClusterNo != 2) {
+      stop("Selected indicators require MinClusterNo to be set with two.")
     }
     else if (dim(cls)[2] == range + 1) {
       clusters <- cls[, 1:range]
-      colnames(clusters) <- c(min.nc:max.nc)
+      colnames(clusters) <- c(MinClusterNo:MaxClusterNo)
       clusters2 <- cls
       clusters2 <- cbind(rep(1, dim(cls)[1]), cls)
-      colnames(clusters2) <- c(1, min.nc:(max.nc + 1))
+      colnames(clusters2) <- c(1, MinClusterNo:(MaxClusterNo + 1))
     }
     else if (dim(cls)[2] == range + 2) {
       clusters <- cls[, 2:(range + 1)]
-      colnames(clusters) <- c(min.nc:max.nc)
+      colnames(clusters) <- c(MinClusterNo:MaxClusterNo)
       clusters2 <- cls
-      colnames(clusters2) <- c((min.nc - 1):(max.nc + 1))
+      colnames(clusters2) <- c((MinClusterNo - 1):(MaxClusterNo + 1))
     }
   }
   else {
     clusters <- cls
-    colnames(clusters) <- c(min.nc:max.nc)
+    colnames(clusters) <- c(MinClusterNo:MaxClusterNo)
     clusters2 <-
       cbind(rep(NA, dim(cls)[1]), cls, rep(NA, dim(cls)[1]))
-    colnames(clusters2) <- c(NA, min.nc:max.nc, NA)
+    colnames(clusters2) <- c(NA, MinClusterNo:MaxClusterNo, NA)
   }
   
   if (!Silent) {
@@ -502,52 +502,87 @@ ClusterNoEstimation <- function (DataOrDistances,
     if (!Silent) {
       message("Clustering in creation") 
     }
-    methodnames <- c("ward.D", "single", "complete", "average", "mcquitty", 
-                     "median", "centroid", "ward.D2","kmeans","DBSclustering")
-    methodn <- pmatch(method,methodnames)
-    clusters2 <- matrix(1,nrow = dim(data)[1],ncol = range + 2)
-    if (methodn > 0 && methodn <= 8) {
-      md <- dist(data)
-      hc <- hclust(md,method)
+
+    helpfun=function(data,FUN,range,MinClusterNo,...){
+      clusters2 <- matrix(1,nrow = dim(data)[1],ncol = range + 2)
       for (i in 0:(range + 1)) {
-        if (i != 0 || !min.nc == 2) {
-          temp <- cutree(hc,min.nc-1+i)
+        if (i != 0 || !MinClusterNo == 2) {
+          temp <- FUN(data,ClusterNo=MinClusterNo-1+i,...)$Cls
           clusters2[,i+1] <- temp
         }
       }
-      
+      return(clusters2)
     }
-    else if (methodn == 9) {
-      for (i in 0:(range + 1)) {
-        if (i != 0 || !min.nc == 2) {
-          temp <- kmeans(data,min.nc-1+i)$cluster
-          clusters2[,i+1] <- temp
-        }
-      }
-    }
-    else if (methodn == 10) {
-      
-      if(requireNamespace("DatabionicSwarm")){
+    switch (Method,
+      "kmeans" = {
+        clusters2=helpfun(data,kmeansClustering,range,MinClusterNo,...)
+      },
+      "DivisiveAnalysisClustering" = {
+        clusters2=helpfun(data,DivisiveAnalysisClustering,range,MinClusterNo,...)
+      },
+      "FannyClustering" = {
+        clusters2=helpfun(data,FannyClustering,range,MinClusterNo,...)
+      },
+      "ModelBasedClustering" = {
+        clusters2=helpfun(data,ModelBasedClustering,range,MinClusterNo,...)
+      },
+      "SpectralClustering" = {
+        clusters2=helpfun(data,SpectralClustering,range,MinClusterNo,...)
+      },
+      "DBSclustering"={
         projPoints <- DatabionicSwarm::Pswarm(data)
-      }
-      else{
-        stop('DatabionicSwarm package not loaded or installed.')
-      }
-      
-      for (i in 0:(range + 1)) {
-        if (i != 0 || !min.nc == 2) {
-          temp <- DatabionicSwarm::DBSclustering(min.nc-1+i,data,projPoints$ProjectedPoints,projPoints$LC[c(2,1)])
-          clusters2[,i+1] <- temp
-        }
-      }
-    }
-    else {
-      stop("Wrong method")
-    }
+        clusters2=helpfun(data,DatabionicSwarm::DBSclustering,range,MinClusterNo,Type=Method,BestMatches = projPoints$ProjectedPoints,LC = projPoints$LC[c(2,1)],...)
+      },{
+        clusters2=helpfun(data,FUN=HierarchicalClustering,range,MinClusterNo,Type=Method,...)
     
-    colnames(clusters2) <- c((min.nc - 1):(max.nc + 1))
+      }
+    )
+    # Methodnames <- c("ward.D", "single", "complete", "average", "mcquitty", 
+    #                  "median", "centroid", "ward.D2","kmeans","DBSclustering")
+    # Methodn <- pmatch(Method,Methodnames)
+    # clusters2 <- matrix(1,nrow = dim(data)[1],ncol = range + 2)
+    # if (Methodn > 0 && Methodn <= 8) {
+    #   md <- dist(data)
+    #   hc <- hclust(md,Method)
+    #   for (i in 0:(range + 1)) {
+    #     if (i != 0 || !MinClusterNo == 2) {
+    #       temp <- cutree(hc,MinClusterNo-1+i)
+    #       clusters2[,i+1] <- temp
+    #     }
+    #   }
+    #   
+    # }
+    # else if (Methodn == 9) {
+    #   for (i in 0:(range + 1)) {
+    #     if (i != 0 || !MinClusterNo == 2) {
+    #       temp <- kmeans(data,MinClusterNo-1+i)$cluster
+    #       clusters2[,i+1] <- temp
+    #     }
+    #   }
+    # }
+    # else if (Methodn == 10) {
+    #   
+    #   if(requireNamespace("DatabionicSwarm")){
+    #     projPoints <- DatabionicSwarm::Pswarm(data)
+    #   }
+    #   else{
+    #     stop('DatabionicSwarm package not loaded or installed.')
+    #   }
+    #   
+    #   for (i in 0:(range + 1)) {
+    #     if (i != 0 || !MinClusterNo == 2) {
+    #       temp <- DatabionicSwarm::DBSclustering(MinClusterNo-1+i,data,projPoints$ProjectedPoints,projPoints$LC[c(2,1)])
+    #       clusters2[,i+1] <- temp
+    #     }
+    #   }
+    # }
+    # else {
+    #   stop("Wrong Method")
+    #}
+    
+    colnames(clusters2) <- c((MinClusterNo - 1):(MaxClusterNo + 1))
     clusters <- clusters2[, 2:(range + 1)]
-    colnames(clusters) <- c(min.nc:max.nc)
+    colnames(clusters) <- c(MinClusterNo:MaxClusterNo)
     
     if (!Silent) {
       message("Clusterings created, start computation") 
@@ -1353,20 +1388,20 @@ ClusterNoEstimation <- function (DataOrDistances,
                 nrow = range,
                 ncol = length(indexnames))
   colnames(res) <- indexnames
-  rownames(res) <- c(min.nc:max.nc)
+  rownames(res) <- c(MinClusterNo:MaxClusterNo)
   criticalValues <- matrix(data = 0,
                            nrow = range,
                            ncol = 3)
   colnames(criticalValues) <- c(indexnames[18:20])
-  rownames(criticalValues) <- c(min.nc:max.nc)
+  rownames(criticalValues) <- c(MinClusterNo:MaxClusterNo)
   
   if (any(indexn == 2) || indexn == all) {
     distdata <- count(data)
   }
   
   for (i in 0:(range - 1)) {
-    #temp <- rep(min.nc+i,length(indexnames))
-    #temp <- rep(min.nc+i,4)
+    #temp <- rep(MinClusterNo+i,length(indexnames))
+    #temp <- rep(MinClusterNo+i,4)
     
     temp1 <- rep(0, 14)
     temp2 <- list(Indicators = rep(0, 12),
@@ -1453,7 +1488,7 @@ ClusterNoEstimation <- function (DataOrDistances,
           if (eigenValues[i400] < 0) {
             #cat(paste("There are only", numberObsAfter,"nonmissing observations out of a possible", numberObsBefore ,"observations."))
             stop(
-              "The TSS matrix is indefinite. There must be too many missing values. The index cannot be calculated."
+              "The TSS matrix is indefinite. There must be too many missing values. The ClusterIndex cannot be calculated."
             )
           }
         }
@@ -1565,7 +1600,7 @@ ClusterNoEstimation <- function (DataOrDistances,
     }
     
     if (!Silent) {
-      message(paste0("Operating numbers for number of classes ",i+min.nc," computed, highest number of classes: ",max.nc))
+      message(paste0("Operating numbers for number of classes ",i+MinClusterNo," computed, highest number of classes: ",MaxClusterNo))
     }
     
   }
@@ -1660,9 +1695,9 @@ ClusterNoEstimation <- function (DataOrDistances,
     while (!flag) {
       if (res[c + 1, 18] >= criticalValues[c + 1, 1]) {
         flag <- TRUE
-        klassenanzahl[18] <- c + min.nc
+        klassenanzahl[18] <- c + MinClusterNo
       }
-      else if (c + min.nc == max.nc) {
+      else if (c + MinClusterNo == MaxClusterNo) {
         flag <- TRUE
       }
       c <- c + 1
@@ -1676,9 +1711,9 @@ ClusterNoEstimation <- function (DataOrDistances,
     while (!flag) {
       if (res[c + 1, 19] <= criticalValues[c + 1, 2]) {
         flag <- TRUE
-        klassenanzahl[19] <- c + min.nc
+        klassenanzahl[19] <- c + MinClusterNo
       }
-      else if (c + min.nc == max.nc) {
+      else if (c + MinClusterNo == MaxClusterNo) {
         flag <- TRUE
       }
       c <- c + 1
@@ -1692,9 +1727,9 @@ ClusterNoEstimation <- function (DataOrDistances,
     while (!flag) {
       if (criticalValues[c + 1, 3] >= alphabeale) {
         flag <- TRUE
-        klassenanzahl[20] <- c + min.nc
+        klassenanzahl[20] <- c + MinClusterNo
       }
-      else if (c + min.nc == max.nc) {
+      else if (c + MinClusterNo == MaxClusterNo) {
         flag <- TRUE
       }
       c <- c + 1
@@ -1712,9 +1747,9 @@ ClusterNoEstimation <- function (DataOrDistances,
     while (!flag) {
       if (res[c + 1, 22] < 1) {
         flag <- TRUE
-        klassenanzahl[22] <- c + min.nc - 1
+        klassenanzahl[22] <- c + MinClusterNo - 1
       }
-      else if (c + min.nc == max.nc) {
+      else if (c + MinClusterNo == MaxClusterNo) {
         flag <- TRUE
       }
       c <- c + 1
@@ -1786,7 +1821,11 @@ ClusterNoEstimation <- function (DataOrDistances,
           message('Colors added using the tail of DataVisualizations::DefaultColorSequence because number of colors was smaller than number of labels.')
         }
       }
-      DataVisualizations::Fanplot(Datavector = cat,Names = unique(cat),Labels = unique(cat),main = 'Indicators for Cluster No.',MaxNumberOfSlices = SelectByABC,col = Colorsequence)
+      DataVisualizations::Fanplot(Datavector = cat,Names = unique(cat),Labels = unique(cat),main = 'Indicators for Cluster No.',MaxNumberOfSlices = SelectByABC,col = Colorsequence)     
+      if(!missing(Method))
+        title(sub=paste0('for ',Method),line=1)
+          #DataVisualizations::Fanplot(Datavector = cat,Names = unique(cat),Labels = unique(cat),main = 'Indicators for Cluster No.',sub=paste0('for ',Method),MaxNumberOfSlices = SelectByABC,col = Colorsequence)
+        
     }
     else{
       stop('DataVisualizations package not loaded or installed.')

@@ -5,17 +5,16 @@ Estimates Number of Clusters using up to 26 Indicators
 }
 \description{
 Calculation of up to 26 indicators and the recommendations based on them for the number of clusters in data sets. 
-For a given dataset and clusterings for this dataset, key indicators mentioned in details are calculated and based on this a recommendation regarding the number of classes is given for each indicator.
+For a given dataset and clusterings for this dataset, key indicators mentioned in details are calculated and based on this a recommendation regarding the number of clusters is given for each indicator.
 
 An alternative estimation of the cluster number can be done by counting the valleys of the topographic map of the generalized U-Matrix for a specfic projection method using the \pkg{ProjectionBasesdClustering} and \pkg{GeneralizedUmatrix} packages on CRAN, see [Thrun/Ultsch, 2021] for details.
 }
 \usage{
-ClusterNoEstimation(DataOrDistances, ClsMatrix = NULL, max.nc, 
+ClusterNoEstimation(DataOrDistances, ClsMatrix = NULL, MaxClusterNo, 
 
-index = "all", min.nc = 2,
+ClusterIndex = "all", Method = NULL, MinClusterNo = 2,
 
-Silent = TRUE, method = NULL, 
-PlotIt=FALSE,SelectByABC=TRUE,Colorsequence)
+Silent = TRUE,PlotIt=FALSE,SelectByABC=TRUE,Colorsequence,\dots)
 }
 \arguments{
   \item{DataOrDistances}{
@@ -26,24 +25,24 @@ PlotIt=FALSE,SelectByABC=TRUE,Colorsequence)
 Symmetric [1:n,1:n] distance matrix
   }
   \item{ClsMatrix}{
-[1:n,1:(max.nc)] matrix of clusterings each columns is defined as: 
+[1:n,1:(MaxClusterNo)] matrix of clusterings each columns is defined as: 
 
 1:n numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.
 
 (see also details (2) and (3)), must be specified if method = NULL
   }
-  \item{max.nc}{
-    Highest number of classes to be checked
+  \item{MaxClusterNo}{
+    Highest number of clusters to be checked
   }
-  \item{method}{
+  \item{Method}{
     Cluster procedure, with which the clusterings are created (see details (4) for possible methods), must be specified if ClsMatrix = NULL
 	}
   Optional:
-  \item{index}{
+  \item{ClusterIndex}{
  String or vector of strings with the indicators to be calculated (see details (1)), default = "all
   }
-  \item{min.nc}{
-   Lowest number of classes to be checked, default = 2
+  \item{MinClusterNo}{
+   Lowest number of clusters to be checked, default = 2
   }
   \item{Silent}{
       If TRUE status messages are output, default = FALSE
@@ -56,6 +55,9 @@ Symmetric [1:n,1:n] distance matrix
   }
         \item{Colorsequence}{
     Optional, character vector of sufficient length of colors for the fan plot.If the sequence is too long the first part of the sequence is used.
+  }
+          \item{\dots}{
+    Optional, further arguents used if clustering methods if \code{Method} is set.
   }
 }
 \details{
@@ -74,18 +76,17 @@ If you enter 'all', all key figures are calculated.
 
 (2)
 
-The indicators kl, duda, pseudot2, beale, frey and mcclain require a clustering for max.nc+1 classes. If these key figures are to be calculated, this clustering must be specified in cls.
+The indicators kl, duda, pseudot2, beale, frey and mcclain require a clustering for MaxClusterNo+1 clusters. If these key figures are to be calculated, this clustering must be specified in cls.
 
 (3)
 
-The indicator kl requires a clustering for min.nc-1 classes. If this key figure is to be calculated, this clustering must also be specified in cls. For the case min.nc = 2 no clustering for 1 has to be given.
+The indicator kl requires a clustering for MinClusterNo-1 clusters. If this key figure is to be calculated, this clustering must also be specified in cls. For the case MinClusterNo = 2 no clustering for 1 has to be given.
 
 (4)
 
 The following methods can be used to create clusterings:
 
-"ward.D", "single", "complete", "average", "mcquitty" 
-"median," "centroid," "ward.D2," "kmeans," "DBSclustering,"
+"kmeans," "DBSclustering","DivisiveAnalysisClustering","FannyClustering", "ModelBasedClustering","SpectralClustering" or all methods found in \code{\link{HierarchicalClustering}}.
 
 (5)
 
@@ -101,7 +102,7 @@ If a distances matrix is given, then \pkg{ProjectionBasedClustering} is required
  The recommended number of clusters for each calculated indicator
 }
 \item{ClsMatrix}{
-  [1:n,min.nc:(max.nc)] Output of the clusterings used for the calculation
+  [1:n,MinClusterNo:(MaxClusterNo)] Output of the clusterings used for the calculation
 }
 \item{HierarchicalIndicators}{
   Either NULL or the values for the indicators Duda, Pseudot2 and Beale in case of hierarchical cluster procedures, if calculated
@@ -116,7 +117,7 @@ Dimtriadou, E. "cclust: Convex Clustering Methods and Clustering Indexes." R pac
 
 }
 \author{
-Peter Nahrgang
+Peter Nahrgang, revised by Michael Thrun (2021)
 }
 \note{
 Code of "calinski", "cindex", "db", "hartigan",
@@ -128,24 +129,24 @@ Colorsequence works if \pkg{DataVisualizations} 1.1.13 is installed (currently o
 \examples{
 # Reading the iris dataset from the standard R-Package datasets
 data <- as.matrix(iris[,1:4])
-max.nc = 7
+MaxClusterNo = 7
 # Creating the clusterings for the data set
-#(here with method complete) for the number of classes 2 to 8
+#(here with method complete) for the number of clusters 2 to 8
 hc <- hclust(dist(data), method = "complete")
 clsm <- matrix(data = 0, nrow = dim(data)[1],
 
-ncol = max.nc)
-for (i in 2:(max.nc+1)) {
+ncol = MaxClusterNo)
+for (i in 2:(MaxClusterNo+1)) {
   clsm[,i-1] <- cutree(hc,i)
 }
 
-# Calculation of all indicators and recommendations for the number of classes
+# Calculation of all indicators and recommendations for the number of clusters
 indicatorsList=ClusterNoEstimation(Data = data, 
 
-ClsMatrix = clsm, max.nc = max.nc)
+ClsMatrix = clsm, MaxClusterNo = MaxClusterNo)
 
 # Alternatively, the same calculation as above can be executed with the following call
-ClusterNoEstimation(Data = data, max.nc = 7, method = "complete")
+ClusterNoEstimation(Data = data, MaxClusterNo = 7, Method = "CompleteL")
 # In this variant, the function clusterumbers also takes over the clustering
 }
 \concept{Estimation of Number of Clusters}

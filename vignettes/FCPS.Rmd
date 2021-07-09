@@ -105,7 +105,7 @@ clsm <- matrix(data = 0, nrow = dim(Data)[1],  ncol = MaximumNunber)
 for (i in 2:(MaximumNunber+1)) {
   clsm[,i-1] <- cutree(Tree,i)
 }
-out=ClusterNoEstimation(Data,ClsMatrix = clsm, max.nc = MaximumNunber,PlotIt = TRUE)
+out=ClusterNoEstimation(Data,ClsMatrix = clsm, MaxClusterNo = MaximumNunber,PlotIt = TRUE)
 ```
 
 ## Accurate Comparison to a Given Ground Truth

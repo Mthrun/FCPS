@@ -70,7 +70,8 @@ ClusterChallenge=function(Name,SampleSize,PlotIt=FALSE,PointSize=1,Plotter3D="rg
     HighestVariance = TransData[, 1]
     
     kernels=seq(from=min(HighestVariance,na.rm = T),to=max(HighestVariance,na.rm = T),length.out=SampleSize)
-    pde=DataVisualizations::ParetoDensityEstimation(HighestVariance,kernels = kernels)
+    #After DataVisualization in next version makes it to CRAN, set Silent=TRUE
+    pde=suppressWarnings(DataVisualizations::ParetoDensityEstimation(HighestVariance,kernels = kernels))
     maxdens=max(pde$paretoDensity)
     
     dens=function(y,pde,maxdens){
