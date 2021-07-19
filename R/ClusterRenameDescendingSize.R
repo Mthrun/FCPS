@@ -1,4 +1,4 @@
-ClusterRenameDescendingSize <- function(Cls) {
+ClusterRenameDescendingSize <- function(Cls,ProvideClusterNames=FALSE) {
   # Cls are renamed such that largest class =1 ...
   # RenamedCls = ClusterRenameDescendingSize(GivenCls)
   # 
@@ -13,7 +13,7 @@ ClusterRenameDescendingSize <- function(Cls) {
     warning('ClusterRenameDescendingSize: Cls is not a vector. Calling as.numeric(as.character(Cls))')
     Cls=as.numeric(as.character(Cls))
   }
-  
+   
   ListeV <- ClusterCount(Cls)
   countPerClass <- ListeV[[2]]
   UniqueClasses=ListeV[[1]]
@@ -21,8 +21,15 @@ ClusterRenameDescendingSize <- function(Cls) {
   numberOfClasses <- length(countPerClass)
   renamedCls <- Cls
   
+  Matchingtable=matrix(0,numberOfClasses,2)
+  Matchingtable[,1]=1:numberOfClasses
+  colnames(Matchingtable)=c("New","Prior")
   for (i in 1: numberOfClasses) {
+    Matchingtable[i,2]=UniqueClasses[sortedClasses$ix[i]]
     renamedCls[which(Cls == UniqueClasses[sortedClasses$ix[i]],arr.ind = T)] <- i # Hier mit den mitgelieferten Original-Indizes arbeiten
-  }  
-  return(renamedCls)
+  } 
+  if(isFALSE(ProvideClusterNames))
+    return(renamedCls)
+  else
+    return(list(renamedCls=renamedCls,ClusterName=Matchingtable))
 }

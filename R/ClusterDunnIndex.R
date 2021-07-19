@@ -17,6 +17,7 @@ ClusterDunnIndex=function(Cls,DataOrDistances,DistanceMethod="euclidean",Silent=
     }
   }# end if(isSymmetric(DataOrDists))
   
+  if(length(unique(Cls))>1){
   intrac=ClusterIntraDistances(DataDists,Cls,PlotIt = F)
   interc=ClusterInterDistances(DataDists,Cls,PlotIt = F)
   
@@ -38,4 +39,8 @@ ClusterDunnIndex=function(Cls,DataOrDistances,DistanceMethod="euclidean",Silent=
     dunn <- (min(InterDist,na.rm = T)/max(InnerDist,na.rm = T))
   }
   return(list(Dunn=dunn,IntraDist=InnerDist,InterDist=InterDist))
+  }else{
+    warning("ClusterDunnIndex: only one cluster given. Computation cannot be performed")
+    return(list(Dunn=NaN,IntraDist=NULL,InterDist=NULL))
+  }
 }
