@@ -16,8 +16,8 @@ MoGclustering(Data,ClusterNo=2,Type,PlotIt=FALSE,Silent=TRUE,...)
 
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
 \item{Type}{string defining approach to select:  initialization approach of "EM" or "kmeans" of [Chen et al., 2012], or other methods "mvnormalmixEM" [McLachlan/Peel, 2000],
-"npEM"[Benaglia/Chauveau/Hunter, 2009] or its extension "mvnpEM"
-[Benaglia[Chauveau/Hoang, 2016].
+"npEM"[Benaglia et al., 2009] or its extension "mvnpEM"
+[Chauveau/Hoang, 2016].
 }
 \item{PlotIt}{Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{Silent}{(optional) Boolean: print output or not (Default = FALSE = no
@@ -38,7 +38,7 @@ List of
 
 [Chauveau/Hoang, 2016]  Chauveau, D., & Hoang, V. T. L.: Nonparametric mixture models with conditionally independent multivariate component densities, Computational Statistics & Data Analysis, Vol. 103, pp. 1-16. 2016.
 
-[Benaglia/Chauveau/Hunter, 2009] Benaglia, T., Chauveau, D., and Hunter, D. R.: An EM-like algorithm for semi-and nonparametric estimation in multivariate mixtures. Journal of Computational and Graphical Statistics, 18(2), pp. 505-526, 2009.
+[Benaglia et al., 2009] Benaglia, T., Chauveau, D., and Hunter, D. R.: An EM-like algorithm for semi-and nonparametric estimation in multivariate mixtures. Journal of Computational and Graphical Statistics, 18(2), pp. 505-526, 2009.
 
 [McLachlan/Peel, 2000] D. McLachlan, G. J. and Peel, D.: Finite Mixture Models, John Wiley and Sons, Inc, 2000.
 

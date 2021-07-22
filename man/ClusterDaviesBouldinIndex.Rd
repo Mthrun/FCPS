@@ -22,11 +22,11 @@ ClusterDaviesBouldinIndex(Cls, Data,\dots)
     \item{\dots}{Further arguments passed on to the \code{\link[clusterSim]{index.DB}} function of \code{clusterSim}}
 }
 \details{
-Wrapper for \code{\link[clusterSim]{index.DB}}. Davies Bouldin index is defined in [Davies/Bouldin, 1979]. Best clustering scheme essentially minimizes the Davies-Bouldin index [Davies/Bouldin, 1979].
+Wrapper for \code{\link[clusterSim]{index.DB}}. Davies Bouldin index is defined in [Davies/Bouldin, 1979]. Best clustering scheme essentially minimizes the Davies-Bouldin index because it is defined as the function of the ratio of the within cluster scatter, to the between cluster separation.[Davies/Bouldin, 1979].
 }
 \value{
 List of 
-  \item{Dunn}{
+  \item{DaviesBouldinIndex}{
 scalar,Davies Bouldin index
 }
   \item{Object}{
