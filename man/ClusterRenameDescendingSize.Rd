@@ -1,6 +1,6 @@
 \name{ClusterRenameDescendingSize}
 \alias{ClusterRenameDescendingSize}
-\title{ ClusterRenameDescendingSize}
+\title{Cluster Rename Descending Size}
 \description{
 Renames the clusters of a classification in descending order.}
 \usage{
@@ -30,7 +30,7 @@ ProvideClusterNames==TRUE: List V with
 \author{Michael Thrun, Alfred Ultsch}
 
 \keyword{ClusterRenameDescendingSize}
-\concept{Descending Clustertering}
+\concept{Descending Clustering}
 \concept{Rename Descending Cluster Size}
 
 \examples{
@@ -40,6 +40,9 @@ Cls=Lsun3D$Cls
 Cls[Cls==1]=543
 Cls[Cls==4]=1
 
-# Now ordered ber cluster size and descending
+# Now ordered per cluster size and descending
 ClusterRenameDescendingSize(Cls)
+}
+\seealso{
+\code{\link{ClusterNormalize}}
 }

@@ -30,7 +30,14 @@ for(i in 1:NumberOfClusters){
    if(CountPerCluster[i] > MinClusterSize){     # Kuerzung notwendig
     Ind = sample(1:CountPerCluster[i],size = MinClusterSize,replace = F)       # subsample
     ClusterInd = ClusterInd[Ind]         # Kuerzung auf  MinClsAnz
-   }  
+   } else if(CountPerCluster[i] == MinClusterSize){
+      Ind = 1:CountPerCluster[i]      # no sample
+      ClusterInd = ClusterInd[Ind]         # Kuerzung auf  MinClsAnz
+   }else{
+      Ind = sample(1:CountPerCluster[i],size = MinClusterSize - CountPerCluster[i],replace = T)       # subsample
+      Ind=c(1:CountPerCluster[i],Ind)
+      ClusterInd = ClusterInd[Ind]         # Kuerzung auf  MinClsAnz
+   }
 
 BalancedInd= c(BalancedInd,ClusterInd)# Aufsammeln des index
 }; # for i

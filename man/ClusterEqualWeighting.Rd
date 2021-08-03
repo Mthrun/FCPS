@@ -23,7 +23,7 @@ Optional, scalar defining the number of cases m that each cluster should have
 }
 }
 \details{
-Balance clusters such that their sizes are the same by subsampling the larger cluster. If \code{MinClusterSize} is missing the number of cases per cluster is set to the smallest cluster size.
+Balance clusters such that their sizes are the same by subsampling the larger cluster. If \code{MinClusterSize} is missing the number of cases per cluster is set to the smallest cluster size. For clusters sizes smaller than \code{MinClusterSize}, sampling with replacement is turned on, i.e. up sampling. For clusters sizes equal to \code{MinClusterSize}, no sampling is performed.
 }
 \value{
 List of
@@ -44,4 +44,4 @@ ClusterEqualWeighting(Hepta$Cls,Hepta$Data,5)
 
 \keyword{ClusterEqualWeighting}
 \concept{Equal Weighting}
-
+\concept{Cluster Sampling}
