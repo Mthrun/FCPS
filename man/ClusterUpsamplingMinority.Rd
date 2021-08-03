@@ -1,14 +1,14 @@
-\name{ClusterUpsampling}
-\alias{ClusterUpsampling}
+\name{ClusterUpsamplingMinority}
+\alias{ClusterUpsamplingMinority}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Cluster Up Sampling using SMOTE
+Cluster Up Sampling using SMOTE for minority cluster
 }
 \description{
 Wrapper for one specific internal function of L. Torgo who implemented there the relevant part of the SMOTE algorithm [Chawla et al., 2002].
 }
 \usage{
-ClusterUpsampling(Cls, Data, MinorityCluster,
+ClusterUpsamplingMinority(Cls, Data, MinorityCluster,
 
 Percentage = 200, knn = 5, PlotIt = FALSE)
 }
@@ -54,7 +54,7 @@ Data=Lsun3D$Data
 Cls=Lsun3D$Cls
 table(Cls)
 
-V=ClusterUpsampling(Cls,Data,4,1000)
+V=ClusterUpsamplingMinority(Cls,Data,4,1000)
 table(V$ClsExt)
 }
 

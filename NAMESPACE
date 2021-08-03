@@ -67,7 +67,7 @@ export(ClusterPlotMDS)
 export(ClusterRename)
 export(ClusterShannonInfo)
 export(ClusterRenameDescendingSize)
-export(ClusterUpsampling)
+export(ClusterUpsamplingMinority)
 
 export(EntropyOfDataField)
 export(EstimateRadiusByDistance)
