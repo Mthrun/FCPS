@@ -39,9 +39,10 @@ ClusterCount <- function(Cls,Ordered=FALSE) {
   as.numeric(countPerCluster)[ind],
   ClusterPercentages[ind]
   )
+
   if(isTRUE(Ordered)){
     ind=order(Overview[,1],decreasing = FALSE,na.last = T)
-    Overview=Overview[ind,]
+    Overview=Overview[ind,,drop=FALSE]
   }
 
   return(

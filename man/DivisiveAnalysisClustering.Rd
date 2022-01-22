@@ -34,7 +34,7 @@ List of
 \item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 
- \examples{
+\examples{
 data('Hepta')
 CA=DivisiveAnalysisClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
 \donttest{
