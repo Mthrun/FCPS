@@ -8,11 +8,11 @@ Dunn Index
 Internal (i.e. without prior classification) cluster quality measure called Dunn index for a given clustering published in [Dunn, 1974].
 }
 \usage{
-ClusterDunnIndex(Cls, DataOrDistances, 
+ClusterDunnIndex(Cls,DataOrDistances,
 
-DistanceMethod = "euclidean", Silent = TRUE,\dots)
+DistanceMethod="euclidean",Silent=TRUE,Force=FALSE,\dots)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{Cls}{
 [1:n] numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.
@@ -26,9 +26,12 @@ DistanceMethod = "euclidean", Silent = TRUE,\dots)
 Optional, one of 39 distance methods of \code{parDist} of package parallelDist,  if Data matrix is chosen above
 }
   \item{Silent}{
-T: Warnings are shown
+TRUE: Warnings are shown
 }
-    \item{\dots}{Further arguments passed on to the \code{parDist} function, e.g. user-defined distance functions}
+  \item{Force}{
+TRUE: force computing in case of numerical instability
+}
+    \item{\dots}{Further arguments passed on to the \code{parDist} function, e.g. user_defined distance functions}
 }
 \details{
 Dunn index is defined as \code{Dunn=min(InterDist)/max(IntraDist)}. Well seperated clusters have usually a dunn index above 1, for details please see [Dunn, 1974].
@@ -46,7 +49,7 @@ scalar, Dunn Index
 }
 }
 \references{
-[Dunn, 1974]  Dunn, J. C.: Well-separated clusters and optimal fuzzy partitions, Journal of cybernetics, Vol. 4(1), pp. 95-104. 1974.
+[Dunn, 1974]  Dunn, J. C.: Well_separated clusters and optimal fuzzy partitions, Journal of cybernetics, Vol. 4(1), pp. 95-104. 1974.
 }
 \author{
 Michael Thrun

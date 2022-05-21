@@ -6,7 +6,7 @@ export(AgglomerativeNestingClustering)
 export(APclustering)
 export(AutomaticProjectionBasedClustering)
 #export(ConsensusClustering) #doku is corrupted at the moment
-export(CrossEntropyClustering)
+export(CrossEntropyClustering) #package not on CRAN anymore
 export(DatabionicSwarmClustering)
 export(DBSCAN)
 export(DensityPeakClustering)
@@ -99,3 +99,4 @@ importFrom("stats", "cor")
 importFrom("stats", "order.dendrogram")
 importFrom("utils", "tail")
 importFrom("stats", "median")
+importFrom("graphics", "title")

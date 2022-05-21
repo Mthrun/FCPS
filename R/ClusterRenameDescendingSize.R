@@ -13,7 +13,10 @@ ClusterRenameDescendingSize <- function(Cls,ProvideClusterNames=FALSE) {
     warning('ClusterRenameDescendingSize: Cls is not a vector. Calling as.numeric(as.character(Cls))')
     Cls=as.numeric(as.character(Cls))
   }
-   
+  if(length(unique(Cls))==1){
+    warning("ClusterRenameDescendingSize: Only one unique label in Cls given. Nothing to rename.")
+    return(list(renamedCls=Cls,ClusterName=NULL))
+  }
   ListeV <- ClusterCount(Cls)
   countPerClass <- ListeV[[2]]
   UniqueClasses=ListeV[[1]]

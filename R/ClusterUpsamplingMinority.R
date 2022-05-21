@@ -61,7 +61,9 @@ smote.exs <- function(data,tgt,N,k)
   nomatr <- c()
   T <- matrix(nrow=dim(data)[1],ncol=dim(data)[2]-1)
   for(col in seq.int(dim(T)[2]))
-    if (class(data[,col]) %in% c('factor','character')) {
+	#mt: compatibility to R 4.2:
+	ind_temp=class(data[,col]) %in% c('factor','character')
+    if (isTRUE(ind_temp[1])) {
       T[,col] <- as.integer(data[,col])
       nomatr <- c(nomatr,col)
     } else T[,col] <- data[,col]

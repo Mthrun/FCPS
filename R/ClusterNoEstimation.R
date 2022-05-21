@@ -45,7 +45,7 @@ ClusterNoEstimation <- function (DataOrDistances,
   #
   #  For the creation of the clustering, following Methods can be used
   #
-  #  "ward.D", "single", "complete", "average", "mcquitty", 
+  #  "ward.D", "single", "complete", "average", "mcquitty",
   #  "median", "centroid", "ward.D2", "kmeans", "DBSclustering"
   #
   #  NOTES
@@ -74,19 +74,19 @@ ClusterNoEstimation <- function (DataOrDistances,
     if(any(apply(cls,2,function(x) length(unique(x)))<2)){
       stop('Amount of unqiue clusters for each column of ClsMatrix should be at least 2,')
     }
-  }							
-  
+  }
+
 
   if (isSymmetric(unname(DataOrDistances))) {
     data=internalMDSestimate(DataOrDistances)
   }else{
     data=DataOrDistances
-  }	
-  
+  }
+
   range <- MaxClusterNo - MinClusterNo + 1
-  
+
   alphabeale <- 0.1
-  
+
   indexnames <- c(
     "calinski",
     "cindex",
@@ -115,12 +115,12 @@ ClusterNoEstimation <- function (DataOrDistances,
     "sdindex",
     "sdbw"
   )
-  
+
   indexanzahl <- length(indexnames)
   all <- indexanzahl + 1
-  
+
   indexn <- pmatch(ClusterIndex, c(indexnames,"all"))
-  
+
   crits <- c()
   if (any(indexn == 18)) {
     crits <- c(1)
@@ -134,32 +134,32 @@ ClusterNoEstimation <- function (DataOrDistances,
   if (any(indexn == all)) {
     crits <- c(1:3)
   }
-  
+
   # Helper functions
   centers <- function(cls) {
     n <- length(cls)
     k <- max(cls)
-    
+
     centers <- matrix(nrow = k, ncol = ncol(data))
-    
+
     for (i in 1:k) {
       for (j in 1:ncol(data)) {
         centers[i, j] <- mean(data[cls == i, j])
       }
     }
-    
+
     return(centers)
   }
-  
+
   withinss <- function(centers, cls) {
     res <- rep(0, nrow(centers))
-    
+
     data <- (data - centers[cls, ]) ^ 2
-    
+
     for (k in 1:nrow(centers)) {
       res[k] <- sum(data[cls == k, ])
     }
-    
+
     return(res)
   }
   varwithinss <- function(x, centers, cluster) {
@@ -241,16 +241,16 @@ ClusterNoEstimation <- function (DataOrDistances,
     zvargss <- list(vartss = vartss, varbgss = varbgss)
     return(zvargss)
   }
-  
+
   count <- function(y) {
     x <- trunc(y)
-    
+
     xrows <- nrow(y)
     xcols <- ncol(y)
     d <- xcols + 1
-    
+
     res <- rep(0, d)
-    
+
     for (i in 1:(xrows - 1)) {
       tempi <- x[i,]
       for (j in (i + 1):xrows) {
@@ -267,7 +267,7 @@ ClusterNoEstimation <- function (DataOrDistances,
     }
     res
   }
-  
+
   ttww <- function(x, clsize, cluster) {
     n <- sum(clsize)
     k <- length(clsize)
@@ -280,24 +280,24 @@ ClusterNoEstimation <- function (DataOrDistances,
         w <- w + wtemp
     }
     zttw$w=w
- 
+
     return(zttw)
   }
-  
+
   Average.scattering <- function (cl, x)
   {
     x <- as.matrix(x)
     n <- length(cl)
     k <- max(cl)
     centers.matrix <- centers(cl)
-    
+
     cluster.size <- numeric(0)
     variance.clusters <- matrix(0, ncol = ncol(x), nrow = k)
     var <- matrix(0, ncol = ncol(x), nrow = k)
-    
+
     for (u in 1:k)
       cluster.size[u] <- sum(cl == u)
-    
+
     for (u in 1:k)
     {
       for (j in 1:ncol(x))
@@ -310,32 +310,32 @@ ClusterNoEstimation <- function (DataOrDistances,
         }
       }
     }
-    
+
     for (u in 1:k)
     {
       for (j in 1:ncol(x))
         variance.clusters[u, j] = variance.clusters[u, j] / cluster.size[u]
     }
-    
-    
+
+
     variance.matrix <- numeric(0)
     for (j in 1:ncol(x))
       variance.matrix[j] = var(x[, j]) * (n - 1) / n
-    
-    
+
+
     Somme.variance.clusters <- 0
     for (u in 1:k)
       Somme.variance.clusters <-
       Somme.variance.clusters + sqrt((variance.clusters[u, ] %*% (variance.clusters[u, ])))
-    
-    
+
+
     # Standard deviation
     stdev <- (1 / k) * sqrt(Somme.variance.clusters)
-    
+
     # Average scattering for clusters
     scat <-
       (1 / k) * (Somme.variance.clusters / sqrt(variance.matrix %*% variance.matrix))
-    
+
     scat <-
       list(
         stdev = stdev,
@@ -346,13 +346,13 @@ ClusterNoEstimation <- function (DataOrDistances,
       )
     return(scat)
   }
-  
+
   density.clusters <- function(cl, x)
   {
     x <- as.matrix(x)
     k <- max(cl)
     n <- length(cl)
-    
+
     distance <- matrix(0, ncol = 1, nrow = n)
     density <-  matrix(0, ncol = 1, nrow = k)
     centers.matrix <- centers(cl)
@@ -372,10 +372,10 @@ ClusterNoEstimation <- function (DataOrDistances,
     }
     dens <- list(distance = distance, density = density)
     return(dens)
-    
+
   }
-  
-  
+
+
   density.bw <- function(cl, x)
   {
     x <- as.matrix(x)
@@ -385,7 +385,7 @@ ClusterNoEstimation <- function (DataOrDistances,
     stdev <- Average.scattering(cl, x)$stdev
     density.bw <- matrix(0, ncol = k, nrow = k)
     u <- 1
-    
+
     for (u in 1:k)
     {
       for (v in 1:k)
@@ -422,15 +422,12 @@ ClusterNoEstimation <- function (DataOrDistances,
       }
     density.bw <- S / (k * (k - 1))
     return(density.bw)
-    
+
   }
-  
-  
-  
   Dis <- function (cl, x)
   {
     # Dis : Total separation between clusters
-    
+
     x <- as.matrix(x)
     k <- max(cl)
     centers.matrix <- centers(cl)
@@ -453,11 +450,10 @@ ClusterNoEstimation <- function (DataOrDistances,
   }
   # End: helper Methods
   ########
-  
+
   # Processing of clss
-  
+
   if (is.null(Method)) {
-  
   if (any(indexn == 15,
           indexn == 18,
           indexn == 19,
@@ -488,19 +484,22 @@ ClusterNoEstimation <- function (DataOrDistances,
   }
   else {
     clusters <- cls
-    colnames(clusters) <- c(MinClusterNo:MaxClusterNo)
     clusters2 <-
       cbind(rep(NA, dim(cls)[1]), cls, rep(NA, dim(cls)[1]))
-    colnames(clusters2) <- c(NA, MinClusterNo:MaxClusterNo, NA)
+    if(is.null(clusters)){
+      tryCatch({colnames(clusters) <- c(MinClusterNo:MaxClusterNo)},error=function(e) warning(e))
+      tryCatch({colnames(clusters2) <- c(NA, MinClusterNo:MaxClusterNo, NA)},error=function(e) warning(e))
+    }else{
+      tryCatch({colnames(clusters2) <- c(NA, colnames(clusters), NA)},error=function(e) warning(e))
+    }
   }
-  
   if (!Silent) {
-   message("Given clusterings are done, start computation") 
+   message("Given clusterings are done, start computation")
   }
   }
   else {
     if (!Silent) {
-      message("Clustering in creation") 
+      message("Clustering in creation")
     }
 
     helpfun=function(data,FUN,range,MinClusterNo,...){
@@ -534,10 +533,10 @@ ClusterNoEstimation <- function (DataOrDistances,
         clusters2=helpfun(data,DatabionicSwarm::DBSclustering,range,MinClusterNo,Type=Method,BestMatches = projPoints$ProjectedPoints,LC = projPoints$LC[c(2,1)],...)
       },{
         clusters2=helpfun(data,FUN=HierarchicalClustering,range,MinClusterNo,Type=Method,...)
-    
+
       }
     )
-    # Methodnames <- c("ward.D", "single", "complete", "average", "mcquitty", 
+    # Methodnames <- c("ward.D", "single", "complete", "average", "mcquitty",
     #                  "median", "centroid", "ward.D2","kmeans","DBSclustering")
     # Methodn <- pmatch(Method,Methodnames)
     # clusters2 <- matrix(1,nrow = dim(data)[1],ncol = range + 2)
@@ -550,7 +549,7 @@ ClusterNoEstimation <- function (DataOrDistances,
     #       clusters2[,i+1] <- temp
     #     }
     #   }
-    #   
+    #
     # }
     # else if (Methodn == 9) {
     #   for (i in 0:(range + 1)) {
@@ -561,14 +560,14 @@ ClusterNoEstimation <- function (DataOrDistances,
     #   }
     # }
     # else if (Methodn == 10) {
-    #   
+    #
     #   if(requireNamespace("DatabionicSwarm")){
     #     projPoints <- DatabionicSwarm::Pswarm(data)
     #   }
     #   else{
     #     stop('DatabionicSwarm package not loaded or installed.')
     #   }
-    #   
+    #
     #   for (i in 0:(range + 1)) {
     #     if (i != 0 || !MinClusterNo == 2) {
     #       temp <- DatabionicSwarm::DBSclustering(MinClusterNo-1+i,data,projPoints$ProjectedPoints,projPoints$LC[c(2,1)])
@@ -579,25 +578,25 @@ ClusterNoEstimation <- function (DataOrDistances,
     # else {
     #   stop("Wrong Method")
     #}
-    
+
     colnames(clusters2) <- c((MinClusterNo - 1):(MaxClusterNo + 1))
     clusters <- clusters2[, 2:(range + 1)]
     colnames(clusters) <- c(MinClusterNo:MaxClusterNo)
-    
+
     if (!Silent) {
-      message("Clusterings created, start computation") 
+      message("Clusterings created, start computation")
     }
   }
-  
+
   ######
-  
+
   # Methods to compute operating numbers
   # Operating numbers from cclust
   calinski <- function(zgss, clsize) {
     n <- sum(clsize)
     k <- length(clsize)
     vrc <- (zgss$bgss / (k - 1)) / (zgss$wgss / (n - k))
-    
+
     return(vrc = vrc)
   }
   cindex <- function(withins, minmaxd, clsize) {
@@ -704,17 +703,17 @@ ClusterNoEstimation <- function (DataOrDistances,
     return(xuindex)
   }
   # cclust end
-  
+
   # Operating numbers from nbclust
   ##################################
   #                                #
   #      Frey and McClain          #
   #                                #
   ##################################
-  
-  
-  
-  
+
+
+
+
   Index.15and28  <- function (cl1, cl2, md)
   {
     cn1 <- max(cl1)
@@ -782,33 +781,33 @@ ClusterNoEstimation <- function (DataOrDistances,
       (meanbetween2 - meanbetween1) / (meanwithin2 - meanwithin1)
     Index.28 <-
       (meanwithin1 / nwithin1) / (meanbetween1 / nbetween1)
-    
+
     results <- list(frey = Index.15, mcclain = Index.28)
     return(results)
   }
-  
-  
+
+
   ##################################
   #                                #
   #      Point-biserial            #
   #                                #
   ##################################
-  
-  
-  
+
+
+
   Indice.ptbiserial <- function (x, md, cl1)
   {
     nn <- dim(x)[1]
     pp <- dim(x)[2]
-    
+
     md2 <- as.matrix(md)
     m01 <- array(NA, c(nn, nn))
     nbr <- (nn * (nn - 1)) / 2
     pby <- rep(0,nbr)
     pbx <- md2[row(md2) < col(md2)]
-    
+
     m3 <- 1
-    
+
     for (m1 in 2:nn)
     {
       m12 <- m1 - 1
@@ -823,10 +822,10 @@ ClusterNoEstimation <- function (DataOrDistances,
         m3 <- m3 + 1
       }
     }
-    
+
     y <- pby
     x <- pbx
-    
+
     biserial.cor <-
       function (x,
                 y,
@@ -851,19 +850,19 @@ ClusterNoEstimation <- function (DataOrDistances,
         prob <- mean(ind)
         diff.mu * sqrt(prob * (1 - prob)) / sd(x)
       }
-    
+
     ptbiserial <- biserial.cor(x = pbx, y = pby, level = 2)
     return(ptbiserial)
   }
-  
-  
+
+
   ##########################################
   #                                        #
   #       Duda, pseudot2 and beale         #
   #                                        #
   ##########################################
-  
-  
+
+
   Indices.WKWL <- function (x, cl1 = cl1, cl2 = cl2)
   {
     dim2 <- dim(x)[2]
@@ -872,7 +871,7 @@ ClusterNoEstimation <- function (DataOrDistances,
       x <- as.matrix(x)
       n <- length(x)
       centers <- matrix(nrow = 1, ncol = ncol(x))
-      
+
       if (ncol(x) == 1)
       {
         centers[1, ] <- mean(x)
@@ -889,13 +888,13 @@ ClusterNoEstimation <- function (DataOrDistances,
       {
         centers[1, ] <- apply(x, 2, mean)
       }
-      
+
       x.2 <- sweep(x, 2, centers[1, ], "-")
       withins <- sum(x.2 ^ 2)
       wss <- sum(withins)
       return(wss)
     }
-    
+
     ncg1 <- 1
     ncg1max <- max(cl1)
     while ((sum(cl1 == ncg1) == sum(cl2 == ncg1)) &&
@@ -904,9 +903,9 @@ ClusterNoEstimation <- function (DataOrDistances,
       ncg1 <- ncg1 + 1
     }
     g1 <- ncg1
-    
-    
-    
+
+
+
     ncg2 <- max(cl2)
     nc2g2 <- ncg2 - 1
     while ((sum(cl1 == nc2g2) == sum(cl2 == ncg2)) && nc2g2 >= 1)
@@ -915,28 +914,28 @@ ClusterNoEstimation <- function (DataOrDistances,
       nc2g2 <- nc2g2 - 1
     }
     g2 <- ncg2
-    
+
     NK <- sum(cl2 == g1)
     WK.x <- x[cl2 == g1, ]
     WK <- wss(x = WK.x)
-    
+
     NL <- sum(cl2 == g2)
     WL.x <- x[cl2 == g2, ]
     WL <- wss(x = WL.x)
-    
+
     NM <- sum(cl1 == g1)
     WM.x <- x[cl1 == g1, ]
     WM <- wss(x = WM.x)
-    
+
     duda <- (WK + WL) / WM
-    
+
     BKL <- WM - WK - WL
     pseudot2 <- BKL / ((WK + WL) / (NK + NL - 2))
-    
+
     beale <-
       (BKL / (WK + WL)) / (((NM - 1) / (NM - 2)) * (2 ^ (2 / dim2) -
                                                       1))
-    
+
     results <-
       list(
         duda = duda,
@@ -948,16 +947,16 @@ ClusterNoEstimation <- function (DataOrDistances,
       )
     return(results)
   }
-  
-  
+
+
   ####################
   #                  #
   #       ccc        #
   #                  #
   ####################
-  
-  
-  
+
+
+
   Indices.WBT <- function(x, cl, P, s, vv)
   {
     n <- dim(x)[1]
@@ -965,7 +964,7 @@ ClusterNoEstimation <- function (DataOrDistances,
     qq <- max(cl)
     z <- matrix(0, ncol = qq, nrow = n)
     clX <- as.matrix(cl)
-    
+
     for (i in 1:n)
       for (j in 1:qq)
       {
@@ -975,12 +974,12 @@ ClusterNoEstimation <- function (DataOrDistances,
           z[i, j] = 1
         }
       }
-    
+
     xbar <- solve(t(z) %*% z) %*% t(z) %*% x
     B <- t(xbar) %*% t(z) %*% z %*% xbar
     W <- P - B
-    
-    
+
+
     R2 <- 1 - sum(diag(W)) / sum(diag(P))
     v1 <- 1
     u <- rep(0, pp)
@@ -1014,18 +1013,18 @@ ClusterNoEstimation <- function (DataOrDistances,
     results <- ccc
     return(results)
   }
-  
-  
-  
+
+
+
   ########################################################################
   #                                                                      #
   #                               Kl                                     #
   #                                                                      #
   ########################################################################
-  
-  
-  
-  
+
+
+
+
   Indices.Traces <- function(data, d, clall)
   {
     x <- data
@@ -1039,8 +1038,8 @@ ClusterNoEstimation <- function (DataOrDistances,
     nb1.cl0 <- sum(nb.cl0 == 1)
     nb1.cl1 <- sum(nb.cl1 == 1)
     nb1.cl2 <- sum(nb.cl2 == 1)
-    
-    
+
+
     gss <- function(x, cl, d)
     {
       results <- list(wgss = NaN,
@@ -1068,7 +1067,7 @@ ClusterNoEstimation <- function (DataOrDistances,
         {
           centers[i, ] <- apply(x[cl == i, ,drop=FALSE], 2, mean)
         }
-        
+
       }
       allmean <- apply(x, 2, mean)
       dmean <- sweep(x, 2, allmean, "-")
@@ -1080,14 +1079,14 @@ ClusterNoEstimation <- function (DataOrDistances,
       }
       wgss <- sum(withins)
       bgss <- allmeandist - wgss
-      
+
       results <- list(wgss = wgss,
                       bgss = bgss,
                       centers = centers)
       })
       return(results)
     }
-    
+
     vargss <- function(x, clsize, varwithins)
     {
       nvar <- dim(x)[2]
@@ -1120,9 +1119,9 @@ ClusterNoEstimation <- function (DataOrDistances,
       }
       return(varwithins)
     }
-    
-    
-    
+
+
+
     indice.kl <-
       function (x,
                 clall,
@@ -1154,22 +1153,22 @@ ClusterNoEstimation <- function (DataOrDistances,
                                                                       gss(x, clall[, 3], d)$wgss)
         return(KL)
       }
-    
+
     return(indice.kl(x, clall, d))
   }
-  
-  
-  
-  
-  
+
+
+
+
+
   ########################################################################
   #                                                                      #
   #                             Silhouette                               #
   #                                                                      #
   ########################################################################
-  
-  
-  
+
+
+
   Indice.S <- function (d, cl)
   {
     d <- as.matrix(d)
@@ -1201,23 +1200,23 @@ ClusterNoEstimation <- function (DataOrDistances,
     }
     Si / length(cl)
   }
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
   ########################################################################
   #                                                                      #
   #                              SD, sdbw, dunn                          #
   #                                                                      #
   ########################################################################
-  
-  
-  
-  
+
+
+
+
   Index.sdindex <- function(x, clmax, cl)
   {
     x <- as.matrix(x)
@@ -1227,7 +1226,7 @@ ClusterNoEstimation <- function (DataOrDistances,
     SD.indice <- Alpha * Scatt + Dis0
     return(SD.indice)
   }
-  
+
   Index.SDbw <- function(x, cl)
   {
     x <- as.matrix(x)
@@ -1236,16 +1235,16 @@ ClusterNoEstimation <- function (DataOrDistances,
     SDbw <- Scatt + Dens.bw
     return(SDbw)
   }
-  
-  
+
+
   #####################################################################
   #                                                                   #
   #                            Dunn index                             #
   #                                                                   #
   #####################################################################
-  
-  
-  
+
+
+
   Index.dunn <-
     function(md,
              clusters,
@@ -1256,7 +1255,7 @@ ClusterNoEstimation <- function (DataOrDistances,
       nc <- max(clusters)
       interClust <- matrix(NA, nc, nc)
       intraClust <- rep(NA, nc)
-      
+
       for (i in 1:nc)
       {
         c1 <- which(clusters == i)
@@ -1272,117 +1271,117 @@ ClusterNoEstimation <- function (DataOrDistances,
       dunn <- min(interClust, na.rm = TRUE) / max(intraClust)
       return(dunn)
     }
-  
+
   # Methods to determine optimal number of classes
   # maximum difference to left side
   max.left <- function(indizes) {
-    
+
     anzahl <- length(indizes)
     k.min <- as.numeric(names(indizes)[1])
     k.max <- as.numeric(names(indizes)[anzahl])
-    
-    
+
+
     diffs <- rep(0,anzahl-1)
-    
+
     for (i in 1:anzahl-1) {
       diffs[i] <- indizes[i+1] - indizes[i]
     }
-    
+
     res <- which(diffs==max(diffs))[1]+k.min
-    
+
     as.numeric(res)
-    
+
   }
-  
+
   # Maximum difference to right side
   max.right <- function(indizes) {
-    
-    
-    
+
+
+
     anzahl <- length(indizes)
     k.min <- as.numeric(names(indizes)[1])
     k.max <- as.numeric(names(indizes)[anzahl])
-    
+
     diffs <- rep(0,anzahl-1)
-    
+
     for (i in 1:anzahl-1) {
       diffs[i] <- indizes[i] - indizes[i+1]
     }
-    
+
     res <- which(diffs==max(diffs))[1]+k.min-1
-    
+
     as.numeric(res)
-    
+
   }
-  
+
   # Maximum of second differences
   max.second <- function(indizes) {
-    
-    
+
+
     anzahl <- length(indizes)
     k.min <- as.numeric(names(indizes)[1])
     k.max <- as.numeric(names(indizes)[anzahl])
-    
+
     diffs <- rep(0,anzahl-2)
-    
+
     for (i in 1:(anzahl-2)) {
       diffs[i] <- (indizes[i+2] - indizes[i+1]) - (indizes[i+1] - indizes[i])
     }
-    
+
     res <- which(diffs==max(diffs))[1]+k.min
-    
+
     as.numeric(res)
-    
+
   }
-  
+
   # Minimum of second differences
   min.second <- function(indizes) {
-    
-    
+
+
     anzahl <- length(indizes)
     k.min <- as.numeric(names(indizes)[1])
     k.max <- as.numeric(names(indizes)[anzahl])
-    
+
     diffs <- rep(0,anzahl-2)
-    
+
     for (i in 1:(anzahl-2)) {
       diffs[i] <- (indizes[i+2] - indizes[i+1]) - (indizes[i+1] - indizes[i])
     }
-    
+
     res <- which(diffs==min(diffs))[1]+k.min
-    
+
     as.numeric(res)
-    
+
   }
-  
+
   # Maximal index
   max.index <- function(indizes) {
-    
+
     k.min <- as.numeric(names(indizes)[1])
-    
+
     res <- which(indizes==max(indizes))[1]
-    
+
     res <- res + k.min - 1
-    
+
     as.numeric(res)
-    
+
   }
-  
+
   # Minimal index
   min.index <- function(indizes) {
-    
+
     k.min <- as.numeric(names(indizes)[1])
-    
+
     res <- which(indizes==min(indizes))[1]
-    
+
     res <- res + k.min - 1
-    
+
     as.numeric(res)
-    
+
   }
-  
+
   ####
-  
+
   # Computation of operating numbers  ----
   res <- matrix(data = 0,
                 nrow = range,
@@ -1394,15 +1393,15 @@ ClusterNoEstimation <- function (DataOrDistances,
                            ncol = 3)
   colnames(criticalValues) <- c(indexnames[18:20])
   rownames(criticalValues) <- c(MinClusterNo:MaxClusterNo)
-  
+
   if (any(indexn == 2) || indexn == all) {
     distdata <- count(data)
   }
-  
+
   for (i in 0:(range - 1)) {
     #temp <- rep(MinClusterNo+i,length(indexnames))
     #temp <- rep(MinClusterNo+i,4)
-    
+
     temp1 <- rep(0, 14)
     temp2 <- list(Indicators = rep(0, 12),
                   criticalValues = rep(0, 3))
@@ -1417,11 +1416,11 @@ ClusterNoEstimation <- function (DataOrDistances,
         size = size,
         cluster = clstemp
       )
-      
+
       zgss <- gss(data, clres$size, clres$withins)
       zttw <- ttww(data, clres$size, clres$cluster)
     }
-    
+
     #Indicators aus cclust
     if (any(indexn == 1) || indexn == all) {
       res[i + 1, 1] <- calinski(zgss, clres$size)
@@ -1471,16 +1470,16 @@ ClusterNoEstimation <- function (DataOrDistances,
     }
     # Operating numbers from NbClust
     if (any(indexn >= 15) || indexn == all) {
-     
+
       jeu <- data
       nn <- numberObsAfter <- dim(jeu)[1]
       pp <- dim(jeu)[2]
       TT <- t(jeu) %*% jeu
       sizeEigenTT <- length(eigen(TT)$value)
       eigenValues <- eigen(TT / (nn - 1))$value
-      
+
       # Only for indices using vv : CCC
-      
+
       if (any(indexn == 16) || indexn == all)
       { try({
         for (i400 in 1:sizeEigenTT)
@@ -1503,17 +1502,17 @@ ClusterNoEstimation <- function (DataOrDistances,
       })
       }
       md <- dist(jeu, method = "euclidean")
-      
+
       cl0 <- clusters2[, i + 1]
       cl1 <- clusters[, i + 1]
       cl2 <- clusters2[, i + 3]
       clmax <- clusters[, range]
-      
+
       clall <- cbind(cl1, cl2)
       clall1 <- cbind(cl0, cl1, cl2)
     }
-    
-    
+
+
     if (any(indexn == 15) || indexn == all)
     {
       res[i + 1, 15] <- Indices.Traces(jeu, md, clall1)
@@ -1538,8 +1537,8 @@ ClusterNoEstimation <- function (DataOrDistances,
     if (any(indexn == 18) ||
         any(indexn == 19) || any(indexn == 20) || indexn == all)      {
       temp <-     Indices.WKWL(x = jeu, cl1 = cl1, cl2 = cl2)
-      
-      
+
+
       res[i + 1, 18] <- temp$duda
       res[i + 1, 19] <- temp$pseudot2
       res[i + 1, 20] <- temp$beale
@@ -1548,29 +1547,29 @@ ClusterNoEstimation <- function (DataOrDistances,
       NL <- temp$NL
       zz <- 3.20 # Best standard score in (Milligan and Cooper, 1985)
       zzz <- zz * sqrt(2 * (1 - 8 / ((pi ^ 2) * pp)) / (NM * pp))
-      
-      
-      
+
+
+
       if (any(indexn == 18) || indexn == all)
       {
         criticalValues[i + 1, 1] <- critValue <- 1 - (2 / (pi * pp)) - zzz
       }
-      
+
       if (any(indexn == 19) || indexn == all)
       {
         critValue <- 1 - (2 / (pi * pp)) - zzz
         criticalValues[i + 1, 2] <-
           ((1 - critValue) / critValue) * (NK + NL - 2)
-        
+
       }
-      
-      
+
+
       if (any(indexn == 20) || indexn == all)
       {
         df2 <- (NM - 2) * pp
         criticalValues[i + 1, 3] <- 1 - pf(temp$beale, pp, df2)
       }
-      
+
     }
     if (any(indexn == 21) || indexn == all)
     {
@@ -1578,13 +1577,13 @@ ClusterNoEstimation <- function (DataOrDistances,
     }
     if (any(indexn == 22) || any(indexn == 23) || indexn == all)
     {
-      
+
       temp <- Index.15and28(cl1 = cl1,
                             cl2 = cl2,
                             md = md)
       res[i + 1, 22] <- temp$frey
       res[i + 1, 23] <- temp$mcclain
-      
+
     }
     if (any(indexn == 24) || indexn == all)
     {
@@ -1598,19 +1597,19 @@ ClusterNoEstimation <- function (DataOrDistances,
     {
       res[i + 1, 26] <- Index.SDbw(jeu, cl1)
     }
-    
+
     if (!Silent) {
       message(paste0("Operating numbers for number of classes ",i+MinClusterNo," computed, highest number of classes: ",MaxClusterNo))
     }
-    
+
   }
-  
+
   if (!Silent) {
     message("Operating numbers computed, investigate optimal number of classes")
   }
-  
-  
-  
+
+
+
   # Determine optimal number of classes
   klassenanzahl <-
     matrix(data = 0,
@@ -1618,7 +1617,7 @@ ClusterNoEstimation <- function (DataOrDistances,
            ncol = length(indexnames))
   colnames(klassenanzahl) <- indexnames
   rownames(klassenanzahl) <- c("Recommended number of classes")
-  
+
   if (any(indexn == 1) || indexn == all) {
     #calinski
     klassenanzahl[1] <- min.second(res[, 1])
@@ -1771,10 +1770,10 @@ ClusterNoEstimation <- function (DataOrDistances,
     #sdbw
     klassenanzahl[26] <- min.index(res[, 26])
   }
-  
-  
-  
-  
+
+
+
+
   if (is.null(crits)) {
     criticalValues <- NA
   }
@@ -1785,13 +1784,13 @@ ClusterNoEstimation <- function (DataOrDistances,
   else {
     criticalValues <- criticalValues[, crits]
   }
-  
+
   if (all(indexn != all)) {
     if (length(indexn) == 1) {
       res <- as.matrix(res[, indexn])
       colnames(res) <- indexnames[indexn]
-      
-      
+
+
     }
     else {
       res <- res[, indexn]
@@ -1803,7 +1802,7 @@ ClusterNoEstimation <- function (DataOrDistances,
   else {
     klassenanzahl <- t(klassenanzahl)
   }
-  
+
   if (!Silent) {
     message("Optimal number of classes per method investigated - END")
   }
@@ -1821,11 +1820,11 @@ ClusterNoEstimation <- function (DataOrDistances,
           message('Colors added using the tail of DataVisualizations::DefaultColorSequence because number of colors was smaller than number of labels.')
         }
       }
-      DataVisualizations::Fanplot(Datavector = cat,Names = unique(cat),Labels = unique(cat),main = 'Indicators for Cluster No.',MaxNumberOfSlices = SelectByABC,col = Colorsequence)     
+      DataVisualizations::Fanplot(Datavector = cat,Names = unique(cat),Labels = unique(cat),main = 'Indicators for Cluster No.',MaxNumberOfSlices = SelectByABC,col = Colorsequence)
       if(!missing(Method))
         title(sub=paste0('for ',Method),line=1)
           #DataVisualizations::Fanplot(Datavector = cat,Names = unique(cat),Labels = unique(cat),main = 'Indicators for Cluster No.',sub=paste0('for ',Method),MaxNumberOfSlices = SelectByABC,col = Colorsequence)
-        
+
     }
     else{
       stop('DataVisualizations package not loaded or installed.')
@@ -1837,6 +1836,6 @@ ClusterNoEstimation <- function (DataOrDistances,
     ClsMatrix = clusters,
     HierarchicalIndicators = criticalValues
   )
-  
+
   return(resliste)
 }

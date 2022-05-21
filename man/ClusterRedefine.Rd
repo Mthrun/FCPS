@@ -8,23 +8,23 @@ Redfines Clustering
 Redfines some or all Clusters of Clustering such that the names of the numerical vectors are defined by 
 }
 \usage{
-ClusterRedefine(Cls, NewClusters,OldClusters)
+ClusterRedefine(Cls, NewLabels,OldLabels)
 }
 
 \arguments{
   \item{Cls}{
 1:n numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.
 }
-  \item{NewClusters}{
-  [1:p], p<=k identifiers of clusters to be changed with
+  \item{NewLabels}{
+  [1:p], p<=k labels (identifiers) of clusters to be changed with
 }
-  \item{OldClusters}{
-  Optional,  [1:p], p<=k identifiers of clusters to be changed, default [1:k] unique cluster Ids of \code{Cls}
+  \item{OldLabels}{
+  Optional,  [1:p], p<=k labels(identifiers) of clusters to be changed, default [1:k] unique cluster Ids of \code{Cls}
 }
 
 }
 \details{
-The same ordering of \code{NewClusters} and  \code{OldClusters} is assumend, i.e., the mapping is defined by OldClusters[i] -> NewClusters[i] with \code{i} in [1:p].   \code{NewClusters} can also be a vector for strings, for example for plotting.
+The same ordering of \code{NewLabels} and  \code{OldLabels} is assumend, i.e., the mapping is defined by OldLabels[i] -> NewLabels[i] with \code{i} in [1:p].   \code{NewLabels} can also be a vector for strings, for example for plotting.
 }
 \value{
 Cls[1:n] numerical vector named after the row names of data
