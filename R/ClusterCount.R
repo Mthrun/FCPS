@@ -1,4 +1,4 @@
-ClusterCount <- function(Cls,Ordered=FALSE) {
+ClusterCount <- function(Cls,Ordered=TRUE,NonFinite=9999) {
   # Calculates statistics for clustering
   # C <-ClusterCount(Cls)
   # UniqueClusters <-C$UniqueClusters
@@ -21,36 +21,42 @@ ClusterCount <- function(Cls,Ordered=FALSE) {
     warning('ClusterCount: Cls is not a vector. Calling as.numeric(as.character(Cls))')
     Cls=as.numeric(as.character(Cls))
   }
-  Cls[!is.finite(Cls)]=9999
-  
-  countPerCluster=table(Cls)
-  u= unique(Cls,fromLast = FALSE)
- 
-  uniqueClusters = as.numeric(names(countPerCluster)) #order ist not as is!
-  
-  ind=match(u,table = uniqueClusters)
+  Cls[!is.finite(Cls)]=NonFinite
+
+  if(isFALSE(Ordered)){
+    countPerCluster=table(Cls)
+    u= unique(Cls,fromLast = FALSE)
+    uniqueClusters = as.numeric(names(countPerCluster)) #order ist not as is!
+    ind=match(u,table = uniqueClusters)
+    uniqueClusters=uniqueClusters[ind]
+    countPerCluster=as.numeric(countPerCluster)[ind]
+  }else{
+    #radix: fasted sort of numeric
+    #rle, run length encoding, counts number of consecutive values
+    V=rle(sort(Cls,method="radix"))
+    countPerCluster=V$lengths
+    uniqueClusters=V$values
+  }
   
   numberOfClusters = length(uniqueClusters)
-  
   ClusterPercentages = as.numeric(prop.table(countPerCluster)*100)
   
-  Overview=cbind(
-  uniqueClusters[ind],
-  as.numeric(countPerCluster)[ind],
-  ClusterPercentages[ind]
-  )
-
-  if(isTRUE(Ordered)){
-    ind=order(Overview[,1],decreasing = FALSE,na.last = T)
-    Overview=Overview[ind,,drop=FALSE]
-  }
-
+  # Overview=cbind(
+  #   uniqueClusters[ind],
+  #   as.numeric(countPerCluster)[ind],
+  #   ClusterPercentages[ind]
+  # )
+  # if(isTRUE(Ordered)){
+  #   ind=order(Overview[,1],decreasing = FALSE,na.last = T)
+  #   Overview=Overview[ind,,drop=FALSE]
+  # }
+  names(countPerCluster)=uniqueClusters
   return(
     list(
-      UniqueClusters = Overview[,1],
-      CountPerCluster = Overview[,2],
+      UniqueClusters = uniqueClusters,
+      CountPerCluster = countPerCluster,
       NumberOfClusters = numberOfClusters,
-      ClusterPercentages = Overview[,3]
+      ClusterPercentages = ClusterPercentages
     )
   )
 }

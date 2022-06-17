@@ -96,8 +96,7 @@ PlotIt=FALSE,Type="MacQueen")
 
 \donttest{
 data('Hepta')
-out=kmeansClustering(Hepta$Data,ClusterNo=7,  
-PlotIt=FALSE,Type="Steinley")
+out=kmeansClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE,Type="Steinley")
 }
 }
 
