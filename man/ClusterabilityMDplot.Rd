@@ -11,7 +11,9 @@ A dataset has a high probabilty to possess cluster structures, if the first comp
 An alternative investigation of clusterability can be performed by inspecting the topographic map of the Generalized U-Matrix for a specfic projection method using the \pkg{ProjectionBasesdClustering} and \pkg{GeneralizedUmatrix} packages on CRAN, see [Thrun/Ultsch, 2021] for details.
 }
 \usage{
-ClusterabilityMDplot(DataOrDistance,Method,na.rm=FALSE,\dots)
+ClusterabilityMDplot(DataOrDistance,Method,
+
+na.rm=FALSE,PlotIt=TRUE,\dots)
 }
 
 \arguments{
@@ -27,7 +29,8 @@ ClusterabilityMDplot(DataOrDistance,Method,na.rm=FALSE,\dots)
   "distance" computes pairwise distances (using distance_metric as the metric).
 }
   \item{na.rm}{Statistical testing will not work with missing values, if TRUE values are imputed with averages}
-  \item{\dots}{Further arguments like main, and ordering}
+\item{PlotIt}{TRUE: print plot, otherwise do not plot directly, instead use \code{Handle} for further adjustment}
+  \item{\dots}{Further arguments for function\code{MDplot4multiplevectors} of package \pkg{DataVisualizations} like \code{"main"}, and \code{"Ordering"}}
 }
 \details{
 Use the method of [Adolfsson et al., 2019] specified as pca plus dip-test (PCA dip) per default without scaling or standardization of data because this step should never be done automatically. In [Thrun, 2020] the standardization and scaling did not improve the results.
@@ -40,12 +43,16 @@ Based on [Thrun, 2020], the author of this function disagrees with [Adolfsson et
 
 }
 \value{
-ggplot2 plotter handle
+List of
+\item{Handle}{GGobject, plotter handle of \pkg{ggplot2}}
+\item{Pvalue}{One or more p-values of dip test depending on \code{DataOrDistance}}
+
+
 }
 \references{
 [Adolfsson et al., 2019]  Adolfsson, A., Ackerman, M., & Brownstein, N. C.: To cluster, or not to cluster: An analysis of clusterability methods, Pattern Recognition, Vol. 88, pp. 13-26. 2019.
 
-[Thrun et al., 2020]  Thrun, M. C., Gehlert, T. & Ultsch, A.: Analyzing the Fine Structure of Distributions, PLOS ONE, in press, pp. 1-66,DOI 10.1371/journal.pone.0238835, preprint available at arXiv:1908.06081, 2020. 
+[Thrun et al., 2020]  Thrun, M. C., Gehlert, T. & Ultsch, A.: Analyzing the Fine Structure of Distributions, PLoS ONE, Vol. 15(10), pp. 1-66, DOI \doi{10.1371/journal.pone.0238835}, 2020. 
 
 [Thrun/Ultsch, 2021]  Thrun, M. C., and Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Artificial Intelligence, Vol. 290, pp. 103237, \doi{10.1016/j.artint.2020.103237}, 2021.
 

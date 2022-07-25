@@ -1,4 +1,4 @@
-ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
+ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,PlotIt=TRUE,...){
   #
   # INPUT
   # DataOrDistances[1:n,1:d]    Dataset with n observations and d features or distance matrix with size n
@@ -84,6 +84,7 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
 
   ## real code
   if(!is.list(DataOrDistance)){
+    #DataOrDistance ist ein einzelner datensatz ----
     if(is.null(dots[["main"]]))
       main=paste('MDplot of Clusterability')
     else
@@ -94,15 +95,16 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
         stop('ClusterabilityMDplot: Non-Finite Data found. Please perform imputation before using function because statistical testing will not work otherwise.')
       }
     }
-    IsDistance=FALSE
+    
     if(isSymmetric(unname(DataOrDistance))){
-      Method="none"
       IsDistance=TRUE
+      Method="none"
       message("Distance detected, Method is set to 'none'")
       if(isTRUE(na.rm)){
         warning('ClusterabilityMDplot: Imputation of non-finite distances is not available.')
       }
     }else{
+      IsDistance=FALSE
       if(isTRUE(na.rm)){
         message('ClusterabilityMDplot: Imputation per mean per cluster is performed. This is experimental.')
         DataOrDistance=apply(DataOrDistance,2,function(x){
@@ -116,9 +118,10 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
         })
       }
     }
-  pvalm=clusterability::clusterabilitytest(DataOrDistance,reduction = Method,test = 'dip',pca_scale=scale,pca_center=scale,is_dist_matrix = IsDistance)
+  pvalm=clusterability::clusterabilitytest(DataOrDistance,is_dist_matrix = IsDistance,reduction = Method,test = 'dip',pca_scale=scale,pca_center=scale, distance_standardize = "none")
   #print(pvalm$pvalue)
-  pvalue=round(pvalm$pvalue,2)
+  vals=pvalm$pvalue
+  pvalue=round(vals,2)
   if(pvalue==0) 
     pvalue='p < 0.01'
   else
@@ -161,12 +164,14 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
     }
   }
   
-  }else{#dataordistance is list
+  }else{#DataOrDistance is list
     n=length(DataOrDistance)
     isDistance=unlist(lapply(DataOrDistance, function(x) isSymmetric(unname(x))))
-    
+ 
+    #itereriere mit lapply durch liste DataOrDistance um
+    # pvals zu berechnen ----
     pvalsL=lapply(DataOrDistance, function(x,Method,na.rm,center,scale){
-      IsDistance_hlp=FALSE
+     #wenn symetrisch setze flag fuer clusterabilitytest true
       if(isSymmetric(unname(x))){
         Method="none"
         IsDistance_hlp=TRUE
@@ -174,6 +179,7 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
           warning('ClusterabilityMDplot: Imputation of non-finite distances is not available.')
         }
       }else{
+        IsDistance_hlp=FALSE
         if(isTRUE(na.rm)){
           x=apply(x,2,function(x2){
             bb=!is.finite(x2)
@@ -186,27 +192,28 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
           })
         }
       }
-      return(clusterability::clusterabilitytest(x,reduction = Method,test = 'dip',pca_scale=scale,pca_center=center,is_dist_matrix = IsDistance_hlp)$pvalue)
+      return(clusterability::clusterabilitytest(x,is_dist_matrix = IsDistance_hlp,reduction = Method,test = 'dip',pca_scale=scale,pca_center=center, distance_standardize = "none")$pvalue)
     },Method,na.rm,center,scale) 
     Names=names(DataOrDistance)
     vals=unlist(pvalsL)
-    vals=round(vals,2)
-    ind=which(vals==0)
-     ind2=which(vals!=0)
-     vals[ind]='p < 0.01'
-     vals[ind2]=paste("p =",vals[ind2])
+    vals_round=round(vals,2)
+    ind=which(vals_round==0)
+     ind2=which(vals_round!=0)
+     vals_round[ind]='p < 0.01'
+     vals_round[ind2]=paste("p =",vals_round[ind2])
 	 # Modes depricated
     if(is.null(Names)){
       #Ordering = 'Columnwise'
-      Names=as.character(vals)
+      Names=as.character(vals_round)
     }else{
-      Names=paste0(Names,', ',vals)
+      Names=paste0(Names,', ',vals_round)
       #if(Method!="distance")
       #  Ordering = 'Bimodal'
      # else
       #  Ordering = 'Columnwise'
     }
-    
+     #itereriere mit lapply durch liste DataOrDistance,sodass die 
+     #vektoren fuer md plot definiert sind----
     pcasordistances=lapply(DataOrDistance, function(x,Method,scale,center){
       
       if(isFALSE(isSymmetric(unname(x)))){
@@ -247,7 +254,10 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,...){
       plot+ ggplot2::ylab('PDE of 1st principal component/distance distribution')
     }
   }#end dataordistance is list
-  return(plot)
+  if(isTRUE(PlotIt)){
+    print(plot)
+  }
+  return(list(Handle=plot,Pvalue=vals))
 }
 ## internal functions ----
 
