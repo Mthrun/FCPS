@@ -21,8 +21,12 @@ ClusterCount <- function(Cls,Ordered=TRUE,NonFinite=9999) {
     warning('ClusterCount: Cls is not a vector. Calling as.numeric(as.character(Cls))')
     Cls=as.numeric(as.character(Cls))
   }
-  Cls[!is.finite(Cls)]=NonFinite
-
+  if(is.numeric(Cls)){
+    Cls[!is.finite(Cls)]=NonFinite
+  }else{
+    warning('ClusterCount: Cls is not numeric Calling as.character(Cls)')
+    Cls=as.vector(Cls)
+  }
   if(isFALSE(Ordered)){
     countPerCluster=table(Cls)
     u= unique(Cls,fromLast = FALSE)

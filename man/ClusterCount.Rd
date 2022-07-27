@@ -23,7 +23,11 @@ ClusterCount(Cls,Ordered=TRUE,NonFinite=9999)
 \item{NumberOfClusters}{The number of clusters k}
 \item{ClusterPercentages}{[1:k] numerical vector of the percentages of datapoints belonging to a cluster for each cluster}
 }
-\details{The ordering of the output is defined by the first occurence of every cluster label in \code{Cls} in the  setting of \code{Ordered=FALSE}. }
+\details{
+The ordering of the output is defined by the first occurence of every cluster label in \code{Cls} in the  setting of \code{Ordered=FALSE}. 
+
+The function can be overloaded with non-numerical vectors. In this case, a cast via as.character() is applied to \code{Cls}, a warning is stated, and the statistics are still computed.
+}
 \author{Michael Thrun}
 
 \examples{
