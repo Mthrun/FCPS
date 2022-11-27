@@ -4,7 +4,7 @@
 \description{
 Applies a given function to each dimension \code{d} of data separately for each cluster}
 \usage{
-ClusterApply(DataOrDistances,FUN,Cls,\ldots)
+ClusterApply(DataOrDistances,FUN,Cls,Simple=FALSE,\ldots)
 }
 \arguments{
   \item{DataOrDistances}{  [1:n,1:d] with: if d=n and symmetric then distance matrix assumed, otherwise:
@@ -13,6 +13,7 @@ ClusterApply(DataOrDistances,FUN,Cls,\ldots)
 }
   \item{FUN}{Function to be applied to each cluster of data and each column of data}
   \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
+    \item{Simple}{Boolean, if TRUE, simplifies output}
   \item{\ldots}{Additional parameters to be passed on to FUN}
 }
 \details{
@@ -23,9 +24,16 @@ In case of a distance matrix an automatic classical multidimensional scaling tra
 If \code{FUN} has not function name, then ResultPerCluster is given back.
 }
 \value{
+if(Simple==FALSE)
+List with
 \item{UniqueClusters}{The unique clusters in Cls}
-\item{FUNPerCluster}{a matrix of [1:k,1:d] of d features and k clusters
-}
+\item{FUNPerCluster}{a matrix of [1:k,1:d] of d features and k clusters, the list element is named by the function \code{FUN} used }
+
+if(Simple==TRUE)
+
+a matrix of [1:k,1:d] of d features and k clusters
+
+
 }
 \examples{
 ##one dataset
@@ -34,6 +42,9 @@ Data=Hepta$Data
 Cls=Hepta$Cls
 #mean per cluster
 ClusterApply(Data,mean,Cls)
+
+#Simplified
+ClusterApply(Data,mean,Cls,Simple=TRUE)
 
 # Mean per cluster of MDS transformation
 # Beware, this is not the same!

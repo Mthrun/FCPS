@@ -1,4 +1,4 @@
-ClusterApply <- function(DataOrDistances, FUN, Cls, ...){
+ClusterApply <- function(DataOrDistances, FUN, Cls,Simple=FALSE,...){
   #
   # Applies a given function to each dimension for each cluster in Cls for all observations in the data.
   #
@@ -37,47 +37,15 @@ ClusterApply <- function(DataOrDistances, FUN, Cls, ...){
     Cls=as.vector(Cls)
   }
   Names=colnames(Data)
-  #uniqueClusters <- sort(na.last = T, unique(Cls))
-  #numberOfClusters <- length(uniqueClusters)
-  #resultPerCluster <- matrix(0, numberOfClusters, ncol(Data))
-  
-  #Option 3
-  #laesst identity nicht zu
-  #erfordert seperates unique
-  #resultPerCluster=apply(Data,2,function(x,Cls,FUN) return(tapply(X = x, INDEX = Cls, FUN = FUN)),Cls,FUN)
-  #uniqueClusters =unique(Cls)
+
   
   #Option 2
+  if(isFALSE(Simple)){
   Liste=split(x = as.data.frame(Data),f = Cls)
   uniqueClusters=names(Liste)
   PerClusterV=lapply(Liste, function(x,FUN) apply(x,FUN=FUN,MARGIN = 2),FUN)
   resultPerCluster=do.call(rbind,PerClusterV)
   
-  #Option 1
-  #Dims=dim(Data)[2]
-  # for (i in 1:numberOfClusters) {
-  #   #inClusterInd <- which(Cls == uniqueClusters[i])
-  #   #x = Data[inClusterInd, ,drop=FALSE]
-  #   x=Data[Cls== uniqueClusters[i], ,drop=FALSE]
-  #   #if(Dims==1) { # Creates problems if there is only one data point
-  #     #margin = 1
-  #   #  x = as.matrix(x)
-  #     
-  #   #} else {
-  #     margin = 2
-  #   #}
-  #    y<-
-  #     apply(
-  #       X = x,
-  #       FUN = FUN,
-  #       MARGIN = margin,
-  #       ...
-  #     )
-  #   if(i==1)
-  #     resultPerCluster=matrix(y,ncol = ncol(Data))
-  #   else
-  #     resultPerCluster=rbind(resultPerCluster,y)
-  # }
   if(!is.null(Names)){
     try({
       colnames(resultPerCluster)=Names
@@ -91,7 +59,7 @@ ClusterApply <- function(DataOrDistances, FUN, Cls, ...){
        rownames(resultPerCluster)=NULL
     })
 
-  V=list(UniqueClusters = uniqueClusters, ResultPerCluster = resultPerCluster)
+  V=list(ResultPerCluster = resultPerCluster,UniqueClusters = uniqueClusters)
   
   tryCatch({
     string=as.character(substitute(FUN))
@@ -100,5 +68,8 @@ ClusterApply <- function(DataOrDistances, FUN, Cls, ...){
     message('ClusterApply: FUN could not be extracted because:')
     message(e)
   })
+  }else{
+    V=apply(Data,2,function(X,...) tapply(X, Cls, FUN = FUN,...))
+  }
   return(V)
 }

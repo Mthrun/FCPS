@@ -8,7 +8,7 @@ Matthews Correlation Coefficient (MCC)
 Matthews correlation coefficient eneralized to the multiclass case (a.k.a.  R_K statistic).
 }
 \usage{
-ClusterMCC(PriorCls, CurrentCls)
+ClusterMCC(PriorCls, CurrentCls,Force=TRUE)
 }
 
 \arguments{
@@ -17,6 +17,11 @@ Ground truth,[1:n] numerical vector with n numbers defining the classification. 
 }
 \item{CurrentCls}{
 Main output of the clustering, [1:n]  numerical vector with n numbers defining the classification. It has k unique numbers representing the labels of the clustering.
+}
+
+\item{Force}{
+Boolean, if is TRUE: forces code even if one or more than one of the k numbers given in \code{PriorCls} is missing in \code{CurrentCls} or vice versa. In this case, one label per missing number is added ad the end of the vectors.
+
 }
 }
 \details{
