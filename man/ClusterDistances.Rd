@@ -43,7 +43,7 @@ Matrix [1:m,1:(k+1)] of k clusters, each columns consists of the distances in a 
 Michael Thrun
 }
 \references{
-[Thrun, 2021]  Thrun, M. C.: The Exploitation of Distance Distributions for Clustering, International Journal of Computational Intelligence and Applications, Vol. accepted, 2021.
+[Thrun, 2021]  Thrun, M. C.: The Exploitation of Distance Distributions for Clustering, International Journal of Computational Intelligence and Applications, Vol. 20(3), pp. 2150016, DOI: \doi{10.1142/S1469026821500164}, 2021.
 }
 \seealso{
 \code{\link[DataVisualizations]{MDplot}}

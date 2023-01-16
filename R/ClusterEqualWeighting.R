@@ -15,6 +15,9 @@ ClusterEqualWeighting=function(Cls,Data,MinClusterSize){
 #
 # BalancedData = Data(BalancedInd,:)
 # author: ALU, reimplemented from matlab by mct  
+   if(length(Cls)!=nrow(Data)){
+      stop("ClusterEqualWeighting: length of Cls does not equal the number of cases in data.")
+   }
 V= ClusterCount(Cls)
 UniqueClusters=V$UniqueClusters
 CountPerCluster=V$CountPerCluster
