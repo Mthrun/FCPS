@@ -94,7 +94,7 @@ HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,Type="wa
   if(DistanceMethod=='euclidean')
     DistanceMethod='Euclidean'
     
-  m=paste(Type,"LinkCluster/ ",DistanceMethod," N=",nrow(as.matrix(Data)))
+  m=paste0(Type," Clustering with Distance ",DistanceMethod,", N=",nrow(as.matrix(Data)))
   # Classification or dendrogram
   if (ClusterNo>0){
     Cls=cutree(hc,ClusterNo)
@@ -115,7 +115,7 @@ HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,Type="wa
 		#                   "none" suppresses leaf labels 
 		#                   s. ?as.dendrogramm
     #plot(x, main=m,xlab="Anzahl N", ylab=DistanceMethod, sub=" ",leaflab ="none")
-    plot(x, main=m,xlab="Number of Data Points N", ylab=DistanceMethod, sub=" ", leaflab="none",...)
+    plot(x, main=m,xlab="Number of Data Points N", ylab=paste0("Ultrametric Portion of ",DistanceMethod), sub=" ", leaflab="none",...)
    # if(is.null(rownames(x))){
    #   plot(x, main=m,xlab="Anzahl N", ylab=DistanceMethod, sub=" ",leaflab ="none")
    # }else{

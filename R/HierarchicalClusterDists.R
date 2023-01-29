@@ -28,7 +28,7 @@ HierarchicalClusterDists <-function(pDist,ClusterNo=0,Type="ward.D2",ColorTresho
   }else{
     hc <- hclust(pDist,method=Type); #liefert teilweise andere Werte wie Z = linkage(Y,Type);
   }
-	m=paste(Type,"LinkCluster/ "," N=",nrow(as.matrix(pDist)))
+	m=paste(Type,"Clustering, N=",nrow(as.matrix(pDist)))
 	
   # Classification or Dendrogram
 	if (ClusterNo>0){
@@ -36,7 +36,7 @@ HierarchicalClusterDists <-function(pDist,ClusterNo=0,Type="ward.D2",ColorTresho
 		return(list(Cls=Cls,Dendrogram=as.dendrogram(hc),Object=hc))
 	} 
 	else{
-		x=as.dendrogram(hc);plot(x, main=m,xlab="Number of Data Points N", ylab="Distance",sub=" ",leaflab ="none",...)
+		x=as.dendrogram(hc);plot(x, main=m,xlab="Number of Data Points N", ylab="Ultrametric Portion of Distance",sub=" ",leaflab ="none",...)
 		axis(1,col="black",las=1)
 		if (ColorTreshold!=0){
 		  rect.hclust(hc, h=ColorTreshold,border="red")}		  
