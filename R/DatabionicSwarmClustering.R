@@ -1,4 +1,4 @@
-DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRUE,DistancesMethod=NULL,PlotTree=FALSE,PlotMap=FALSE,PlotIt=FALSE,Data){
+DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRUE,DistancesMethod=NULL,PlotTree=FALSE,PlotMap=FALSE,PlotIt=FALSE,Parallel=TRUE,Data){
   # INPUT
   # DataOrDistances[1:n,1:d]    Either nonsymmetric [1:n,1:d] datamatrix of n cases and d features or
   #                             symmetric [1:n,1:n] distance matrix
@@ -56,58 +56,73 @@ DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRU
     if (isSymmetric(unname(DataOrDistances))) {
       DataDists = DataOrDistances
       if(requireNamespace("ProjectionBasedClustering",quietly = TRUE)){
+        if(isTRUE(PlotMap)){
         DataPoints=ProjectionBasedClustering::MDS(DataDists,OutputDimension = nrow(DataDists)-1)$ProjectedPoints
         AnzVar = ncol(DataOrDistances)
         AnzData = nrow(DataOrDistances)
+        }else if(ClusterNo==0){
+          DataPoints=ProjectionBasedClustering::MDS(DataDists,OutputDimension = nrow(DataDists)-1)$ProjectedPoints
+          AnzVar = ncol(DataOrDistances)
+          AnzData = nrow(DataOrDistances)
+        }else{
+         #do nothing
+        }
       }
       else{
         stop('ProjectionBasedClustering package not loaded or installed.')
       }#end requireNamespace("ProjectionBasedClustering)
-      
-    }else{
+     }else{#data should be used
       DataPoints=DataOrDistances
     }#end isSymmetric(unname(DataOrDistances)
+    #Perform Schwarm in given Input
     if(requireNamespace("DatabionicSwarm",quietly = TRUE)){
-      proj= DatabionicSwarm::Pswarm(DataOrDistance = DataOrDistances)
-    }
-    else{
+      proj= DatabionicSwarm::Pswarm(DataOrDistance = DataOrDistances,Parallel=Parallel)
+    }else{
       stop('DatabionicSwarm package not loaded or installed.')
     }# end requireNamespace("DatabionicSwarm"
-    
-  }else{
+  }else{ #DistancesMethod is not null
     requireNamespace('parallelDist')
     DataDists=as.matrix(parallelDist::parallelDist(DataOrDistances,method = DistancesMethod))
-    proj= DatabionicSwarm::Pswarm(DataOrDistance = DataDists)
+    DataPoints=DataOrDistances
+    #Perform Schwarm on selected distances
+    if(requireNamespace("DatabionicSwarm",quietly = TRUE)){
+      proj= DatabionicSwarm::Pswarm(DataOrDistance = DataOrDistances,Parallel=Parallel)
+    }else{
+      stop('DatabionicSwarm package not loaded or installed.')
+    }# end requireNamespace("DatabionicSwarm"
   }#end is.null(DistancesMethod)
-
+  
+  #Projektionspunkte fuer clusterung direkt nutzen
+  TwoD_Points=proj$ProjectedPoints
+  # Make sure that grid dimensions are correct, even if GeneralizedUmatrix is not computed which is not necessary for clustering.
+  LC=c()
+  LC[1]=ceiling(max(TwoD_Points[, 1])+1)
+  LC[2]=ceiling(max(TwoD_Points[, 2])+1)
+  
   if(ClusterNo==0){
-    if(isTRUE(PlotTree)){
+    #if(isTRUE(PlotTree)){
       message("Operator: Generating dendrogram.")
       Cls=DatabionicSwarm::DBSclustering(1,DataOrDistance = DataOrDistances,BestMatches =TwoD_Points,LC = LC,
                                          StructureType = StructureType,PlotIt = PlotTree)
-    }#end isTRUE(PlotTree
-    if(!is.null(DistancesMethod))    
-      DataPoints=ProjectionBasedClustering::MDS(DataDists,OutputDimension = nrow(DataDists))$ProjectedPoints
-    
-    generalizedUmatrix=DatabionicSwarm::GeneratePswarmVisualization(Data = DataPoints,ProjectedPoints = proj$ProjectedPoints,LC = proj$LC)
-    
-    if (requireNamespace('GeneralizedUmatrix',quietly = TRUE)){
-      message("Operator: Generating topographic map of high-dimensional structures.")
-      GeneralizedUmatrix::TopviewTopographicMap(GeneralizedUmatrix = generalizedUmatrix$Umatrix,BestMatchingUnits = generalizedUmatrix$Bestmatches)
-    }else{
-      message(
-        'Subordinate clustering package (GeneralizedUmatrix) is missing. No computations are performed.
-            Please install the package which is defined in "Suggests".Setting "PlotMap=FALSE"'
-      )
-      PlotMap=FALSE
-    }#end requireNamespace('GeneralizedUmatrix'
+    #}#end isTRUE(PlotTree
+
+     if(!is.null(DistancesMethod))    
+       DataPoints=ProjectionBasedClustering::MDS(DataDists,OutputDimension = nrow(DataDists))$ProjectedPoints
+
+       generalizedUmatrix=DatabionicSwarm::GeneratePswarmVisualization(Data = DataPoints,ProjectedPoints = proj$ProjectedPoints,LC = proj$LC)
+     if (requireNamespace('GeneralizedUmatrix',quietly = TRUE)){
+       message("Operator: Generating topview of topographic map of high-dimensional structures.")
+       out=GeneralizedUmatrix::TopviewTopographicMap(GeneralizedUmatrix = generalizedUmatrix$Umatrix,BestMatchingUnits = generalizedUmatrix$Bestmatches)
+       print(out)
+      }else{
+       message(
+         'Subordinate clustering package (GeneralizedUmatrix) is missing. No computations are performed.
+             Please install the package which is defined in "Suggests".Setting "PlotMap=FALSE"'
+       )
+     }#end requireNamespace('GeneralizedUmatrix'
+
   }else{#ClusterNo!=0
     message("Operator: Clustering the dataset.")
-    TwoD_Points=proj$ProjectedPoints
-    # Make sure that grid dimensions are correct, even if GeneralizedUmatrix is not computed which is not necessary for clustering.
-    LC=c()
-    LC[1]=ceiling(max(TwoD_Points[, 1])+1)
-    LC[2]=ceiling(max(TwoD_Points[, 2])+1)
  
     if(is.null(DistancesMethod)){
       Cls=DatabionicSwarm::DBSclustering(ClusterNo,DataOrDistance = DataOrDistances,BestMatches =TwoD_Points,LC = LC,
@@ -118,22 +133,19 @@ DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRU
     }#end is.null(DistancesMethod))
     Cls=ClusterRename(Cls,DataOrDistances)
   }# end ClusterNo==0
+  
   if (isTRUE(PlotMap)) {
-    if (ClusterNo != 0) {
       message("Operator: Generating topographic map of high-dimensional structures.")
       generalizedUmatrix = DatabionicSwarm::GeneratePswarmVisualization(
         Data = DataPoints,
         ProjectedPoints = proj$ProjectedPoints,
         LC = proj$LC
       )
-    }#end ClusterNo != 0 #otherwise it already exists
-    if (ClusterNo == 0) {
-      #plotting is already performed in order to derive the number of clusters
-      #GeneralizedUmatrix::plotTopographicMap(generalizedUmatrix$Umatrix,generalizedUmatrix$Bestmatches)
-    } else{
+      GeneralizedUmatrix = generalizedUmatrix$Umatrix
+      BestMatchingUnits = generalizedUmatrix$Bestmatches
       if (requireNamespace('GeneralizedUmatrix', quietly = TRUE)) {
-        GeneralizedUmatrix::plotTopographicMap(generalizedUmatrix$Umatrix,
-                                               generalizedUmatrix$Bestmatches,
+        GeneralizedUmatrix::plotTopographicMap(GeneralizedUmatrix = GeneralizedUmatrix,
+                                               BestMatchingUnits = BestMatchingUnits,
                                                Cls = Cls)
       }else{
         message(
@@ -142,7 +154,6 @@ DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRU
         )
         PlotMap=FALSE
       }#end !requireNamespace('GeneralizedUmatrix',
-    }# end ClusterNo == 0)
   }#end PlotMap
   if(PlotIt){
 	  ClusterPlotMDS(DataOrDistances,Cls)
