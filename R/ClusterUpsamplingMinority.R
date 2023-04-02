@@ -27,11 +27,25 @@ ClusterUpsamplingMinority=function(Cls,Data,MinorityCluster,Percentage=200,knn=5
     return(list(ClsExt=NULL,DataExt=NULL))
   }
   ind=which(Cls==MinorityCluster)
-  internaldata=cbind(Data,Cls)
+
   if(length(ind)>0){
+    #target tgt is the Cls
+    
+    internaldata=cbind(Data,Cls)
+    #smote.exs only estimates the last variable in a data matrix
     out=smote.exs(data = internaldata[ind,],tgt = ncol(internaldata),N = Percentage,k = knn)
+    for(i in 1:(ncol(Data)-1)){
+      internaldata=cbind(Data[,i],Cls)
+      out_tmp=smote.exs(data = internaldata[ind,],tgt = ncol(internaldata),N = Percentage,k = knn)
+      #print(dim(out_tmp))
+      out[,i]=out_tmp[,1]
+      #print(i)
+      #print(dim(out))
+    }
+    internaldata=cbind(Data,Cls)
     upsampleddata=out[,1:(ncol(internaldata)-1)]
-    DataNew=rbind(Data,upsampleddata)
+    
+    DataNew=as.matrix(rbind(Data,upsampleddata))
     ClsNew=c(Cls,rep(MinorityCluster,nrow(upsampleddata)))
     
     if(isTRUE(PlotIt))
