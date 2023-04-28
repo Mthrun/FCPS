@@ -15,9 +15,13 @@ ClusterAccuracy=function(PriorCls,CurrentCls,K=9){
   CurrentCls[!is.finite(CurrentCls)]=9999
   
     if(length(unique(PriorCls))>9){
-      warning('Too many clusters in PriorCls for RAM of single PC. Please use cloud computing, e.g. SparkR')
+      warning('ClusterAccuracy: Too many clusters in PriorCls for RAM of single PC. Please use cloud computing, e.g. SparkR')
     }
     
+  if(length(PriorCls)!=length(CurrentCls)){
+    warning('ClusterAccuracy: length of PriorCls does not equal CurrentCls. Accuracy is not defined. Returning Null.')
+    return(NULL)
+  }
     #Note: symmetric ClsToTrueCls() which always works
     
 
