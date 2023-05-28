@@ -10,18 +10,23 @@ Perform k-means clustering on a data matrix.
 \usage{
 kmeansClustering(DataOrDistances, ClusterNo,
 
- Type = 'LBG',RandomNo=5000, PlotIt=FALSE, Verbose = FALSE,\dots )
+ Type = 'LBG',RandomNo=5000, CategoricalData,
+ 
+ PlotIt=FALSE, Verbose = FALSE,\dots )
 }
 \arguments{
-\item{DataOrDistances}{Either nonsymmetric [1:n,1:d] datamatrix of n cases and d features or
+\item{DataOrDistances}{Either nonsymmetric [1:n,1:d] datamatrix of n cases and d numerical features or
 
 symmetric [1:n,1:n] distance matrix}
 
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
-  \item{RandomNo}{Only for " \code{Steinley}" or in case of distance matrix, number of random initializations with searching for minimal SSE, see [Steinley/Brusco, 2007]}
   \item{Type}{ 
-  Choice of Kmeans algorithm, currently either " \code{Hartigan}" [Hartigan/Wong, 1979], "\code{LBG}" [Linde et al., 1980], "\code{Sparse}" sparse k-means proposed in [Witten/Tibshirani, 2010], "\code{Steinley}" best method of [Steinley/Brusco, 2007] proposed in Steinley 2003, "\code{Lloyd}" [Lloyd, 1982], "\code{Forgy}"[Forgy, 1965], \code{MacQueen} [MacQueen, 1967], or \code{kcentroids} [Leisch, 2006].
+  Choice of Kmeans algorithm, currently either " \code{Hartigan}" [Hartigan/Wong, 1979], "\code{LBG}" [Linde et al., 1980], "\code{Sparse}" sparse k-means proposed in [Witten/Tibshirani, 2010], "\code{Steinley}" best method of [Steinley/Brusco, 2007] proposed in Steinley 2003, "\code{Lloyd}" [Lloyd, 1982], "\code{Forgy}"[Forgy, 1965], \code{MacQueen} [MacQueen, 1967], \code{kcentroids} [Leisch, 2006], "\code{kprototypes}" [Szepannek, 2018], "\code{Pelleg-moore}", \code{Elkan}", \code{Hamerly}",\code{Dualtree}" or \code{Dualtree-covertree}"
   }
+    \item{RandomNo}{Only for " \code{Steinley}" or in case of distance matrix, number of random initializations with searching for minimal SSE, see [Steinley/Brusco, 2007]}
+    
+        \item{CategoricalData}{Only for " \code{kprototypes}", [1:n,1:m] matrix of categorical features]}
+        
   \item{PlotIt}{Default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
   \item{Verbose}{Print details, if true}
   \item{\dots}{Further arguments like \code{iter.max}, \code{nstart}, for \code{kcentroids} please see \code{kcca} function of the \pkg{flexclust} package, or  \code{\link[sparcl]{KMeansSparseCluster}} 
@@ -65,6 +70,8 @@ SumDistsToCentroids: Vector of within-cluster sum of squares, one component per 
 Feature Selection in Clustering. Journal of the American Statistical
 Association, Vol. 105(490), pp. 713-726, 2010.
 
+[Szepannek, 2018] Szepannek, G.: clustMixType: User-Friendly Clustering of Mixed-Type Data in R, The R Journal, Vol. 10/2, pp. 200-208, doi:10.32614/RJ2018048, 2018.
+
 }
  \examples{
 data('Hepta')
@@ -98,6 +105,12 @@ PlotIt=FALSE,Type="MacQueen")
 data('Hepta')
 out=kmeansClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE,Type="Steinley")
 }
+
+\donttest{
+data('Hepta')
+out=kmeansClustering(Hepta$Data,ClusterNo = 7,Type = "kprototypes",CategoricalData = as.matrix(Hepta$Cls))
+}
+
 }
 
 \note{

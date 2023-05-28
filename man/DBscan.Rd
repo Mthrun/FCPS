@@ -63,7 +63,6 @@ DBSGrid <- expand.grid(
 )
 BestAcc = c()
 for (i in seq_len(nrow(DBSGrid))) {
-  print(i)
   parameters <- DBSGrid[i,]
   Cls9 = DBSCAN(
     Data,

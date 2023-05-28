@@ -1,4 +1,4 @@
-DBSCAN = DBscan=function(Data,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
+DBSCAN = DBscan=function(Data,Radius,minPts,Rcpp=TRUE,PlotIt=FALSE,UpperLimitRadius,...){
   # Cls=DBSCAN(FCPS$Hepta$Data,sqrt(min(res$withinss)))
   # DBSCAN based on [Ester et al., 1996]
   #
@@ -10,6 +10,7 @@ DBSCAN = DBscan=function(Data,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
   # minPts           In principle minimum number of points in the unit disk, if the unit disk is within the cluster (core) [Ester et al., 1996, p. 228].
   #                  number of minimum points in the eps region (for core points). 
   #                  Default is 5 points.
+  # Rcpp              TRUE: uses rcpp fast version
   # PlotIt           Boolean. Decision to plot or not
   # UpperLimitRadius Limit for radius search, experimental
   #
@@ -20,6 +21,23 @@ DBSCAN = DBscan=function(Data,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
   # Author: MT 2017, 1.Editor MT 04/2018, 2. Editor: MT 02/2019: Parameter Estimation significantly improved
   #
   # [Ester et al., 1996]  Ester, M., Kriegel, H.-P., Sander, J., & Xu, X.: A density-based algorithm for discovering clusters in large spatial databases with noise, Proc. Kdd, Vol. 96, pp. 226-231, 1996.
+
+  if(isTRUE(Rcpp)){
+    if (!requireNamespace('mlpack',quietly = TRUE)) {
+      message(
+        'Subordinate clustering package (mlpack) is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+      )
+      return(
+        list(
+          Cls = rep(1, nrow(Data)),
+          Object = "Subordinate clustering package (mlpack) is missing.
+                Please install the package which is defined in 'Suggests'."
+        )
+      )
+    }
+  }else{
+    
 
   if (!requireNamespace('dbscan',quietly = TRUE)) {
     message(
@@ -34,7 +52,7 @@ DBSCAN = DBscan=function(Data,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
       )
     )
   }
-  
+  }
  if(is.null(nrow(Data))){# Then we get a vector
     return(cls <- rep(1,length(Data)))
   }
@@ -55,14 +73,14 @@ DBSCAN = DBscan=function(Data,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
   if(missing(UpperLimitRadius))
     UpperLimitRadius=1.1*Radius
 
-  liste=dbscan::dbscan(x = Data,eps = Radius,minPts = minPts,...)
-  Cls=liste$cluster
+  if(isTRUE(Rcpp)){
+    liste=mlpack::dbscan(input =  Data,epsilon =  Radius,min_size = minPts,...)
+    Cls=as.vector(liste$assignments)
+  }else{
+    liste=dbscan::dbscan(x = Data,eps = Radius,minPts = minPts,...)
+    Cls=liste$cluster
+  }
   ind=which(Cls==0)
-  # if(length(ind)>0)
-  #   Cls[ind]=999
-	#Cls=NormalizeCls(Cls)$normalizedCls
-	#if(length(ind)>0)
-	#  Cls[ind]=NaN
   Cls[!is.finite(Cls)]=0
   # Per Definition are not clustered objects in searching for
   # distance and density based structures not allowed.
@@ -74,7 +92,6 @@ DBSCAN = DBscan=function(Data,Radius,minPts,PlotIt=FALSE,UpperLimitRadius,...){
     liste=out$DBscanObject
   }
 	if(isTRUE(PlotIt)){
-	 
 	  Cls2=Cls
 	  Cls2[Cls2==0]=999
 	  p=ClusterPlotMDS(Data,Cls2)
