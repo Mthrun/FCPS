@@ -1,4 +1,4 @@
-DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRUE,DistancesMethod=NULL,PlotTree=FALSE,PlotMap=FALSE,PlotIt=FALSE,Parallel=TRUE,Data){
+DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRUE,DistancesMethod=NULL,PlotTree=FALSE,PlotMap=FALSE,PlotIt=FALSE,Parallel=FALSE){
   # INPUT
   # DataOrDistances[1:n,1:d]    Either nonsymmetric [1:n,1:d] datamatrix of n cases and d features or
   #                             symmetric [1:n,1:n] distance matrix
@@ -26,9 +26,6 @@ DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRU
   if(StructureType==1) StructureType=TRUE
   if(StructureType==0) StructureType=FALSE
   
-  if(missing(DataOrDistances)){
-    DataOrDistances=Data
-  }
   if(!is.matrix(DataOrDistances)){
     warning('Argument "DataOrDistances" is not a matrix. Calling "as.matrix()"...')
     DataOrDistances=as.matrix(DataOrDistances)
@@ -76,7 +73,10 @@ DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRU
     }#end isSymmetric(unname(DataOrDistances)
     #Perform Schwarm in given Input
     if(requireNamespace("DatabionicSwarm",quietly = TRUE)){
-      proj= DatabionicSwarm::Pswarm(DataOrDistance = DataOrDistances,Parallel=Parallel)
+      if(isFALSE(Parallel))#on cran the argument does not exist yet
+        proj= DatabionicSwarm::Pswarm(DataOrDistance = DataOrDistances)
+      else
+        proj= DatabionicSwarm::Pswarm(DataOrDistance = DataOrDistances,Parallel=Parallel)
     }else{
       stop('DatabionicSwarm package not loaded or installed.')
     }# end requireNamespace("DatabionicSwarm"
@@ -86,7 +86,10 @@ DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRU
     DataPoints=DataOrDistances
     #Perform Schwarm on selected distances
     if(requireNamespace("DatabionicSwarm",quietly = TRUE)){
-      proj= DatabionicSwarm::Pswarm(DataOrDistance = DataOrDistances,Parallel=Parallel)
+      if(isFALSE(Parallel))
+        proj= DatabionicSwarm::Pswarm(DataOrDistance = DataOrDistances)
+      else
+        proj= DatabionicSwarm::Pswarm(DataOrDistance = DataOrDistances,Parallel=Parallel)
     }else{
       stop('DatabionicSwarm package not loaded or installed.')
     }# end requireNamespace("DatabionicSwarm"

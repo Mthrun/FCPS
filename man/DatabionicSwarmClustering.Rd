@@ -13,7 +13,9 @@ DatabionicSwarmClustering(DataOrDistances, ClusterNo = 0,
 
 StructureType = TRUE, DistancesMethod = NULL,
 
-PlotTree = FALSE, PlotMap = FALSE,PlotIt=FALSE,Data)
+PlotTree = FALSE, PlotMap = FALSE,PlotIt=FALSE, 
+
+Parallel = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -42,7 +44,8 @@ Optional, if TRUE: topographic map is plotted if \pkg{GeneralizedUmatrix} is ins
 }
 \item{PlotIt}{Default: FALSE, If TRUE and dataset of [1:n,1:d] dimensions then a plot of the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls} will be generated.}
 
-\item{Data}{[1:n,1:d] data matrix in the case that \code{DataOrDistances} is missing and partial matching does not work.}
+\item{Parallel}{FALSE: default implementatiomn, TRUE faster Cpp parallel implementation, for this the subsequent packages have
+to be installed from github, as they are not available on CRAN yet.}
 
 }
 \details{

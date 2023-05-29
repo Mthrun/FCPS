@@ -32,12 +32,12 @@ List of
 
  \examples{
 data('Hepta')
-out=MeanShiftClustering(Hepta$Data,PlotIt=FALSE)
+out=MeanShiftClustering(Hepta$Data,PlotIt=FALSE,radius=1)
 }
 \author{Michael Thrun}
 
 \references{
-[Cheng, 1995]	Cheng, Yizong: Mean Shift, Mode Seeking, and Clustering, IEEE Transactions on Pattern Analysis and Machine Intelligence, Vol. 17 (8), pp. 790–799, doi:10.1109/34.400568, 1995.
+[Cheng, 1995]	Cheng, Yizong: Mean Shift, Mode Seeking, and Clustering, IEEE Transactions on Pattern Analysis and Machine Intelligence, Vol. 17 (8), pp. 790-799, doi:10.1109/34.400568, 1995.
 }
 \keyword{MeanShiftClustering}
 \keyword{Clustering}

@@ -21,7 +21,7 @@ symmetric [1:n,1:n] distance matrix}
 
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
   \item{Type}{ 
-  Choice of Kmeans algorithm, currently either " \code{Hartigan}" [Hartigan/Wong, 1979], "\code{LBG}" [Linde et al., 1980], "\code{Sparse}" sparse k-means proposed in [Witten/Tibshirani, 2010], "\code{Steinley}" best method of [Steinley/Brusco, 2007] proposed in Steinley 2003, "\code{Lloyd}" [Lloyd, 1982], "\code{Forgy}"[Forgy, 1965], \code{MacQueen} [MacQueen, 1967], \code{kcentroids} [Leisch, 2006], "\code{kprototypes}" [Szepannek, 2018], "\code{Pelleg-moore}", \code{Elkan}", \code{Hamerly}",\code{Dualtree}" or \code{Dualtree-covertree}"
+  Choice of Kmeans algorithm, currently either " \code{Hartigan}" [Hartigan/Wong, 1979], "\code{LBG}" [Linde et al., 1980], "\code{Sparse}" sparse k-means proposed in [Witten/Tibshirani, 2010], "\code{Steinley}" best method of [Steinley/Brusco, 2007] proposed in Steinley 2003, "\code{Lloyd}" [Lloyd, 1982], "\code{Forgy}"[Forgy, 1965], \code{MacQueen} [MacQueen, 1967], \code{kcentroids} [Leisch, 2006], "\code{kprototypes}" [Szepannek, 2018], "\code{Pelleg-moore}" [Pelleg & Moores,2000], \code{Elkan}" [Elkan, 2003], \code{Hamerly}"[Hamerly, 2010] ,\code{Dualtree}"  or \code{Dualtree-covertree} [Curtin, 2017]"
   }
     \item{RandomNo}{Only for " \code{Steinley}" or in case of distance matrix, number of random initializations with searching for minimal SSE, see [Steinley/Brusco, 2007]}
     
@@ -62,6 +62,10 @@ SumDistsToCentroids: Vector of within-cluster sum of squares, one component per 
 
 [MacQueen, 1967]  MacQueen, J.: Some methods for classification and analysis of multivariate observations, Proc. Proceedings of the fifth Berkeley symposium on mathematical statistics and probability, Vol. 1, pp. 281-297, Oakland, CA, USA., 1967.
 
+[Pelleg & Moores,2000] Pelleg, Dan, and Andrew W. Moore. X-means: Extending k-means with efficient estimation of the number of clusters, ICML. Vol. 1. 2000.
+
+[Elkan, 2003] Elkan, Charles: Using the triangle inequality to acceler- ate k-means, In Tom Fawcett and Nina Mishra, editors, ICML, pages Vol.3, 147-153. AAAI Press, 2003.
+
 [Lloyd, 1982]  Lloyd, S.: Least squares quantization in PCM, IEEE transactions on information theory, Vol. 28(2), pp. 129-137. 1982.
 
 [Leisch, 2006]  Leisch, F.: A toolbox for k-centroids cluster analysis, Computational Statistics & Data Analysis, Vol. 51(2), pp. 526-544. 2006.
@@ -70,7 +74,11 @@ SumDistsToCentroids: Vector of within-cluster sum of squares, one component per 
 Feature Selection in Clustering. Journal of the American Statistical
 Association, Vol. 105(490), pp. 713-726, 2010.
 
+[Hamerly, 2010]  Hamerly, Greg: Making k-means even faster, Proceedings of the 2010 SIAM international conference on data mining, Society for Industrial and Applied Mathematics, pp. 130-140, 2010.
+
 [Szepannek, 2018] Szepannek, G.: clustMixType: User-Friendly Clustering of Mixed-Type Data in R, The R Journal, Vol. 10/2, pp. 200-208, doi:10.32614/RJ2018048, 2018.
+
+[Curtin, 2017]  Curtin, Ryan R: A dual-tree algorithm for fast k-means clustering with large k, Proceedings of the 2017 SIAM International Conference on Data Mining, Society for Industrial and Applied Mathematics, 2017.
 
 }
  \examples{
@@ -108,7 +116,8 @@ out=kmeansClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE,Type="Steinley")
 
 \donttest{
 data('Hepta')
-out=kmeansClustering(Hepta$Data,ClusterNo = 7,Type = "kprototypes",CategoricalData = as.matrix(Hepta$Cls))
+out=kmeansClustering(Hepta$Data,ClusterNo = 7,
+Type = "kprototypes",CategoricalData = as.matrix(Hepta$Cls))
 }
 
 }
@@ -118,7 +127,7 @@ The version using a distance matrix is still in the test phase and not yet verif
 }
 
 \author{
-Alfred Ultsch, Michael Thrun
+Michael Thrun
 }
 
 \keyword{kmeansClustering}

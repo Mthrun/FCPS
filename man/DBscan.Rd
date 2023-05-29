@@ -9,7 +9,7 @@ DBSCAN
 Density-Based Spatial Clustering of Applications with Noise of [Ester et al., 1996].
 }
 \usage{
-DBSCAN(Data,Radius,minPts,
+DBSCAN(Data,Radius,minPts,Rcpp=TRUE,
 
 PlotIt=FALSE,UpperLimitRadius,\dots)
 }
@@ -26,6 +26,10 @@ PlotIt=FALSE,UpperLimitRadius,\dots)
  In principle minimum number of points in the unit disk, if the unit disk is within the cluster (core) [Ester et al., 1996, p. 228].
  If NULL, 2.5 percent of points is selected.
 }
+  \item{Rcpp}{
+If TRUE: fast Rcpp implementation of mlpack is used. FALSE uses dbscan package.
+}
+
 
 \item{PlotIt}{Default: FALSE, If TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{UpperLimitRadius}{Limit for radius search, experimental}

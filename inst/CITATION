@@ -1,8 +1,8 @@
 citHeader("To cite the 'FCPS' R package in publications, please use:")
 
-citEntry(entry = "article",
+bibentry(bibtype = "article",
   title = "Fundamental clustering algorithms suite",
-  author = personList(person(given="Michael Christoph"),person(given="Quirin", family="Stier")),
+  author = c(person(given="Michael Christoph"),person(given="Quirin", family="Stier")),
   publisher = "Elsevier",
   journal ="SoftwareX",
 volume = "13",
