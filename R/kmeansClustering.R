@@ -188,6 +188,31 @@ kmeansClustering <-function(DataOrDistances,ClusterNo=2,Type='LBG',RandomNo=5000
           ),
           Centroids = res$centers
         ))
+      },"Kmeans++"={
+        if (!requireNamespace('ClusterR',quietly = TRUE)) {
+          message(
+            'Subordinate clustering package (ClusterR) is missing. No computations are performed.
+            Please install the package which is defined in "Suggests".'
+          )
+          return(
+            list(
+              Cls = rep(1, nrow(DataOrDistances)),
+              Object = "Subordinate clustering package (ClusterR) is missing.
+                Please install the package which is defined in 'Suggests'."
+            )
+          )
+        }
+        res = ClusterR::MiniBatchKmeans(data = DataOrDistances,clusters = ClusterNo, ...)
+        Cls = predict(res,DataOrDistances,fuzzy = F)
+        if (PlotIt) {
+          ClusterPlotMDS(DataOrDistances, Cls)
+        }
+        Cls = ClusterRename(Cls, DataOrDistances)
+        return(list(
+          Cls = Cls,
+          Object = res,
+          Centroids =  res$centroids
+        ))
       },"Pelleg-moore"={
         if (!requireNamespace('mlpack',quietly = TRUE)) {
           message(

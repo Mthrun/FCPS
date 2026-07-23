@@ -65,9 +65,8 @@ Michael Thrun
 }
  \examples{
 data('Hepta')
-out=Spectrum(Hepta$Data,PlotIt=FALSE)
 \donttest{
-out=Spectrum(Hepta$Data,PlotIt=TRUE)
+out=Spectrum(Hepta$Data,PlotIt=FALSE)
 }
 }
 

@@ -33,7 +33,9 @@ List of
 
 \examples{
 data('Hepta')
+\donttest{
 out=RobustTrimmedClustering(Hepta$Data,ClusterNo=7,Alpha=0,PlotIt=FALSE)
+}
 }
 \author{Michael Thrun}
 

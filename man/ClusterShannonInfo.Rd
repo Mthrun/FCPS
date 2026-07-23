@@ -20,6 +20,14 @@ ClusterShannonInfo(ClsMatrix)
 }
 \details{
 Info[1:d]  = sum(-p * log(p)/MaxInfo) for all unique cases with probability p in ClsMatrix[,c] for a column with k clusters  MaxInfo = -(1/k)*log(1/k)
+
+The function measures how balanced and diverse the clusters are in each clustering solution (column):
+
+Balanced clusters (e.g., 3 clusters with equal size) => entropy close to 1.
+
+Skewed clusters (e.g., 95 percent in one cluster) => entropy closer to 0.
+
+It normalizes entropy by the theoretical max entropy for k clusters, giving a percentage of "information efficiency" in the clustering.
 }
 \value{
 \item{Info}{
@@ -47,9 +55,7 @@ mean per column of \code{Info}
 \author{
 Michael Thrun
 }
-\note{
-reeimplemented from Alfred's Ultsch Matlab version but not verified yet.
-}
+
 \examples{
 # Reading the iris dataset from the standard R-Package datasets
 data <- as.matrix(iris[,1:4])

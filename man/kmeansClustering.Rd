@@ -21,7 +21,7 @@ symmetric [1:n,1:n] distance matrix}
 
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
   \item{Type}{ 
-  Choice of Kmeans algorithm, currently either " \code{Hartigan}" [Hartigan/Wong, 1979], "\code{LBG}" [Linde et al., 1980], "\code{Sparse}" sparse k-means proposed in [Witten/Tibshirani, 2010], "\code{Steinley}" best method of [Steinley/Brusco, 2007] proposed in Steinley 2003, "\code{Lloyd}" [Lloyd, 1982], "\code{Forgy}"[Forgy, 1965], \code{MacQueen} [MacQueen, 1967], \code{kcentroids} [Leisch, 2006], "\code{kprototypes}" [Szepannek, 2018], "\code{Pelleg-moore}" [Pelleg & Moores,2000], \code{Elkan}" [Elkan, 2003], \code{Hamerly}"[Hamerly, 2010] ,\code{Dualtree}"  or \code{Dualtree-covertree} [Curtin, 2017]"
+  Choice of Kmeans algorithm, currently either " \code{Hartigan}" [Hartigan/Wong, 1979], "\code{LBG}" [Linde et al., 1980], "\code{Sparse}" sparse k-means proposed in [Witten/Tibshirani, 2010], "\code{Steinley}" best method of [Steinley/Brusco, 2007] proposed in Steinley 2003, "\code{Lloyd}" [Lloyd, 1982], "\code{Forgy}"[Forgy, 1965], \code{MacQueen} [MacQueen, 1967], \code{kcentroids} [Leisch, 2006], "\code{kprototypes}" [Szepannek, 2018], "\code{Pelleg-moore}" [Pelleg & Moores,2000], "\code{Elkan}" [Elkan, 2003], "\code{kmeans++}"" [Arthur & Vassilvitskii], \code{Hamerly}"[Hamerly, 2010] ,\code{Dualtree}"  or \code{Dualtree-covertree} [Curtin, 2017]"
   }
     \item{RandomNo}{Only for " \code{Steinley}" or in case of distance matrix, number of random initializations with searching for minimal SSE, see [Steinley/Brusco, 2007]}
     
@@ -69,6 +69,8 @@ SumDistsToCentroids: Vector of within-cluster sum of squares, one component per 
 [Lloyd, 1982]  Lloyd, S.: Least squares quantization in PCM, IEEE transactions on information theory, Vol. 28(2), pp. 129-137. 1982.
 
 [Leisch, 2006]  Leisch, F.: A toolbox for k-centroids cluster analysis, Computational Statistics & Data Analysis, Vol. 51(2), pp. 526-544. 2006.
+
+[Arthur & Vassilvitskii] Arthur, David, and  Vassilvitskii, Sergei: K-means++ the advantages of careful seeding, Proceedings of the eighteenth annual ACM-SIAM symposium on Discrete algorithms. 2007
 
 [Witten/Tibshirani, 2010] Witten, D. and Tibshirani, R.: A Framework for
 Feature Selection in Clustering. Journal of the American Statistical

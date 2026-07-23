@@ -5,7 +5,7 @@
 Density Peak Clustering algorithm using the Decision Graph
 }
 \description{
-Density peaks clustering of [Rodriguez/Laio, 2014] is here implemented by [Pedersen et al., 2017] with estimation of [Wang et al, 2015] meaning its non adaptive in the sense of \code{\link{ADPclustering}}.
+Density peaks clustering of [Rodriguez/Laio, 2014] is here implemented by [Pedersen et al., 2017] with estimation of [Wang et al, 2015] meaning its non adaptive.
 }
 \usage{
 DensityPeakClustering(DataOrDistances, Rho,Delta,Dc,Knn=7, 
@@ -44,7 +44,7 @@ Optional, further arguments for  \code{\link[densityClust]{densityClust}}
 }
 }
 \details{
-The densityClust algorithm does not decide the k number of clusters, this has to be done by the parameter setting. This is contrary to the other version of the algorithm from another package which can be called with \code{\link{ADPclustering}}.
+The densityClust algorithm does not decide the k number of clusters, this has to be done by the parameter setting.
 
 The plot shows the density peaks (Cluster centers). Set Rho and Delta as boundaries below the number of relevant cluster centers for your problem. (see example below).
 }
@@ -72,8 +72,6 @@ Michael Thrun
 }
 
 \seealso{
-\code{\link{ADPclustering}}
-
 \code{\link[densityClust]{densityClust}}
 }
 \examples{

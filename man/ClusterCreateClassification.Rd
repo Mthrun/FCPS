@@ -8,7 +8,7 @@ Create Classification for Cluster.. functions
 Creates a Cls from arbitrary list of objects
 }
 \usage{
-ClusterCreateClassification(Objects,Decreasing)
+ClusterCreateClassification(Objects,Decreasing,na.rm=FALSE)
 }
 
 \arguments{
@@ -18,7 +18,9 @@ Listed objects, for example factor
   \item{Decreasing}{
 Boolean that can be missing. If given, sorts \code{ClusterNames} with either decreasing or increasing.
 }
-
+  \item{na.rm}{
+Boolean, if TRUE all non finite values of Cls are set to 0. FALSE: NaN and Inf and -Inf are set to different numeric labels, NA is set to NaN 
+}
 }
 \details{
 \code{ClusterNames} can be sorted before the classification stored \code{Cls} is created. See example.

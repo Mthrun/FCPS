@@ -1,4 +1,4 @@
-ClusterCreateClassification=function(Objects,Decreasing){
+ClusterCreateClassification=function(Objects,Decreasing,na.rm=FALSE){
   #
   # INPUT
   # Objects          listed objects, for example factor
@@ -20,6 +20,7 @@ ClusterCreateClassification=function(Objects,Decreasing){
   Cls=rep(NaN,n)
   u_num=as.numeric(u)
   nans=sum(!is.finite(u_num))
+
   if(nans>0){
     for(i in 1:length(u)){
       Cls[y==u[i]]=i
@@ -29,7 +30,21 @@ ClusterCreateClassification=function(Objects,Decreasing){
       Cls[y==u[i]]=u_num[i]
     }
   }
- 
+ if(isTRUE(na.rm)){
+   Cls[!is.finite(Cls)]=0
+   Cls[Cls==names(u)[is.na(u)]] = 0
+   names(u)[is.na(u)]=0
+   u[is.na(u)]="NA"
+   
+   Cls[Cls==names(u)[u=="Inf"]] = 0
+   Cls[Cls==names(u)[u=="-Inf"]]= 0
+   Cls[Cls==names(u)[u=="NaN"]] = 0
+   
+   names(u)[u=="Inf"]=0
+   names(u)[u=="-Inf"]=0
+   names(u)[u=="NaN"]=0
+
+ }
 
   return(list(Cls=Cls,ClusterNames=u))
 }

@@ -1,34 +1,27 @@
-cluster_analysis_fun = function(i, fun, DataOrDistances, ClusterNo = NULL,
-                                 SetSeed = TRUE, ...) {
-  # cluster_analysis_fun(i,fun,DataOrDistances,ClusterNo=2)
+CA_data_fun = function(i, fun, Data, ClusterNo = NULL, SetSeed = TRUE, ...) {
+
+  # V=CA_data_fun(i,fun,Data,ClusterNo=2)
   #
   # INTERNAL WORKER
   #
-  # Executes one clustering trial for a generic data or distance input. Validates
-  # the trial identifier, optionally sets a deterministic seed, calls FUN, measures
-  # elapsed time, and extracts the unique result element named Cls.
+  # Executes one data-based clustering trial, records elapsed time and seed, and
+  # extracts the unique element named Cls from the clustering result.
   #
   # INPUT
-  # i                Positive integer trial identifier.
-  # fun              Function or character string naming the clustering function.
-  # DataOrDistances  Data or distance object supplied to fun.
+  # i          Positive integer trial identifier.
+  # fun        Function or character string naming a clustering function.
+  # Data       Dataset supplied to fun.
   #
   # OPTIONAL
-  # ClusterNo        Number of clusters. NULL omits this argument from the call.
-  # SetSeed          Logical. If TRUE, uses seed 1000 + i. Default: TRUE.
-  # ...              Further arguments forwarded to fun.
+  # ClusterNo  Number of clusters. NULL omits this argument.
+  # SetSeed    Logical. If TRUE, uses seed 1000 + i. Default: TRUE.
+  # ...        Further arguments forwarded to fun.
   #
   # OUTPUT
-  # List with:
-  # Cls              Clustering vector, or NULL when no unique Cls element exists.
-  # ComputationTime  Named elapsed time in seconds.
-  # Seed             Integer seed, or NULL when SetSeed = FALSE.
-  # CAs              Complete object returned by fun.
+  # List with Cls, ComputationTime, Seed, and CAs.
   #
   # INTERNAL
-  # This function is used by parApplyClusterAnalysis() and is not intended as the
-  # primary user interface.
-  
+  # Used by parApplyDataBasedCA().
   if (!is.logical(SetSeed) || length(SetSeed) != 1L || is.na(SetSeed)) {
     stop("'SetSeed' must be exactly TRUE or FALSE.", call. = FALSE)
   }
@@ -54,27 +47,20 @@ cluster_analysis_fun = function(i, fun, DataOrDistances, ClusterNo = NULL,
   }
 
   non_dots = formal_names[formal_names != "..."]
-  preferred_names = c(
-    "DataOrDistances", "Data", "Distances", "Distance", "Dissimilarities"
-  )
-
-  if (length(non_dots) > 0L && non_dots[[1L]] %in% preferred_names) {
+  if ("Data" %in% formal_names) {
+    input_name = "Data"
+  } else if ("DataOrDistances" %in% formal_names) {
+    input_name = "DataOrDistances"
+  } else if (length(non_dots) > 0L) {
     input_name = non_dots[[1L]]
+  } else if ("..." %in% formal_names) {
+    input_name = "Data"
   } else {
-    available = preferred_names[preferred_names %in% formal_names]
-    if (length(available) > 0L) {
-      input_name = available[[1L]]
-    } else if (length(non_dots) > 0L) {
-      input_name = non_dots[[1L]]
-    } else if ("..." %in% formal_names) {
-      input_name = "DataOrDistances"
-    } else {
-      stop("Could not identify an input argument in 'fun'.", call. = FALSE)
-    }
+    stop("Could not identify an input argument in 'fun'.", call. = FALSE)
   }
 
   call_args = list()
-  call_args[[input_name]] = DataOrDistances
+  call_args[[input_name]] = Data
   if (!is.null(ClusterNo)) {
     call_args$ClusterNo = ClusterNo
   }

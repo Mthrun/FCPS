@@ -43,6 +43,8 @@ List of
 \item{Object}{Object defined by clustering algorithm as the other output of this algorithm}
 }
 \note{
+subsclustering of subclue package is not available on CRAN anymore. you can comment the code in and get the archive version, otherwise only orclus is available as an option.
+
 JAVA_HOME has to be set for rJava to the ProClus algorithm (in windows set PATH env. variable to .../bin path of Java. The architecture of R and Java have to match. Java automatically downloads the Java version of the browser which may not be installed in the architecture in R. In such a case choose a Java version manually.
 }
 \references{

@@ -1,109 +1,147 @@
-parApplyClusterAnalysis=function(DataOrDistances,FUN,NumberOfTrials=1:100,ClusterNo=NULL,WorkersOrNo,SocketType="PSOCK",SetSeed=TRUE,...){
-  #example
+parApplyClusterAnalysis = function(DataOrDistances, FUN,
+                                    NumberOfTrials = 1:100,
+                                    ClusterNo = NULL, WorkersOrNo,
+                                    SocketType = "PSOCK", SetSeed = TRUE, ...) {
   # data(Hepta)
   # Distance=as.matrix(parallelDist::parallelDist(Hepta$Data))
   # out=parApplyClusterAnalysis(DataOrDistances = Distance,FUN=APclustering,ClusterNo = 7)
-  if(!is.list(DataOrDistances)){
-    if(!is.null(WorkersOrNo)){
-      if(!requireNamespace('parallel')){
-        message('package parrellels not availalbe. Using simple lapply function.')
-        WorkersOrNo=NULL
-      }
-    }
- 
-  ShutDownAfter=TRUE
-  if(missing(WorkersOrNo)){
-    WorkersOrNo <- parallel::detectCores() - 1
-  }
-  if(is.na(ClusterNo)) ClusterNo=NULL
-  
-  if(any(class(WorkersOrNo)=="cluster")){
-    message("Use clusters...")
-      cl=WorkersOrNo
-      ShutDownAfter=FALSE
-    }else{
-      if(!is.null(WorkersOrNo)){
-        message("Make clusters...")
-        cl=parallel::makeCluster(WorkersOrNo,type = SocketType)
-      }
-  }
-  
 
-  message("Compute Benchmarking of Clustering Method")
-  #parallel::clusterExport(cl = cl,varlist = c(deparse(substitute(FUN)),'cluster_analysis_fun'))
-  
-  string=names(formals(FUN))
-  if(!is.null(WorkersOrNo)){
-    tryCatch({
-      if(string[1]=="Data") {
-        Data=DataOrDistances
-        if(!isSymmetric(unname(Data)))
-          out=parallel::parLapply(cl = cl,X = NumberOfTrials,fun = cluster_analysis_fun,FUN,Data,ClusterNo,SetSeed,...)
-        else
-          stop(paste('Clustering algorithm',deparse(substitute(FUN)),'is unable to use a distance matrix. Please provide a data matrix.'))
-      }else{
-          out=parallel::parLapply(cl = cl,X = NumberOfTrials,fun = cluster_analysis_fun,FUN,DataOrDistances,ClusterNo,SetSeed,...)
-      }
-  
-    },error=function(e){
-      print(e)
-      #if(ShutDownAfter)
-        parallel::stopCluster(cl)
-    })
-    
-    if(ShutDownAfter)
-      try(parallel::stopCluster(cl))
-  }else{
-    if(string[1]=="Data") {
-      Data=DataOrDistances
-      if(!isSymmetric(unname(Data)))
-        out=lapply(X = NumberOfTrials,FUN = cluster_analysis_fun,FUN,Data,ClusterNo,SetSeed,...)
-      else
-        stop(paste('Clustering algorithm',deparse(substitute(FUN)),'is unable to use a distance matrix. Please provide a data matrix.'))
-    }else{
-      out=lapply(X = NumberOfTrials,FUN = cluster_analysis_fun,FUN,DataOrDistances,ClusterNo,SetSeed,...)
+  #
+  # Repeatedly applies a clustering function to data or distances, optionally
+  # using parallel workers. Supports a single input or a list of inputs.
+  #
+  # INPUT
+  # DataOrDistances  Data matrix, data.frame, distance object, or a list of such
+  #                  inputs. A list is interpreted as a collection of datasets or
+  #                  distance objects and processed sequentially at the outer
+  #                  level.
+  #
+  # FUN              Function or character string naming a clustering function.
+  #                  The function should return a list containing a unique element
+  #                  named Cls if a clustering matrix is required.
+  #
+  # OPTIONAL
+  # NumberOfTrials   Positive integer count or vector of positive integer trial
+  #                  identifiers. A scalar n generates trials seq_len(n).
+  #                  Default: 1:100.
+  #
+  # ClusterNo        Number of clusters supplied to FUN. For a list of inputs,
+  #                  this may be a scalar or one value per input. NULL or NA means
+  #                  that ClusterNo is not supplied to FUN.
+  #
+  # WorkersOrNo      Missing, NULL, a positive integer worker count, or an existing
+  #                  parallel cluster object.
+  #                  - missing: use detectCores() - 1, with at least one worker
+  #                  - NULL: execute serially
+  #                  - integer: create and subsequently stop a worker cluster
+  #                  - cluster object: use it without stopping it
+  #
+  # SocketType       Character scalar passed as type to parallel::makeCluster().
+  #                  Default: "PSOCK".
+  #
+  # SetSeed          Logical scalar. If TRUE, trial i uses seed 1000 + i.
+  #                  If FALSE, deterministic trial seeds are not assigned.
+  #                  Default: TRUE.
+  #
+  # ...              Further arguments forwarded to FUN. Arguments supplied here
+  #                  may not duplicate DataOrDistances or ClusterNo as supplied by
+  #                  the wrapper.
+  #
+  # OUTPUT
+  # For a single input, a list with:
+  # Cls_Matrix       Matrix whose columns contain Cls returned by each trial, or
+  #                  NULL if at least one result has no unique Cls element.
+  # ComputationTime  Named numeric vector with elapsed time per trial.
+  # Seeds            Named integer vector of seeds, or NULL when SetSeed = FALSE.
+  # CAobjects        Included if Cls_Matrix cannot be constructed.
+  #
+  # For a list of inputs, returns a list containing one such result per input.
+  #
+  # DETAILS
+  # The input argument of FUN is identified from its formal arguments. Preferred
+  # names are DataOrDistances, Data, Distances, Distance, and Dissimilarities.
+  # Unsupported named arguments are removed when FUN has no ... argument.
+  #
+  # Parallel execution uses parallel::parLapply(). PSOCK is the portable default
+  # and is supported on Windows, macOS, and Unix-like systems.
+  #
+  # author: Michael Thrun
+
+  caller = "parApplyClusterAnalysis"
+  workers_missing = missing(WorkersOrNo)
+  SetSeed = .fcps_validate_set_seed(SetSeed)
+  trial_ids = .fcps_trial_ids(NumberOfTrials)
+  fun_object = match.fun(FUN)
+  dots = list(...)
+
+  is_collection = .fcps_is_input_collection(DataOrDistances)
+  if (is_collection) {
+    n_inputs = length(DataOrDistances)
+    if (n_inputs == 0L) {
+      return(vector("list", 0L))
     }
+    cluster_numbers = .fcps_expand_cluster_no(ClusterNo, n_inputs, caller)
+  } else {
+    cluster_number = .fcps_normalize_cluster_no(ClusterNo)
   }
 
-  
-  Cls_matrix=simplify2array(lapply(out, `[[`, 1),higher = FALSE)
-  CompTimeVec=sapply(out, `[[`, 2)
-  Seeds=sapply(out, `[[`, 3)
-  
-  return(list(Cls_Matrix=Cls_matrix,ComputationTime=CompTimeVec,Seeds=Seeds))
-  }else{#data is list
-    if(missing(WorkersOrNo)){
-      WorkersOrNo <- parallel::detectCores() - 1
-    }
-    
-    if(any(class(WorkersOrNo)=="cluster")){
-      message("Use clusters...")
-      cl=WorkersOrNo
-      ShutDownAfter=FALSE
-    }else{
-      if(!is.null(WorkersOrNo)){
-        message("Make clusters...")
-        cl=parallel::makeCluster(WorkersOrNo,type = SocketType)
-      }
-    }
-    
-    Datanames=names(DataOrDistances)
-    Benchmarking=list()
-    N=length(DataOrDistances)
-    if(N!=length(ClusterNo)){
-      ClusterNo=c(ClusterNo,rep(ClusterNo[1],N-length(ClusterNo)))
-      warning('parApplyClusterAnalysis: ClusterNo is not of length of list of DataOrDistances. Extending to equal lengths with ClusterNo[1] = ',ClusterNo[1],'. Benchmarking may not work correctly.')
-    }
-    for(i in 1:N){
-      DataOrDistancesCur=DataOrDistances[[i]]
-      ClusterNoCur=ClusterNo[i]
-      message(paste('Computing Dataset',Datanames[i],'out of',N))
-      if(!is.null(WorkersOrNo))
-        Benchmarking[[i]]=parApplyClusterAnalysis(DataOrDistances=DataOrDistancesCur,FUN,NumberOfTrials=NumberOfTrials,ClusterNo=ClusterNoCur,WorkersOrNo=cl,SocketType=NULL,SetSeed=SetSeed,...)
-      else
-        Benchmarking[[i]]=parApplyClusterAnalysis(DataOrDistances=DataOrDistancesCur,FUN,NumberOfTrials=NumberOfTrials,ClusterNo=ClusterNoCur,WorkersOrNo=NULL,SocketType=NULL,SetSeed=SetSeed,...)
-    }
-    names(Benchmarking)=Datanames
-    return(Benchmarking)
+  if (workers_missing) {
+    WorkersOrNo = .fcps_default_workers()
   }
+  backend = .fcps_prepare_backend(WorkersOrNo, SocketType)
+  if (isTRUE(backend$owned)) {
+    on.exit(
+      try(parallel::stopCluster(backend$cluster), silent = TRUE),
+      add = TRUE
+    )
+  }
+
+  if (is.null(backend$cluster)) {
+    message("Compute benchmarking of clustering method serially")
+  } else if (isTRUE(backend$owned)) {
+    message("Compute benchmarking of clustering method with a new worker cluster")
+  } else {
+    message("Compute benchmarking of clustering method with the supplied worker cluster")
+  }
+
+  run_single = function(input, current_cluster_no) {
+    worker_args = .fcps_merge_worker_args(
+      list(
+        fun = fun_object,
+        DataOrDistances = input,
+        ClusterNo = current_cluster_no,
+        SetSeed = SetSeed
+      ),
+      dots
+    )
+    out = .fcps_apply_trials(
+      cl = backend$cluster,
+      trial_ids = trial_ids,
+      worker_fun = cluster_analysis_fun,
+      worker_args = worker_args
+    )
+    .fcps_aggregate_trials(
+      out = out,
+      SetSeed = SetSeed,
+      caller = caller,
+      include_objects = FALSE
+    )
+  }
+
+  if (!is_collection) {
+    return(run_single(DataOrDistances, cluster_number))
+  }
+
+  input_names = names(DataOrDistances)
+  benchmarking = vector("list", n_inputs)
+  for (i in seq_len(n_inputs)) {
+    input_label = .fcps_input_label(input_names, i)
+    message(sprintf("Computing dataset %s (%d of %d)", input_label, i, n_inputs))
+    benchmarking[[i]] = run_single(
+      DataOrDistances[[i]],
+      cluster_numbers[[i]]
+    )
+  }
+  names(benchmarking) = input_names
+  benchmarking
 }

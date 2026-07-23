@@ -1,5 +1,5 @@
 SparseClustering=function(DataOrDistances, ClusterNo, Type="Hierarchical",PlotIt=F,
-                          Silent=FALSE, NoPerms=10,Wbounds,Data, ...){
+                          Silent=FALSE, NoPerms=10,Wbounds, ...){
   # INPUT
   # Data[1:n,1:d]     Data set with n observations and d features
   # ClusterNo         Numeric indicating number to cluster to find in Tree/
@@ -33,12 +33,12 @@ SparseClustering=function(DataOrDistances, ClusterNo, Type="Hierarchical",PlotIt
     )
   }
   if(missing(DataOrDistances)){
-    if(!missing(Data))
-      DataOrDistances=Data ##for parApplyDataBasedCA
-    else{
+    # if(!missing(Data))
+    #   DataOrDistances=Data ##for parApplyDataBasedCA
+    # else{
       message('SparseClustering: Variable Data is not given. Returning.')
       return()
-    }
+    # }
   }
   if(is.null(DataOrDistances)){
     message('SparseClustering: Variable Data is not given. Returning.')

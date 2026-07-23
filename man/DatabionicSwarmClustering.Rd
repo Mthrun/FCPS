@@ -2,20 +2,13 @@
 \alias{DatabionicSwarmClustering}
 \alias{DBSclusteringAndVisualization}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Databionic Swarm (DBS) Clustering and Visualization
-}
+\title{Databionic Swarm (DBS) Clustering and Visualization}
 \description{
 Swarm-based clustering by exploting self-organization, emergence, swarm intelligence and game theory published in [Thrun/Ultsch, 2021].
 }
-\usage{
-DatabionicSwarmClustering(DataOrDistances, ClusterNo = 0,
-
+\usage{DatabionicSwarmClustering(DataOrDistances, ClusterNo = 0,
 StructureType = TRUE, DistancesMethod = NULL,
-
-PlotTree = FALSE, PlotMap = FALSE,PlotIt=FALSE, 
-
-Parallel = FALSE)
+PlotTree = FALSE, PlotMap = FALSE,PlotIt=FALSE, Parallel = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -40,7 +33,7 @@ Optional, if data matrix given, annon Euclidean distance can be selected
 Optional, if TRUE: dendrogram is plotted.
 }
   \item{PlotMap}{
-Optional, if TRUE: topographic map is plotted if \pkg{GeneralizedUmatrix} is installed.
+Optional, if TRUE: topographic map is plotted if \pkg{GeneralizedUmatrix} is installed. See details.
 }
 \item{PlotIt}{Default: FALSE, If TRUE and dataset of [1:n,1:d] dimensions then a plot of the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls} will be generated.}
 
@@ -55,6 +48,8 @@ Instead, this function is implemented for the purpose of automatic benchmarking 
 
 If one would like to perform a clustering exploratively (in the sense that a prior clustering is not given for evaluation purposes), then please use the \pkg{DatabionicSwarm} package directly and read the vignette there.
 Databionic swarm is like k-means a stochastic algorithm meaning that the clustering and visualization may change between trials.
+
+If \code{PlotMap==TRUE} and \code{ClusterNo=0} a topview of the topographic map is shown, in which the points are not labeled, i.e. colored by the same color. If \code{PlotMap==TRUE} and \code{ClusterNo>0}, then the points are colored by their cluster labels. If you would like to look an 3D topogrpahic map that can be interactively rotated or use 3D printing of the high-dimensional structures [Thrun et al., 2016], please see \code{\link[GeneralizedUmatrix]{plotTopographicMap}} for further details.
 }
 \value{
 List of
@@ -65,6 +60,8 @@ List of
 [Thrun/Ultsch, 2021]  Thrun, M. C., and Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Artificial Intelligence, Vol. 290, pp. 103237, \doi{10.1016/j.artint.2020.103237}, 2021.
 
 [Thrun/Ultsch, 2021] Thrun, M. C., & Ultsch, A.: Swarm Intelligence for Self-Organized Clustering (Extended Abstract), in Bessiere, C. (Ed.), 29th International Joint Conference on Artificial Intelligence (IJCAI), Vol. IJCAI-20, pp. 5125--5129, \doi{10.24963/ijcai.2020/720}, Yokohama, Japan, Jan., 2021. 
+
+[Thrun et al., 2016] Thrun, M. C., Lerch, F., Lötsch, J., & Ultsch, A. : Visualization and 3D Printing of Multivariate Data of Biomarkers, in Skala, V. (Ed.), International Conference in Central Europe on Computer Graphics, Visualization and Computer Vision (WSCG), Vol. 24, Plzen, 2016. 
 }
 \author{
 Michael Thrun
@@ -86,19 +83,19 @@ data = cbind(
 )
 # Make sure there are no structures
 # (sample size is small and still could generate structures randomly)
-if(requireNamespace('DatabionicSwarm',quietly = TRUE)){
-Data = DatabionicSwarm::RobustNormalization(data, Centered = TRUE)
+if(requireNamespace('DataVisualizations',quietly = TRUE)){
+Data = DataVisualizations::RobustNormalization(data, Centered = TRUE)
 #DataVisualizations::Plot3D(Data)
 
 # No structres are visible
 # Topographic map looks like "egg carton"
 # with every point in its own valley
-Cls = DatabionicSwarmClustering(Data, 0, PlotMap = TRUE)
+ClsV = DatabionicSwarmClustering(Data, 0, PlotMap = TRUE)
 }else{
 # only for testing purposes of CRAN!
 # in case CRAN tests with no suggest packages available
 # please use alpways some kind of standardization!
-Cls = DatabionicSwarmClustering(data, 0, PlotMap = TRUE)
+ClsV = DatabionicSwarmClustering(data, 0, PlotMap = TRUE)
 }
 }
 
@@ -108,7 +105,7 @@ Cls = DatabionicSwarmClustering(data, 0, PlotMap = TRUE)
 data(Hepta)
 #DataVisualizations::Plot3D(Hepta$Data)
 
-Cls = DatabionicSwarmClustering(Hepta$Data, 0, PlotMap = TRUE)
+ClsV = DatabionicSwarmClustering(Hepta$Data, 0, PlotMap = TRUE)
 }
 
 #entagled, complex, and non-linear seperable structures 
@@ -118,19 +115,19 @@ data(Chainlink)
 #DataVisualizations::Plot3D(Chainlink$Data)
 
 # 2 valleys are visible, thus ClusterNo=2
-Cls = DatabionicSwarmClustering(Chainlink$Data, 0, PlotMap = TRUE)
+ClsV = DatabionicSwarmClustering(Chainlink$Data, 0, PlotMap = TRUE)
 
 # Experiment with parameter StructureType only
 # reveals that clustering is appropriate
 # if StructureType=FALSE
-Cls = DatabionicSwarmClustering(Chainlink$Data,
+ClsV2 = DatabionicSwarmClustering(Chainlink$Data,
                                 2,
                                 StructureType = FALSE,
                                 PlotMap = TRUE)
 
 # Here clusters (colored points)
 # are not seperated by valleys
-Cls = DatabionicSwarmClustering(Chainlink$Data,
+ClsV = DatabionicSwarmClustering(Chainlink$Data,
                                 2,
                                 StructureType = TRUE,
                                 PlotMap = TRUE)

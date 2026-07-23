@@ -45,7 +45,9 @@ Michael Thrun
 }
  \examples{
 data('Hepta')
+\donttest{
 Clust=GenieClustering(Hepta$Data,ClusterNo=7)
+}
 }
 \keyword{Hierarchical}
 \keyword{Clustering}

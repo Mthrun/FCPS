@@ -102,7 +102,7 @@ ClusterAccuracy(Cls,Classification)
 ```
 
 <p align="center">
-  <img src="/img/Fig0.png" width="400" height="400">
+  <img src="/man/image_directory/Fig0.png" width="400" height="400">
 </p>
 
 
@@ -126,7 +126,7 @@ $ClusterPercentages
 ```
 
 <p align="center">
-  <img src="/img/Fig1.png" width="400" height="400">
+  <img src="/man/image_directory/Fig1.png" width="400" height="400">
 </p>
 
 ### Cluster-Tendency
@@ -143,7 +143,7 @@ ClusterabilityMDplot(Data)+theme_bw()
 ```
 
 <p align="center">
-  <img src="/img/Fig2.png" width="400" height="400">
+  <img src="/man/image_directory/Fig2.png" width="400" height="400">
 </p>
 
 
@@ -169,7 +169,7 @@ MaxClusterNo = MaximumNumber, PlotIt = TRUE)
 
 
 <p align="center">
-  <img src="/img/Fig4.png" width="400" height="200">
+  <img src="/man/image_directory/Fig4.png" width="400" height="200">
 </p>
 
 ## Additional information

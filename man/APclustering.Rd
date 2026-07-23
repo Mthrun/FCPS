@@ -57,11 +57,6 @@ List of
 [Frey/Dueck, 2007]	Frey, B. J., & Dueck, D.: Clustering by passing messages between data points, Science, Vol. 315(5814), pp. 972-976, <doi:10.1126/science.1136800>, 2007.
 
 [Bodenhofer et al., 2011]	Bodenhofer, U., Kothmeier, A., & Hochreiter, S.: APCluster: an R package for affinity propagation clustering, Bioinformatics, Vol. 27(17), pp, 2463-2464, 2011.
-
-Further details in
-\url{
-http://www.bioinf.jku.at/software/apcluster/ 
-}
 }
 \author{
 Michael Thrun

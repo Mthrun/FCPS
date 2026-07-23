@@ -63,78 +63,78 @@ SubspaceClustering <-function(Data,ClusterNo,DimSubspace,Type='Orclus',PlotIt=FA
                            ...)
       Cls = obj$cluster
     },
-    ProClus = {
-      if (!requireNamespace('subspace',quietly = TRUE)) {
-        message(
-          'Subordinate clustering package (subspace) is missing. No computations are performed.
-            Please install the package which is defined in "Suggests".'
-        )
-        return(
-          list(
-            Cls = rep(1, nrow(Data)),
-            Object = "Subordinate clustering package (subspace) is missing.
-                Please install the package which is defined in 'Suggests'."
-          )
-        )
-      }
-      
-      if (!missing(DimSubspace))
-        obj = subspace::ProClus(data = Data, k = ClusterNo, d = DimSubspace, ...)
-      else
-        obj = subspace::ProClus(data = Data, k = ClusterNo, ...)
-      
-      Cls = rep(NaN, nrow(Data))
-      for (i in 1:length(obj)) {
-        Cls[obj[[i]]$objects] = i
-      }
-      Cls[!is.finite(Cls)] = 9999
-    },
-    SubClu = {
-      if (!requireNamespace('subspace',quietly = TRUE)) {
-        message(
-          'Subordinate clustering package (subspace) is missing. No computations are performed.
-            Please install the package which is defined in "Suggests".'
-        )
-        return(
-          list(
-            Cls = rep(1, nrow(Data)),
-            Object = "Subordinate clustering package (subspace) is missing.
-                Please install the package which is defined in 'Suggests'."
-          )
-        )
-      }
-      
-      obj = subspace::SubClu(data = Data, ...)
-      
-      Cls = rep(NaN, nrow(Data))
-      for (i in 1:length(obj)) {
-        Cls[obj[[i]]$objects] = i
-      }
-      Cls[!is.finite(Cls)] = 9999
-    },
-    Clique = {
-      if (!requireNamespace('subspace',quietly = TRUE)) {
-        message(
-          'Subordinate clustering package (subspace) is missing. No computations are performed.
-            Please install the package which is defined in "Suggests".'
-        )
-        return(
-          list(
-            Cls = rep(1, nrow(Data)),
-            Object = "Subordinate clustering package (subspace) is missing.
-                Please install the package which is defined in 'Suggests'."
-          )
-        )
-      }
-      obj = subspace::CLIQUE(data = Data, ...)
-      
-      Cls = rep(NaN, nrow(Data))
-      for (i in 1:length(obj)) {
-        Cls[obj[[i]]$objects] = i
-      }
-      Cls[!is.finite(Cls)] = 9999
-    },
-    stop("Wrong Type string entered")
+    # ProClus = {
+      # if (!requireNamespace('subspace',quietly = TRUE)) {
+      #   message(
+      #     'Subordinate clustering package (subspace) is missing. No computations are performed.
+      #       Please install the package which is defined in "Suggests".'
+      #   )
+      #   return(
+      #     list(
+      #       Cls = rep(1, nrow(Data)),
+      #       Object = "Subordinate clustering package (subspace) is missing.
+      #           Please install the package which is defined in 'Suggests'."
+      #     )
+      #   )
+      # }
+      # 
+      # if (!missing(DimSubspace))
+      #   obj = subspace::ProClus(data = Data, k = ClusterNo, d = DimSubspace, ...)
+      # else
+      #   obj = subspace::ProClus(data = Data, k = ClusterNo, ...)
+      # 
+      # Cls = rep(NaN, nrow(Data))
+      # for (i in 1:length(obj)) {
+      #   Cls[obj[[i]]$objects] = i
+      # }
+      # Cls[!is.finite(Cls)] = 9999
+    # },
+    # SubClu = {
+    #   if (!requireNamespace('subspace',quietly = TRUE)) {
+    #     message(
+    #       'Subordinate clustering package (subspace) is missing. No computations are performed.
+    #         Please install the package which is defined in "Suggests".'
+    #     )
+    #     return(
+    #       list(
+    #         Cls = rep(1, nrow(Data)),
+    #         Object = "Subordinate clustering package (subspace) is missing.
+    #             Please install the package which is defined in 'Suggests'."
+    #       )
+    #     )
+    #   }
+    #   
+    #   obj = subspace::SubClu(data = Data, ...)
+    #   
+    #   Cls = rep(NaN, nrow(Data))
+    #   for (i in 1:length(obj)) {
+    #     Cls[obj[[i]]$objects] = i
+    #   }
+    #   Cls[!is.finite(Cls)] = 9999
+    # },
+    # Clique = {
+    #   if (!requireNamespace('subspace',quietly = TRUE)) {
+    #     message(
+    #       'Subordinate clustering package (subspace) is missing. No computations are performed.
+    #         Please install the package which is defined in "Suggests".'
+    #     )
+    #     return(
+    #       list(
+    #         Cls = rep(1, nrow(Data)),
+    #         Object = "Subordinate clustering package (subspace) is missing.
+    #             Please install the package which is defined in 'Suggests'."
+    #       )
+    #     )
+    #   }
+    #   obj = subspace::CLIQUE(data = Data, ...)
+    #   
+    #   Cls = rep(NaN, nrow(Data))
+    #   for (i in 1:length(obj)) {
+    #     Cls[obj[[i]]$objects] = i
+    #   }
+    #   Cls[!is.finite(Cls)] = 9999
+    # },
+    stop("Wrong Type string entered/subspace package was taken dwon from cran")
     
   )
   

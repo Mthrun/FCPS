@@ -1,103 +1,124 @@
-parApplyDistanceBasedCA=function(Distances,FUN,NumberOfTrials=1:100,ClusterNo=NULL,WorkersOrNo,SocketType="PSOCK",SetSeed=TRUE,...){
-  #example
+parApplyDistanceBasedCA = function(Distances, FUN, NumberOfTrials = 1:100,
+                                    ClusterNo = NULL, WorkersOrNo,
+                                    SocketType = "PSOCK", SetSeed = TRUE, ...) {
   # data(Hepta)
   # Distance=as.matrix(parallelDist::parallelDist(Hepta$Data))
   # out=parApplyDistanceBasedCA(Distance,FUN=APclustering,ClusterNo = 7)
+  #
+  # Repeatedly applies a distance-based clustering function to one distance input
+  # or a list of distance inputs, optionally using parallel workers.
+  #
+  # INPUT
+  # Distances        Distance or dissimilarity representation accepted by FUN, or
+  #                  a list of such representations.
+  #
+  # FUN              Function or character string naming a distance-based
+  #                  clustering function. FUN should normally return a list with
+  #                  a unique element named Cls.
+  #
+  # OPTIONAL
+  # NumberOfTrials   Positive integer count or vector of positive integer trial
+  #                  identifiers. Default: 1:100.
+  #
+  # ClusterNo        Number of clusters passed to FUN. May be scalar or one value
+  #                  per input when Distances is a list. NULL or NA omits it.
+  #
+  # WorkersOrNo      Missing, NULL, positive integer worker count, or an existing
+  #                  parallel cluster object.
+  #
+  # SocketType       Cluster type passed to parallel::makeCluster().
+  #                  Default: "PSOCK".
+  #
+  # SetSeed          Logical scalar. If TRUE, trial i uses seed 1000 + i.
+  #                  Default: TRUE.
+  #
+  # ...              Further arguments forwarded to FUN.
+  #
+  # OUTPUT
+  # For one distance input, a list containing:
+  # Cls_Matrix, ComputationTime, Seeds, and CAobjects.
+  #
+  # For a list of distance inputs, a named list with one result per input.
+  #
+  # DETAILS
+  # The input argument of FUN is selected preferentially from DataOrDistances,
+  # Distances, Distance, or Dissimilarities. If none exists, the first inspectable
+  # non-dots formal argument is used.
+  #
+  # author: Michael Thrun and contributors
   
-  if(missing(WorkersOrNo)){
-    WorkersOrNo <- parallel::detectCores() - 1
-  }
-  
-  if(!is.list(Distances)){
-    if(!is.null(WorkersOrNo)){
-      if(!requireNamespace('parallel')){
-        message('package parrellels not availalbe. Using simple lapply function.')
-        WorkersOrNo=NULL
-      }
-    }
- 
-  ShutDownAfter=FALSE
+  caller = "parApplyDistanceBasedCA"
+  workers_missing = missing(WorkersOrNo)
+  SetSeed = .fcps_validate_set_seed(SetSeed)
+  trial_ids = .fcps_trial_ids(NumberOfTrials)
+  fun_object = match.fun(FUN)
+  dots = list(...)
 
-  if(is.na(ClusterNo)) ClusterNo=NULL
-  
-  if(any(class(WorkersOrNo)=="cluster")){
-    message("Use clusters...")
-      cl=WorkersOrNo
-   
-    }else{
-      ShutDownAfter=TRUE
-      if(!is.null(WorkersOrNo)){
-        message("Make clusters...")
-        cl=parallel::makeCluster(WorkersOrNo,type = SocketType)
-      }
-  }
-  
-
-  message("Compute Benchmarking of Clustering Method")
-  #parallel::clusterExport(cl = cl,varlist = c(deparse(substitute(FUN)),'CA_dist_fun'))
-  
-  string=names(formals(FUN))
-  if(!is.null(WorkersOrNo)){
-    tryCatch({
-      out=parallel::parLapply(cl = cl,X = NumberOfTrials,fun = CA_dist_fun,FUN,Distances,ClusterNo,SetSeed,...)
-    },error=function(e){
-      print(e)
-      #if(ShutDownAfter)
-        parallel::stopCluster(cl)
-    })
-    
-    if(ShutDownAfter){
-      message("Stop clusters...")
-      try(parallel::stopCluster(cl))
+  is_collection = .fcps_is_input_collection(Distances)
+  if (is_collection) {
+    n_inputs = length(Distances)
+    if (n_inputs == 0L) {
+      return(vector("list", 0L))
     }
-     
-  }else{
-      out=lapply(X = NumberOfTrials,FUN = CA_dist_fun,FUN,Distances,ClusterNo,SetSeed,...)
-    
+    cluster_numbers = .fcps_expand_cluster_no(ClusterNo, n_inputs, caller)
+  } else {
+    cluster_number = .fcps_normalize_cluster_no(ClusterNo)
   }
 
-  
-  Cls_matrix=simplify2array(lapply(out, `[[`, 1),higher = FALSE)
-  CompTimeVec=sapply(out, `[[`, 2)
-  Seeds=sapply(out, `[[`, 3)
-  CAobjects=sapply(out, `[[`, 4)
-  
-  return(list(Cls_Matrix=Cls_matrix,ComputationTime=CompTimeVec,Seeds=Seeds,CAobjects=CAobjects))
-  }else{#data is list
-    if(missing(WorkersOrNo)){
-      WorkersOrNo <- parallel::detectCores() - 1
-    }
-    
-    if(any(class(WorkersOrNo)=="cluster")){
-      message("Use clusters...")
-      cl=WorkersOrNo
- 
-    }else{
-      ShutDownAfter=TRUE
-      if(!is.null(WorkersOrNo)){
-        message("Make clusters...")
-        cl=parallel::makeCluster(WorkersOrNo,type = SocketType)
-      }
-    }
-    
-    Datanames=names(Distances)
-    Benchmarking=list()
-    N=length(Distances)
-    if(N!=length(ClusterNo)){
-      ClusterNo=c(ClusterNo,rep(ClusterNo[1],N-length(ClusterNo)))
-      warning('parApplyDistanceBasedCA: ClusterNo is not of length of list of Distances. Extending to equal lengths with ClusterNo[1] = ',ClusterNo[1],'. Benchmarking may not work correctly.')
-    }
-    for(i in 1:N){
-      DistancesCur=Distances[[i]]
-      ClusterNoCur=ClusterNo[i]
-      message(paste('Computing Dataset',Datanames[i],'out of',N))
-      if(!is.null(WorkersOrNo))
-        Benchmarking[[i]]=parApplyDistanceBasedCA(Distances=DistancesCur,FUN,NumberOfTrials=NumberOfTrials,ClusterNo=ClusterNoCur,WorkersOrNo=cl,SocketType=NULL,SetSeed=SetSeed,...)
-      else
-        Benchmarking[[i]]=parApplyDistanceBasedCA(Distances=DistancesCur,FUN,NumberOfTrials=NumberOfTrials,ClusterNo=ClusterNoCur,WorkersOrNo=NULL,SocketType=NULL,SetSeed=SetSeed,...)
-    }
-    names(Benchmarking)=Datanames
-    
-    return(Benchmarking)
+  if (workers_missing) {
+    WorkersOrNo = .fcps_default_workers()
   }
+  backend = .fcps_prepare_backend(WorkersOrNo, SocketType)
+  if (isTRUE(backend$owned)) {
+    on.exit(
+      try(parallel::stopCluster(backend$cluster), silent = TRUE),
+      add = TRUE
+    )
+  }
+
+  if (is.null(backend$cluster)) {
+    message("Compute benchmarking of clustering method serially")
+  } else if (isTRUE(backend$owned)) {
+    message("Compute benchmarking of clustering method with a new worker cluster")
+  } else {
+    message("Compute benchmarking of clustering method with the supplied worker cluster")
+  }
+
+  run_single = function(input, current_cluster_no) {
+    worker_args = .fcps_merge_worker_args(
+      list(
+        fun = fun_object,
+        Distances = input,
+        ClusterNo = current_cluster_no,
+        SetSeed = SetSeed
+      ),
+      dots
+    )
+    out = .fcps_apply_trials(
+      cl = backend$cluster,
+      trial_ids = trial_ids,
+      worker_fun = CA_dist_fun,
+      worker_args = worker_args
+    )
+    .fcps_aggregate_trials(
+      out = out,
+      SetSeed = SetSeed,
+      caller = caller,
+      include_objects = TRUE
+    )
+  }
+
+  if (!is_collection) {
+    return(run_single(Distances, cluster_number))
+  }
+
+  input_names = names(Distances)
+  benchmarking = vector("list", n_inputs)
+  for (i in seq_len(n_inputs)) {
+    input_label = .fcps_input_label(input_names, i)
+    message(sprintf("Computing dataset %s (%d of %d)", input_label, i, n_inputs))
+    benchmarking[[i]] = run_single(Distances[[i]], cluster_numbers[[i]])
+  }
+  names(benchmarking) = input_names
+  benchmarking
 }

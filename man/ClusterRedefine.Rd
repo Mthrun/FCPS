@@ -8,7 +8,7 @@ Redfines Clustering
 Redfines some or all Clusters of Clustering such that the names of the numerical vectors are defined by 
 }
 \usage{
-ClusterRedefine(Cls, NewLabels,OldLabels)
+ClusterRedefine(Cls, NewLabels,OldLabels,Silent=FALSE)
 }
 
 \arguments{
@@ -21,7 +21,9 @@ ClusterRedefine(Cls, NewLabels,OldLabels)
   \item{OldLabels}{
   Optional,  [1:p], p<=k labels(identifiers) of clusters to be changed, default [1:k] unique cluster Ids of \code{Cls}
 }
-
+  \item{Silent}{
+  Optional,  TRUE: No warnign messages are printed out
+}
 }
 \details{
 The same ordering of \code{NewLabels} and  \code{OldLabels} is assumend, i.e., the mapping is defined by OldLabels[i] -> NewLabels[i] with \code{i} in [1:p].   \code{NewLabels} can also be a vector for strings, for example for plotting.

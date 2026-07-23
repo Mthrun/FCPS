@@ -37,7 +37,14 @@ If TRUE: fast Rcpp implementation of mlpack is used. FALSE uses dbscan package.
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 
 }
+\details{
 
+To simplify, the radius works as follows. When DBSCAN looks at a data point, it draws a circle around it with a \code{Radius}.
+If there are enough data points inside that circle, they become a group. Choosing the right \code{Radius} depends on how spread out your data points are.
+
+This is the minimum number of data points  \code{minPts} that should be inside the circle for DBSCAN to consider them a group. If there are fewer data points than this number, the data point might be considered as noise or an outlier. 
+The \code{minPts}  value helps control how strict or lenient the algorithm is when forming groups.
+}
 \value{
 List of
 \item{Cls}{[1:n]  numerical vector defining the clustering; this classification is the main output of the algorithm. Points which cannot be assigned to a cluster will be reported as members of the noise cluster with 0.}
@@ -78,7 +85,7 @@ for (i in seq_len(nrow(DBSGrid))) {
     UpperLimitRadius = parameters$Radius
   )$Cls
   if (length(unique(Cls9)) < 5)
-    BestAcc[i] = DatabionicSwarm::ClusteringAccuracy(WingNut$Cls,
+    BestAcc[i] = ClusterAccuracy(WingNut$Cls,
                                     
                                     Cls9) * 100
   else

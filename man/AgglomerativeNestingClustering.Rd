@@ -19,7 +19,7 @@ PlotIt = FALSE, Standardization = TRUE, ...)
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.
 if \code{ClusterNo=0}, the dendrogram is generated instead of a clustering to estimate the numbers of clusters.
 }
-\item{PlotIt}{Default: FALSE if code{ClusterNo!=0}, If TRUE or code{ClusterNo=0} plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
+\item{PlotIt}{Default: FALSE if \code{ClusterNo!=0}, If TRUE or \code{ClusterNo=0} plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{Standardization}{
 \code{DataOrDistances} is standardized before calculating the dissimilarities. Measurements are standardized for each variable (column), by subtracting the variable's mean value and dividing by the variable's mean absolute deviation. If \code{DataOrDistances} is already a distance matrix, then this argument will be ignored.
 }

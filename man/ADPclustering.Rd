@@ -40,7 +40,8 @@ Michael Thrun
 }
 \examples{
 data('Hepta')
-out=ADPclustering(Hepta$Data,PlotIt=FALSE)
+#nicht mehr exportiert in namespace
+#out=ADPclustering(Hepta$Data,PlotIt=FALSE)
 }
 
 \keyword{ADPclustering}
