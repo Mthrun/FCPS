@@ -1,4 +1,4 @@
-GenieClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",ColorTreshold=0,...){
+GenieClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",ColorTreshold=0,...,PlotIt=FALSE){
   # INPUT
   # DataOrDistances[1:n,1:d]    Dataset with n observations and d features or distance matrix with size n
   #
@@ -6,6 +6,7 @@ GenieClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",
   # ClusterNo                   Number of clusters to search for
   # DistanceMethod              String. 'euclidean','mahalanobis','manhatten' (cityblock),'fJaccard','binary', 'canberra', 'maximum'
   # ColorTreshold               Number. Draws cutline w.r.t. dendogram y-axis (height), height of line as scalar should be given
+  # PlotIt                      Boolean. Default = FALSE = No plotting performed.
   # 
   # OUTPUT
   # Cls[1:n]    Clustering of data
@@ -26,38 +27,48 @@ GenieClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",
     )
   }
   
-  if (!isSymmetric(unname(DataOrDistances))) {
+  if(inherits(DataOrDistances,'dist')){
+    pDist=DataOrDistances
+  }else if (!isSymmetric(unname(as.matrix(DataOrDistances)))) {
     if(requireNamespace("parallelDist",quietly = TRUE)){
       pDist=as.dist(parallelDist::parDist(DataOrDistances,method=DistanceMethod))
     }
     else{
       stop('parallelDist package not loaded or installed.')
     }
-
-  }else if(!inherits(DataOrDistances,'dist')){
-    pDist=as.dist(DataOrDistances)
   }else{
-    pDist=DataOrDistances
+    pDist=as.dist(DataOrDistances)
   }
   
   #requireNamespace('genie')
   hc <- genie::hclust2(pDist,...)
   
-  m=paste("Genie Clustering/ "," N=",nrow(as.matrix(pDist)))
+
   
+  m=sprintf("Genie clustering, k = %d", ClusterNo)
+  x=as.dendrogram(hc)
+  plot_x_label =  sprintf("No. of Data Points N = %d",nrow(as.matrix(DataOrDistances)))
   # Classification or dendrogram
   if (ClusterNo>0){
 	  Cls=cutree(hc,ClusterNo)
     Cls=ClusterRename(Cls,DataOrDistances)
-    return(list(Cls=Cls,Dendrogram=as.dendrogram(hc),Object=hc))
+    if(isTRUE(PlotIt)){
+      V=ClusterDendrogram(TreeOrDendrogram=x,ClusterNo=ClusterNo,main=m,xlab=plot_x_label)
+    }
+    return(list(Cls=Cls,Dendrogram=x,Object=hc))
   } 
   else{
-    x=as.dendrogram(hc);plot(x, main=m,xlab="Number of data points N", ylab="Distance",sub=" ",leaflab ="none")
-    axis(1,col="black",las=1)
-    if (ColorTreshold!=0){
-      rect.hclust(hc, h=ColorTreshold,border="red")}		  
-    else{
+    if(isTRUE(PlotIt)){
+      plot(x, main=m,xlab=plot_x_label, ylab="Distance",sub=" ",leaflab ="none")
+      axis(1,col="black",las=1)
     }
-    return(list(Cls=NULL,Dendrogram=x,Object=hc))
+    if (ColorTreshold!=0){
+      if(isTRUE(PlotIt)) rect.hclust(hc, h=ColorTreshold,border="red")
+      Cls=cutree(hc,h=ColorTreshold)
+      Cls=ClusterRename(Cls,DataOrDistances)
+    }else{
+      Cls=NULL
+    }
+    return(list(Cls=Cls,Dendrogram=x,Object=hc))
   }
 }

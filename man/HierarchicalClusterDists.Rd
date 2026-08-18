@@ -20,7 +20,8 @@ HierarchicalClusterDists(
   Type = "ward.D2",
   ColorTreshold = 0,
   Fast = FALSE,
-  ...
+  PlotIt=FALSE,
+  \dots
 )
 }
 \arguments{
@@ -51,22 +52,25 @@ HierarchicalClusterDists(
     Character scalar specifying the agglomeration method. Supported values are
     \code{"ward.D"}, \code{"ward.D2"}, \code{"ward.pseudo"},
     \code{"single"}, \code{"complete"}, \code{"average"},
-    \code{"mcquitty"}, \code{"median"}, and \code{"centroid"}.
+    \code{"mcquitty"}, \code{"median"}, and \code{"centroid"},
+     \code{"MinEnergy"}, \code{"Minimax"}, and \code{"Sparse"} or
+      \code{"Gini"} or its synonym \code{"Genie"}
+
 
     See \code{Details} for the distinction between the three Ward variants.
   }
 
   \item{ColorTreshold}{
-    Finite numeric scalar. Legacy spelling retained for backward compatibility.
-
+    Finite numeric scalar.
     If nonzero and \code{ClusterNo = 0}, the value is interpreted on the
-    dendrogram height scale. For monotone fusion heights,
-    \code{stats::rect.hclust()} draws rectangles at this height. If fusion
-    heights are non-monotone, only a horizontal reference line is drawn.
+    dendrogram height scale. For a monotone ultramteric portion of given dissimilarity,
+    \code{stats::rect.hclust()} draws rectangles at this height and classifiation vector \code{Cls} is return based on 
+    the cut using the threshold.
+    
+    If these fusion heights are non-monotone, only a horizontal reference line is drawn and \code{Cls=NULL}
 
     Height scales depend on \code{Type}; in particular, a threshold used for
-    \code{"ward.D2"} cannot be transferred unchanged to
-    \code{"ward.pseudo"}.
+    \code{"ward.D2"} cannot be transferred unchanged to \code{"ward.pseudo"}.
   }
 
   \item{Fast}{
@@ -76,10 +80,14 @@ HierarchicalClusterDists(
     \pkg{fastcluster} is unavailable, a warning is issued.
   }
 
-  \item{\dots}{
-    Additional graphical arguments passed to \code{plot.dendrogram()} when
-    \code{ClusterNo = 0}.
+  \item{PlotIt}{
+      If TRUE and ClusterNo>0 plots dendrogramm using \code{ClusterDendrogram}
+      
+      If TRUE and ClusterNo==0 plots black dendrogramm using base R plot
+      
+      FALSE: No plot
   }
+  \item{\dots}{IF PlotIt==TRUE and ClusterNo==0 In case of plotting further argument for \code{plot}, see \code{\link{as.dendrogram}}}
 }
 \value{
 A list with components:
@@ -266,6 +274,7 @@ Michael Thrun
 \seealso{
 \code{\link{HierarchicalClusterData}},
 \code{\link{HierarchicalClustering}},
+\code{\link{ClusterDendrogram}},
 \code{\link[stats]{hclust}},
 \code{\link[stats]{cutree}}
 }

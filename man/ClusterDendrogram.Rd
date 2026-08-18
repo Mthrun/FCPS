@@ -10,7 +10,7 @@ Presents a dendrogram of a given tree using a colorsequence for the branches def
 \usage{
 ClusterDendrogram(TreeOrDendrogram, ClusterNo, 
 
-Colorsequence,main='Name of Algorithm')
+Colorsequence,main,xlab,ylab)
 }
 
 \arguments{
@@ -27,7 +27,10 @@ k number of clusters for cutree.
   \item{Colorsequence}{
 [1:k] character vector of colors, per default the colorsquence defined in the \pkg{DataVisualizations} is used
 }
-\item{main}{Title of plot}
+\item{main}{title of plot}
+\item{xlab}{x label of plot}
+\item{ylab}{ylabel of plot}
+
 }
 \details{
 Reqires the package \pkg{dendextend} to work correctly.

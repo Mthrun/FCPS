@@ -3,7 +3,7 @@
 \title{Unified Wrapper for Hierarchical Clustering}
 \description{
 Provides a unified interface for hierarchical clustering from either raw
-numeric data or precomputed dissimilarities.
+numeric data or precomputed distances.
 
 The wrapper dispatches to the appropriate lower-level implementation according
 to the selected clustering \code{Type} and the form of
@@ -17,6 +17,7 @@ HierarchicalClustering(
   ClusterNo = 0,
   Type = "SingleL",
   Fast = TRUE,
+  PlotIt=FALSE,
   Data,
   ...
 )
@@ -99,7 +100,14 @@ symmetric [1:n,1:n] distance matrix, e.g. \code{as.matrix(dist(Data,method))}
     \pkg{fastcluster} may be used. Specialized methods manage their own
     implementations. Default is \code{TRUE}.
   }
-
+  \item{PlotIt}{
+      If TRUE and ClusterNo>0 plots dendrogramm using \code{ClusterDendrogram}
+      
+      If TRUE and ClusterNo==0 plots black dendrogramm using base R plot
+      
+      FALSE: No plot
+  }
+  
   \item{Data}{
     Legacy alias for \code{DataOrDistances}. It is used only when
     \code{DataOrDistances} is missing.
@@ -137,15 +145,15 @@ their lower-level implementation.
 \details{
 \strong{Input dispatch}
 
-The wrapper distinguishes raw data from precomputed dissimilarities.
+The wrapper distinguishes raw data from precomputed distances or dissimilarities.
 
-A \code{dist} object is always treated as precomputed dissimilarities. A square
+A \code{dist} object is always treated as precomputed distances or dissimilarities. A square
 matrix or data frame is treated as a distance matrix only when it is numeric,
 finite, symmetric within numerical tolerance, has a zero diagonal, and is
 non-negative within tolerance. This reduces the risk of accidentally treating
 a square raw-data matrix as a distance matrix.
 
-Precomputed dissimilarities are sent to
+Precomputed distances or dissimilarities are sent to
 \code{HierarchicalClusterDists()}. Raw data are sent to
 \code{HierarchicalClusterData()}.
 

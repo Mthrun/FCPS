@@ -1,4 +1,4 @@
-MinimaxLinkageClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",ColorTreshold=0,...){
+MinimaxLinkageClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",ColorTreshold=0,...,PlotIt=FALSE){
   # INPUT
   # DataOrDistances[1:n,1:d]    Dataset with n observations and d features or distance matrix with size n
   # ClusterNo                   Number of clusters to search for
@@ -6,6 +6,7 @@ MinimaxLinkageClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="eu
   # OPTIONAL
   # DistanceMethod    Choose distance metric.
   # ColorTreshold     draws cutline w.r.t. dendogram y-axis (height), height of line as scalar should be given
+  # PlotIt            Boolean. Default = FALSE = No plotting performed.
   # 
   # OUTPUT
   # Cls[1:n]          Clustering of data
@@ -27,7 +28,9 @@ MinimaxLinkageClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="eu
     )
   }
   
-  if (!isSymmetric(unname(DataOrDistances))) {
+  if(inherits(DataOrDistances,'dist')){
+    pDist=DataOrDistances
+  }else if (!isSymmetric(unname(as.matrix(DataOrDistances)))) {
     if(requireNamespace("parallelDist",quietly = TRUE)){
       pDist=as.dist(parallelDist::parDist(DataOrDistances,method=DistanceMethod))
     }
@@ -35,31 +38,38 @@ MinimaxLinkageClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="eu
       warning("Please install the parallelDist package, using dist()")
       pDist=dist(DataOrDistances,method=DistanceMethod)
     }
-    
-  }else if(!inherits(DataOrDistances,'dist')){
-    pDist=as.dist(DataOrDistances)
   }else{
-    pDist=DataOrDistances
+    pDist=as.dist(DataOrDistances)
   }
   
   hc <- protoclust::protoclust(pDist,...)
   
-  m=paste("Minimax Linkage Clustering/ "," N=",nrow(as.matrix(pDist)))
+  m=sprintf("Minimax Linkage clustering, k = %d", ClusterNo)
+  plot_x_label =  sprintf("No. of Data Points N = %d",nrow(as.matrix(DataOrDistances)))
+  x=as.dendrogram(hc)
   
   # Classification or Dendrogram
   if(ClusterNo>0){
     out=protoclust::protocut(hc,ClusterNo)
 	  Cls=out$cl
 	  Cls=ClusterRename(Cls,DataOrDistances)
-    return(list(Cls=Cls,Dendrogram=as.dendrogram(hc),Object=out))
+	  if(isTRUE(PlotIt)){
+	    V=ClusterDendrogram(TreeOrDendrogram=x,ClusterNo=ClusterNo,main=m,xlab=plot_x_label)
+	  }
+    return(list(Cls=Cls,Dendrogram=x,Object=out))
   } 
   else{
-    x=as.dendrogram(hc);plot(x, main=m,xlab="Number of data points N", ylab="Distance",sub=" ",leaflab ="none",...)
-    axis(1,col="black",las=1)
-    if (ColorTreshold!=0){
-      rect.hclust(hc, h=ColorTreshold,border="red")}		  
-    else{
+    if(isTRUE(PlotIt)){
+      plot(x, main=m,xlab="Number of data points N", ylab="Distance",sub=" ",leaflab ="none",xlab=plot_x_label,...)
+      axis(1,col="black",las=1)
     }
-    return(list(Cls=NULL,Dendrogram=x,Object=hc))
+    if (ColorTreshold!=0){
+      if(isTRUE(PlotIt)) rect.hclust(hc, h=ColorTreshold,border="red")
+      Cls=cutree(hc,h=ColorTreshold)
+      Cls=ClusterRename(Cls,DataOrDistances)
+    }else{
+      Cls=NULL
+    }
+    return(list(Cls=Cls,Dendrogram=x,Object=hc))
   }
 }

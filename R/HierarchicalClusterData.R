@@ -1,4 +1,4 @@
-HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,Type="ward.D2",DistanceMethod="euclidean",ColorTreshold=0,Fast=FALSE,Cls=NULL,...){
+HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,Type="ward.D2",DistanceMethod="euclidean",ColorTreshold=0,Fast=FALSE,PlotIt=FALSE, Cls=NULL,...){
   # HierarchicalClusterData(Data)
   # HierarchicalClusterDists(Data,0,"ward.D2",NULL,"cosine",100)
   # Cls=HierarchicalCluster(Data,6,"ward.D2")
@@ -39,6 +39,25 @@ HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,Type="wa
   #	}
   #}
   #else{
+
+  # Specialized hierarchical methods
+  if(Type=="MinEnergy"){
+    return(MinimalEnergyClustering(DataOrDistances=Data,ClusterNo=ClusterNo,
+                                   DistanceMethod=DistanceMethod,ColorTreshold=ColorTreshold,
+                                   ...,PlotIt=PlotIt))
+  }else if(Type %in% c("Gini","Genie")){
+    return(GenieClustering(DataOrDistances=Data,ClusterNo=ClusterNo,
+                           DistanceMethod=DistanceMethod,ColorTreshold=ColorTreshold,
+                           ...,PlotIt=PlotIt))
+  }else if(Type=="Minimax"){
+    return(MinimaxLinkageClustering(DataOrDistances=Data,ClusterNo=ClusterNo,
+                                    DistanceMethod=DistanceMethod,ColorTreshold=ColorTreshold,
+                                    ...,PlotIt=PlotIt))
+  }else if(Type=="Sparse"){
+    return(SparseClustering(DataOrDistances=Data,ClusterNo=ClusterNo,
+                            Type="Hierarchical",PlotIt=PlotIt,
+                            ColorTreshold=ColorTreshold,...))
+  }
   
   dcls = Cls
   
@@ -94,15 +113,30 @@ HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,Type="wa
   if(DistanceMethod=='euclidean')
     DistanceMethod='Euclidean'
     
-  m=paste0(Type," Clustering with Distance ",DistanceMethod,", N=",nrow(as.matrix(Data)))
+  plot_title = sprintf(
+    "%s clustering, k = %d",
+    Type,
+    ClusterNo
+  )
+  plot_y_label = paste0("Ultrametric Portion of ",DistanceMethod)
+  plot_x_label =  sprintf("No. of Data Points N = %d",nrow(as.matrix(Data)))
+  
   # Classification or dendrogram
   if (ClusterNo>0){
+
+  
+    if(isTRUE(PlotIt)){
+      V=ClusterDendrogram(TreeOrDendrogram=as.dendrogram(hc),ClusterNo=ClusterNo,main=plot_title,ylab=plot_y_label,xlab=plot_x_label)
+    }
+    
     Cls=cutree(hc,ClusterNo)
     Cls=ClusterRename(Cls,Data)
     return(list(Cls=Cls,Dendrogram=as.dendrogram(hc),Object=hc))
   } 
   else{
 		x=as.dendrogram(hc)
+		
+		if(isTRUE(PlotIt)){
 		if(!is.null(Cls)){
   		x = setNodeAttributes(x)$node
   		print("Class colors:")
@@ -110,23 +144,49 @@ HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,Type="wa
   		  print(paste0("Class ", i, ": ", col[i]))
   		}
 		}
-		# # leaflab         a string specifying how leaves are labeled. The default "perpendicular" write text vertically (by default).
-		#                   "textlike" writes text horizontally (in a rectangle), and 
-		#                   "none" suppresses leaf labels 
-		#                   s. ?as.dendrogramm
-    #plot(x, main=m,xlab="Anzahl N", ylab=DistanceMethod, sub=" ",leaflab ="none")
-    plot(x, main=m,xlab="Number of Data Points N", ylab=paste0("Ultrametric Portion of ",DistanceMethod), sub=" ", leaflab="none",...)
-   # if(is.null(rownames(x))){
-   #   plot(x, main=m,xlab="Anzahl N", ylab=DistanceMethod, sub=" ",leaflab ="none")
-   # }else{
-   #   plot(x, main=m,xlab="Anzahl N", ylab=DistanceMethod, sub=" ",leaflab =rownames(x))
-   # }
-		axis(1,col="black",las=1)
-    if (ColorTreshold!=0){
-			rect.hclust(hc, h=ColorTreshold,border="red")}
-		else{
-		#rect.hclust(hc, h=4*mean(hc$height),border="red")
+     plot(x, main=plot_title,xlab=plot_x_label, ylab=plot_y_label, sub=" ", leaflab="none",...)
+     axis(1,col="black",las=1)
 		}
-		return(list(Cls=NULL,Dendrogram=x,Object=hc))
+
+		if (ColorTreshold != 0) {
+		  height_tolerance = sqrt(.Machine$double.eps) *
+		    max(1, max(abs(hc$height)))
+		  
+		  monotone_heights = all(
+		    diff(hc$height) >= -height_tolerance
+		  )
+		  
+		  if (monotone_heights) {
+		    if(isTRUE(PlotIt)){
+  		    stats::rect.hclust(
+  		      hc,
+  		      h = ColorTreshold,
+  		      border = "red"
+  		    )
+		    }
+		    Cls <- stats::cutree(
+		      hc,
+		      h = ColorTreshold
+		    )
+		  } else {
+		    if(isTRUE(PlotIt)){
+  		    graphics::abline(
+  		      h = ColorTreshold,
+  		      col = "red"
+  		    )
+		    }
+		    Cls=NULL
+		    warning(
+		      "The hierarchy has non-monotone fusion heights. ",
+		      "Only a horizontal threshold line was drawn. ",
+		      "Use ClusterNo rather than a height cut to obtain ",
+		      "a partition.",
+		      call. = TRUE
+		    )
+		  }
+		}else{
+		  Cls=NULL
+		}
+		return(list(Cls=Cls,Dendrogram=x,Object=hc))
 	}
 }

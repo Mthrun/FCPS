@@ -3,3 +3,5 @@
 ^.*\Rproj$
 ^.*\.PreyClustering$
 ^.*\dependencies.R$
+^\.positai$
+^\.claude$

@@ -1,4 +1,4 @@
-HierarchicalClusterDists = function(pDist, ClusterNo = 0,Type = "ward.D2", ColorTreshold = 0,Fast = FALSE, ..) {
+HierarchicalClusterDists = function(pDist, ClusterNo = 0,Type = "ward.D2", ColorTreshold = 0,Fast = FALSE,PlotIt=FALSE,...) {
   # HierarchicalClusterDists(pDist)
   # HierarchicalClusterDists(pDist, 0, "ward.D2", 100)
   # res = HierarchicalClusterDists(pDist, 6, "ward.D2")
@@ -221,19 +221,18 @@ HierarchicalClusterDists = function(pDist, ClusterNo = 0,Type = "ward.D2", Color
     "average",
     "mcquitty",
     "median",
-    "centroid"
+    "MinEnergy",
+    "Gini",
+    "Genie",
+    "Minimax",
+    "Sparse"
   )
   
   # ---------------------------------------------------------------
   # Validate Type
   # ---------------------------------------------------------------
   
-  if (
-    !is.character(Type) ||
-    length(Type) != 1L ||
-    is.na(Type) ||
-    !(Type %in% supported_types)
-  ) {
+  if ( !is.character(Type) || length(Type) != 1L || is.na(Type) ||!(Type %in% supported_types) ) {
     stop(
       "Unknown 'Type'. Supported values are: ",
       paste(shQuote(supported_types), collapse = ", "),
@@ -246,15 +245,8 @@ HierarchicalClusterDists = function(pDist, ClusterNo = 0,Type = "ward.D2", Color
   # Validate Fast
   # ---------------------------------------------------------------
   
-  if (
-    !is.logical(Fast) ||
-    length(Fast) != 1L ||
-    is.na(Fast)
-  ) {
-    stop(
-      "'Fast' must be either TRUE or FALSE.",
-      call. = FALSE
-    )
+  if ( !is.logical(Fast) ||  length(Fast) != 1L || is.na(Fast) ) {
+    stop(  "'Fast' must be either TRUE or FALSE.", call. = TRUE )
   }
   
   # ---------------------------------------------------------------
@@ -263,59 +255,34 @@ HierarchicalClusterDists = function(pDist, ClusterNo = 0,Type = "ward.D2", Color
   
   if (!inherits(pDist, "dist")) {
     if (!(is.matrix(pDist) || is.data.frame(pDist))) {
-      stop(
-        "'pDist' must be an object of class 'dist' or a square ",
-        "dissimilarity matrix.",
-        call. = FALSE
-      )
+      stop( "'pDist' must be an object of class 'dist' or a square ", "dissimilarity matrix.", call. = TRUE  )
     }
     
     dmat = as.matrix(pDist)
     
-    if (
-      !is.numeric(dmat) ||
-      length(dim(dmat)) != 2L ||
-      nrow(dmat) != ncol(dmat) ||
-      nrow(dmat) < 2L
-    ) {
-      stop(
-        "A matrix supplied as 'pDist' must be numeric, square, ",
+    if ( !is.numeric(dmat) || length(dim(dmat)) != 2L ||  nrow(dmat) != ncol(dmat) ||  nrow(dmat) < 2L  ) {
+      stop("A matrix supplied as 'pDist' must be numeric, square, ",
         "and contain at least two observations. For raw feature ",
-        "data, calculate distances first with stats::dist().",
-        call. = FALSE
-      )
+        "data, calculate distances first with stats::dist().", call. = TRUE )
     }
     
     if (anyNA(dmat) || any(!is.finite(dmat))) {
-      stop(
-        "'pDist' contains missing or non-finite values.",
-        call. = FALSE
-      )
+      stop( "'pDist' contains missing or non-finite values.", call. = TRUE )
     }
     
     matrix_tolerance = 100 * .Machine$double.eps *
       max(1, max(abs(dmat)))
     
     if (max(abs(dmat - t(dmat))) > matrix_tolerance) {
-      stop(
-        "A dissimilarity matrix supplied as 'pDist' must be symmetric.",
-        call. = FALSE
-      )
+      stop( "A dissimilarity matrix supplied as 'pDist' must be symmetric.",call. = TRUE)
     }
     
     if (max(abs(diag(dmat))) > matrix_tolerance) {
-      stop(
-        "A dissimilarity matrix supplied as 'pDist' must have ",
-        "a zero diagonal.",
-        call. = FALSE
-      )
+      stop("A dissimilarity matrix supplied as 'pDist' must have ","a zero diagonal.", call. = TRUE )
     }
     
     if (min(dmat) < -matrix_tolerance) {
-      stop(
-        "'pDist' must contain nonnegative dissimilarities.",
-        call. = FALSE
-      )
+      stop( "'pDist' must contain nonnegative dissimilarities.", call. = TRUE)
     }
     
     # Remove negligible numerical asymmetry and negative round-off.
@@ -323,22 +290,33 @@ HierarchicalClusterDists = function(pDist, ClusterNo = 0,Type = "ward.D2", Color
     dmat[dmat < 0] = 0
     diag(dmat) = 0
     
+    
+    # Specialized hierarchical methods
+    if(Type=="MinEnergy"){
+      return(MinimalEnergyClustering(DataOrDistances=dmat,ClusterNo=ClusterNo,
+                                     DistanceMethod=DistanceMethod,ColorTreshold=ColorTreshold,
+                                     ...,PlotIt=PlotIt))
+    }else if(Type %in% c("Gini","Genie")){
+      return(GenieClustering(DataOrDistances=dmat,ClusterNo=ClusterNo,
+                             DistanceMethod=DistanceMethod,ColorTreshold=ColorTreshold,
+                             ...,PlotIt=PlotIt))
+    }else if(Type=="Minimax"){
+      return(MinimaxLinkageClustering(DataOrDistances=dmat,ClusterNo=ClusterNo,
+                                      DistanceMethod=DistanceMethod,ColorTreshold=ColorTreshold,
+                                      ...,PlotIt=PlotIt))
+    }else if(Type=="Sparse"){
+      return(SparseClustering(DataOrDistances=dmat,ClusterNo=ClusterNo,
+                              Type="Hierarchical",PlotIt=PlotIt,
+                              ColorTreshold=ColorTreshold,...))
+    }
+    
     pDist = stats::as.dist(dmat)
   }
   
   n = attr(pDist, "Size", exact = TRUE)
   
-  if (
-    is.null(n) ||
-    length(n) != 1L ||
-    is.na(n) ||
-    !is.finite(n) ||
-    n < 2
-  ) {
-    stop(
-      "'pDist' must describe at least two observations.",
-      call. = FALSE
-    )
+  if (is.null(n) ||length(n) != 1L ||  is.na(n) ||!is.finite(n) || n < 2) {
+    stop("'pDist' must describe at least two observations.",  call. = TRUE  )
   }
   
   n = as.integer(n)
@@ -346,38 +324,24 @@ HierarchicalClusterDists = function(pDist, ClusterNo = 0,Type = "ward.D2", Color
   expected_length = n * (n - 1) / 2
   
   if (length(pDist) != expected_length) {
-    stop(
-      "'pDist' has an invalid length for a distance object of size ",
-      n,
-      ".",
-      call. = FALSE
-    )
+    stop( "'pDist' has an invalid length for a distance object of size ", n,".", call. = TRUE)
   }
   
   distance_values = as.numeric(pDist)
   
-  if (
-    anyNA(distance_values) ||
-    any(!is.finite(distance_values))
-  ) {
-    stop(
-      "'pDist' contains missing or non-finite values.",
-      call. = FALSE
-    )
+  if (anyNA(distance_values) || any(!is.finite(distance_values))) {
+    stop(  "'pDist' contains missing or non-finite values.", call. = TRUE )
   }
   
   distance_tolerance = 100 * .Machine$double.eps *
     max(1, max(abs(distance_values)))
   
   if (min(distance_values) < -distance_tolerance) {
-    stop(
-      "'pDist' must contain nonnegative dissimilarities.",
-      call. = FALSE
-    )
+    stop( "'pDist' must contain nonnegative dissimilarities.", call. = TRUE  )
   }
   
   if (any(distance_values < 0)) {
-    pDist[] = pmax(distance_values, 0)
+     pDist[] = pmax(distance_values, 0)
     distance_values = as.numeric(pDist)
   }
   
@@ -385,21 +349,8 @@ HierarchicalClusterDists = function(pDist, ClusterNo = 0,Type = "ward.D2", Color
   # Validate ClusterNo
   # ---------------------------------------------------------------
   
-  if (
-    !is.numeric(ClusterNo) ||
-    length(ClusterNo) != 1L ||
-    is.na(ClusterNo) ||
-    !is.finite(ClusterNo) ||
-    ClusterNo < 0 ||
-    ClusterNo > n ||
-    ClusterNo != floor(ClusterNo)
-  ) {
-    stop(
-      "'ClusterNo' must be an integer between 0 and ",
-      n,
-      ".",
-      call. = FALSE
-    )
+  if ( !is.numeric(ClusterNo) || length(ClusterNo) != 1L || is.na(ClusterNo) || !is.finite(ClusterNo) ||ClusterNo < 0 || ClusterNo > n || ClusterNo != floor(ClusterNo) ) {
+    stop("'ClusterNo' must be an integer between 0 and ",  n,  ".",   call. = TRUE  )
   }
   
   ClusterNo = as.integer(ClusterNo)
@@ -408,16 +359,9 @@ HierarchicalClusterDists = function(pDist, ClusterNo = 0,Type = "ward.D2", Color
   # Validate ColorTreshold
   # ---------------------------------------------------------------
   
-  if (
-    !is.numeric(ColorTreshold) ||
-    length(ColorTreshold) != 1L ||
-    is.na(ColorTreshold) ||
-    !is.finite(ColorTreshold)
+  if (!is.numeric(ColorTreshold) || length(ColorTreshold) != 1L ||  is.na(ColorTreshold) || !is.finite(ColorTreshold)
   ) {
-    stop(
-      "'ColorTreshold' must be one finite numeric value.",
-      call. = FALSE
-    )
+    stop(  "'ColorTreshold' must be one finite numeric value.",  call. = TRUE )
   }
   
   ColorTreshold = as.numeric(ColorTreshold)
@@ -426,35 +370,21 @@ HierarchicalClusterDists = function(pDist, ClusterNo = 0,Type = "ward.D2", Color
   # Select hclust implementation
   # ---------------------------------------------------------------
   
-  use_fast = isTRUE(Fast) &&
-    requireNamespace("fastcluster", quietly = TRUE)
+  use_fast = isTRUE(Fast) && requireNamespace("fastcluster", quietly = TRUE)
   
   if (isTRUE(Fast) && !use_fast) {
-    warning(
-      "Package 'fastcluster' is not installed; ",
-      "using stats::hclust() instead.",
-      call. = FALSE
-    )
+    warning( "Package 'fastcluster' is not installed; ", "using stats::hclust() instead.",  call. = TRUE )
   }
   
-  hclust_function = if (use_fast) {
-    fastcluster::hclust
+  if (use_fast) {
+    hclust_function =fastcluster::hclust
   } else {
-    stats::hclust
+    hclust_function = stats::hclust
   }
   
-  input_distance_method = attr(
-    pDist,
-    "method",
-    exact = TRUE
-  )
+  input_distance_method = attr( pDist,"method", exact = TRUE )
   
-  if (
-    is.null(input_distance_method) ||
-    length(input_distance_method) != 1L ||
-    is.na(input_distance_method) ||
-    !nzchar(as.character(input_distance_method))
-  ) {
+  if (is.null(input_distance_method) ||length(input_distance_method) != 1L ||is.na(input_distance_method) ||!nzchar(as.character(input_distance_method)) ) {
     input_distance_method = "user-supplied"
   } else {
     input_distance_method = as.character(input_distance_method)
@@ -465,7 +395,7 @@ HierarchicalClusterDists = function(pDist, ClusterNo = 0,Type = "ward.D2", Color
   # ---------------------------------------------------------------
   
   if (identical(Type, "ward.pseudo")) {
-    observation_weights = rep(1 / n, n)
+     observation_weights = rep(1 / n, n)
     
     # Chavent et al. singleton aggregation costs:
     #
@@ -494,31 +424,18 @@ HierarchicalClusterDists = function(pDist, ClusterNo = 0,Type = "ward.D2", Color
     hc$dist.method = input_distance_method
     hc$call = match.call()
     
-    plot_title = sprintf(
-      "Ward-like pseudo-inertia clustering, N = %d",
-      n
-    )
-    
-    plot_y_label = paste(
-      "Increase in pseudo within-cluster inertia"
-    )
+    plot_title = sprintf( "Ward-like pseudo-inertia clustering, k = %d",  ClusterNo  )
+    plot_y_label = paste("Increase of ultrametric Portion in pseudo within-cluster inertia" )
   } else {
-    hc = hclust_function(
-      pDist,
-      method = Type
-    )
+    hc = hclust_function( pDist, method = Type)
     
     hc$dist.method = input_distance_method
     hc$call = match.call()
     
-    plot_title = sprintf(
-      "%s clustering, N = %d",
-      Type,
-      n
-    )
-    
-    plot_y_label = "Fusion height"
+    plot_title = sprintf(  "%s clustering, k = %d", Type,ClusterNo)
+    plot_y_label = "Ultrametric Portion of Distance"
   }
+  plot_x_label =  sprintf("No. of Data Points N = %d",n)
   
   dendrogram = stats::as.dendrogram(hc)
   
@@ -527,79 +444,61 @@ HierarchicalClusterDists = function(pDist, ClusterNo = 0,Type = "ward.D2", Color
   # ---------------------------------------------------------------
   
   if (ClusterNo > 0L) {
-    Cls = stats::cutree(
-      hc,
-      k = ClusterNo
-    )
-    
+    Cls = stats::cutree(  hc, k = ClusterNo)
+    if(isTRUE(PlotIt)){
+      V=ClusterDendrogram(TreeOrDendrogram=dendrogram,ClusterNo=ClusterNo,main=plot_title,ylab=plot_y_label,xlab=plot_x_label)
+    }
     return(
-      list(
-        Cls = Cls,
-        Dendrogram = dendrogram,
-        Object = hc
-      )
+      list( Cls = Cls, Dendrogram = dendrogram,  Object = hc  )
     )
   }
   
   # ---------------------------------------------------------------
   # Plot dendrogram
   # ---------------------------------------------------------------
-  
-  graphics::plot(
-    dendrogram,
-    main = plot_title,
-    xlab = "Number of data points N",
-    ylab = plot_y_label,
-    sub = " ",
-    leaflab = "none",
-    ...
-  )
-  
-  graphics::axis(
-    side = 1,
-    col = "black",
-    las = 1
-  )
-  
+  if(isTRUE(PlotIt)){
+    graphics::plot(
+      dendrogram,
+      main = plot_title,
+      xlab = "Number of data points N",
+      ylab = plot_y_label,
+      sub = " ",
+      leaflab = "none",
+    )
+    
+    graphics::axis(
+      side = 1,
+      col = "black",
+      las = 1
+    )
+  }
   # ---------------------------------------------------------------
   # Draw threshold
   # ---------------------------------------------------------------
   
   if (ColorTreshold != 0) {
-    height_tolerance = sqrt(.Machine$double.eps) *
-      max(1, max(abs(hc$height)))
+    height_tolerance = sqrt(.Machine$double.eps) * max(1, max(abs(hc$height)))
     
-    monotone_heights = all(
-      diff(hc$height) >= -height_tolerance
-    )
+    monotone_heights = all(diff(hc$height) >= -height_tolerance )
     
     if (monotone_heights) {
-      stats::rect.hclust(
-        hc,
-        h = ColorTreshold,
-        border = "red"
-      )
+      if(isTRUE(PlotIt)){
+        stats::rect.hclust( hc, h = ColorTreshold, border = "red" )
+      }
+      Cls <- stats::cutree(hc, h = ColorTreshold)
     } else {
-      graphics::abline(
-        h = ColorTreshold,
-        col = "red"
-      )
-      
-      warning(
-        "The hierarchy has non-monotone fusion heights. ",
+      if(isTRUE(PlotIt)){
+        graphics::abline( h = ColorTreshold, col = "red" )
+      }
+      Cls=NULL
+      warning( "The hierarchy has non-monotone fusion heights. ",
         "Only a horizontal threshold line was drawn. ",
         "Use ClusterNo rather than a height cut to obtain ",
-        "a partition.",
-        call. = FALSE
-      )
+        "a partition.", call. = TRUE )
     }
+  }else{
+    Cls=NULL
   }
   
-  return(
-    list(
-      Cls = NULL,
-      Dendrogram = dendrogram,
-      Object = hc
-    )
-  )
+  return(list(Cls = Cls,Dendrogram = dendrogram,Object = hc))
 }

@@ -1,4 +1,4 @@
-HierarchicalClustering = function( DataOrDistances,ClusterNo = 0,Type = "SingleL",Fast = TRUE, Data,...) {
+HierarchicalClustering = function( DataOrDistances,ClusterNo = 0,Type = "SingleL",Fast = TRUE,PlotIt=FALSE, Data,...) {
   # HierarchicalClustering(DataOrDistances, ClusterNo, Type = "SingleL")
   #
   # DESCRIPTION
@@ -54,7 +54,7 @@ HierarchicalClustering = function( DataOrDistances,ClusterNo = 0,Type = "SingleL
   #     de Amorim's Ward_p algorithm.
   #
   #     Additional wrapper methods:
-  #       "Minimax", "MinEnergy", "Gini", "Sparse", "HDBSCAN".
+  #       "Minimax", "MinEnergy", "Gini"/"Genie", "Sparse", "HDBSCAN".
   #
   #   Fast
   #     Passed to HierarchicalClusterDists or HierarchicalClusterData. The
@@ -84,10 +84,7 @@ HierarchicalClustering = function( DataOrDistances,ClusterNo = 0,Type = "SingleL
 
   if (missing(DataOrDistances)) {
     if (missing(Data)) {
-      stop(
-        "Either 'DataOrDistances' or the legacy argument 'Data' must be supplied.",
-        call. = FALSE
-      )
+      stop("Either 'DataOrDistances' or the legacy argument 'Data' must be supplied.",call. = TRUE)
     }
     DataOrDistances = Data
   }
@@ -98,7 +95,7 @@ HierarchicalClustering = function( DataOrDistances,ClusterNo = 0,Type = "SingleL
     is.na(Type) ||
     !nzchar(Type)
   ) {
-    stop("'Type' must be one non-empty character value.", call. = FALSE)
+    stop("'Type' must be one non-empty character value.", call. = TRUE)
   }
 
   # Public API -> canonical lower-level names.
@@ -164,7 +161,7 @@ HierarchicalClustering = function( DataOrDistances,ClusterNo = 0,Type = "SingleL
         "as a 'dist' object or a symmetric distance matrix. For Minkowski ",
         "p = 6, use dist(scale(X), method = 'minkowski', p = 6) first."
       ),
-      call. = FALSE
+      call. = TRUE
     )
   }
 
@@ -174,14 +171,16 @@ HierarchicalClustering = function( DataOrDistances,ClusterNo = 0,Type = "SingleL
       MinimalEnergyClustering(
         DataOrDistances = DataOrDistances,
         ClusterNo = ClusterNo,
+        PlotIt = PlotIt,
         ...
       )
     )
-  } else if (identical(Type, "Gini")) {
+  } else if (Type %in% c("Gini", "Genie")) {
     return(
       GenieClustering(
         DataOrDistances = DataOrDistances,
         ClusterNo = ClusterNo,
+        PlotIt = PlotIt,
         ...
       )
     )
@@ -190,6 +189,7 @@ HierarchicalClustering = function( DataOrDistances,ClusterNo = 0,Type = "SingleL
       MinimaxLinkageClustering(
         DataOrDistances = DataOrDistances,
         ClusterNo = ClusterNo,
+        PlotIt = PlotIt,
         ...
       )
     )
@@ -198,7 +198,8 @@ HierarchicalClustering = function( DataOrDistances,ClusterNo = 0,Type = "SingleL
       SparseClustering(
         DataOrDistances = DataOrDistances,
         ClusterNo = ClusterNo,
-        Strategy = "Hierarchical",
+        Type = "Hierarchical",
+        PlotIt = PlotIt,
         ...
       )
     )
@@ -238,6 +239,7 @@ HierarchicalClustering = function( DataOrDistances,ClusterNo = 0,Type = "SingleL
         ClusterNo = ClusterNo,
         Type = Type,
         Fast = Fast,
+        PlotIt=PlotIt,
         ...
       )
     )
@@ -250,6 +252,7 @@ HierarchicalClustering = function( DataOrDistances,ClusterNo = 0,Type = "SingleL
     ClusterNo = ClusterNo,
     Type = Type,
     Fast = Fast,
+    PlotIt = PlotIt,
     ...
   )
 }
