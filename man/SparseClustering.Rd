@@ -8,11 +8,11 @@ Sparse Clustering
 Implements the sparse clustering methods of [Witten/Tibshirani, 2010].
 }
 \usage{
-SparseClustering(DataOrDistances, ClusterNo, Type="Hierarchical",
+SparseClustering(DataOrDistances, ClusterNo = 0, Type = "Hierarchical",
 
-ColorTreshold=0,
-
-PlotIt=F,Silent=FALSE, NoPerms=10,Wbounds,PlotIt=FALSE, \dots)
+                 ColorTreshold = 0, Silent = FALSE, NoPerms = 10,
+                 
+                 Wbounds, PlotIt = FALSE, \dots)
 }
 \arguments{
 \item{DataOrDistances}{Either a [1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.
@@ -33,7 +33,6 @@ Default: "Hierarchical"}
     
     If these fusion heights are non-monotone, only a horizontal reference line is drawn and \code{Cls=NULL}
   }
-\item{PlotIt}{(optional) Boolean. Default = FALSE = No plotting performed.}
 \item{Silent}{(optional) Boolean: print output or not (Default = FALSE = no
 output)}
 \item{NoPerms}{(optional), numeric scalar, Number of permutations.}
