@@ -7,8 +7,8 @@ Genie Clustering by Gini Index
 Outlier Resistant Hierarchical Clustering Algorithm of [Gagolewski/Bartoszuk, 2016].
 }
 \usage{
-GenieClustering(DataOrDistances, ClusterNo = 0,
-DistanceMethod="euclidean", ColorTreshold = 0,\dots)
+GenieClustering(DataOrDistances, ClusterNo = 0, ColorTreshold = 0,
+DistanceMethod="euclidean",PlotIt=FALSE,\dots)
 }
 \arguments{
 \item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
@@ -22,6 +22,13 @@ DistanceMethod="euclidean", ColorTreshold = 0,\dots)
 
 \code{thresholdGini}  Single numeric value in [0,1], threshold for the Gini index, 1 gives the standard single linkage algorithm
 }
+  \item{PlotIt}{
+      If TRUE and ClusterNo>0 plots dendrogramm using \code{ClusterDendrogram}
+      
+      If TRUE and ClusterNo==0 plots black dendrogramm using base R plot
+      
+      FALSE: No plot
+  }
 }
 \details{
 Wrapper for Genie algorithm.

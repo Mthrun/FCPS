@@ -294,16 +294,16 @@ HierarchicalClusterDists = function(pDist, ClusterNo = 0,Type = "ward.D2", Color
     # Specialized hierarchical methods
     if(Type=="MinEnergy"){
       return(MinimalEnergyClustering(DataOrDistances=dmat,ClusterNo=ClusterNo,
-                                     DistanceMethod=DistanceMethod,ColorTreshold=ColorTreshold,
-                                     ...,PlotIt=PlotIt))
+                                     ColorTreshold=ColorTreshold,
+                                     PlotIt=PlotIt,...))
     }else if(Type %in% c("Gini","Genie")){
       return(GenieClustering(DataOrDistances=dmat,ClusterNo=ClusterNo,
-                             DistanceMethod=DistanceMethod,ColorTreshold=ColorTreshold,
-                             ...,PlotIt=PlotIt))
+                             ColorTreshold=ColorTreshold,
+                             PlotIt=PlotIt,...))
     }else if(Type=="Minimax"){
       return(MinimaxLinkageClustering(DataOrDistances=dmat,ClusterNo=ClusterNo,
-                                      DistanceMethod=DistanceMethod,ColorTreshold=ColorTreshold,
-                                      ...,PlotIt=PlotIt))
+                                      ColorTreshold=ColorTreshold,
+                                      PlotIt=PlotIt,...))
     }else if(Type=="Sparse"){
       return(SparseClustering(DataOrDistances=dmat,ClusterNo=ClusterNo,
                               Type="Hierarchical",PlotIt=PlotIt,

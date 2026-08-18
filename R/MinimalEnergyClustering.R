@@ -1,4 +1,4 @@
-MinimalEnergyClustering <-function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",ColorTreshold=0,Data,...,PlotIt=FALSE){
+MinimalEnergyClustering <-function(DataOrDistances,ClusterNo=0,ColorTreshold=0,DistanceMethod="euclidean",Data,PlotIt=FALSE,...){
   # HierarchicalClusterDists(pDist)
   # HierarchicalClusterDists(pDist,0,"ward.D2",100)
   # Cls=HierarchicalClusterDists(pDist,6,"ward.D2")

@@ -1,4 +1,4 @@
-GenieClustering=function(DataOrDistances,ClusterNo=0,DistanceMethod="euclidean",ColorTreshold=0,...,PlotIt=FALSE){
+GenieClustering=function(DataOrDistances,ClusterNo=0,ColorTreshold=0,DistanceMethod="euclidean",PlotIt=FALSE,...){
   # INPUT
   # DataOrDistances[1:n,1:d]    Dataset with n observations and d features or distance matrix with size n
   #

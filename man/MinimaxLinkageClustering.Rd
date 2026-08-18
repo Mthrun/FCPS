@@ -8,7 +8,10 @@ In the minimax linkage hierarchical clustering every cluster has an associated p
 }
 \usage{
 MinimaxLinkageClustering(DataOrDistances, ClusterNo = 0,
-DistanceMethod="euclidean", ColorTreshold = 0,\dots)
+
+ColorTreshold = 0,
+
+DistanceMethod="euclidean", PlotIt=FALSE,\dots)
 }
 \arguments{
 \item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
@@ -18,6 +21,13 @@ DistanceMethod="euclidean", ColorTreshold = 0,\dots)
 \item{DistanceMethod}{See  \code{\link[parallelDist]{parDist}}, for example 'euclidean','mahalanobis','manhatten' (cityblock),'fJaccard','binary', 'canberra', 'maximum'. Any unambiguous substring can be given.}
 
 \item{ColorTreshold}{Draws cutline w.r.t. dendogram y-axis (height), height of line as scalar should be given}
+  \item{PlotIt}{
+      If TRUE and ClusterNo>0 plots dendrogramm using \code{ClusterDendrogram}
+      
+      If TRUE and ClusterNo==0 plots black dendrogramm using base R plot
+      
+      FALSE: No plot
+  }
 \item{\dots}{In case of plotting further argument for \code{plot}, see \code{\link{as.dendrogram}}
 }
 }

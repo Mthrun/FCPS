@@ -10,7 +10,9 @@ Implements the sparse clustering methods of [Witten/Tibshirani, 2010].
 \usage{
 SparseClustering(DataOrDistances, ClusterNo, Type="Hierarchical",
 
-PlotIt=F,Silent=FALSE, NoPerms=10,Wbounds, \dots)
+ColorTreshold=0,
+
+PlotIt=F,Silent=FALSE, NoPerms=10,Wbounds,PlotIt=FALSE, \dots)
 }
 \arguments{
 \item{DataOrDistances}{Either a [1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.
@@ -22,11 +24,27 @@ Dendrogramm in case of Type="Hierachical" or numer of cluster to use in
 Type="kmeans"}
 \item{Type}{(optional) Char selecting methods Hierarchical or kmeans.
 Default: "Hierarchical"}
+  \item{ColorTreshold}{
+    If Type=="Hierarchical"", Finite numeric scalar.
+    If nonzero and \code{ClusterNo = 0}, the value is interpreted on the
+    dendrogram height scale. For a monotone ultramteric portion of given dissimilarity,
+    \code{stats::rect.hclust()} draws rectangles at this height and classifiation vector \code{Cls} is return based on 
+    the cut using the threshold.
+    
+    If these fusion heights are non-monotone, only a horizontal reference line is drawn and \code{Cls=NULL}
+  }
 \item{PlotIt}{(optional) Boolean. Default = FALSE = No plotting performed.}
 \item{Silent}{(optional) Boolean: print output or not (Default = FALSE = no
 output)}
 \item{NoPerms}{(optional), numeric scalar, Number of permutations.}
 \item{Wbounds}{(optional) numeric vector, range of tuning parameters to consider. This is the L1 bound on w, the feature weights [Witten/Tibshirani, 2010].}
+  \item{PlotIt}{
+      If TRUE and ClusterNo>0 plots dendrogramm using \code{ClusterDendrogram}
+      
+      If TRUE and ClusterNo==0 plots black dendrogramm using base R plot
+      
+      FALSE: No plot
+  }
 \item{\dots}{Further arguments passed on to sparcl \link[sparcl]{HierarchicalSparseCluster} or \link[sparcl]{KMeansSparseCluster} depending on \code{Type}.
 }
 }

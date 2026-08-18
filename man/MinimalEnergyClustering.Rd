@@ -8,7 +8,10 @@ Hierchical Clustering using the minimal energy approach of [Szekely/Rizzo, 2005]
 }
 \usage{
 MinimalEnergyClustering(DataOrDistances, ClusterNo = 0,
-DistanceMethod="euclidean", ColorTreshold = 0,Data,\dots)
+
+ColorTreshold = 0,
+
+DistanceMethod="euclidean", Data,PlotIt=FALSE,\dots)
 }
 \arguments{
 \item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
@@ -19,6 +22,13 @@ DistanceMethod="euclidean", ColorTreshold = 0,Data,\dots)
 
 \item{ColorTreshold}{Draws cutline w.r.t. dendogram y-axis (height), height of line as scalar should be given}
 \item{Data}{[1:n,1:d] data matrix in the case that \code{DataOrDistances} is missing and partial matching does not work.}
+  \item{PlotIt}{
+      If TRUE and ClusterNo>0 plots dendrogramm using \code{ClusterDendrogram}
+      
+      If TRUE and ClusterNo==0 plots black dendrogramm using base R plot
+      
+      FALSE: No plot
+  }
 \item{\dots}{In case of plotting further argument for \code{plot}, see \code{\link{as.dendrogram}}
 }
 }

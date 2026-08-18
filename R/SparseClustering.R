@@ -1,5 +1,5 @@
-SparseClustering=function(DataOrDistances, ClusterNo=0, Type="Hierarchical",PlotIt=F,
-                          Silent=FALSE, NoPerms=10,Wbounds, ...,ColorTreshold=0){
+SparseClustering=function(DataOrDistances, ClusterNo=0, Type="Hierarchical",ColorTreshold=0,
+                          Silent=FALSE, NoPerms=10,Wbounds,PlotIt=FALSE, ...){
   # INPUT
   # Data[1:n,1:d]     Data set with n observations and d features
   # ClusterNo         Numeric indicating number to cluster to find in Tree/
