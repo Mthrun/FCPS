@@ -8,7 +8,7 @@ ClusterAccuracy
 ClusterAccuracy
 }
 \usage{
-ClusterAccuracy(PriorCls,CurrentCls,K=9)
+ClusterAccuracy(PriorCls,CurrentCls,Fast=TRUE,K=9)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -18,8 +18,13 @@ Ground truth,[1:n] numerical vector with n numbers defining the classification. 
 \item{CurrentCls}{
 Main output of the clustering, [1:n]  numerical vector with n numbers defining the classification. It has k unique numbers representing the arbitrary labels of the clustering.
 }
+\item{Fast}{
+TRUE: useses \code{ClusterAlignLabels} in which \pkg{clue} solves a one-to-one assignment problem
+
+FALSE: best of all permutation of labels
+}
 \item{K}{
-Maximal number of classes for computation.
+Only for FALSE: Maximal number of classes for computation.
 }
 }
 \details{
@@ -64,6 +69,7 @@ ClusterAccuracy(Hepta$Cls,Cls$Cls)
 }
 \seealso{
 \code{\link{ClusterMCC}}
+\code{\link{ClusterAlignLabels}}
 }
 \keyword{Accuracy}
 \keyword{Clustering}

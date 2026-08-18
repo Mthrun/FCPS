@@ -1,4 +1,4 @@
-ClusterAccuracy=function(PriorCls,CurrentCls,K=9){
+ClusterAccuracy=function(PriorCls,CurrentCls,Fast=TRUE,K=9){
   #
   # INPUT
   # PriorCls      Ground truth,[1:n] numerical vector with n numbers defining the classification.
@@ -10,18 +10,45 @@ ClusterAccuracy=function(PriorCls,CurrentCls,K=9){
   # OUTPUT
   # Accuracy      Number
   # 
-  # Author: 04/2018 MT
+  # Author: 04/2018 MCT
+  # 1.editor 08/2026 MCT
   PriorCls[!is.finite(PriorCls)]=9999
   CurrentCls[!is.finite(CurrentCls)]=9999
-  
-    if(length(unique(PriorCls))>9){
-      warning('ClusterAccuracy: Too many clusters in PriorCls for RAM of single PC. Please use cloud computing, e.g. SparkR')
-    }
     
   if(length(PriorCls)!=length(CurrentCls)){
     warning('ClusterAccuracy: length of PriorCls does not equal CurrentCls. Accuracy is not defined. Returning Null.')
     return(NULL)
   }
+  
+  
+  # Fast exact solution.
+  if(isTRUE(Fast)){
+    if (requireNamespace("clue", quietly = TRUE)) {
+      
+      if (length(unique(PriorCls)) == length(unique(CurrentCls))) {
+        Alignment = ClusterAlignLabels(
+          Cls_reference = PriorCls,
+          Cls_candidate = CurrentCls
+        )
+        
+        return(Alignment$Agreement_after)
+      }
+      
+      warning(
+        paste0(
+          "ClusterAccuracy: PriorCls and CurrentCls have different ",
+          "numbers of clusters. ClusterAlignLabels requires equal ",
+          "numbers of clusters; using the permutation fallback."
+        )
+      )
+    }
+  }else{
+    if(length(unique(PriorCls))>9){
+      warning('ClusterAccuracy: Too many clusters in PriorCls for RAM of single PC. Please use cloud computing, e.g. SparkR')
+    }
+  }
+
+  
     #Note: symmetric ClsToTrueCls() which always works
     
 

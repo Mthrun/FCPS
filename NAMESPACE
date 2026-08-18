@@ -51,6 +51,7 @@ export(TandemClustering)
 # Applications
 export(ClusterabilityMDplot)
 export(ClusterAccuracy)
+export(ClusterAlignLabels)
 export(ClusterApply)
 export(ClusterAMI)
 export(ClusterARI)
