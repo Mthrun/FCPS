@@ -48,7 +48,7 @@ DensityPeakClustering=function(DataOrDistances,Rho,Delta,Dc,Knn=7,DistanceMethod
   }
   AnzData = nrow(DataOrDistances)
   
-  if (!isSymmetric(unname(DataOrDistances))) {
+  if (!IsDissimilarity(DataOrDistances)) {
     requireNamespace('parallelDist')
     
     Distances=as.matrix(parallelDist::parDist(DataOrDistances,method=DistanceMethod))

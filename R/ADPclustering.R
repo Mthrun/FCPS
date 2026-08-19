@@ -66,7 +66,7 @@ ADPclustering=function(Data,ClusterNo=NULL,PlotIt=FALSE,...){
 #   }
 #   AnzData = nrow(DataOrDistances)
 #   
-#   if (!isSymmetric(DataOrDistances)) {
+#   if (!IsDissimilarity(DataOrDistances)) {
 #     requireNamespace('parallelDist')
 #     
 #     Distances=as.matrix(parallelDist::parDist(DataOrDistances,method=method))
@@ -76,7 +76,7 @@ ADPclustering=function(Data,ClusterNo=NULL,PlotIt=FALSE,...){
 #   
 #   if(PlotIt){
 #     requireNamespace('DataVisualizations')
-#     if (!isSymmetric(DataOrDistances)) {
+#     if (!IsDissimilarity(DataOrDistances)) {
 #       DataVisualizations::Plot3D(DataOrDistances,Cls,k=Knn)
 #     }else{
 #       requireNamespace('ProjectionBasedClustering')

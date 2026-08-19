@@ -42,7 +42,7 @@ MinimalEnergyClustering <-function(DataOrDistances,ClusterNo=0,ColorTreshold=0,D
   
   if(inherits(DataOrDistances,'dist')){
     pDist=DataOrDistances
-  }else if (!isSymmetric(unname(as.matrix(DataOrDistances)))) {
+  }else if (!IsDissimilarity(DataOrDistances)) {
     requireNamespace('parallelDist')
     pDist=as.dist(parallelDist::parDist(DataOrDistances,method=DistanceMethod))
   }else{

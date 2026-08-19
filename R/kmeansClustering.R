@@ -21,7 +21,7 @@ kmeansClustering <-function(DataOrDistances,ClusterNo=2,Type='LBG',RandomNo=5000
   #
   # ALU 2014, MT 2016
   # Adaption to Mdbt and documentation standards
-  if (!isSymmetric(unname(DataOrDistances))) {
+  if (!IsDissimilarity(DataOrDistances)) {
     #Data = DataOrDistances
     if(missing(CategoricalData)&Type=="kprototypes"){
       warning("kmeansClustering: CategoricalData cannot be missing if Type is 'kprototypes'. Setting type to default")

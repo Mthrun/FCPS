@@ -31,7 +31,7 @@ FannyClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Standardization=
   if(Standardization==1) Standardization=TRUE
   if(Standardization==0) Standardization=FALSE
 
-    if (unname(isSymmetric(DataOrDistances))) {
+    if (IsDissimilarity(DataOrDistances)) {
       Input = as.dist(DataOrDistances)
       AnzVar = ncol(DataOrDistances)
       AnzData = nrow(DataOrDistances)

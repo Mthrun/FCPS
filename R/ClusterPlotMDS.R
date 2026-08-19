@@ -62,7 +62,7 @@ ClusterPlotMDS=function(DataOrDistances,Cls,main='Clustering',DistanceMethod = "
     return(list(DataMDS=DataMDS,Cls=Cls))
   }# End prepareData
   
-  if (isSymmetric(unname(DataOrDistances))) {
+  if (IsDissimilarity(DataOrDistances)) {
     DataDists = DataOrDistances
     AnzVar = ncol(DataOrDistances)
     AnzData = nrow(DataOrDistances)

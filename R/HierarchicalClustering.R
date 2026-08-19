@@ -116,39 +116,7 @@ HierarchicalClustering = function( DataOrDistances,ClusterNo = 0,Type = "SingleL
     Type = unname(type_aliases[[Type]])
   }
 
-  # More reliable than calling isSymmetric() directly on every possible input.
-  # Requiring a zero diagonal and nonnegative entries also reduces accidental
-  # classification of a square, symmetric data matrix as a distance matrix.
-  is_distance_input = function(x) {
-    if (inherits(x, "dist")) {
-      return(TRUE)
-    }
-
-    if (!(is.matrix(x) || is.data.frame(x))) {
-      return(FALSE)
-    }
-
-    x = as.matrix(x)
-
-    if (
-      !is.numeric(x) ||
-      length(dim(x)) != 2L ||
-      nrow(x) != ncol(x) ||
-      nrow(x) < 2L ||
-      anyNA(x) ||
-      any(!is.finite(x))
-    ) {
-      return(FALSE)
-    }
-
-    tolerance = 100 * .Machine$double.eps * max(1, max(abs(x)))
-
-    max(abs(x - t(x))) <= tolerance &&
-      max(abs(diag(x))) <= tolerance &&
-      min(x) >= -tolerance
-  }
-
-  distance_input = is_distance_input(DataOrDistances)
+  distance_input = IsDissimilarity(DataOrDistances)
 
   # WardPseudo is intentionally distance-only at this API level. Otherwise a
   # raw matrix would be sent to HierarchicalClusterData, where the distance

@@ -96,7 +96,7 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,PlotIt=TRU
       }
     }
     
-    if(isSymmetric(unname(DataOrDistance))){
+    if(IsDissimilarity(DataOrDistance)){
       IsDistance=TRUE
       Method="none"
       message("Distance detected, Method is set to 'none'")
@@ -128,7 +128,7 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,PlotIt=TRU
     pvalue=paste('p =',pvalue)
   
 
-  if(isFALSE(isSymmetric(unname(DataOrDistance)))){
+  if(isFALSE(IsDissimilarity(unname(DataOrDistance)))){
     
     if(Method!="distance"){
       res <- prcomp(x=DataOrDistance,retx=T,scale. =scale,tol = 0,center=center)
@@ -166,13 +166,13 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,PlotIt=TRU
   
   }else{#DataOrDistance is list
     n=length(DataOrDistance)
-    isDistance=unlist(lapply(DataOrDistance, function(x) isSymmetric(unname(x))))
+    isDistance=unlist(lapply(DataOrDistance, function(x) IsDissimilarity(unname(x))))
  
     #itereriere mit lapply durch liste DataOrDistance um
     # pvals zu berechnen ----
     pvalsL=lapply(DataOrDistance, function(x,Method,na.rm,center,scale){
      #wenn symetrisch setze flag fuer clusterabilitytest true
-      if(isSymmetric(unname(x))){
+      if(IsDissimilarity(unname(x))){
         Method="none"
         IsDistance_hlp=TRUE
         if(isTRUE(na.rm)){
@@ -216,7 +216,7 @@ ClusterabilityMDplot=function(DataOrDistance,Method="pca",na.rm=FALSE,PlotIt=TRU
      #vektoren fuer md plot definiert sind----
     pcasordistances=lapply(DataOrDistance, function(x,Method,scale,center){
       
-      if(isFALSE(isSymmetric(unname(x)))){
+      if(isFALSE(IsDissimilarity(unname(x)))){
         if(Method!="distance"){
           res <- prcomp(x=x,retx=T,scale. =scale,tol = 0,center=center)
           TransData=as.matrix(res$x)

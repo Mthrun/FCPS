@@ -39,7 +39,7 @@ AgglomerativeNestingClustering <-function(DataOrDistances,ClusterNo,PlotIt=FALSE
     )
   }
  
-  if (isSymmetric(unname(DataOrDistances))) {
+  if (IsDissimilarity(unname(DataOrDistances))) {
     Input = as.dist(DataOrDistances)
     requireNamespace('ProjectionBasedClustering')
     AnzVar = ncol(DataOrDistances)

@@ -42,7 +42,7 @@ HierarchicalDBSCAN =Hierarchical_DBSCAN=Hierarchical_DBscan=function(DataOrDista
     return(cls <- rep(1,length(Data)))
   }
   
-  if (isSymmetric(unname(DataOrDistances))) {
+  if (IsDissimilarity(DataOrDistances)) {
     Data=stats::as.dist(DataOrDistances)
   }else{
     Data=DataOrDistances

@@ -20,7 +20,7 @@ ClusterApply <- function(DataOrDistances, FUN, Cls,Simple=FALSE,...){
     warning('ClusterApply: DataOrDistances is not numeric, setting mode to numeric.')
     mode(DataOrDistances)="numeric"
   }
-  if (isSymmetric(unname(DataOrDistances))) {
+  if (IsDissimilarity(DataOrDistances)) {
     Data=internalMDSestimate(DataOrDistances)
   }else{
     Data=DataOrDistances

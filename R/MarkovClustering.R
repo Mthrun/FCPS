@@ -32,7 +32,7 @@ MarkovClustering=function(DataOrDistances=NULL,Adjacency=NULL,Radius=TRUE,Distan
   
   if(!is.null(DataOrDistances)){
     
-    if (!isSymmetric(unname(DataOrDistances))) {
+    if (!IsDissimilarity(DataOrDistances)) {
  
     
       if(Radius==TRUE){

@@ -31,7 +31,7 @@ PAMclustering=PAMClustering=function(DataOrDistances,ClusterNo,PlotIt=FALSE,Stan
   }
   if(Standardization==1) Standardization=TRUE
   if(Standardization==0) Standardization=FALSE
-      if (isSymmetric(unname(DataOrDistances))) {
+      if (IsDissimilarity(DataOrDistances)) {
       Input = as.dist(DataOrDistances)
       AnzVar = ncol(DataOrDistances)
       AnzData = nrow(DataOrDistances)

@@ -29,7 +29,7 @@ GenieClustering=function(DataOrDistances,ClusterNo=0,ColorTreshold=0,DistanceMet
   
   if(inherits(DataOrDistances,'dist')){
     pDist=DataOrDistances
-  }else if (!isSymmetric(unname(as.matrix(DataOrDistances)))) {
+  }else if (!IsDissimilarity(DataOrDistances)) {
     if(requireNamespace("parallelDist",quietly = TRUE)){
       pDist=as.dist(parallelDist::parDist(DataOrDistances,method=DistanceMethod))
     }

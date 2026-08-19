@@ -29,7 +29,7 @@ AutomaticProjectionBasedClustering=function(DataOrDistances,ClusterNo,Type="NerV
     )
   }
   
-  if(isSymmetric(unname(DataOrDistances))){
+  if(IsDissimilarity(DataOrDistances)){
     #Type %in% c('Sammon','Pswarm','MDS')
     if((Type %in% c('NerV'))){
     #if(!(Type %in% c('Sammon','Pswarm','MDS'))){

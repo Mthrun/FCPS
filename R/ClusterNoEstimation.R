@@ -77,7 +77,7 @@ ClusterNoEstimation <- function (DataOrDistances,
   }
 
 
-  if (isSymmetric(unname(DataOrDistances))) {
+  if (IsDissimilarity(DataOrDistances)) {
     data=internalMDSestimate(DataOrDistances)
   }else{
     data=DataOrDistances

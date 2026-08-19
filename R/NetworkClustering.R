@@ -1,7 +1,7 @@
 NetworkClustering <-function(DataOrDistances=NULL,Adjacency=NULL,Type="louvain",Radius=FALSE,PlotIt=FALSE,...){
  
    if(!is.null(DataOrDistances)){
-    if (!isSymmetric(unname(DataOrDistances))) {
+    if (!IsDissimilarity(DataOrDistances)) {
       #Data = DataOrDistances
       if(Radius==TRUE){
         if(requireNamespace('DataVisualizations')){

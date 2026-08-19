@@ -49,7 +49,7 @@ SparseClustering=function(DataOrDistances, ClusterNo=0, Type="Hierarchical",Colo
     Wbounds=NULL
   }
   
-  if (inherits(DataOrDistances,'dist') || isSymmetric(unname(as.matrix(DataOrDistances)))) {
+  if (inherits(DataOrDistances,'dist') || IsDissimilarity(DataOrDistances)) {
     message('SparseClustering: For symmetric "DataOrDistances" distances are assumed and Type is automatically set to "Hierarchical"
             because for Type="kmeans" the usage of distances is not preferable.')
     Type="Hierarchical"
@@ -57,7 +57,7 @@ SparseClustering=function(DataOrDistances, ClusterNo=0, Type="Hierarchical",Colo
   if(Type=="Hierarchical"){
     # N = dim(Data)[1]
     # D = dim(Data)[2]
-    if (inherits(DataOrDistances,'dist') || isSymmetric(unname(as.matrix(DataOrDistances)))) {
+    if (inherits(DataOrDistances,'dist') || IsDissimilarity(DataOrDistances)) {
       V      = sparcl::HierarchicalSparseCluster(dists=DataOrDistances, silent=Silent,wbound = Wbounds,...)
     }else{
       perm.out = sparcl::HierarchicalSparseCluster.permute(DataOrDistances,wbounds = Wbounds,nperms = NoPerms)

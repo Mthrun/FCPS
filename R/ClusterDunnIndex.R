@@ -9,7 +9,7 @@ ClusterDunnIndex=function(Cls,DataOrDistances,DistanceMethod="euclidean",Silent=
     stop("ClusterDunnIndex: Number of rows in 'DataOrDistances' does not equal length of 'Cls'")
   
   
-  if (isSymmetric(unname(DataOrDistances))) {
+  if (IsDissimilarity(DataOrDistances)) {
     DataDists = DataOrDistances
   } else{
     if(!Silent)
@@ -24,7 +24,7 @@ ClusterDunnIndex=function(Cls,DataOrDistances,DistanceMethod="euclidean",Silent=
     }else{
       DataDists = as.matrix(parallelDist::parDist(DataOrDistances, method = DistanceMethod,...))
     }
-  }# end if(isSymmetric(DataOrDists))
+  }# end if(IsDissimilarity(DataOrDists))
 
   if(length(unique(Cls))==1){
     warning("ClusterDunnIndex: 'Cls' has only one cluster stored.")

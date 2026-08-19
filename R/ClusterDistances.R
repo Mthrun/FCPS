@@ -25,7 +25,7 @@ ClusterDistances=IntraClusterDistances=ClusterIntraDistances=function(FullDistan
 	stop('ClusterDistances: Dimensionality of distance matrix "FullDistanceMatrix" is not consistent with "Cls" classification vector')
   }
   
-  if(!isSymmetric(unname(FullDistanceMatrix))){
+  if(!IsDissimilarity(FullDistanceMatrix)){
 	stop('ClusterDistances: Distance matrix "FullDistanceMatrix" is not symmetric. Please check this, e.g. DataVisualizations::Pixelmatrix.')
   }
   u=sort(unique(Cls))

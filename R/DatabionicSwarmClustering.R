@@ -47,7 +47,7 @@ DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRU
 
   message("Operator: Computing nonlinear projection using the swarm.")
   if(is.null(DistancesMethod)){
-    if(isSymmetric(unname(DataOrDistances))){
+    if(IsDissimilarity(DataOrDistances)){
       DataDists = DataOrDistances
       if(requireNamespace("ProjectionBasedClustering",quietly = TRUE)){
         if(isTRUE(PlotMap)){
@@ -67,7 +67,7 @@ DatabionicSwarmClustering=function(DataOrDistances,ClusterNo=0,StructureType=TRU
       }#end requireNamespace("ProjectionBasedClustering)
      }else{#data should be used
       DataPoints=DataOrDistances
-    }#end isSymmetric(unname(DataOrDistances)
+    }#end IsDissimilarity(DataOrDistances)
     #Perform Schwarm in given Input
     if(requireNamespace("DatabionicSwarm",quietly = TRUE)){
       if(isFALSE(Parallel))#on cran the argument does not exist yet
