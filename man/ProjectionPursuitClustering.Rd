@@ -64,8 +64,15 @@ Michael Thrun
 }
 
 \examples{
+\dontshow{
+data('Hepta')
+out=ProjectionPursuitClustering(Hepta$Data[1:10,],ClusterNo=2,PlotIt=FALSE)
+}
+
+\donttest{
 data('Hepta')
 out=ProjectionPursuitClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)
+}
 }
 
 \keyword{ProjectionPursuitClustering}

@@ -70,6 +70,8 @@ Data = Hepta$Data
 V1 = SparseClustering(Data, ClusterNo=7, Type="kmeans")
 Cls1 = V1$Cls
 
+
+\dontrun{
 V2 = SparseClustering(Data, ClusterNo=7, Type="Hierarchical")
 Cls2 = V2$Cls
 
@@ -78,7 +80,6 @@ DistanceMatrix = as.matrix(InputDistances)
 V3 = SparseClustering(DistanceMatrix, ClusterNo=7, Type="Hierarchical")
 Cls3 = V3$Cls
 
-\dontrun{
 set.seed(1)
 Data = matrix(rnorm(100*50),ncol=50)
 y    = c(rep(1,50),rep(2,50))
