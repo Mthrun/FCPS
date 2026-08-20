@@ -221,6 +221,7 @@ HierarchicalClusterDists = function(pDist, ClusterNo = 0,Type = "ward.D2", Color
     "average",
     "mcquitty",
     "median",
+    "centroid",
     "MinEnergy",
     "Gini",
     "Genie",

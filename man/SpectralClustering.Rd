@@ -6,7 +6,7 @@
 SpectralClustering(Data, ClusterNo,PlotIt=FALSE,...)
 }
 \arguments{
-\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
+\item{Data}{[1:n,1:d] matrix containing the dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
 
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
 \item{PlotIt}{default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
@@ -28,7 +28,7 @@ List of
 
 \description{
  Clusters the Data into "ClusterNo" different clusters using the Spectral Clustering method}
- 
+
  \examples{
 data('Hepta')
 out=SpectralClustering(Hepta$Data,ClusterNo=7,PlotIt=FALSE)

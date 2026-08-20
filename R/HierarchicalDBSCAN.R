@@ -24,6 +24,23 @@ HierarchicalDBSCAN =Hierarchical_DBSCAN=Hierarchical_DBscan=function(DataOrDista
   #
   # [Campello et al., 2015]  Campello RJGB, Moulavi D, Zimek A, Sander J: Hierarchical density estimates for data clustering, visualization, and outlier detection, ACM Transactions on Knowledge Discovery from Data (TKDD), 10(5), pp. 1-51, 2015.
   
+  if(missing(DataOrDistances) || is.null(DataOrDistances)){
+    stop("HierarchicalDBSCAN: 'DataOrDistances' is required.", call. = TRUE)
+  }
+
+  n <- if(inherits(DataOrDistances, "dist")){
+    attr(DataOrDistances, "Size", exact = TRUE)
+  }else if(!is.null(nrow(DataOrDistances))){
+    nrow(DataOrDistances)
+  }else{
+    length(DataOrDistances)
+  }
+
+  if(length(n)!=1L || is.na(n) || !is.finite(n) || n<1L){
+    stop("HierarchicalDBSCAN: could not determine the number of observations.", call. = TRUE)
+  }
+  n <- as.integer(n)
+
   if (!requireNamespace('dbscan',quietly = TRUE)) {
     message(
       'Subordinate clustering package (dbscan) is missing. No computations are performed.
@@ -31,25 +48,23 @@ HierarchicalDBSCAN =Hierarchical_DBSCAN=Hierarchical_DBscan=function(DataOrDista
     )
     return(
       list(
-        Cls = rep(1, nrow(DataOrDistances)),
+        Cls = rep(1, n),
         Object = "Subordinate clustering package (dbscan) is missing.
                 Please install the package which is defined in 'Suggests'."
       )
     )
   }
   
-  if(is.null(nrow(DataOrDistances))){# ensure vector
-    return(cls <- rep(1,length(Data)))
-  }
-  
   if (IsDissimilarity(DataOrDistances)) {
     Data=stats::as.dist(DataOrDistances)
+  }else if(is.null(dim(DataOrDistances))){
+    Data=matrix(DataOrDistances,ncol=1L)
   }else{
     Data=DataOrDistances
   }
 
   if(is.null(minPts)){
-    minPts=round(0.04*nrow(DataOrDistances),0)
+    minPts=round(0.04*n,0)
     warning('The minPts parameter is missing but it is required in DBscan. Trying to estimate. PlotTree is set to TRUE, please look at the dendrogram...')
     PlotTree=TRUE
   }   
@@ -78,7 +93,14 @@ HierarchicalDBSCAN =Hierarchical_DBSCAN=Hierarchical_DBscan=function(DataOrDista
     Cls2[Cls2==0]=999
 	ClusterPlotMDS(DataOrDistances,Cls2)
   }
-   Cls=ClusterRename(Cls,DataOrDistances)
+  RenameData <- if(inherits(DataOrDistances,"dist")){
+    as.matrix(DataOrDistances)
+  }else if(is.null(dim(DataOrDistances))){
+    Data
+  }else{
+    DataOrDistances
+  }
+  Cls=ClusterRename(Cls,RenameData)
   return(list(Cls=Cls,Dendrogram=as.dendrogram(liste$hdbscan_tree),Tree=as.hclust(as.dendrogram(liste$hdbscan_tree)),Object=liste))
   
 }

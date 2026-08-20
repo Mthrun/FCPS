@@ -4,13 +4,13 @@
 Estimates Number of Clusters using up to 26 Indicators
 }
 \description{
-Calculation of up to 26 indicators and the recommendations based on them for the number of clusters in data sets. 
+Calculation of up to 26 indicators and the recommendations based on them for the number of clusters in data sets.
 For a given dataset and clusterings for this dataset, key indicators mentioned in details are calculated and based on this a recommendation regarding the number of clusters is given for each indicator.
 
 An alternative estimation of the cluster number can be done by counting the valleys of the topographic map of the generalized U-Matrix for a specfic projection method using the \pkg{ProjectionBasesdClustering} and \pkg{GeneralizedUmatrix} packages on CRAN, see [Thrun/Ultsch, 2021] for details.
 }
 \usage{
-ClusterNoEstimation(DataOrDistances, ClsMatrix = NULL, MaxClusterNo, 
+ClusterNoEstimation(DataOrDistances, ClsMatrix = NULL, MaxClusterNo,
 
 ClusterIndex = "all", Method = NULL, MinClusterNo = 2,
 
@@ -18,14 +18,14 @@ Silent = TRUE,PlotIt=FALSE,SelectByABC=TRUE,Colorsequence,\dots)
 }
 \arguments{
   \item{DataOrDistances}{
-    Either [1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.
-    
+    Either [1:n,1:d] matrix containing the dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.
+
     or
 
 Symmetric [1:n,1:n] distance matrix
   }
   \item{ClsMatrix}{
-[1:n,1:(MaxClusterNo)] matrix of clusterings each columns is defined as: 
+[1:n,1:(MaxClusterNo)] matrix of clusterings; each column is defined as:
 
 1:n numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.
 
@@ -66,9 +66,9 @@ Each column of \code{ClsMatrix} has to have at least two unqiue clusters defined
 (1)
 
 The following 26 indicators can be calculated:
-"ball", "beale", "calinski", "ccc", "cindex", "db", "duda", 
-"dunn", "frey", "friedman", "hartigan", "kl", "marriot", "mcclain", 
-"pseudot2", "ptbiserial", "ratkowsky", "rubin", "scott", "sdbw", 
+"ball", "beale", "calinski", "ccc", "cindex", "db", "duda",
+"dunn", "frey", "friedman", "hartigan", "kl", "marriot", "mcclain",
+"pseudot2", "ptbiserial", "ratkowsky", "rubin", "scott", "sdbw",
 "sdindex", "silhouette", "ssi", "tracew", "trcovw", "xuindex".
 
 These can be specified individually or as a vector via the parameter index.
@@ -92,7 +92,7 @@ The following methods can be used to create clusterings:
 
 The indicators duda, pseudot2, beale and frey are only intended for use in hierarchical cluster procedures.
 
-If a distances matrix is given, then \pkg{ProjectionBasedClustering} is required to be accessible.
+If a distance matrix is given, then \pkg{ProjectionBasedClustering} is required to be accessible.
 }
 \value{
 \item{Indicators}{
@@ -141,7 +141,7 @@ for (i in 2:(MaxClusterNo+1)) {
 }
 
 # Calculation of all indicators and recommendations for the number of clusters
-indicatorsList=ClusterNoEstimation(Data = data, 
+indicatorsList=ClusterNoEstimation(Data = data,
 
 ClsMatrix = clsm, MaxClusterNo = MaxClusterNo)
 

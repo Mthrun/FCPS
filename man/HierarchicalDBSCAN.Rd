@@ -16,9 +16,9 @@ PlotTree=FALSE,PlotIt=FALSE,\dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-\item{DataOrDistances}{Either a [1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.
+\item{DataOrDistances}{Either a [1:n,1:d] matrix containing the dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.
 
-or a [1:n,1:n] symmetric distance matrix.
+or a [1:n,1:n] symmetric distance matrix or an object of class \code{dist}.
 }
 
   \item{minPts}{

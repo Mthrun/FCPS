@@ -25,7 +25,7 @@ ClusterDaviesBouldinIndex(Cls, Data,\dots)
 Wrapper for \code{\link[clusterSim]{index.DB}}. Davies Bouldin index is defined in [Davies/Bouldin, 1979]. Best clustering scheme essentially minimizes the Davies-Bouldin index because it is defined as the function of the ratio of the within cluster scatter, to the between cluster separation.[Davies/Bouldin, 1979].
 }
 \value{
-List of 
+List of
   \item{DaviesBouldinIndex}{
 scalar,Davies Bouldin index
 }
@@ -47,8 +47,8 @@ ClusterDaviesBouldinIndex(Cls,Hepta$Data)[1]
 
 \donttest{
 data("Hepta")
-ClsWellSeperated=kmeansClustering(Hepta$Data,ClusterNo = 7,Type="Steinley")$Cls
-ClusterDaviesBouldinIndex(ClsWellSeperated,Hepta$Data)[1]
+ClsWellSeparated=kmeansClustering(Hepta$Data,ClusterNo = 7,Type="Steinley")$Cls
+ClusterDaviesBouldinIndex(ClsWellSeparated,Hepta$Data)[1]
 }
 }
 \keyword{DaviesBouldinIndex}

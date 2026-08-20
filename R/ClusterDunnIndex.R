@@ -67,16 +67,19 @@ ClusterDunnIndex=function(Cls,DataOrDistances,DistanceMethod="euclidean",Silent=
     InterDist = apply(FUN = min,MARGIN = 2,X = interc,na.rm=T)
   }
 
-  if(sum(is.finite(InnerDist))==0){
-	  dunn <- NaN
-  }else if(sum(is.finite(InterDist))==0){
-	  dunn <- NaN
-  } else if (max(InnerDist,na.rm = T) < 10^(-7)) {
-    if(isFALSE(Force))
-      dunn <- NaN
-  }
-  else {
-    dunn <- (min(InterDist,na.rm = T)/max(InnerDist,na.rm = T))
+  numerator <- min(InterDist, na.rm = TRUE)
+  denominator <- max(InnerDist, na.rm = TRUE)
+
+  if (!is.finite(numerator) || !is.finite(denominator)) {
+    dunn <- NaN
+  } else if (denominator < 1e-7) {
+    dunn <- if (isTRUE(Force)) {
+      numerator / max(denominator, .Machine$double.eps)
+    } else {
+      NaN
+    }
+  } else {
+    dunn <- numerator / denominator
   }
   return(list(Dunn=dunn,IntraDist=InnerDist,InterDist=InterDist))
   }else{

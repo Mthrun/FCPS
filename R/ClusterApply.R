@@ -43,7 +43,10 @@ ClusterApply <- function(DataOrDistances, FUN, Cls,Simple=FALSE,...){
   if(isFALSE(Simple)){
   Liste=split(x = as.data.frame(Data),f = Cls)
   uniqueClusters=names(Liste)
-  PerClusterV=lapply(Liste, function(x,FUN) apply(x,FUN=FUN,MARGIN = 2),FUN)
+  PerClusterV=lapply(
+    Liste,
+    function(x) apply(x, FUN = FUN, MARGIN = 2, ...)
+  )
   resultPerCluster=do.call(rbind,PerClusterV)
   
   if(!is.null(Names)){
@@ -59,15 +62,18 @@ ClusterApply <- function(DataOrDistances, FUN, Cls,Simple=FALSE,...){
        rownames(resultPerCluster)=NULL
     })
 
-  V=list(ResultPerCluster = resultPerCluster,UniqueClusters = uniqueClusters)
-  
-  tryCatch({
-    string=as.character(substitute(FUN))
-    names(V)=c('UniqueClusters',paste0(string,'PerCluster'))
-  },error=function(e){
-    message('ClusterApply: FUN could not be extracted because:')
-    message(e)
-  })
+  fun_name <- paste(deparse(substitute(FUN)), collapse = "")
+  result_name <- if (nzchar(fun_name)) {
+    paste0(fun_name, "PerCluster")
+  } else {
+    "ResultPerCluster"
+  }
+
+  V <- list(
+    UniqueClusters = uniqueClusters,
+    ResultPerCluster = resultPerCluster
+  )
+  names(V)[2L] <- result_name
   }else{
     V=apply(Data,2,function(X,...) tapply(X, Cls, FUN = FUN,...))
   }

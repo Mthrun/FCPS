@@ -1,7 +1,7 @@
 \name{MinimalEnergyClustering}
 \alias{MinimalEnergyClustering}
 \title{
-Minimal Energy Clustering 
+Minimal Energy Clustering
 }
 \description{
 Hierchical Clustering using the minimal energy approach of [Szekely/Rizzo, 2005].
@@ -14,19 +14,19 @@ ColorTreshold = 0,
 DistanceMethod="euclidean", Data,PlotIt=FALSE,\dots)
 }
 \arguments{
-\item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
+\item{DataOrDistances}{[1:n,1:d] matrix containing the dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
 
 \item{ClusterNo}{A number k which defines k different clusters to be build by the algorithm.}
 
 \item{DistanceMethod}{See  \code{\link[parallelDist]{parDist}}, for example 'euclidean','mahalanobis','manhatten' (cityblock),'fJaccard','binary', 'canberra', 'maximum'. Any unambiguous substring can be given.}
 
-\item{ColorTreshold}{Draws cutline w.r.t. dendogram y-axis (height), height of line as scalar should be given}
+\item{ColorTreshold}{Draws cutline w.r.t. dendrogram y-axis (height), height of line as scalar should be given}
 \item{Data}{[1:n,1:d] data matrix in the case that \code{DataOrDistances} is missing and partial matching does not work.}
   \item{PlotIt}{
-      If TRUE and ClusterNo>0 plots dendrogramm using \code{ClusterDendrogram}
-      
-      If TRUE and ClusterNo==0 plots black dendrogramm using base R plot
-      
+      If TRUE and ClusterNo>0 plots dendrogram using \code{ClusterDendrogram}
+
+      If TRUE and ClusterNo==0 plots black dendrogram using base R plot
+
       FALSE: No plot
   }
 \item{\dots}{In case of plotting further argument for \code{plot}, see \code{\link{as.dendrogram}}

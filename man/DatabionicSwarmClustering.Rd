@@ -42,7 +42,7 @@ to be installed from github, as they are not available on CRAN yet.}
 
 }
 \details{
-This function does not enable the user first to project the data and then to test the Boolean parameter defining the type of structure contrary to the \pkg{DatabionicSwarm} which is an inappropriate approach in case of exploratory data analysis. 
+This function does not enable the user first to project the data and then to test the Boolean parameter defining the type of structure contrary to the \pkg{DatabionicSwarm} which is an inappropriate approach in case of exploratory data analysis.
 
 Instead, this function is implemented for the purpose of automatic benchmarking because in such a case nobody will investigate many trials with one visualization per trial.
 
@@ -59,9 +59,9 @@ List of
 \references{
 [Thrun/Ultsch, 2021]  Thrun, M. C., and Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Artificial Intelligence, Vol. 290, pp. 103237, \doi{10.1016/j.artint.2020.103237}, 2021.
 
-[Thrun/Ultsch, 2021] Thrun, M. C., & Ultsch, A.: Swarm Intelligence for Self-Organized Clustering (Extended Abstract), in Bessiere, C. (Ed.), 29th International Joint Conference on Artificial Intelligence (IJCAI), Vol. IJCAI-20, pp. 5125--5129, \doi{10.24963/ijcai.2020/720}, Yokohama, Japan, Jan., 2021. 
+[Thrun/Ultsch, 2021] Thrun, M. C., & Ultsch, A.: Swarm Intelligence for Self-Organized Clustering (Extended Abstract), in Bessiere, C. (Ed.), 29th International Joint Conference on Artificial Intelligence (IJCAI), Vol. IJCAI-20, pp. 5125--5129, \doi{10.24963/ijcai.2020/720}, Yokohama, Japan, Jan., 2021.
 
-[Thrun et al., 2016] Thrun, M. C., Lerch, F., Lötsch, J., & Ultsch, A. : Visualization and 3D Printing of Multivariate Data of Biomarkers, in Skala, V. (Ed.), International Conference in Central Europe on Computer Graphics, Visualization and Computer Vision (WSCG), Vol. 24, Plzen, 2016. 
+[Thrun et al., 2016] Thrun, M. C., Lerch, F., Lötsch, J., & Ultsch, A. : Visualization and 3D Printing of Multivariate Data of Biomarkers, in Skala, V. (Ed.), International Conference in Central Europe on Computer Graphics, Visualization and Computer Vision (WSCG), Vol. 24, Plzen, 2016.
 }
 \author{
 Michael Thrun
@@ -108,7 +108,7 @@ data(Hepta)
 ClsV = DatabionicSwarmClustering(Hepta$Data, 0, PlotMap = TRUE)
 }
 
-#entagled, complex, and non-linear seperable structures 
+#entagled, complex, and non-linear seperable structures
 \dontrun{
 #takes too long for CRAN tests
 data(Chainlink)
@@ -126,7 +126,7 @@ ClsV2 = DatabionicSwarmClustering(Chainlink$Data,
                                 PlotMap = TRUE)
 
 # Here clusters (colored points)
-# are not seperated by valleys
+# are not separated by valleys
 ClsV = DatabionicSwarmClustering(Chainlink$Data,
                                 2,
                                 StructureType = TRUE,

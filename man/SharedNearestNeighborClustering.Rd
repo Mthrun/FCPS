@@ -2,7 +2,7 @@
 \alias{SharedNearestNeighborClustering}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-SNN clustering 
+SNN clustering
 }
 \description{
 Shared Nearest Neighbor Clustering of [Ertoz et al., 2003].
@@ -16,7 +16,7 @@ UpperLimitRadius,\dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
+\item{Data}{[1:n,1:d] matrix containing the dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
   \item{Knn}{
 Number of neighbors to consider to calculate the shared nearest neighbors.
 }
@@ -25,7 +25,7 @@ Number of neighbors to consider to calculate the shared nearest neighbors.
  If NULL, automatic estimation is done using insights of [Ultsch, 2005].
 }
   \item{minPts}{
- Number of minimum points in the eps region (for core points). 
+ Number of minimum points in the eps region (for core points).
  In principle minimum number of points in the unit disk, if the unit disk is within the cluster (core) [Ester et al., 1996, p. 228].
  if NULL, its 2.5 percent of points.
 }

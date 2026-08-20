@@ -10,7 +10,7 @@ OPTICS (Ordering points to identify the clustering structure) clustering algorit
 OPTICSclustering(Data, MaxRadius,RadiusThreshold, minPts = 5, PlotIt=FALSE,\dots)
 }
 \arguments{
-\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
+\item{Data}{[1:n,1:d] matrix containing the dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
 
   \item{MaxRadius}{
 Upper limit neighborhood in the R-ball graph/unit disk graph), size of the epsilon neighborhood  (eps) [Ester et al., 1996, p. 227].
@@ -20,7 +20,7 @@ Upper limit neighborhood in the R-ball graph/unit disk graph), size of the epsil
 Threshold to identify clusters (RadiusThreshold <= MaxRadius), if NULL \code{0.9*MaxRadius} is set.
 }
   \item{minPts}{
- Number of minimum points in the eps region (for core points). 
+ Number of minimum points in the eps region (for core points).
  In principle minimum number of points in the unit disk, if the unit disk is within the cluster (core) [Ester et al., 1996, p. 228].
  If NULL, its 2.5 percent of points.
 }

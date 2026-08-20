@@ -13,7 +13,7 @@ ClusterShannonInfo(ClsMatrix)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{ClsMatrix}{
-[1:n,1:C] matrix of C clusterings each columns is defined as: 
+[1:n,1:C] matrix of C clusterings; each column is defined as:
 
 1:n numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.
 }

@@ -8,7 +8,7 @@ dissimilarity object.
 The function accepts either a \code{dist} object or a validated square
 dissimilarity matrix. If \code{ClusterNo > 0}, the hierarchy is cut into the
 requested number of clusters. If \code{ClusterNo = 0}, the complete
-dendrogram is plotted and returned.
+dendrogram is returned and is plotted only when \code{PlotIt = TRUE}.
 
 This is primarily an internal helper. For the usual user interface, see
 \code{\link{HierarchicalClustering}}.
@@ -41,8 +41,9 @@ HierarchicalClusterDists(
   \item{ClusterNo}{
     Integer between zero and the number of observations.
 
-    If \code{ClusterNo = 0}, the complete hierarchy is plotted and
-    \code{Cls = NULL} is returned.
+    If \code{ClusterNo = 0}, the complete hierarchy is returned. It is
+    plotted only when \code{PlotIt = TRUE}; \code{Cls = NULL} is returned
+    unless a height threshold is used.
 
     If \code{ClusterNo > 0}, the hierarchy is cut into exactly
     \code{ClusterNo} clusters using \code{stats::cutree()}.
@@ -52,9 +53,9 @@ HierarchicalClusterDists(
     Character scalar specifying the agglomeration method. Supported values are
     \code{"ward.D"}, \code{"ward.D2"}, \code{"ward.pseudo"},
     \code{"single"}, \code{"complete"}, \code{"average"},
-    \code{"mcquitty"}, \code{"median"}, and \code{"centroid"},
-     \code{"MinEnergy"}, \code{"Minimax"}, and \code{"Sparse"} or
-      \code{"Gini"} or its synonym \code{"Genie"}
+    \code{"mcquitty"}, \code{"median"}, \code{"centroid"},
+    \code{"MinEnergy"}, \code{"Minimax"}, \code{"Sparse"},
+    \code{"Gini"}, and its synonym \code{"Genie"}.
 
 
     See \code{Details} for the distinction between the three Ward variants.
@@ -65,9 +66,10 @@ HierarchicalClusterDists(
     If nonzero and \code{ClusterNo = 0}, the value is interpreted on the
     dendrogram height scale. For a monotone ultramteric portion of given dissimilarity,
     \code{stats::rect.hclust()} draws rectangles at this height and classifiation vector \code{Cls} is return based on 
-    the cut using the threshold.
-    
-    If these fusion heights are non-monotone, only a horizontal reference line is drawn and \code{Cls=NULL}
+    classification vector \code{Cls} is returned from the corresponding cut.
+
+    If the fusion heights are non-monotone, only a horizontal reference line
+    is drawn and \code{Cls = NULL}.
 
     Height scales depend on \code{Type}; in particular, a threshold used for
     \code{"ward.D2"} cannot be transferred unchanged to \code{"ward.pseudo"}.
@@ -81,18 +83,18 @@ HierarchicalClusterDists(
   }
 
   \item{PlotIt}{
-      If TRUE and ClusterNo>0 plots dendrogramm using \code{ClusterDendrogram}
-      
-      If TRUE and ClusterNo==0 plots black dendrogramm using base R plot
-      
-      FALSE: No plot
+      If \code{TRUE} and \code{ClusterNo > 0}, plots the dendrogram using
+      \code{ClusterDendrogram}. If \code{TRUE} and \code{ClusterNo = 0},
+      plots the complete dendrogram using base R graphics. The default is
+      \code{FALSE}.
   }
-  \item{\dots}{IF PlotIt==TRUE and ClusterNo==0 In case of plotting further argument for \code{plot}, see \code{\link{as.dendrogram}}}
+  \item{\dots}{Further arguments passed to a selected specialized method.
+  In the ordinary \code{hclust} path, these arguments are currently not used.}
 }
 \value{
 A list with components:
 
-\item{Cls}{If, ClusterNo>0: [1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering. Otherwise for ClusterNo=0: NULL}
+\item{Cls}{If \code{ClusterNo > 0}, a numerical vector of length n defining the classification. If \code{ClusterNo = 0}, \code{NULL} unless a height threshold is used.}
 
 \item{Dendrogram}{
   Object of class \code{"dendrogram"} representing the complete hierarchy.
@@ -187,7 +189,8 @@ by exact numerical ties. However, their height scales differ according to
 h_{\mathrm{ward.pseudo}} =
 \frac{h_{\mathrm{ward.D2}}^2}{2n}.
 }
-allowing for a better visual identification of an appropriate cut in the dendrogramm.
+This rescaling can make an appropriate dendrogram cut easier to identify
+visually.
 
 The \code{"ward.pseudo"} option is not the Ward_p algorithm of de Amorim
 (2015), which additionally uses cluster-dependent feature weights and
@@ -195,7 +198,7 @@ The \code{"ward.pseudo"} option is not the Ward_p algorithm of de Amorim
 
 \strong{Plotting and non-monotone heights}
 
-When \code{ClusterNo = 0}, the dendrogram is plotted. For
+When \code{ClusterNo = 0} and \code{PlotIt = TRUE}, the dendrogram is plotted. For
 \code{"ward.pseudo"}, the y-axis represents the increase in pseudo
 within-cluster inertia; for other methods it is the ordinary fusion height.
 

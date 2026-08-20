@@ -19,7 +19,7 @@ Cls=NULL,\dots)
 Please use \code{\link{HierarchicalClustering}}. Hierarchical cluster analysis on a set of dissimilarities and methods for analyzing it. Uses stats package function 'hclust'.
 }
 \arguments{
-\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
+\item{Data}{[1:n,1:d] matrix containing the dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
 \item{ClusterNo}{A number k which defines k different clusters to be build by the algorithm.}
 \item{Type}{Methode der Clusterung: "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid",
      \code{"MinEnergy"}, \code{"Minimax"}, and \code{"Sparse"} or
@@ -29,10 +29,10 @@ Please use \code{\link{HierarchicalClustering}}. Hierarchical cluster analysis o
 \item{ColorTreshold}{Draws cutline w.r.t. dendrogram y-axis (height), height of line as scalar should be given}
 \item{Fast}{If TRUE and fastcluster installed, then a faster implementation of the methods above can be used}
   \item{PlotIt}{
-      If TRUE and ClusterNo>0 plots dendrogramm using \code{ClusterDendrogram}
-      
-      If TRUE and ClusterNo==0 plots black dendrogramm using base R plot
-      
+      If TRUE and ClusterNo>0 plots dendrogram using \code{ClusterDendrogram}
+
+      If TRUE and ClusterNo==0 plots black dendrogram using base R plot
+
       FALSE: No plot
   }
 \item{Cls}{If PlotIt==TRUE and ClusterNo==0: [1:n] classification vector for coloring of dendrogram in plot}

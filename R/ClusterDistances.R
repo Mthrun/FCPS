@@ -32,10 +32,17 @@ ClusterDistances=IntraClusterDistances=ClusterIntraDistances=function(FullDistan
 
   classdist=list(FullDistanceMatrix[upper.tri(FullDistanceMatrix,diag = F)])
   if(length(u)==1) return(unlist(classdist))
-  # Does not work for clustersize==1!
   for(i in u){
-    classdistcur=FullDistanceMatrix[Cls==i,Cls==i]
-    distvec=classdistcur[upper.tri(classdistcur,diag = F)]
+    classdistcur=FullDistanceMatrix[
+      Cls==i,
+      Cls==i,
+      drop=FALSE
+    ]
+    if(nrow(classdistcur)<2L){
+      distvec=NaN
+    }else{
+      distvec=classdistcur[upper.tri(classdistcur,diag = FALSE)]
+    }
     classdist=c(classdist,list(distvec))
   }
 

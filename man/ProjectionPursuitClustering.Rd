@@ -14,7 +14,7 @@ PlotIt=FALSE,PlotSolution=FALSE,\dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
+\item{Data}{[1:n,1:d] matrix containing the dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
 
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
 \item{Type}{
@@ -27,7 +27,7 @@ Either  \code{MinimumDensity}[Pavlidis et al., 2016]
 \item{PlotIt}{Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 
 \item{PlotSolution}{
-Plots the partioning solution as a tree as described in 
+Plots the partioning solution as a tree as described in
 }
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 }
@@ -37,7 +37,7 @@ The details of the options for projection pursuit and partioning of data are def
 
 "KernelPCA" uses additionally the package kernlab and is implemented as given in the fifth example on page 21, section "extension" of [Hofmeyr/Pavlidis, 2019].
 
-The first idea of using non-PCA projections for clustering was published by [Bock, 1987] as an definition. However, to the knowledge of the author it was not applied to any data. The first systematic comparison to Projection-Pursuit Methods \code{\link{ProjectionPursuitClustering}} and \code{\link{AutomaticProjectionBasedClustering}} can be found in [Thrun/Ultsch, 2018]. For PCA-based clustering methods please see \code{\link{TandemClustering}}
+The idea of using non-PCA projections for clustering was first proposed by [Bock, 1987], but, to the author's knowledge, it was not applied to data. The first systematic comparison with projection-pursuit methods, \code{\link{ProjectionPursuitClustering}} and \code{\link{AutomaticProjectionBasedClustering}}, can be found in [Thrun/Ultsch, 2018]. For PCA-based clustering methods, see \code{\link{TandemClustering}}.
 }
 \value{
 List of

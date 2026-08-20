@@ -2,14 +2,14 @@
 \alias{ClusterApply}
 \title{Applies a function over grouped data}
 \description{
-Applies a given function to each dimension \code{d} of data separately for each cluster}
+Applies a given function to each data dimension separately within each cluster.}
 \usage{
 ClusterApply(DataOrDistances,FUN,Cls,Simple=FALSE,\ldots)
 }
 \arguments{
-  \item{DataOrDistances}{  [1:n,1:d] with: if d=n and symmetric then distance matrix assumed, otherwise:
-  
-  [1:n,1:d] matrix of defining the dataset that consists of \code{n} cases or d-dimensional data points. Every case has \code{d} attributes, variables or features.
+  \item{DataOrDistances}{  Either a symmetric [1:n,1:n] distance matrix or:
+
+  a [1:n,1:d] matrix containing \code{n} cases of d-dimensional data points. Every case has \code{d} attributes, variables, or features.
 }
   \item{FUN}{Function to be applied to each cluster of data and each column of data}
   \item{Cls}{[1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering.}
@@ -17,21 +17,18 @@ ClusterApply(DataOrDistances,FUN,Cls,Simple=FALSE,\ldots)
   \item{\ldots}{Additional parameters to be passed on to FUN}
 }
 \details{
-Applies a given function to each feature of each cluster of data using the clustering stored in \code{Cls} which is the cluster identifiers for all rows in data. If missing, all data are in first cluster, The main output is \code{FUNPerCluster[i]} which is the result of \code{FUN} for the data points in cluster of \code{UniqueClusters[i]} named with the function's name used.
+Applies \code{FUN} to each feature within each cluster defined by \code{Cls}. If \code{Cls} is missing, all observations are assigned to one cluster. The main output contains the result of \code{FUN} for each cluster and is named after the supplied function.
 
-In case of a distance matrix an automatic classical multidimensional scaling transformation of distances to data is computed. Number of dimensions is selected by the minimal stress w.r.t. the possible output dimensions of cmdscale.
+For a distance matrix, classical multidimensional scaling is used automatically to obtain coordinates. The number of dimensions is selected from the possible \code{cmdscale} output dimensions by minimum stress.
 
-If \code{FUN} has not function name, then ResultPerCluster is given back.
+If the name of \code{FUN} cannot be extracted, the component is named \code{ResultPerCluster}.
 }
 \value{
-if(Simple==FALSE)
-List with
-\item{UniqueClusters}{The unique clusters in Cls}
-\item{FUNPerCluster}{a matrix of [1:k,1:d] of d features and k clusters, the list element is named by the function \code{FUN} used }
+If \code{Simple = FALSE}, a list with:
+\item{UniqueClusters}{The unique cluster labels in \code{Cls}.}
+\item{FUNPerCluster}{A [1:k,1:d] matrix with one row per cluster and one column per feature. The component name is derived from the supplied \code{FUN}; for example, \code{meanPerCluster}.}
 
-if(Simple==TRUE)
-
-a matrix of [1:k,1:d] of d features and k clusters
+If \code{Simple = TRUE}, a [1:k,1:d] matrix with one row per cluster and one column per feature.
 
 
 }

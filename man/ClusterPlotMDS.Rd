@@ -5,7 +5,7 @@
 Plot Clustering using Dimensionality Reduction by MDS
 }
 \description{
-This function uses a projection method to perform dimensionality reduction (DR) on order to visualize the data as 3D data points colored by a clustering.
+Uses a projection method for dimensionality reduction so that the data can be visualized as two- or three-dimensional points colored by cluster.
 }
 \usage{
 ClusterPlotMDS(DataOrDistances, Cls, main = "Clustering",
@@ -35,11 +35,11 @@ Either two or three depending on user choice
 Scalar defining the size of points
 }
   \item{Plotter3D}{
-	
+
 In case of 3 dimensions, choose either "plotly" or "rgl",
 }
   \item{Colorsequence}{
-[1:k] character vector of colors, per default the colorsquence defined in the \pkg{DataVisualizations} is used
+[1:k] character vector of colors. By default, the color sequence defined in \pkg{DataVisualizations} is used
 }
   \item{\dots}{
 Please see \code{\link[DataVisualizations]{Plot3D}} in \pkg{DataVisualizations}
@@ -48,11 +48,11 @@ Please see \code{\link[DataVisualizations]{Plot3D}} in \pkg{DataVisualizations}
 \details{
 
 
-If dataset has more than 3 dimesions, mds is performed as defined in the \pkg{smacof} [De Leeuw/Mair, 2011].
-If \pkg{smacof} package is not installed, classical metric MDS (see Def. in [Thrun, 2018]) is performed.
-In both cases, the first OutputDimension are visualized. Points are colored by the labels (Cls).
+If the dataset has more than three dimensions, MDS is performed as implemented in the \pkg{smacof} package [De Leeuw/Mair, 2011].
+If \pkg{smacof} is not installed, classical metric MDS (see the definition in [Thrun, 2018]) is performed.
+In both cases, the requested \code{OutputDimension} is used. Points are colored according to the labels in \code{Cls}.
 
-In the special case that the dataset has not more than 3 dimensions, all dimensions are visualized and no DR is performed.
+If the dataset has no more than three dimensions, all dimensions are visualized and no dimensionality reduction is performed.
 }
 \value{
 The rgl or plotly plot handler depending on \code{Plotter3D}
@@ -68,7 +68,7 @@ Michael Thrun
 \note{
 If \pkg{DataVisualizations} is not installed a 2D plot using native plot function is shown.
 
-If  \pkg{MASS} is not installed, classicial metric MDS is used, see [Thrun, 2018] for definition.
+If \pkg{smacof} is not installed, classical metric MDS is used; see [Thrun, 2018] for the definition.
 }
 
 \seealso{

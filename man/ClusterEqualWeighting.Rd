@@ -16,7 +16,7 @@ ClusterEqualWeighting(Cls, Data, MinClusterSize)
 1:n numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.
 }
   \item{Data}{
-Optional, [1:n,1:d] matrix of dataset consisting of n cases of d-dimensional data points. Every case has d attributes, variables or features.
+Optional, [1:n,1:d] matrix containing the dataset consisting of n cases of d-dimensional data points. Every case has d attributes, variables or features.
 }
   \item{MinClusterSize}{
 Optional, scalar defining the number of cases m that each cluster should have
@@ -33,7 +33,7 @@ List of
 }
 
 \author{
-Alfred Ultsch (matlab), reimplemented by Michael Thrun 
+Alfred Ultsch (matlab), reimplemented by Michael Thrun
 }
 
 

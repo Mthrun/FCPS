@@ -6,7 +6,7 @@ Clusterability MDplot
 }
 \description{
 Clusterability mirrored-density plot. Clusterability aims to quantify the degree of cluster structures [Adolfsson et al., 2019].
-A dataset has a high probabilty to possess cluster structures, if the first component of the PCA projection is multimodal [Adolfsson et al., 2019]. As the dip test is less exact than the MDplot [Thrun et al., 2020] , pvalues above 0.05 can be given for MDplots which are clearly multimodal. 
+A dataset has a high probabilty to possess cluster structures, if the first component of the PCA projection is multimodal [Adolfsson et al., 2019]. As the dip test is less exact than the MDplot [Thrun et al., 2020] , pvalues above 0.05 can be given for MDplots which are clearly multimodal.
 
 An alternative investigation of clusterability can be performed by inspecting the topographic map of the Generalized U-Matrix for a specfic projection method using the \pkg{ProjectionBasesdClustering} and \pkg{GeneralizedUmatrix} packages on CRAN, see [Thrun/Ultsch, 2021] for details.
 }
@@ -18,14 +18,14 @@ na.rm=FALSE,PlotIt=TRUE,\dots)
 
 \arguments{
   \item{DataOrDistance}{
-  Either a dataset[1:n,1:d] of n cases and d features or a symmetric distance matrix [1:d,1:d] 
+  Either a dataset[1:n,1:d] of n cases and d features or a symmetric distance matrix [1:d,1:d]
   or multiple data sets or distances in a list
 }
   \item{Method}{
   "none" performs no dimension reduction.
-  
+
   "pca" uses the scores from the first principal component.
-  
+
   "distance" computes pairwise distances (using distance_metric as the metric).
 }
   \item{na.rm}{Statistical testing will not work with missing values, if TRUE values are imputed with averages}
@@ -33,7 +33,7 @@ na.rm=FALSE,PlotIt=TRUE,\dots)
   \item{\dots}{Further arguments for function\code{MDplot4multiplevectors} of package \pkg{DataVisualizations} like \code{"main"}, and \code{"Ordering"}}
 }
 \details{
-Use the method of [Adolfsson et al., 2019] specified as pca plus dip-test (PCA dip) per default without scaling or standardization of data because this step should never be done automatically. In [Thrun, 2020] the standardization and scaling did not improve the results.
+By default, use the method of [Adolfsson et al., 2019], specified as PCA plus the dip test (PCA dip), without scaling or standardizing the data because this step should not be performed automatically. In [Thrun, 2020] the standardization and scaling did not improve the results.
 
 If list is named, than the names of the list will be used and the MDplots will be re-ordered according to multimodality in the plot, otherwise only the pvalues of [Adolfsson et al., 2019] will be the names and the ordering of the MDplots is the same as the list.
 
@@ -52,7 +52,7 @@ List of
 \references{
 [Adolfsson et al., 2019]  Adolfsson, A., Ackerman, M., & Brownstein, N. C.: To cluster, or not to cluster: An analysis of clusterability methods, Pattern Recognition, Vol. 88, pp. 13-26. 2019.
 
-[Thrun et al., 2020]  Thrun, M. C., Gehlert, T. & Ultsch, A.: Analyzing the Fine Structure of Distributions, PLoS ONE, Vol. 15(10), pp. 1-66, DOI \doi{10.1371/journal.pone.0238835}, 2020. 
+[Thrun et al., 2020]  Thrun, M. C., Gehlert, T. & Ultsch, A.: Analyzing the Fine Structure of Distributions, PLoS ONE, Vol. 15(10), pp. 1-66, DOI \doi{10.1371/journal.pone.0238835}, 2020.
 
 [Thrun/Ultsch, 2021]  Thrun, M. C., and Ultsch, A.: Swarm Intelligence for Self-Organized Clustering, Artificial Intelligence, Vol. 290, pp. 103237, \doi{10.1016/j.artint.2020.103237}, 2021.
 

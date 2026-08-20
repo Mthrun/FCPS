@@ -8,21 +8,21 @@ Fast Adaptive Spectral Clustering [John et al, 2020]
 Spectrum is a self-tuning spectral clustering method for single or multi-view data. In this wrapper restricted to the standard use in other clustering algorithms.
 }
 \usage{
-Spectrum(Data, Type = 2, ClusterNo = NULL, 
+Spectrum(Data, Type = 2, ClusterNo = NULL,
 
 PlotIt = FALSE, Silent = TRUE,PlotResults = FALSE, \dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Data}{
-1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.
+[1:n,1:d] matrix containing the dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.
 }
   \item{Type}{
 Type=1: default eigengap method (Gaussian clusters)
 
 Type=2: multimodality gap method (Gaussian/ non-Gaussian clusters)
 
-Type=3: Allows to setClusterNo
+Type = 3: allows \code{ClusterNo} to be specified.
 }
   \item{ClusterNo}{Optional, A number k which defines k different clusters to be built by the algorithm.
 For default \code{ClusterNo=NULL} please see details.
@@ -41,7 +41,7 @@ Method: numerical value: 1 = default eigengap method (Gaussian clusters), 2 = mu
 gap method (Gaussian/ non-Gaussian clusters), 3 = no automatic
 method (see fixk param)
 
-Other parameters defined in Spectrum packages
+Further parameters passed to functions in the \pkg{Spectrum} package.
 }
 }
 \details{

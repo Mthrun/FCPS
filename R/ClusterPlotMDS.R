@@ -26,9 +26,10 @@ ClusterPlotMDS=function(DataOrDistances,Cls,main='Clustering',DistanceMethod = "
     DataOrDistances=as.matrix(DataOrDistances)
   }
   
+  n=nrow(DataOrDistances)
   if(missing(Cls)){
     message('Cls is missing, using default Cls with one cluster.')
-    Cls=rep(1,length(DataOrDistances))
+    Cls=rep(1,n)
   }
   if(!is.vector(Cls)){
     warning('Cls is not a vector. Calling as.numeric(as.character(Cls))')
@@ -42,9 +43,9 @@ ClusterPlotMDS=function(DataOrDistances,Cls,main='Clustering',DistanceMethod = "
     warning('OutputDimension can be only 2 or 3')
     OutputDimension=3
   } 
-  if(nrow(DataOrDistances)!=length(Cls)){
-    warning('Cls has not the length or DataOrDistances, using default Cls with one cluster.')
-    Cls=rep(1,length(DataOrDistances))
+  if(n!=length(Cls)){
+    warning('Cls does not have one value per observation; using one cluster.')
+    Cls=rep(1,n)
   }
   
   prepareData=function(DataDists,Cls){
@@ -52,7 +53,7 @@ ClusterPlotMDS=function(DataOrDistances,Cls,main='Clustering',DistanceMethod = "
     Cls[!is.finite(Cls)]=999
 
     if(requireNamespace('smacof',quietly = TRUE)){
-      DataMDS =smacof::mds(DataDists,ndim = 3)$conf
+      DataMDS =smacof::mds(DataDists,ndim = OutputDimension)$conf
       # DataMDS = MASS::sammon(d = DataDists, y = cmdscale(d = DataDists, 
       #                                                    k = OutputDimension), k = OutputDimension)$points
     }else{
@@ -110,6 +111,7 @@ ClusterPlotMDS=function(DataOrDistances,Cls,main='Clustering',DistanceMethod = "
       }
     }
   }
+  PointColors=Colors[match(Cls,sort(unique(Cls)))]
   
   if(requireNamespace('DataVisualizations',quietly = TRUE)){
     if(Plotter3D=="rgl"){
@@ -127,7 +129,7 @@ ClusterPlotMDS=function(DataOrDistances,Cls,main='Clustering',DistanceMethod = "
                                             main=main,
                                             Plotter3D=Plotter3D,...))
         }else{
-          plot(Data[,1],Data[,2],cols=Cls,main = main,...)
+          graphics::plot(Data[,1],Data[,2],col=PointColors,main=main,...)
         }
 
       }
@@ -141,7 +143,7 @@ ClusterPlotMDS=function(DataOrDistances,Cls,main='Clustering',DistanceMethod = "
           print(p)
           return(p)
           }else{
-            plot(Data[,1],Data[,2],cols=Cls,main = main,...)
+            graphics::plot(Data[,1],Data[,2],col=PointColors,main=main,...)
           }
       }
   
@@ -153,7 +155,7 @@ ClusterPlotMDS=function(DataOrDistances,Cls,main='Clustering',DistanceMethod = "
           p
           return(p)
         }else{
-          plot(Data[,1],Data[,2],cols=Cls,main = main,...)
+          graphics::plot(Data[,1],Data[,2],col=PointColors,main=main,...)
         }
       }else{
         if(requireNamespace("ggplot2",quietly = TRUE)){
@@ -163,11 +165,11 @@ ClusterPlotMDS=function(DataOrDistances,Cls,main='Clustering',DistanceMethod = "
                                             size=PointSize,
                                             Plotter3D=Plotter3D,...)+ggplot2::ggtitle(main))
         }else{
-          plot(Data[,1],Data[,2],cols=Cls,main = main,...)
+          graphics::plot(Data[,1],Data[,2],col=PointColors,main=main,...)
         }
       }# end if  if(dim(Data)[2]!=2){
     }#end if(Plotter3D=="rgl")
   }else{# 
-    plot(Data[,1],Data[,2],cols=Cls,main = main,...)
+    graphics::plot(Data[,1],Data[,2],col=PointColors,main=main,...)
   } # end if(requireNamespace('DataVisualizations',quietly = TRUE)){
 }

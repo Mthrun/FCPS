@@ -8,7 +8,7 @@ Cluster Dendrogram
 Presents a dendrogram of a given tree using a colorsequence for the branches defined from the highest cluster size to the lowest cluster size.
 }
 \usage{
-ClusterDendrogram(TreeOrDendrogram, ClusterNo, 
+ClusterDendrogram(TreeOrDendrogram, ClusterNo,
 
 Colorsequence,main,xlab,ylab)
 }
@@ -25,7 +25,7 @@ Object of class dendrogram,  second list element of hierarchical cluster algorit
 k number of clusters for cutree.
 }
   \item{Colorsequence}{
-[1:k] character vector of colors, per default the colorsquence defined in the \pkg{DataVisualizations} is used
+[1:k] character vector of colors. By default, the color sequence defined in \pkg{DataVisualizations} is used
 }
 \item{main}{title of plot}
 \item{xlab}{x label of plot}
@@ -52,7 +52,7 @@ Michael Thrun
 data(Lsun3D)
 listofh=HierarchicalClustering(Lsun3D$Data,0,'SingleL')
 Tree=listofh$Object
-#given colors are per default:
+# Default colors:
 #"magenta" "yellow"  "black"   "red"
 ClusterDendrogram(Tree, 4,main='Single Linkage Clustering')
 

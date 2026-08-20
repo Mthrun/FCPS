@@ -39,7 +39,6 @@ HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,Type="wa
   #	}
   #}
   #else{
-
   # Specialized hierarchical methods
   if(Type=="MinEnergy"){
     return(MinimalEnergyClustering(DataOrDistances=Data,ClusterNo=ClusterNo,
@@ -120,21 +119,20 @@ HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,Type="wa
   )
   plot_y_label = paste0("Ultrametric Portion of ",DistanceMethod)
   plot_x_label =  sprintf("No. of Data Points N = %d",nrow(as.matrix(Data)))
-  
+  dend=as.dendrogram(hc)
   # Classification or dendrogram
   if (ClusterNo>0){
 
   
     if(isTRUE(PlotIt)){
-      V=ClusterDendrogram(TreeOrDendrogram=as.dendrogram(hc),ClusterNo=ClusterNo,main=plot_title,ylab=plot_y_label,xlab=plot_x_label)
+      V=ClusterDendrogram(TreeOrDendrogram=dend,ClusterNo=ClusterNo,main=plot_title,ylab=plot_y_label,xlab=plot_x_label)
     }
     
     Cls=cutree(hc,ClusterNo)
     Cls=ClusterRename(Cls,Data)
-    return(list(Cls=Cls,Dendrogram=as.dendrogram(hc),Object=hc))
-  } 
-  else{
-		x=as.dendrogram(hc)
+    return(list(Cls=Cls,Dendrogram=dend,Object=hc))
+  }else{
+		x=dend
 		
 		if(isTRUE(PlotIt)){
 		if(!is.null(Cls)){
@@ -144,7 +142,15 @@ HierarchicalClusterData=HierarchicalCluster <-function(Data,ClusterNo=0,Type="wa
   		  print(paste0("Class ", i, ": ", col[i]))
   		}
 		}
-     plot(x, main=plot_title,xlab=plot_x_label, ylab=plot_y_label, sub=" ", leaflab="none",...)
+     graphics::plot(
+       x,
+       main=plot_title,
+       xlab=plot_x_label,
+       ylab=plot_y_label,
+       sub=" ",
+       leaflab="none",
+       ...
+     )
      axis(1,col="black",las=1)
 		}
 

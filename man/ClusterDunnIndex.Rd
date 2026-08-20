@@ -5,7 +5,8 @@
 Dunn Index
 }
 \description{
-Internal (i.e. without prior classification) cluster quality measure called Dunn index for a given clustering published in [Dunn, 1974].
+Calculates the internal Dunn cluster-validity index for a given clustering
+[Dunn, 1974]. No prior classification is required.
 }
 \usage{
 ClusterDunnIndex(Cls,DataOrDistances,
@@ -14,42 +15,36 @@ DistanceMethod="euclidean",Silent=TRUE,Force=FALSE,\dots)
 }
 
 \arguments{
-  \item{Cls}{
-[1:n] numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.
-}
-  \item{DataOrDistances}{
-	matrix, DataOrDistance[1:n,1:n] symmetric matrix of dissimilarities, if variable unsymmetric 
-	DataOrDistance[1:d,1:n] is assumed as a dataset and the euclidean distances are calculated of d variables and n cases
-}
-
-  \item{DistanceMethod}{
-Optional, one of 39 distance methods of \code{parDist} of package parallelDist,  if Data matrix is chosen above
-}
-  \item{Silent}{
-TRUE: Warnings are shown
-}
-  \item{Force}{
-TRUE: force computing in case of numerical instability
-}
-    \item{\dots}{Further arguments passed on to the \code{parDist} function, e.g. user_defined distance functions}
+\item{Cls}{A numerical vector of length n defining the classification. It has k
+unique values representing the arbitrary cluster labels.}
+\item{DataOrDistances}{Either a [1:n,1:d] data matrix containing n observations
+and d variables, or a symmetric [1:n,1:n] dissimilarity matrix. For a data
+matrix, pairwise distances are calculated using \code{DistanceMethod}.}
+\item{DistanceMethod}{Optional distance method passed to
+\code{parallelDist::parDist()} or, when \pkg{parallelDist} is unavailable, to
+\code{stats::dist()}. The default is \code{"euclidean"}.}
+\item{Silent}{Logical scalar. If \code{TRUE}, suppresses the informational
+message printed when distances must be calculated from a data matrix.}
+\item{Force}{Logical scalar. If \code{TRUE}, computes the ratio even when the maximum within-cluster distance is near zero, using machine precision as the minimum denominator.}
+\item{\dots}{Further arguments passed to \code{parallelDist::parDist()}, for
+example a user-defined distance function.}
 }
 \details{
-Dunn index is defined as \code{Dunn=min(InterDist)/max(IntraDist)}. Well seperated clusters have usually a dunn index above 1, for details please see [Dunn, 1974].
+The Dunn index is defined as
+\code{min(InterDist) / max(IntraDist)}. Well-separated clusters usually have a
+Dunn index above 1; see [Dunn, 1974] for details.
 }
 \value{
-List of 
-  \item{Dunn}{
-scalar, Dunn Index
-}
-  \item{IntraDist}{
-[1:k] numerical vector of minimal intra cluster distances per given cluster
-}
-  \item{InterDist}{
-[1:k] numerical vector of minimal inter cluster distances per given cluster
-}
+A list with the following components:
+\item{Dunn}{A numeric scalar containing the Dunn index.}
+\item{IntraDist}{A numerical vector of length k containing the maximum
+within-cluster distance for each cluster.}
+\item{InterDist}{A numerical vector of length k containing the minimum
+between-cluster distance for each cluster.}
 }
 \references{
-[Dunn, 1974]  Dunn, J. C.: Well_separated clusters and optimal fuzzy partitions, Journal of cybernetics, Vol. 4(1), pp. 95-104. 1974.
+[Dunn, 1974] Dunn, J. C.: Well-separated clusters and optimal fuzzy partitions.
+Journal of Cybernetics, Vol. 4(1), pp. 95-104, 1974.
 }
 \author{
 Michael Thrun
@@ -57,17 +52,23 @@ Michael Thrun
 
 \examples{
 data("Hepta")
-Cls=kmeansClustering(Hepta$Data,ClusterNo = 7,Type="Hartigan")$Cls
-ClusterDunnIndex(Cls,Hepta$Data)
+Cls <- kmeansClustering(
+  Hepta$Data,
+  ClusterNo = 7,
+  Type = "Hartigan"
+)$Cls
+ClusterDunnIndex(Cls, Hepta$Data)
 
 \donttest{
-data("Hepta")
-ClsWellSeperated=kmeansClustering(Hepta$Data,ClusterNo = 7,Type="Steinley")$Cls
-ClusterDunnIndex(ClsWellSeperated,Hepta$Data)
+ClsWellSeparated <- kmeansClustering(
+  Hepta$Data,
+  ClusterNo = 7,
+  Type = "Steinley"
+)$Cls
+ClusterDunnIndex(ClsWellSeparated, Hepta$Data)
 }
 }
 \keyword{DunnIndex}
 \keyword{dunn}
 \keyword{Clustering}
 \concept{Dunn Index}
-

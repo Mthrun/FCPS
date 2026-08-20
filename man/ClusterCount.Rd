@@ -2,7 +2,7 @@
 \alias{ClusterCount}
 \title{ClusterCount}
 \description{
-Calulates statistics for clustering in each group of the data points
+Calculates cluster counts and percentages.
 }
 \usage{
 ClusterCount(Cls,Ordered=TRUE,NonFinite=9999)
@@ -10,23 +10,23 @@ ClusterCount(Cls,Ordered=TRUE,NonFinite=9999)
 \arguments{
   \item{Cls}{1:n numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.}
     \item{Ordered}{
-    Optional, boolean, if TRUE: the ouput is ordered increasingly by cluster labels in \code{UniqueClusters}.
+    Optional logical scalar. If \code{TRUE}, the output is ordered increasingly by the labels in \code{UniqueClusters}.
     }
    \item{NonFinite}{
-    Optional, If non finite values are given in the numerical vector, they are set to the scalar value defined here}
-    
+    Optional scalar used to replace non-finite values in \code{Cls}.}
+
 }
 
 \value{
-\item{UniqueClusters}{[1:k] numerical vector of the k unique clusters in Cls}
-\item{CountPerCluster}{Named vector [1:k] with the number of data points in the corresponding unique clusters. Names are the \code{UniqueClusters}}
-\item{NumberOfClusters}{The number of clusters k}
-\item{ClusterPercentages}{[1:k] numerical vector of the percentages of datapoints belonging to a cluster for each cluster}
+\item{UniqueClusters}{A numerical vector containing the k unique cluster labels in \code{Cls}.}
+\item{CountPerCluster}{A named vector of length k containing the number of observations in each cluster. Its names are \code{UniqueClusters}.}
+\item{NumberOfClusters}{The number of clusters, k.}
+\item{ClusterPercentages}{A numerical vector of length k containing the percentage of observations in each cluster.}
 }
 \details{
-The ordering of the output is defined by the first occurence of every cluster label in \code{Cls} in the  setting of \code{Ordered=FALSE}. 
+When \code{Ordered = FALSE}, output order is determined by the first occurrence of each cluster label in \code{Cls}.
 
-The function can be overloaded with non-numerical vectors. In this case, a cast via as.character() is applied to \code{Cls}, a warning is stated, and the statistics are still computed.
+Non-numeric vectors are supported. In that case, \code{Cls} is converted with \code{as.character()}, a warning is issued, and the statistics are computed.
 }
 \author{Michael Thrun}
 

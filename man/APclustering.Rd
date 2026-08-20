@@ -19,7 +19,7 @@ Seed=7568,PlotIt=FALSE,Data,\dots)
 \arguments{
   \item{DataOrDistances}{
   [1:n,1:d] with: if d=n and symmetric then distance matrix assumed, otherwise:
-  [1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features.
+  [1:n,1:d] matrix containing the dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.
   In the latter case the Euclidean distances will be calculated.
 }
   \item{InputPreference}{

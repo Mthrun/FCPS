@@ -20,7 +20,7 @@ Main output of the clustering, [1:n]  numerical vector with n numbers defining t
 }
 
 \item{Force}{
-Boolean, if is TRUE: forces code even if one or more than one of the k numbers given in \code{PriorCls} is missing in \code{CurrentCls} or vice versa. In this case, one label per missing number is added ad the end of the vectors.
+Logical scalar. If \code{TRUE}, forces computation when one or more labels in \code{PriorCls} are absent from \code{CurrentCls}, or vice versa. One placeholder observation is added for each missing label.
 
 }
 }
@@ -29,7 +29,7 @@ Contrary to accuracy, the MCC is balanced measure which can be used even if the 
 Beware that in contrast to \code{\link{ClusterAccuracy}}, the labels cannot be arbitrary. Instead each label of \code{PriorCls} and \code{CurrentCls} has to be mapped to the same cluster of data points. Typically this has to be ensured manually.
 }
 \value{
-Single scalar of MCC in a range described in details.
+A numeric MCC scalar in the range described in \code{Details}.
 }
 \references{
 Matthews, B. W.: Comparison of the predicted and observed secondary structure of T4 phage lysozyme, Biochimica et Biophysica Acta (BBA), Protein Structure, Vol. 405(2), pp. 442-451, 1975.
@@ -42,7 +42,7 @@ Chicco, D.; Toetsch, N. and Jurman, G.: The Matthews correlation coefficient (MC
 Michael Thrun
 }
 \note{
-If No. of Clusters is not equivalent, internally the number is allgined with zero datapoints belonging to the missing clusters.
+If the numbers of clusters differ, missing clusters are aligned internally using placeholder observations.
 }
 
 \seealso{

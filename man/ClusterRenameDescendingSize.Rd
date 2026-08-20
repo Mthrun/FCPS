@@ -10,20 +10,20 @@ ProvideClusterNames=FALSE)
 }
 \arguments{
   \item{Cls}{[1:n numerical vector of numbers defining the classification as the main output of the clustering algorithm for the n cases of data. It has k unique numbers representing the arbitrary labels of the clustering.}
-    \item{ProvideClusterNames}{TRUE: Provides in seperate output new and old k numbers, FALSE: simple output }
+    \item{ProvideClusterNames}{If \code{TRUE}, also returns the new and old cluster labels. If \code{FALSE}, returns only the relabeled classification.}
 }
 \details{
-Beware: output changes in this function depending on \code{ProvideClusterNames} in order to be congruent to prior code in a large varierity of other packages.
+The return type depends on \code{ProvideClusterNames} for backward compatibility with existing code.
 
 }
 \value{
 ProvideClusterNames==FALSE:
 
-\item{RenamedCls}{The renamed classification. A vector of clusters, were the largest cluster is C1 and so forth}
+\item{RenamedCls}{The renamed classification. A vector of cluster labels in which the largest cluster is C1, the second largest is C2, and so forth}
 
 ProvideClusterNames==TRUE: List V with
 
-\item{RenamedCls}{The renamed classification. A vector of clusters, were the largest cluster is C1 and so forth}
+\item{RenamedCls}{The renamed classification. A vector of cluster labels in which the largest cluster is C1, the second largest is C2, and so forth}
 
 \item{ClusterName}{[1:k,1:2] matrix of k new numbers and prior numbers}
 }
@@ -36,7 +36,7 @@ ProvideClusterNames==TRUE: List V with
 \examples{
 data('Lsun3D')
 Cls=Lsun3D$Cls
-#not desceending cluster numbers
+# not descending cluster numbers
 Cls[Cls==1]=543
 Cls[Cls==4]=1
 

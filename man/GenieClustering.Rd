@@ -11,22 +11,22 @@ GenieClustering(DataOrDistances, ClusterNo = 0, ColorTreshold = 0,
 DistanceMethod="euclidean",PlotIt=FALSE,\dots)
 }
 \arguments{
-\item{DataOrDistances}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
+\item{DataOrDistances}{[1:n,1:d] matrix containing the dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
 
 \item{ClusterNo}{A number k which defines k different clusters to be build by the algorithm.}
 
 \item{DistanceMethod}{See  \code{\link[parallelDist]{parDist}}, for example 'euclidean','mahalanobis','manhatten' (cityblock),'fJaccard','binary', 'canberra', 'maximum'. Any unambiguous substring can be given.}
 
-\item{ColorTreshold}{Draws cutline w.r.t. dendogram y-axis (height), height of line as scalar should be given}
+\item{ColorTreshold}{Draws cutline w.r.t. dendrogram y-axis (height), height of line as scalar should be given}
 \item{\dots}{furter argument to genie like:
 
 \code{thresholdGini}  Single numeric value in [0,1], threshold for the Gini index, 1 gives the standard single linkage algorithm
 }
   \item{PlotIt}{
-      If TRUE and ClusterNo>0 plots dendrogramm using \code{ClusterDendrogram}
-      
-      If TRUE and ClusterNo==0 plots black dendrogramm using base R plot
-      
+      If TRUE and ClusterNo>0 plots dendrogram using \code{ClusterDendrogram}
+
+      If TRUE and ClusterNo==0 plots black dendrogram using base R plot
+
       FALSE: No plot
   }
 }

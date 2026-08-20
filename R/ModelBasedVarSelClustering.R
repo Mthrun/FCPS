@@ -50,8 +50,8 @@ ModelBasedVarSelClustering=function(Data,ClusterNo,Type,PlotIt=FALSE, ...){
 
   Object = VarSelLCM::VarSelCluster(x=Data, gvals=ClusterNo, ...)
   Cls = Object@partitions@zMAP
-  if(length(Cls)<2){
-    warning("ModelBasedVarSelClustering:: The subfunction VarSelLCM::VarSelCluster did not perfom any clustering, please contact the author for further information. Setting all clusters to 1")
+  if(length(unique(Cls))<2L){
+    warning("ModelBasedVarSelClustering: The subordinate function VarSelLCM::VarSelCluster returned fewer than two clusters. Setting all labels to 1.")
     Cls=rep(1,nrow(Data))
   }
   }else if(Type=="clustvarsel"){

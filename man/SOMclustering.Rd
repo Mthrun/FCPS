@@ -2,10 +2,10 @@
 \alias{SOMclustering}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-self-organizing maps based clustering implemented by [Wherens, Buydens, 2017]. 
+self-organizing maps based clustering implemented by [Wherens, Buydens, 2017].
 }
 \description{
-Either the variant k-batch or k-online is possible in which every unit can be seen approximately as an cluster.
+Either the variant k-batch or k-online is possible in which every unit can be seen approximately as a cluster.
 }
 \usage{
 SOMclustering(Data,LC=c(1,2),ClusterNo=NULL,
@@ -14,7 +14,7 @@ Mode="online",PlotIt=FALSE,rlen=100,alpha = c(0.05, 0.01),...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
+\item{Data}{[1:n,1:d] matrix containing the dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
 \item{LC}{Lines and Columns of a very small SOM, usually every unit is a cluster, will be ignored if ClusterNo is not NULL.}
 \item{ClusterNo}{Optional, A number k which defines k different clusters to be built by the algorithm. LC will then be set accordingly.}
 \item{Mode}{Either "batch" or "online"}
@@ -22,7 +22,7 @@ Mode="online",PlotIt=FALSE,rlen=100,alpha = c(0.05, 0.01),...)
 
 \item{rlen}{Please see \code{\link[kohonen]{supersom}}}
 \item{alpha}{Please see \code{\link[kohonen]{supersom}}}
-\item{\dots}{Further arguments to be set for the clustering algorithm in 
+\item{\dots}{Further arguments to be set for the clustering algorithm in
 \code{\link[kohonen:unit.distances]{somgrid}}, if not set, default arguments are used.}
 }
 \details{

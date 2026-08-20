@@ -85,7 +85,7 @@ symmetric [1:n,1:n] distance matrix, e.g. \code{as.matrix(dist(Data,method))}
       \code{GenieClustering()}.
 
       \item \code{"Sparse"}: sparse hierarchical clustering through
-      \code{SparseClustering(..., Strategy = "Hierarchical")}.
+      \code{SparseClustering(..., Type = "Hierarchical")}.
 
       \item \code{"HDBSCAN"}: hierarchical density-based clustering through
       \code{HierarchicalDBSCAN()}.
@@ -101,13 +101,12 @@ symmetric [1:n,1:n] distance matrix, e.g. \code{as.matrix(dist(Data,method))}
     implementations. Default is \code{TRUE}.
   }
   \item{PlotIt}{
-      If TRUE and ClusterNo>0 plots dendrogramm using \code{ClusterDendrogram}
-      
-      If TRUE and ClusterNo==0 plots black dendrogramm using base R plot
-      
-      FALSE: No plot
+      If \code{TRUE} and \code{ClusterNo > 0}, plots the dendrogram using
+      \code{ClusterDendrogram}. If \code{TRUE} and \code{ClusterNo = 0},
+      plots the complete dendrogram using base R graphics. The default is
+      \code{FALSE}.
   }
-  
+
   \item{Data}{
     Legacy alias for \code{DataOrDistances}. It is used only when
     \code{DataOrDistances} is missing.
@@ -123,7 +122,9 @@ A method-specific list.
 For ordinary hierarchical methods and \code{"WardPseudo"}, the result is
 normally a list with components:
 
-\item{Cls}{If, ClusterNo>0: [1:n]  numerical vector with n numbers defining the classification as the main output of the clustering algorithm. It has k unique numbers representing the arbitrary labels of the clustering. Otherwise for ClusterNo=0: NULL}
+\item{Cls}{For \code{ClusterNo > 0}, a numerical vector of length n
+containing the classification. For \code{ClusterNo = 0}, usually \code{NULL};
+some specialized methods may return automatically selected classes.}
 
 
 \item{Dendrogram}{

@@ -7,7 +7,7 @@
 ClusterDistances
 }
 \description{
-Computes intra-cluster distances which are the distance in-between each cluster.
+Computes the within-cluster distances for each cluster.
 }
 \usage{
 ClusterDistances(FullDistanceMatrix, Cls,
@@ -33,11 +33,11 @@ Names, PlotIt = FALSE)
 }
 }
 \details{
-Cluster distances are given back as a matrix, one column per cluster and the vector of the full distance matrix without the diagonal elements and the upper half of the symmetric matrix.
-Details and definitons can be found in [Thrun, 2021].
+Returns a matrix with one column per cluster and one column containing all pairwise distances from the upper triangle of the complete distance matrix.
+Details and definitions can be found in [Thrun, 2021].
 }
 \value{
-Matrix [1:m,1:(k+1)] of k clusters, each columns consists of the distances in a cluster, filled up with NaN at the end to be of the same length as the vector of the upper triangle of the complete distance matrix.
+A matrix with k + 1 columns. The first column contains all pairwise distances; each remaining column contains the within-cluster distances for one cluster. Shorter columns are padded with \code{NaN}; a singleton cluster therefore has \code{NaN} as its within-cluster distance.
 }
 \author{
 Michael Thrun

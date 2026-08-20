@@ -14,7 +14,7 @@ Type="louvain",Radius=FALSE,PlotIt=FALSE,\dots)
 }
 
 \arguments{
-\item{DataOrDistances}{NULL or: [1:n,1:d] matrix of dataset to be clustered. It consists of n cases or d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
+\item{DataOrDistances}{NULL or: [1:n,1:d] matrix containing the dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features. Alternatively, symmetric [1:n,1:n] distance matrix}
 \item{Adjacency}{Used if \code{DataOrDistances} is NULL, matrix [1:n,1:n] defining which points are adjacent to each other by the number 1; not adjacent: 0}
 \item{Type}{
 Either "louvain" or "leiden"

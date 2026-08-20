@@ -2,7 +2,7 @@
 \alias{HDDClustering}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-HDD clustering is a model-based clustering method of [Bouveyron et al., 2007]. 
+HDD clustering is a model-based clustering method of [Bouveyron et al., 2007].
 }
 \description{
 HDD clustering is based on the Gaussian Mixture Model and on the idea that the data lives in subspaces with a lower dimension than the dimension of the original space. It uses the EM algorithm to estimate the parameters of the model [Berge et al., 2012].
@@ -12,10 +12,10 @@ HDDClustering(Data, ClusterNo, PlotIt=F,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases
+\item{Data}{[1:n,1:d] matrix containing the dataset to be clustered. It consists of n cases
 of d-dimensional data points. Every case has d attributes, variables or
 features.}
-\item{ClusterNo}{Optional, Numeric indicating either the number of cluster or a vector of 1:k to indicate the maximal expected number of clusters.}
+\item{ClusterNo}{Optional numeric value indicating the number of clusters, or a vector from 1 to k indicating the maximum expected number of clusters.}
 \item{PlotIt}{(optional) Boolean. Default = FALSE = No plotting performed.}
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used, see \code{\link[HDclassif]{hddc}} for details.}
 }
@@ -28,7 +28,7 @@ representing the arbitrary labels of the clustering.}
 of this algorithm}
 }
 \details{
-HDD clustering maximises the BIC criterion for a range of possible number of cluster up to \code{ClusterNo}. Per default the most general model is used, alternetively the parameter \code{model="ALL"} can be used to evaluate all possible models with BIC [Berge et al., 2012]. If specific properties of \code{Data} are known priorly please see \code{\link[HDclassif]{hddc}} for specific model selection.
+HDD clustering maximizes the BIC criterion over possible numbers of clusters up to \code{ClusterNo}. By default, the most general model is used. Alternatively, \code{model = "ALL"} evaluates all available models with BIC [Berge et al., 2012]. If specific properties of \code{Data} are known beforehand, see \code{\link[HDclassif]{hddc}} for model selection.
 }
 
 \references{

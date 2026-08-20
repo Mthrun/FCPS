@@ -10,13 +10,13 @@ SOTAclustering(Data, ClusterNo,PlotIt=FALSE,UnrestGrowth,...)
 }
 
 \arguments{
-\item{Data}{[1:n,1:d] matrix of dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
+\item{Data}{[1:n,1:d] matrix containing the dataset to be clustered. It consists of n cases of d-dimensional data points. Every case has d attributes, variables or features.}
 
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
 \item{PlotIt}{Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{UnrestGrowth}{
 TRUE: forces the \code{ClusterNo} option to uphold.
-FALSE: enables the algorithm to find its own number of clusters, in this cases ClusterNo should contain a high number because it is internally set as the number of iterations which is either reached or the max diversity criteria is satisfied priorly.
+If \code{FALSE}, the algorithm estimates the number of clusters. In that case, \code{ClusterNo} should be set to a sufficiently high value because it is used internally as the maximum number of iterations; the algorithm stops when this value is reached or the maximum-diversity criterion is satisfied.
 }
 \item{\dots}{Further arguments to be set for the clustering algorithm, if not set, default arguments are used.}
 }

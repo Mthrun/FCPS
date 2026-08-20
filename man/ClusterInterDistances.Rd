@@ -6,7 +6,7 @@
 Computes Inter-Cluster Distances
 }
 \description{
-Computes inter-cluster distances which are the distance between each cluster and all other clusters
+Computes the distances between each cluster and all other clusters.
 }
 \usage{
 ClusterInterDistances(FullDistanceMatrix, Cls,
@@ -32,7 +32,7 @@ Names,PlotIt=FALSE)
 Cluster distances are given back as a matrix, one column per cluster and the vector of the full distance matrix without the diagonal elements and the upper half of the symmetric matrix. Details and definitons can be found in [Thrun, 2021].
 }
 \value{
-Matrix [1:m,1:(k+1)] of k clusters, each columns consists of the distances between a cluster and all other clusters, filled up with NaN at the end to be of the same lenght as the vector of the upper triangle of the complete distance matrix.
+A matrix with k + 1 columns. The first column contains all pairwise distances; each remaining column contains the distances between one cluster and all other clusters. Shorter columns are padded with \code{NaN} to match the length of the upper triangle of the complete distance matrix.
 }
 \author{
 Michael Thrun
