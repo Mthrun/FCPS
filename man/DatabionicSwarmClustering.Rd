@@ -95,7 +95,7 @@ ClsV = DatabionicSwarmClustering(Data, 0, PlotMap = TRUE)
 # only for testing purposes of CRAN!
 # in case CRAN tests with no suggest packages available
 # please use alpways some kind of standardization!
-ClsV = DatabionicSwarmClustering(data, 0, PlotMap = TRUE)
+ClsV = DatabionicSwarmClustering(data[1:10,], 0, PlotMap = TRUE)
 }
 }
 

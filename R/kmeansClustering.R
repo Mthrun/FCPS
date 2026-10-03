@@ -173,7 +173,7 @@ kmeansClustering <-function(DataOrDistances,ClusterNo=2,Type='LBG',RandomNo=5000
       },
       "BKM+" = {
         out=BalancedKmeansClustering(Data = DataOrDistances,
-                             ClusterNo = ClusterNo...)
+                             ClusterNo = ClusterNo,...)
         if (PlotIt) {
           ClusterPlotMDS(DataOrDistances, Cls)
         }

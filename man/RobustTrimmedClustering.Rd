@@ -19,7 +19,7 @@ Alpha=0.05,PlotIt=FALSE,...)
 \item{Alpha}{
 If \code{alpha = 0}, no trimming is performed. Otherwise, this is the proportion of data points to trim. \code{\link[tclust]{tclust}} uses 0.05 by default.
 }
-\item{\dots}{Further arguments passed to \code{\link[tclust]{tclust}}, such as \code{nstart} (number of random initializations), \code{iter.max} (maximum number of concentration steps), \code{restr}, and \code{restr.fact}.}
+\item{\dots}{Further arguments passed to \code{\link[tclust]{tclust}}, such as \code{niter1} (number of random initializations), \code{niter2} (maximum number of concentration steps), \code{restr}, and \code{restr.fact}.}
 }
 
 \details{
@@ -44,7 +44,7 @@ out <- RobustTrimmedClustering(
   Alpha = 0,
   PlotIt = FALSE,
   nstart = 1,
-  iter.max = 5
+  niter1 = 5
 )
 }
 

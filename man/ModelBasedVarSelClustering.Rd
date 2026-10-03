@@ -77,14 +77,6 @@ V <- ModelBasedVarSelClustering(
 )
 Cls <- V$Cls
 ClusterAccuracy(Hepta$Cls, Cls, K = 7)
-
-# Hearts
-heart <- VarSelLCM::heart
-ztrue <- heart[, "Class"]
-Data <- heart[, -13]
-V <- ModelBasedVarSelClustering(Data, 2, Type = "VarSelLCM")
-Cls <- V$Cls
-ClusterAccuracy(ztrue, Cls, K = 2)
 }
 }
 \concept{Variable Selection}
