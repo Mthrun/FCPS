@@ -43,8 +43,8 @@ out <- RobustTrimmedClustering(
   ClusterNo = 2,
   Alpha = 0,
   PlotIt = FALSE,
-  nstart = 1,
-  niter1 = 5
+  niter1 = 5,
+  nkeep = 1
 )
 }
 
