@@ -27,7 +27,7 @@ Number of neighbors to consider to calculate the shared nearest neighbors.
   \item{minPts}{
  Number of minimum points in the eps region (for core points).
  In principle minimum number of points in the unit disk, if the unit disk is within the cluster (core) [Ester et al., 1996, p. 228].
- if NULL, its 2.5 percent of points.
+ if NULL, its 2.5 percent of points. It should be larger than one and integer (but can be of class numeric).
 }
 \item{PlotIt}{Default: FALSE, if TRUE plots the first three dimensions of the dataset with colored three-dimensional data points defined by the clustering stored in \code{Cls}}
 \item{UpperLimitRadius}{Limit for radius search, experimental}

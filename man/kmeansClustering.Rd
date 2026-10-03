@@ -17,11 +17,13 @@ kmeansClustering(DataOrDistances, ClusterNo,
 \arguments{
 \item{DataOrDistances}{Either nonsymmetric [1:n,1:d] datamatrix of n cases and d numerical features or
 
-symmetric [1:n,1:n] distance matrix}
+symmetric [1:n,1:n] distance matrix if not \code{Type="BKM+"}}
 
 \item{ClusterNo}{A number k which defines k different clusters to be built by the algorithm.}
   \item{Type}{ 
-  Choice of Kmeans algorithm, currently either " \code{Hartigan}" [Hartigan/Wong, 1979], "\code{LBG}" [Linde et al., 1980], "\code{Sparse}" sparse k-means proposed in [Witten/Tibshirani, 2010], "\code{Steinley}" best method of [Steinley/Brusco, 2007] proposed in Steinley 2003, "\code{Lloyd}" [Lloyd, 1982], "\code{Forgy}"[Forgy, 1965], \code{MacQueen} [MacQueen, 1967], \code{kcentroids} [Leisch, 2006], "\code{kprototypes}" [Szepannek, 2018], "\code{Pelleg-moore}" [Pelleg & Moores,2000], "\code{Elkan}" [Elkan, 2003], "\code{kmeans++}"" [Arthur & Vassilvitskii], \code{Hamerly}"[Hamerly, 2010] ,\code{Dualtree}"  or \code{Dualtree-covertree} [Curtin, 2017]"
+  Choice of Kmeans algorithm, currently either " \code{Hartigan}" [Hartigan/Wong, 1979], "\code{LBG}" [Linde et al., 1980], "\code{Sparse}" sparse k-means proposed in [Witten/Tibshirani, 2010], "\code{Steinley}" best method of [Steinley/Brusco, 2007] proposed in Steinley 2003, "\code{Lloyd}" [Lloyd, 1982], "\code{Forgy}"[Forgy, 1965], \code{MacQueen} [MacQueen, 1967], \code{kcentroids} [Leisch, 2006], 
+  "\code{kprototypes}" [Szepannek, 2018], "\code{Pelleg-moore}" [Pelleg & Moores,2000], "\code{Elkan}" [Elkan, 2003], "\code{kmeans++}"" [Arthur & Vassilvitskii], \code{Hamerly}"[Hamerly, 2010] ,\code{Dualtree}",
+  "\code{BKM+}" [de Maeyer et al., 2023], or \code{Dualtree-covertree} [Curtin, 2017]"
   }
     \item{RandomNo}{Only for " \code{Steinley}" or in case of distance matrix, number of random initializations with searching for minimal SSE, see [Steinley/Brusco, 2007]}
     
@@ -36,6 +38,7 @@ symmetric [1:n,1:n] distance matrix}
 \details{
 Uses either \pkg{stats} package function 'kmeans', \pkg{cclust} package implemention, \pkg{flexclust} package implemention or own code.
 In case of a distance matrix, RandomNo should be significantly lower than 5000, otherwise a long computation time is to be expected.
+
 }
 \value{
 List V of 
@@ -82,6 +85,7 @@ Association, Vol. 105(490), pp. 713-726, 2010.
 
 [Curtin, 2017]  Curtin, Ryan R: A dual-tree algorithm for fast k-means clustering with large k, Proceedings of the 2017 SIAM International Conference on Data Mining, Society for Industrial and Applied Mathematics, 2017.
 
+[de Maeyer et al., 2023]  de Maeyer, R., Sieranoja, S., and Franti, P.:Balanced k-means revisited, Applied Computing and Intelligence, 3(2), 145-179. \doi{10.3934/aci.2023008}, 2023
 }
  \examples{
 data('Hepta')

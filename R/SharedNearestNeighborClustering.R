@@ -51,13 +51,16 @@ SharedNearestNeighborClustering <-function(Data,Knn,Radius,minPts,PlotIt=FALSE,U
   } 
   if(is.null(minPts)){
     minPts=min(round(0.0005*nrow(Data),2),20)## A point needs at least 16 (minPts) links in the sNN graph to be a core point.
+	minPts <- max(c(floor(minPts), 1))
     warning('The minPts parameter is missing but it is required in DBscan. Trying to estimate..')
   }   
   if(missing(UpperLimitRadius))
     UpperLimitRadius=2*Radius
- 
-  minPts <- max(floor(minPts), 1)
-   
+ 	if(minPts<1){
+		  warning('The minPts parameter has to be larger than one.')
+	}  
+
+   minPts <- max(c(floor(minPts), 1))
   liste=dbscan::sNNclust(x = Data,k=Knn,eps=Radius,minPts=minPts,...)
   Cls=liste$cluster
 

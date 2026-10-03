@@ -24,7 +24,7 @@ PlotIt=FALSE,UpperLimitRadius,\dots)
   \item{minPts}{
  Number of minimum points in the eps region (for core points).
  In principle minimum number of points in the unit disk, if the unit disk is within the cluster (core) [Ester et al., 1996, p. 228].
- If NULL, 2.5 percent of points is selected.
+ If NULL, 2.5 percent of points is selected. It should be larger than one and integer (but can be of class numeric).
 }
   \item{Rcpp}{
 If TRUE: fast Rcpp implementation of mlpack is used. FALSE uses dbscan package.

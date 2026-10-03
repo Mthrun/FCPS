@@ -163,6 +163,20 @@ kmeansClustering <-function(DataOrDistances,ClusterNo=2,Type='LBG',RandomNo=5000
       "Sparse" = {
         out=SparseClustering(DataOrDistances = DataOrDistances,
                              ClusterNo = ClusterNo,Strategy = 'kmeans',...)
+        if (PlotIt) {
+          ClusterPlotMDS(DataOrDistances, Cls)
+        }
+        return(list(
+          Cls = out$Cls,
+          Object = out$Object
+        ))
+      },
+      "BKM+" = {
+        out=BalancedKmeansClustering(Data = DataOrDistances,
+                             ClusterNo = ClusterNo...)
+        if (PlotIt) {
+          ClusterPlotMDS(DataOrDistances, Cls)
+        }
         return(list(
           Cls = out$Cls,
           Object = out$Object

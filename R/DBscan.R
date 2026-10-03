@@ -68,8 +68,14 @@ DBSCAN = DBscan=function(Data,Radius,minPts,Rcpp=TRUE,PlotIt=FALSE,UpperLimitRad
   }
   if(is.null(minPts)){
     minPts=round(0.04*nrow(Data),0)
+    minPts <- max(c(floor(minPts), 1))
     warning('The minPts parameter is missing but it is required in DBSCAN. Trying to estimate..')
-  }   
+  }
+  if(minPts<1){
+    warning('The minPts parameter has to be larger than one.')
+  }  
+  
+  minPts <- max(c(floor(minPts), 1))
   if(missing(UpperLimitRadius))
     UpperLimitRadius=1.1*Radius
 

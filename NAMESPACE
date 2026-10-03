@@ -5,6 +5,7 @@ export(AgglomerativeNestingClustering)
 #export(ADPclustering)#not on cran anymore
 export(APclustering)
 export(AutomaticProjectionBasedClustering)
+export(BalancedKmeansClustering)
 export(ConsensusClustering)
 export(CrossEntropyClustering)
 export(DatabionicSwarmClustering)
