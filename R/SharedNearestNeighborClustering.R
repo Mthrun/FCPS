@@ -55,7 +55,9 @@ SharedNearestNeighborClustering <-function(Data,Knn,Radius,minPts,PlotIt=FALSE,U
   }   
   if(missing(UpperLimitRadius))
     UpperLimitRadius=2*Radius
-
+ 
+  minPts <- max(floor(minPts), 1)
+   
   liste=dbscan::sNNclust(x = Data,k=Knn,eps=Radius,minPts=minPts,...)
   Cls=liste$cluster
 
